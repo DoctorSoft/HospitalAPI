@@ -3,3 +3,10 @@ HospitalWebAPI/DataBaseTools/obj/
 HospitalWebAPI/DataBaseModelConfigurations/obj/
 HospitalWebAPI/HospitalWebAPI/obj/
 HospitalWebAPI/StorageModels/obj/
+HospitalWebAPI/Repositories/obj/
+HospitalWebAPI/RepositoryDependencies/obj/
+HospitalWebAPI/RepositoryTools/obj/
+HospitalWebAPI/HospitalWebAPI/bin/
+HospitalWebAPI/DataBaseModelConfigurations/bin/
+HospitalWebAPI/DataBaseTools/bin/
+HospitalWebAPI/RepositoryDependencies/bin/

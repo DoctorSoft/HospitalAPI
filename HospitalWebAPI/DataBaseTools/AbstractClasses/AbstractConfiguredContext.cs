@@ -3,7 +3,7 @@ using DataBaseTools.Interfaces;
 
 namespace DataBaseTools.AbstractClasses
 {
-    public class AbstractConfiguredContext : DbContext, IDataBaseContext
+    public abstract class AbstractConfiguredContext : DbContext, IDataBaseContext
     {
         private readonly IDataBaseConfigurationFactory _configurationFactory;
 
