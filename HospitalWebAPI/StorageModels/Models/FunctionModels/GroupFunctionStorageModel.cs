@@ -7,5 +7,8 @@ namespace StorageModels.Models.FunctionModels
         public int Id { get; set; }
 
         //
+
+        public DistributiveGroupStorageModel DistributiveGroup { get; set; }
+        public FunctionStorageModel Function { get; set; }
     }
 }

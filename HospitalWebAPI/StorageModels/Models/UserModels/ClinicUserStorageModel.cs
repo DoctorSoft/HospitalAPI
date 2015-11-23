@@ -2,7 +2,7 @@
 
 namespace StorageModels.Models.UserModels
 {
-    public class ClinicUserModel : IIdModel
+    public class ClinicUserStorageModel : IIdModel
     {
         public int Id { get; set; }
     }

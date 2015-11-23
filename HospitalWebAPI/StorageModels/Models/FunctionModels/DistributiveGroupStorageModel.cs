@@ -1,4 +1,5 @@
 ﻿using StorageModels.Interfaces;
+using System.Collections.Generic;
 
 namespace StorageModels.Models.FunctionModels
 {
@@ -7,5 +8,11 @@ namespace StorageModels.Models.FunctionModels
         public int Id { get; set; }
 
         //
+
+        public string Name { get; set; }
+
+        //
+
+        public IEnumerable<GroupFunctionStorageModel> GroupFunction { get; set; }
     }
 }

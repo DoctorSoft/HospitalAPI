@@ -1,5 +1,6 @@
 ﻿using StorageModels.Enums;
 using StorageModels.Interfaces;
+using StorageModels.Models.UserModels;
 
 namespace StorageModels.Models.MailboxModels
 {
@@ -10,6 +11,14 @@ namespace StorageModels.Models.MailboxModels
 
         //
 
-        
+        public string Title { get; set; }
+        public string Text { get; set; }
+        public MessageType MessageType { get; set; }
+
+        //
+
+        public UserStorageModel UserTo { get; set; }
+        public UserStorageModel UserFrom { get; set; }
+
     }
 }

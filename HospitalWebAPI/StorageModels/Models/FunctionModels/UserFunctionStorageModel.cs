@@ -1,4 +1,5 @@
 ﻿using StorageModels.Interfaces;
+using StorageModels.Models.UserModels;
 
 namespace StorageModels.Models.FunctionModels
 {
@@ -8,5 +9,8 @@ namespace StorageModels.Models.FunctionModels
         public bool IsBlocked { get; set; }
 
         //
+
+        public UserStorageModel User { get; set; }
+        public FunctionStorageModel Function { get; set; }
     }
 }

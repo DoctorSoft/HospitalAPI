@@ -15,21 +15,15 @@ namespace StorageModels.Models.UserModels
         //
 
         public string Name { get; set; }
-
         public UserType UserType { get; set; }
 
         //
 
         public AccountStorageModel Account { get; set; }
-
         public IEnumerable<UserFunctionStorageModel> UserFunctions { get; set; }
-
-        public ClinicStorageModel Clinic { get; set; }
-
+        public ClinicUserStorageModel ClinicUser { get; set; }
         public HospitalUserStorageModel HospitalUser { get; set; }
-
         public IEnumerable<MessageStorageModel> MessagesTo { get; set; }
-
         public IEnumerable<MessageStorageModel> MessageFrom { get; set; }
     }
 }
