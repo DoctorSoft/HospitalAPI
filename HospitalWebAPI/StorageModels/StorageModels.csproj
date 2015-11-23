@@ -40,18 +40,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\TwoSideShowStatus.cs" />
+    <Compile Include="Enums\UserType.cs" />
     <Compile Include="Interfaces\IBlockableModel.cs" />
     <Compile Include="Interfaces\IIdModel.cs" />
     <Compile Include="Interfaces\IShowStatusModel.cs" />
+    <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
+    <Compile Include="Models\FunctionModels\UserFunctionStorageModel.cs" />
+    <Compile Include="Models\HospitalModels\HospitalStorageModel.cs" />
+    <Compile Include="Models\MailboxModels\MessageStorageModel.cs" />
+    <Compile Include="Models\UserModels\AccountStorageModel.cs" />
+    <Compile Include="Models\UserModels\ClinicUserModel.cs" />
+    <Compile Include="Models\UserModels\HospitalUserStorageModel.cs" />
+    <Compile Include="Models\UserModels\SessionStorageModel.cs" />
+    <Compile Include="Models\UserModels\UserStorageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\ClinicModels\" />
-    <Folder Include="Models\FunctionModels\" />
-    <Folder Include="Models\HospitalModels\" />
-    <Folder Include="Models\MailboxModels\" />
-    <Folder Include="Models\UserModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
