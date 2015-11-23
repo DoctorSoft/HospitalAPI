@@ -39,14 +39,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\MessageType.cs" />
+    <Compile Include="Enums\ReservationStatus.cs" />
     <Compile Include="Enums\TwoSideShowStatus.cs" />
     <Compile Include="Enums\UserType.cs" />
     <Compile Include="Interfaces\IBlockableModel.cs" />
     <Compile Include="Interfaces\IIdModel.cs" />
     <Compile Include="Interfaces\IShowStatusModel.cs" />
     <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
+    <Compile Include="Models\ClinicModels\PatientStorageModel.cs" />
+    <Compile Include="Models\ClinicModels\ReservationStrorageModel.cs" />
+    <Compile Include="Models\FunctionModels\DistributiveGroupStorageModel.cs" />
+    <Compile Include="Models\FunctionModels\FunctionStorageModel.cs" />
+    <Compile Include="Models\FunctionModels\GroupFunctionStorageModel.cs" />
     <Compile Include="Models\FunctionModels\UserFunctionStorageModel.cs" />
+    <Compile Include="Models\HospitalModels\EmptyPlaceStatisticStorageModel.cs" />
+    <Compile Include="Models\HospitalModels\HospitalSectionProfileStorageModel.cs" />
     <Compile Include="Models\HospitalModels\HospitalStorageModel.cs" />
+    <Compile Include="Models\HospitalModels\SectionProfileStorageModel.cs" />
+    <Compile Include="Models\HospitalModels\SectionStorageModel.cs" />
     <Compile Include="Models\MailboxModels\MessageStorageModel.cs" />
     <Compile Include="Models\UserModels\AccountStorageModel.cs" />
     <Compile Include="Models\UserModels\ClinicUserModel.cs" />
