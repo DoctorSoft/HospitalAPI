@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationFactories\OriginalConfigurationFactory.cs" />
+    <Compile Include="Configurations\UserModels\AccountDataBaseConfiguration.cs" />
     <Compile Include="Contexts\OriginalDataBaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,7 +58,6 @@
     <Folder Include="Configurations\FunctionModels\" />
     <Folder Include="Configurations\HospitalModels\" />
     <Folder Include="Configurations\MailboxModels\" />
-    <Folder Include="Configurations\UserModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,6 +67,10 @@
     <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
       <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
       <Name>DataBaseTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StorageModels\StorageModels.csproj">
+      <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
+      <Name>StorageModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
