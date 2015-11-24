@@ -1,4 +1,5 @@
-﻿using StorageModels.Enums;
+﻿using System;
+using StorageModels.Enums;
 using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
 
@@ -11,6 +12,8 @@ namespace StorageModels.Models.ClinicModels
         //
 
         public ReservationStatus Status { get; set; }
+        public DateTime ApproveTime { get; set; }
+        public DateTime? CancelTime { get; set; }
 
         //
 

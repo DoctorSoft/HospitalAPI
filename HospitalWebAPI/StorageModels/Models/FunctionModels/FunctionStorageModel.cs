@@ -1,4 +1,5 @@
-﻿using StorageModels.Interfaces;
+﻿using StorageModels.Enums;
+using StorageModels.Interfaces;
 using System.Collections.Generic;
 
 namespace StorageModels.Models.FunctionModels
@@ -11,6 +12,7 @@ namespace StorageModels.Models.FunctionModels
         //
 
         public string Name { get; set; }
+        public FunctionIdentityName FunctionIdentityName { get; set; }
 
         //
 

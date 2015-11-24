@@ -1,4 +1,5 @@
-﻿using StorageModels.Enums;
+﻿using System;
+using StorageModels.Enums;
 using StorageModels.Interfaces;
 using StorageModels.Models.UserModels;
 
@@ -13,7 +14,9 @@ namespace StorageModels.Models.MailboxModels
 
         public string Title { get; set; }
         public string Text { get; set; }
+        public DateTime Date { get; set; }
         public MessageType MessageType { get; set; }
+        public bool IsRead { get; set; }
 
         //
 

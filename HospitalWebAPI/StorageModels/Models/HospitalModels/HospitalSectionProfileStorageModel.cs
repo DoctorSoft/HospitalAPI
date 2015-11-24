@@ -1,4 +1,5 @@
-﻿using StorageModels.Interfaces;
+﻿using System;
+using StorageModels.Interfaces;
 using System.Collections.Generic;
 
 namespace StorageModels.Models.HospitalModels
@@ -7,6 +8,10 @@ namespace StorageModels.Models.HospitalModels
     {
         public int Id { get; set; }
         public bool IsBlocked { get; set; }
+
+        //
+
+        public DateTime Date { get; set; }
 
         //
 

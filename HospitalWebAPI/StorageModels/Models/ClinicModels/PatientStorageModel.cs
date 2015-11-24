@@ -8,7 +8,7 @@ namespace StorageModels.Models.ClinicModels
 
         //
 
-        public int Code { get; set; }
+        public string Code { get; set; }
 
         //
 

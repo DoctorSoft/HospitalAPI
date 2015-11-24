@@ -1,4 +1,5 @@
-﻿using StorageModels.Interfaces;
+﻿using System;
+using StorageModels.Interfaces;
 using StorageModels.Models.ClinicModels;
 using System.Collections.Generic;
 
@@ -11,7 +12,10 @@ namespace StorageModels.Models.HospitalModels
         //
 
         public int ManRoomCount { get; set; }
-        public int WoomanRoomCount { get; set; }
+        public int WomanRoomCount { get; set; }
+        public DateTime Date { get; set; }
+
+        public DateTime CreateTime { get; set; }
 
         //
 

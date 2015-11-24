@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\FunctionIdentityName.cs" />
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Enums\ReservationStatus.cs" />
     <Compile Include="Enums\TwoSideShowStatus.cs" />

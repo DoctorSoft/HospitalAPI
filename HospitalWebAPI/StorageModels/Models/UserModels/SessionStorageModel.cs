@@ -9,6 +9,7 @@ namespace StorageModels.Models.UserModels
 
         //
 
+        public DateTime StartTime { get; set; }
         public Guid Token { get; set; }
 
         //
