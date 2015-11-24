@@ -1,4 +1,5 @@
 ﻿using StorageModels.Interfaces;
+using System.Collections.Generic;
 
 namespace StorageModels.Models.HospitalModels
 {
@@ -8,5 +9,12 @@ namespace StorageModels.Models.HospitalModels
         public bool IsBlocked { get; set; }
 
         //
+
+        public string Name { get; set; }
+
+        //
+
+        public IEnumerable<HospitalSectionProfileStorageModel> HospitalSectionProfiles { get; set; }
+        public SectionStorageModel Section { get; set; }
     }
 }

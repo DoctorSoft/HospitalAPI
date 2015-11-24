@@ -7,5 +7,11 @@ namespace StorageModels.Models.ClinicModels
         public int Id { get; set; }
 
         //
+
+        public int Code { get; set; }
+
+        //
+
+        public ReservationStorageModel Reservation { get; set; }
     }
 }

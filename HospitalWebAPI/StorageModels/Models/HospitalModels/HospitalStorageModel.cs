@@ -1,4 +1,6 @@
 ﻿using StorageModels.Interfaces;
+using StorageModels.Models.UserModels;
+using System.Collections.Generic;
 
 namespace StorageModels.Models.HospitalModels
 {
@@ -9,6 +11,13 @@ namespace StorageModels.Models.HospitalModels
 
         //
 
+        public string Name { get; set; }
+        public string Address { get; set; }
+
+        //
+
+        public IEnumerable<HospitalUserStorageModel> HospitalUsers { get; set; }
+        public IEnumerable<HospitalSectionProfileStorageModel> HospitalSectionProfiles { get; set; }
 
     }
 }

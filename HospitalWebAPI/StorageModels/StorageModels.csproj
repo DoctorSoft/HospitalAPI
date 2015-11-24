@@ -48,7 +48,7 @@
     <Compile Include="Interfaces\IShowStatusModel.cs" />
     <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
     <Compile Include="Models\ClinicModels\PatientStorageModel.cs" />
-    <Compile Include="Models\ClinicModels\ReservationStrorageModel.cs" />
+    <Compile Include="Models\ClinicModels\ReservationStorageModel.cs" />
     <Compile Include="Models\FunctionModels\DistributiveGroupStorageModel.cs" />
     <Compile Include="Models\FunctionModels\FunctionStorageModel.cs" />
     <Compile Include="Models\FunctionModels\GroupFunctionStorageModel.cs" />

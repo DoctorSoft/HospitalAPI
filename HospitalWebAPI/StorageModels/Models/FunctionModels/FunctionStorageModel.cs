@@ -1,4 +1,5 @@
 ﻿using StorageModels.Interfaces;
+using System.Collections.Generic;
 
 namespace StorageModels.Models.FunctionModels
 {
@@ -8,5 +9,12 @@ namespace StorageModels.Models.FunctionModels
         public bool IsBlocked { get; set; }
 
         //
+
+        public string Name { get; set; }
+
+        //
+
+        public IEnumerable<UserFunctionStorageModel> UserFunctions { get; set; }
+        public IEnumerable<GroupFunctionStorageModel> GroupFunctions { get; set; }
     }
 }

@@ -10,5 +10,9 @@ namespace StorageModels.Models.UserModels
         //
 
         public Guid Token { get; set; }
+
+        //
+
+        public AccountStorageModel Account { get; set; }
     }
 }

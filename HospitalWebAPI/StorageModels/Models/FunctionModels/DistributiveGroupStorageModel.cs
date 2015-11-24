@@ -13,6 +13,6 @@ namespace StorageModels.Models.FunctionModels
 
         //
 
-        public IEnumerable<GroupFunctionStorageModel> GroupFunction { get; set; }
+        public IEnumerable<GroupFunctionStorageModel> GroupFunctions { get; set; }
     }
 }
