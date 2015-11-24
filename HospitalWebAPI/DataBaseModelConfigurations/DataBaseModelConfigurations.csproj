@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationFactories\OriginalConfigurationFactory.cs" />
     <Compile Include="Configurations\UserModels\AccountDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\UserModels\UserDataBaseConfiguration.cs" />
     <Compile Include="Contexts\OriginalDataBaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

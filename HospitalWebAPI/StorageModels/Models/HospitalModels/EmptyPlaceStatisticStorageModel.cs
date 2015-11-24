@@ -14,8 +14,7 @@ namespace StorageModels.Models.HospitalModels
         public int ManRoomCount { get; set; }
         public int WomanRoomCount { get; set; }
         public DateTime Date { get; set; }
-
-        public DateTime CreateTime { get; set; }
+        public DateTime? CreateTime { get; set; }
 
         //
 

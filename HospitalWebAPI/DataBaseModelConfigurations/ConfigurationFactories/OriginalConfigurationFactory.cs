@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using DataBaseModelConfigurations.Configurations.UserModels;
 using DataBaseTools.Interfaces;
 
 namespace DataBaseModelConfigurations.ConfigurationFactories
@@ -10,6 +11,8 @@ namespace DataBaseModelConfigurations.ConfigurationFactories
             var builder = new DbModelBuilder();
 
             // Add some configurations
+            builder.Configurations.Add(new AccountDataBaseConfiguration());
+            builder.Configurations.Add(new UserDataBaseConfiguration());
 
             return builder;
         }
