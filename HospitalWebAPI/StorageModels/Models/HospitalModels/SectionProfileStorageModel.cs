@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StorageModels.Models.HospitalModels
 {
-    public class SectionProfileStorageModel : IIdModel, IBlockableModel
+    public class SectionProfileStorageModel : IIdModel, IBlockAbleModel
     {
         public int Id { get; set; }
         public bool IsBlocked { get; set; }

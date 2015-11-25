@@ -3,7 +3,7 @@ using StorageModels.Interfaces;
 
 namespace StorageModels.Models.UserModels
 {
-    public class AccountStorageModel : IIdModel, IBlockableModel
+    public class AccountStorageModel : IIdModel, IBlockAbleModel
     {
         public int Id { get; set; }
 

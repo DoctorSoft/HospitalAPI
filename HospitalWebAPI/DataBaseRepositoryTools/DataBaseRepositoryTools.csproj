@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</ProjectGuid>
+    <ProjectGuid>{2C4E04EC-DCE7-476A-B64F-94693442F653}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StorageModels</RootNamespace>
-    <AssemblyName>StorageModels</AssemblyName>
+    <RootNamespace>DataBaseRepositoryTools</RootNamespace>
+    <AssemblyName>DataBaseRepositoryTools</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,35 +43,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\FunctionIdentityName.cs" />
-    <Compile Include="Enums\MessageType.cs" />
-    <Compile Include="Enums\ReservationStatus.cs" />
-    <Compile Include="Enums\TwoSideShowStatus.cs" />
-    <Compile Include="Enums\UserType.cs" />
-    <Compile Include="Interfaces\IBlockAbleModel.cs" />
-    <Compile Include="Interfaces\IIdModel.cs" />
-    <Compile Include="Interfaces\IShowStatusModel.cs" />
-    <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
-    <Compile Include="Models\ClinicModels\PatientStorageModel.cs" />
-    <Compile Include="Models\ClinicModels\ReservationStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\DistributiveGroupStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\FunctionStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\GroupFunctionStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\UserFunctionStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\EmptyPlaceStatisticStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\HospitalSectionProfileStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\HospitalStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\SectionProfileStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\SectionStorageModel.cs" />
-    <Compile Include="Models\MailboxModels\MessageStorageModel.cs" />
-    <Compile Include="Models\UserModels\AccountStorageModel.cs" />
-    <Compile Include="Models\UserModels\ClinicUserStorageModel.cs" />
-    <Compile Include="Models\UserModels\HospitalUserStorageModel.cs" />
-    <Compile Include="Models\UserModels\SessionStorageModel.cs" />
-    <Compile Include="Models\UserModels\UserStorageModel.cs" />
+    <Compile Include="AbstractTools\AbstractAddAbleDataBaseRepository.cs" />
+    <Compile Include="AbstractTools\AbstractReadOnlyDataBaseRepository.cs" />
+    <Compile Include="AbstractTools\AbstractUpdateAbleDataBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
+      <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
+      <Name>DataBaseTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
+      <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
+      <Name>RepositoryTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StorageModels\StorageModels.csproj">
+      <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
+      <Name>StorageModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

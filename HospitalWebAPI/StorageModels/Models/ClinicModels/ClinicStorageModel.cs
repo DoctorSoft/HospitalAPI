@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StorageModels.Models.ClinicModels
 {
-    public class ClinicStorageModel : IIdModel, IBlockableModel
+    public class ClinicStorageModel : IIdModel, IBlockAbleModel
     {
         public int Id { get; set; }
         public bool IsBlocked { get; set; }

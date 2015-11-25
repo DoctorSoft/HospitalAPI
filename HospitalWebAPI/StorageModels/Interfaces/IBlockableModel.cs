@@ -1,6 +1,6 @@
 ﻿namespace StorageModels.Interfaces
 {
-    public interface IBlockableModel 
+    public interface IBlockAbleModel 
     {
         bool IsBlocked { get; set; }
     }

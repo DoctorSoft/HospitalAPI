@@ -3,7 +3,7 @@ using StorageModels.Models.UserModels;
 
 namespace StorageModels.Models.FunctionModels
 {
-    public class UserFunctionStorageModel : IIdModel, IBlockableModel
+    public class UserFunctionStorageModel : IIdModel, IBlockAbleModel
     {
         public int Id { get; set; }
         public bool IsBlocked { get; set; }

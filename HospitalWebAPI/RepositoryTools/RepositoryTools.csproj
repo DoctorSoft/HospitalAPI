@@ -39,10 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IAddAbleRepository.cs" />
+    <Compile Include="Interfaces\IBlockAbleRepository.cs" />
+    <Compile Include="Interfaces\IReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\IUpdateAbleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Folder Include="AbstractTools\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StorageModels\StorageModels.csproj">
+      <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
+      <Name>StorageModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

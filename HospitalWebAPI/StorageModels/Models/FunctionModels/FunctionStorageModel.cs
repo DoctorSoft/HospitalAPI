@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StorageModels.Models.FunctionModels
 {
-    public class FunctionStorageModel : IIdModel, IBlockableModel
+    public class FunctionStorageModel : IIdModel, IBlockAbleModel
     {
         public int Id { get; set; }
         public bool IsBlocked { get; set; }
