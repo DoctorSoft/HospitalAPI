@@ -49,6 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationFactories\OriginalConfigurationFactory.cs" />
+    <Compile Include="Configurations\ClinicModels\ClinicDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\ClinicModels\PatientDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\ClinicModels\ReservationDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\FunctionModels\DistibutiveGroupDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\FunctionModels\FunctionDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\FunctionModels\GroupFunctionDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\FunctionModels\UserFunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\HospitalModels\EmptyPlaceStatisticDataBaseConfiguration.cs" />
     <Compile Include="Configurations\HospitalModels\HospitalDataBaseConfiguration.cs" />
     <Compile Include="Configurations\HospitalModels\HospitalSectionProfileDataBaseConfiguration.cs" />
@@ -63,10 +70,7 @@
     <Compile Include="Contexts\OriginalDataBaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configurations\ClinicModels\" />
-    <Folder Include="Configurations\FunctionModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
