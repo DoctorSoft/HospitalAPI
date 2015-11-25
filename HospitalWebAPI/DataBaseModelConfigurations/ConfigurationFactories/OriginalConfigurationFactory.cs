@@ -1,4 +1,6 @@
 ﻿using System.Data.Entity;
+using DataBaseModelConfigurations.Configurations.HospitalModels;
+using DataBaseModelConfigurations.Configurations.MailboxModels;
 using DataBaseModelConfigurations.Configurations.UserModels;
 using DataBaseTools.Interfaces;
 
@@ -13,6 +15,15 @@ namespace DataBaseModelConfigurations.ConfigurationFactories
             // Add some configurations
             builder.Configurations.Add(new AccountDataBaseConfiguration());
             builder.Configurations.Add(new UserDataBaseConfiguration());
+            builder.Configurations.Add(new ClinicUserDataBaseConfiguration());
+            builder.Configurations.Add(new HospitalUserDataBaseConfiguration());
+            builder.Configurations.Add(new SessionDataBaseConfiguration());
+            builder.Configurations.Add(new EmptyPlaceStatisticDataBaseConfiguration());
+            builder.Configurations.Add(new HospitalDataBaseConfiguration());
+            builder.Configurations.Add(new HospitalSectionProfileDataBaseConfiguration());
+            builder.Configurations.Add(new SectionDataBaseConfiguration());
+            builder.Configurations.Add(new SectionProfileDataBaseConfiguration());
+            builder.Configurations.Add(new MessageDataBaseConfiguration());
 
             return builder;
         }
