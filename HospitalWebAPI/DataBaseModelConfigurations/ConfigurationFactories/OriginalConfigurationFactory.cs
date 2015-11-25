@@ -30,7 +30,7 @@ namespace DataBaseModelConfigurations.ConfigurationFactories
             builder.Configurations.Add(new ClinicDataBaseConfiguration());
             builder.Configurations.Add(new PatientDataBaseConfiguration());
             builder.Configurations.Add(new ReservationDataBaseConfiguration());
-            builder.Configurations.Add(new DistributiveGroupStorageModel());
+            builder.Configurations.Add(new DistributiveGroupDataBaseConfiguration());
             builder.Configurations.Add(new FunctionDataBaseConfiguration());
             builder.Configurations.Add(new GroupFunctionDataBaseConfiguration());
             builder.Configurations.Add(new UserFunctionDataBaseConfiguration());

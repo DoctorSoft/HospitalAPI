@@ -3,9 +3,9 @@ using StorageModels.Models.FunctionModels;
 
 namespace DataBaseModelConfigurations.Configurations.FunctionModels
 {
-    public class DistibutiveGroupDataBaseConfiguration : EntityTypeConfiguration<DistributiveGroupStorageModel>
+    public class DistributiveGroupDataBaseConfiguration : EntityTypeConfiguration<DistributiveGroupStorageModel>
     {
-        public DistibutiveGroupDataBaseConfiguration()
+        public DistributiveGroupDataBaseConfiguration()
         {
             
         }

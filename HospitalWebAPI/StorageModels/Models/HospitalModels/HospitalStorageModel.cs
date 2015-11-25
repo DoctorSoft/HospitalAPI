@@ -16,8 +16,8 @@ namespace StorageModels.Models.HospitalModels
 
         //
 
-        public IEnumerable<HospitalUserStorageModel> HospitalUsers { get; set; }
-        public IEnumerable<HospitalSectionProfileStorageModel> HospitalSectionProfiles { get; set; }
+        public ICollection<HospitalUserStorageModel> HospitalUsers { get; set; }
+        public ICollection<HospitalSectionProfileStorageModel> HospitalSectionProfiles { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ namespace StorageModels.Models.ClinicModels
 
         //
 
-        public IEnumerable<ClinicUserStorageModel> ClinicUsers { get; set; }
-        public IEnumerable<ReservationStorageModel> Reservations { get; set; }
+        public ICollection<ClinicUserStorageModel> ClinicUsers { get; set; }
+        public ICollection<ReservationStorageModel> Reservations { get; set; }
     }
 }

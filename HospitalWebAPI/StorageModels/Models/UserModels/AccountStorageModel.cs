@@ -17,7 +17,7 @@ namespace StorageModels.Models.UserModels
 
         //
 
-        public IEnumerable<SessionStorageModel> Sessions { get; set; }
+        public ICollection<SessionStorageModel> Sessions { get; set; }
         public UserStorageModel User { get; set; }
 
     }

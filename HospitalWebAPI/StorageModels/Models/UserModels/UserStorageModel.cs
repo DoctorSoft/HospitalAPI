@@ -20,10 +20,10 @@ namespace StorageModels.Models.UserModels
         //
 
         public AccountStorageModel Account { get; set; }
-        public IEnumerable<UserFunctionStorageModel> UserFunctions { get; set; }
+        public ICollection<UserFunctionStorageModel> UserFunctions { get; set; }
         public ClinicUserStorageModel ClinicUser { get; set; }
         public HospitalUserStorageModel HospitalUser { get; set; }
-        public IEnumerable<MessageStorageModel> MessagesTo { get; set; }
-        public IEnumerable<MessageStorageModel> MessageFrom { get; set; }
+        public ICollection<MessageStorageModel> MessagesTo { get; set; }
+        public ICollection<MessageStorageModel> MessagesFrom { get; set; }
     }
 }

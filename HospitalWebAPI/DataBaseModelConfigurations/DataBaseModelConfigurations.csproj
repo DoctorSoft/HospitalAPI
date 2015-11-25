@@ -52,7 +52,7 @@
     <Compile Include="Configurations\ClinicModels\ClinicDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\PatientDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\ReservationDataBaseConfiguration.cs" />
-    <Compile Include="Configurations\FunctionModels\DistibutiveGroupDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\FunctionModels\DistributiveGroupDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\FunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\GroupFunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\UserFunctionDataBaseConfiguration.cs" />
