@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 using StorageModels.Models.ClinicModels;
 
 namespace DataBaseModelConfigurations.Configurations.ClinicModels
@@ -7,7 +8,24 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
     {
         public ReservationDataBaseConfiguration()
         {
-            
+            // Table name
+
+            this.ToTable("Reservation");
+
+            // Primary key
+
+            this.HasKey(model => model.Id);
+
+            // Properties
+
+            this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(model => model.Status).IsRequired();
+
+            // Links to tables
+
+            this.HasRequired(model => model.Clinic).WithMany(link => link.Reservations);
+            this.HasRequired(model => model.Patient).WithOptional(link => link.Reservation);
+            this.HasRequired(model => model.EmptyPlaceStatistic).WithMany(link => link.Reservations);
         }
     }
 }

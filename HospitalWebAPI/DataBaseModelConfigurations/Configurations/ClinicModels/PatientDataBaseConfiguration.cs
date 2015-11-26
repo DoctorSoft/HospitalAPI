@@ -7,7 +7,22 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
     {
         public PatientDataBaseConfiguration()
         {
-            
+            // Table name
+
+            this.ToTable("Patient");
+
+            // Primary key
+
+            this.HasKey(model => model.Id);
+
+            // Properties
+
+            this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(model => model.Code).IsRequired();
+
+            // Links to tables
+
+            this.HasRequired(model => model.Reservation).WithOptional(link => link.Patient);
         }
     }
 }
