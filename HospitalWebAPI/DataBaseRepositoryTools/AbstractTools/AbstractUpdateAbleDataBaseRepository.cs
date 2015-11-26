@@ -15,7 +15,7 @@ namespace DataBaseRepositoryTools.AbstractTools
             _context = context;
         }
 
-        public void Update(int id, T model)
+        public virtual void Update(int id, T model)
         {
             model.Id = id;
             if (id < 1)
@@ -24,6 +24,11 @@ namespace DataBaseRepositoryTools.AbstractTools
             }
 
             _context.Set<T>().AddOrUpdate(model);
+        }
+
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace DataBaseRepositoryTools.AbstractTools
             _context = context;
         }
 
-        public void Add(T model)
+        public virtual void Add(T model)
         {
             _context.Set<T>().Add(model);
         }

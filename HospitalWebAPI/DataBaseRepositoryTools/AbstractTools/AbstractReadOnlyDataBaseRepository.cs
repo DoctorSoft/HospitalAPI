@@ -16,12 +16,12 @@ namespace DataBaseRepositoryTools.AbstractTools
             _context = context;
         }
 
-        public IEnumerable<T> GetModels()
+        public virtual IEnumerable<T> GetModels()
         {
             return _context.Set<T>();
         }
 
-        public T GetModelById(int id)
+        public virtual T GetModelById(int id)
         {
             return _context.Set<T>().SingleOrDefault(arg => arg.Id == id);
         }

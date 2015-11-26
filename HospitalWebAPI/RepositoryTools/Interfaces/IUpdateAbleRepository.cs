@@ -6,5 +6,7 @@ namespace RepositoryTools.Interfaces
         where T : IIdModel
     {
         void Update(int id, T model);
+
+        int SaveChanges();
     }
 }
