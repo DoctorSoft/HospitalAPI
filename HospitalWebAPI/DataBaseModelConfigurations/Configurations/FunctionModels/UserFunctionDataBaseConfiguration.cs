@@ -10,7 +10,7 @@ namespace DataBaseModelConfigurations.Configurations.FunctionModels
         {
             // Table name
 
-            this.ToTable("UserFunction");
+            this.ToTable("UserFunctions");
 
             // Primary key
 

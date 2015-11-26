@@ -11,7 +11,7 @@ namespace DataBaseModelConfigurations.Configurations.MailboxModels
         {
             // Table name
 
-            this.ToTable("Message");
+            this.ToTable("Messages");
 
             // Primary key
 
@@ -23,6 +23,9 @@ namespace DataBaseModelConfigurations.Configurations.MailboxModels
             this.Property(model => model.Title).IsRequired();
             this.Property(model => model.Text).IsRequired();
             this.Property(model => model.MessageType).IsRequired();
+            this.Property(model => model.IsRead).IsRequired();
+            this.Property(model => model.Date).IsRequired();
+            this.Property(model => model.ShowStatus).IsRequired();
 
             // Links to tables
 

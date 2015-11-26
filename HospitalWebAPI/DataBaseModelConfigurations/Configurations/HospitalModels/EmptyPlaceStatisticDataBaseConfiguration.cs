@@ -11,7 +11,7 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
         {
             // Table name
 
-            this.ToTable("EmptyPlaceStatistic");
+            this.ToTable("EmptyPlaceStatistics");
 
             // Primary key
 
@@ -23,6 +23,7 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
             this.Property(model => model.ManRoomCount).IsRequired();
             this.Property(model => model.WomanRoomCount).IsRequired();
             this.Property(model => model.Date).IsRequired();
+            this.Property(model => model.CreateTime).IsOptional();
 
             // Links to tables
 

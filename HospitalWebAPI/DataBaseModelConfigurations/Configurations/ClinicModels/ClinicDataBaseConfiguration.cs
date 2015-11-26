@@ -11,7 +11,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
         {
             // Table name
 
-            this.ToTable("Clinic");
+            this.ToTable("Clinics");
 
             // Primary key
 
@@ -22,6 +22,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(model => model.Name).IsRequired();
             this.Property(model => model.Address).IsRequired();
+            this.Property(model => model.IsBlocked).IsRequired();
 
             // Links to tables
 

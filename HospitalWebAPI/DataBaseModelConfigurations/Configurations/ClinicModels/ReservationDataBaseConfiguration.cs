@@ -10,7 +10,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
         {
             // Table name
 
-            this.ToTable("Reservation");
+            this.ToTable("Reservations");
 
             // Primary key
 
@@ -20,6 +20,8 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(model => model.Status).IsRequired();
+            this.Property(model => model.ApproveTime).IsRequired();
+            this.Property(model => model.CancelTime).IsOptional();
 
             // Links to tables
 

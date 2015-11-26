@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 using StorageModels.Models.ClinicModels;
 
 namespace DataBaseModelConfigurations.Configurations.ClinicModels
@@ -9,7 +10,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
         {
             // Table name
 
-            this.ToTable("Patient");
+            this.ToTable("Patients");
 
             // Primary key
 

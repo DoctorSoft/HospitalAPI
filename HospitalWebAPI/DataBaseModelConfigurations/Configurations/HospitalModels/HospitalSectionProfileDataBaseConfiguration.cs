@@ -10,7 +10,7 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
         {
             // Table name
 
-            this.ToTable("HospitalSectionProfile");
+            this.ToTable("HospitalSectionProfiles");
 
             // Primary key
 
@@ -19,6 +19,8 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
             // Properties
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(model => model.Date).IsRequired();
+            this.Property(model => model.IsBlocked).IsRequired();
 
             // Links to tables
 

@@ -10,7 +10,7 @@ namespace DataBaseModelConfigurations.Configurations.FunctionModels
         {
             // Table name
 
-            this.ToTable("GroupFunction");
+            this.ToTable("GroupFunctions");
 
             // Primary key
 

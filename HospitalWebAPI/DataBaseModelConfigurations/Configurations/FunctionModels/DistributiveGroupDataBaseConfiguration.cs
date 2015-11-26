@@ -10,7 +10,7 @@ namespace DataBaseModelConfigurations.Configurations.FunctionModels
         {
             // Table name
 
-            this.ToTable("DistributiveGroup");
+            this.ToTable("DistributiveGroups");
 
             // Primary key
 
