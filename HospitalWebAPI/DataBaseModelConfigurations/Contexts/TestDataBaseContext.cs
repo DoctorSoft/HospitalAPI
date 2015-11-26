@@ -4,9 +4,9 @@ using DataBaseTools.Interfaces;
 
 namespace DataBaseModelConfigurations.Contexts
 {
-    public class OriginalDataBaseContext : AbstractConfiguredContext
+    public class TestDataBaseContext: AbstractConfiguredContext
     {
-        public OriginalDataBaseContext() : base("OriginalHospitalDataBase", new OriginalConfigurationFactory())
+        public TestDataBaseContext() : base("TestHospitalDataBase", new OriginalConfigurationFactory())
         {
         }
     }

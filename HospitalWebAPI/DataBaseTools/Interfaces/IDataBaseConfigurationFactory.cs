@@ -5,6 +5,6 @@ namespace DataBaseTools.Interfaces
 {
     public interface IDataBaseConfigurationFactory
     {
-        DbModelBuilder GetConfigurations();
+        DbModelBuilder GetConfigurations(DbModelBuilder builder);
     }
 }

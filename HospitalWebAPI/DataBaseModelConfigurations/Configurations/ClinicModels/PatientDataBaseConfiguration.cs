@@ -18,7 +18,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
 
             // Properties
 
-            this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             this.Property(model => model.Code).IsRequired();
 
             // Links to tables

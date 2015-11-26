@@ -29,8 +29,8 @@ namespace DataBaseModelConfigurations.Configurations.MailboxModels
 
             // Links to tables
 
-            this.HasRequired(model => model.UserFrom).WithMany(link => link.MessagesFrom);
-            this.HasRequired(model => model.UserTo).WithMany(link => link.MessagesTo);
+            this.HasRequired(model => model.UserFrom).WithMany(link => link.MessagesFrom).WillCascadeOnDelete(false);
+            this.HasRequired(model => model.UserTo).WithMany(link => link.MessagesTo).WillCascadeOnDelete(false);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
             // Links to tables
 
             this.HasRequired(model => model.Clinic).WithMany(link => link.Reservations);
-            this.HasRequired(model => model.Patient).WithOptional(link => link.Reservation);
+            this.HasOptional(model => model.Patient).WithRequired(link => link.Reservation);
             this.HasRequired(model => model.EmptyPlaceStatistic).WithMany(link => link.Reservations);
         }
     }

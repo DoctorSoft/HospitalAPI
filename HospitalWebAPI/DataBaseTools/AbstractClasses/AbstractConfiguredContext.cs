@@ -15,7 +15,7 @@ namespace DataBaseTools.AbstractClasses
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(_configurationFactory.GetConfigurations());
+            base.OnModelCreating(_configurationFactory.GetConfigurations(modelBuilder));
         }
     }
 }
