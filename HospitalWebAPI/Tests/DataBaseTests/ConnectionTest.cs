@@ -13,7 +13,7 @@ namespace Tests.DataBaseTests
         [TestMethod]
         public void DoesConnectionExist()
         {
-            var connection = new TestDataBaseContext(new OriginalConfigurationFactory());
+            var connection = new TestDataBaseContext();
             var list = connection.Set<AccountStorageModel>().ToList();
         }
     }

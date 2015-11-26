@@ -42,6 +42,7 @@
     <Compile Include="Interfaces\IAddAbleRepository.cs" />
     <Compile Include="Interfaces\IBlockAbleRepository.cs" />
     <Compile Include="Interfaces\IReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\ITwoSideShowingRepository.cs" />
     <Compile Include="Interfaces\IUpdateAbleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
