@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{43A7781C-B11E-4283-9CA0-59072276C733}</ProjectGuid>
+    <ProjectGuid>{47B3BB78-DCB8-4520-8AAC-E6532DF491AC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Repositories</RootNamespace>
-    <AssemblyName>Repositories</AssemblyName>
+    <RootNamespace>HandleTools</RootNamespace>
+    <AssemblyName>HandleTools</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,32 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBaseRepositories\ClinicRepositories\ClinicRepository.cs" />
-    <Compile Include="DataBaseRepositories\ClinicRepositories\PatientRepository.cs" />
-    <Compile Include="DataBaseRepositories\ClinicRepositories\ReservationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryHandlers\IBlockAbleHandler.cs" />
+    <Compile Include="RepositoryHandlers\ITwoSideShowingHandler.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DataBaseRepositories\FunctionRepositories\" />
-    <Folder Include="DataBaseRepositories\HospitalRepositories\" />
-    <Folder Include="DataBaseRepositories\MailboxRepositories\" />
-    <Folder Include="DataBaseRepositories\UserRepositories\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
-      <Project>{2C4E04EC-DCE7-476A-B64F-94693442F653}</Project>
-      <Name>DataBaseRepositoryTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
-      <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
-      <Name>DataBaseTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
-      <Project>{26A323FE-637C-414F-8924-6E76A4756C08}</Project>
-      <Name>RepositoryTools</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
-      <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
+      <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
       <Name>StorageModels</Name>
     </ProjectReference>
   </ItemGroup>

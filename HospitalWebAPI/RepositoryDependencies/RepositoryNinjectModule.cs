@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
 using DataBaseModelConfigurations.ConfigurationFactories;
 using DataBaseModelConfigurations.Contexts;
 using DataBaseTools.Interfaces;
 using Ninject.Modules;
+using Repositories.DataBaseRepositories.ClinicRepositories;
+using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 
 namespace RepositoryDependencies
 {
@@ -15,8 +14,13 @@ namespace RepositoryDependencies
         public override void Load()
         {
             Bind<IDataBaseConfigurationFactory>().To<OriginalConfigurationFactory>();
-            Bind<IDataBaseContext>().To<OriginalDataBaseContext>();
-            
+            Bind<IDataBaseContext>().To<TestDataBaseContext>(); // Change it on OriginalDataBaseContext
+
+            // Repositories
+
+            Bind<IClinicRepository>().To<ClinicRepository>();
+            Bind<IPatientRepository>().To<PatientRepository>();
+            Bind<IReservationRepository>().To<ReservationRepository>();
         }
     }
 }

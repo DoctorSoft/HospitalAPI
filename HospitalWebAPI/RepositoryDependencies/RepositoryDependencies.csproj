@@ -64,9 +64,25 @@
       <Project>{11CCD57B-FFEF-4C04-BCAC-540B9A7DD20A}</Project>
       <Name>DataBaseModelConfigurations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
+      <Project>{2C4E04EC-DCE7-476A-B64F-94693442F653}</Project>
+      <Name>DataBaseRepositoryTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
       <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
       <Name>DataBaseTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repositories\Repositories.csproj">
+      <Project>{43a7781c-b11e-4283-9ca0-59072276c733}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
+      <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
+      <Name>RepositoryTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StorageModels\StorageModels.csproj">
+      <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
+      <Name>StorageModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
