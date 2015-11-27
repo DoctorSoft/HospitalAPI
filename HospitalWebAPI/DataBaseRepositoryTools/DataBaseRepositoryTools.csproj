@@ -43,10 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractTools\AbstarctBlockAbleDataBaseRepository.cs" />
     <Compile Include="AbstractTools\AbstractAddAbleDataBaseRepository.cs" />
     <Compile Include="AbstractTools\AbstractReadOnlyDataBaseRepository.cs" />
-    <Compile Include="AbstractTools\AbstractTwoSideShowingDataBaseRepository.cs" />
     <Compile Include="AbstractTools\AbstractUpdateAbleDataBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

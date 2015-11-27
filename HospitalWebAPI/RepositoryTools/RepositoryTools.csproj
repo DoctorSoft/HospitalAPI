@@ -39,15 +39,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IAddAbleRepository.cs" />
-    <Compile Include="Interfaces\IBlockAbleRepository.cs" />
-    <Compile Include="Interfaces\IReadOnlyRepository.cs" />
-    <Compile Include="Interfaces\ITwoSideShowingRepository.cs" />
-    <Compile Include="Interfaces\IUpdateAbleRepository.cs" />
+    <Compile Include="Interfaces\CommonInterfaces\IAddAbleRepository.cs" />
+    <Compile Include="Interfaces\CommonInterfaces\IReadOnlyRepository.cs" />
+    <Compile Include="Interfaces\CommonInterfaces\IUpdateAbleRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IPatientRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IReservationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AbstractTools\" />
+    <Folder Include="Interfaces\PrivateInterfaces\FunctionRepositories\" />
+    <Folder Include="Interfaces\PrivateInterfaces\HospitalRepositories\" />
+    <Folder Include="Interfaces\PrivateInterfaces\MailboxRepositories\" />
+    <Folder Include="Interfaces\PrivateInterfaces\UserRepositories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
