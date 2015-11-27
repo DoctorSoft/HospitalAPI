@@ -49,9 +49,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataBaseModelConfigurations\DataBaseModelConfigurations.csproj">
+      <Project>{11ccd57b-ffef-4c04-bcac-540b9a7dd20a}</Project>
+      <Name>DataBaseModelConfigurations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
       <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
       <Name>DataBaseTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HandleTools\HandleTools.csproj">
+      <Project>{47b3bb78-dcb8-4520-8aac-e6532df491ac}</Project>
+      <Name>HandleTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
       <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>

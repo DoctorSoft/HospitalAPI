@@ -51,6 +51,10 @@
     <Folder Include="DataBaseRepositories\UserRepositories\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataBaseModelConfigurations\DataBaseModelConfigurations.csproj">
+      <Project>{11ccd57b-ffef-4c04-bcac-540b9a7dd20a}</Project>
+      <Name>DataBaseModelConfigurations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
       <Project>{2C4E04EC-DCE7-476A-B64F-94693442F653}</Project>
       <Name>DataBaseRepositoryTools</Name>
