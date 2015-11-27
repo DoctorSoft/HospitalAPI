@@ -39,13 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IRondomModelListCreator.cs" />
+    <Compile Include="CreationSettings\TestCreationSettingsModule.cs" />
+    <Compile Include="DataCreators\SectionModelCreator.cs" />
+    <Compile Include="Interfaces\CommonInterfaces\ICreationSettingsModule.cs" />
+    <Compile Include="Interfaces\CommonInterfaces\IRandomModelListCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\ISectionModelCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AbstractTools\" />
-    <Folder Include="CreateSettings\" />
-    <Folder Include="DataCreators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
