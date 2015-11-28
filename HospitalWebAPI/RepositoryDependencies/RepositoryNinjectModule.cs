@@ -1,6 +1,4 @@
-﻿
-
-using DataBaseModelConfigurations.ConfigurationFactories;
+﻿using DataBaseModelConfigurations.ConfigurationFactories;
 using DataBaseModelConfigurations.Contexts;
 using DataBaseTools.Interfaces;
 using Ninject.Modules;

@@ -40,9 +40,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreationSettings\TestCreationSettingsModule.cs" />
+    <Compile Include="DataCreators\ClinicModelCreator.cs" />
+    <Compile Include="DataCreators\DistributiveGroupModelCreator.cs" />
+    <Compile Include="DataCreators\FunctionModelCreator.cs" />
+    <Compile Include="DataCreators\HospitalModelCreator.cs" />
     <Compile Include="DataCreators\SectionModelCreator.cs" />
     <Compile Include="Interfaces\CommonInterfaces\ICreationSettingsModule.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IRandomModelListCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IClinicModelCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IDistributiveGroupModelCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IFunctionModelCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IHospitalModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ISectionModelCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
