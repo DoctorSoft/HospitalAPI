@@ -5,7 +5,7 @@ namespace CreateRandomDataTools.CreationSettings
 {
     public class TestCreationSettingsModule : ICreationSettingsModule
     {
-        public bool CreateSectionProfiles()
+        public bool CreateSections()
         {
             return true;
         }

@@ -1,7 +1,4 @@
-﻿using DataBaseModelConfigurations.ConfigurationFactories;
-using DataBaseModelConfigurations.Contexts;
-using DataBaseTools.Interfaces;
-using Ninject.Modules;
+﻿using Ninject.Modules;
 using Repositories.DataBaseRepositories.ClinicRepositories;
 using Repositories.DataBaseRepositories.FunctionRepositories;
 using Repositories.DataBaseRepositories.HospitalRepositories;
@@ -13,15 +10,12 @@ using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 
-namespace RepositoryDependencies
+namespace Repositories.Dependencies
 {
     public class RepositoriesNinjectModule : NinjectModule
     {
         public override void Load()
         {
-            Bind<IDataBaseConfigurationFactory>().To<OriginalConfigurationFactory>();
-            Bind<IDataBaseContext>().To<TestDataBaseContext>(); // Change it on OriginalDataBaseContext
-
             // Repositories
 
             Bind<IClinicRepository>().To<ClinicRepository>();

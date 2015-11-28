@@ -137,10 +137,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CreateRandomDataTools\CreateRandomDataTools.csproj">
-      <Project>{087a278e-8e48-4555-8250-5a0989a78934}</Project>
-      <Name>CreateRandomDataTools</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataBaseModelConfigurations\DataBaseModelConfigurations.csproj">
       <Project>{11ccd57b-ffef-4c04-bcac-540b9a7dd20a}</Project>
       <Name>DataBaseModelConfigurations</Name>
@@ -164,10 +160,6 @@
     <ProjectReference Include="..\Repositories\Repositories.csproj">
       <Project>{43a7781c-b11e-4283-9ca0-59072276c733}</Project>
       <Name>Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepositoryDependencies\RepositoryDependencies.csproj">
-      <Project>{fa980697-1463-4727-bae6-82e3015b9f5e}</Project>
-      <Name>RepositoryDependencies</Name>
     </ProjectReference>
     <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
       <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>

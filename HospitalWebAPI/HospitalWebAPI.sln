@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseModelConfigurations
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{43A7781C-B11E-4283-9CA0-59072276C733}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryDependencies", "RepositoryDependencies\RepositoryDependencies.csproj", "{FA980697-1463-4727-BAE6-82E3015B9F5E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryTools", "RepositoryTools\RepositoryTools.csproj", "{26A323FE-637C-414F-8924-6E76A4756C08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseRepositoryTools", "DataBaseRepositoryTools\DataBaseRepositoryTools.csproj", "{2C4E04EC-DCE7-476A-B64F-94693442F653}"
@@ -26,6 +24,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandleToolsInterfaces", "HandleToolsInterfaces\HandleToolsInterfaces.csproj", "{EEE4F2CE-3D7A-49BD-9CFC-A8F6BA2914D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandleTools", "HandleTools\HandleTools.csproj", "{47B3BB78-DCB8-4520-8AAC-E6532DF491AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseFiller", "DataBaseFiller\DataBaseFiller.csproj", "{8E5752C3-F88B-42CC-9DDF-8C39E44BBEA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpingTools", "HelpingTools\HelpingTools.csproj", "{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +55,6 @@ Global
 		{43A7781C-B11E-4283-9CA0-59072276C733}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43A7781C-B11E-4283-9CA0-59072276C733}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43A7781C-B11E-4283-9CA0-59072276C733}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA980697-1463-4727-BAE6-82E3015B9F5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA980697-1463-4727-BAE6-82E3015B9F5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA980697-1463-4727-BAE6-82E3015B9F5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA980697-1463-4727-BAE6-82E3015B9F5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{26A323FE-637C-414F-8924-6E76A4756C08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{26A323FE-637C-414F-8924-6E76A4756C08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26A323FE-637C-414F-8924-6E76A4756C08}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -81,6 +79,14 @@ Global
 		{47B3BB78-DCB8-4520-8AAC-E6532DF491AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47B3BB78-DCB8-4520-8AAC-E6532DF491AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47B3BB78-DCB8-4520-8AAC-E6532DF491AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E5752C3-F88B-42CC-9DDF-8C39E44BBEA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E5752C3-F88B-42CC-9DDF-8C39E44BBEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E5752C3-F88B-42CC-9DDF-8C39E44BBEA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E5752C3-F88B-42CC-9DDF-8C39E44BBEA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

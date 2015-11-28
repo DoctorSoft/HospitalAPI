@@ -2,7 +2,7 @@
 {
     public interface ICreationSettingsModule
     {
-        bool CreateSectionProfiles();
+        bool CreateSections();
 
         bool CreateHospitals();
 

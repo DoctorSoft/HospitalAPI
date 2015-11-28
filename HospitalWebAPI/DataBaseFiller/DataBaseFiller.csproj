@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FA980697-1463-4727-BAE6-82E3015B9F5E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{8E5752C3-F88B-42CC-9DDF-8C39E44BBEA0}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RepositoryDependencies</RootNamespace>
-    <AssemblyName>RepositoryDependencies</AssemblyName>
+    <RootNamespace>DataBaseFiller</RootNamespace>
+    <AssemblyName>DataBaseFiller</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -52,36 +55,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dependencies\CreatorsFactory.cs" />
+    <Compile Include="Dependencies\CreatorsNinjectModule.cs" />
+    <Compile Include="Tools\DataBaseInfoFiller.cs" />
+    <Compile Include="Interfaces\IDataBaseInfoFiller.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryNinjectModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\CreateRandomDataTools\CreateRandomDataTools.csproj">
+      <Project>{087A278E-8E48-4555-8250-5A0989A78934}</Project>
+      <Name>CreateRandomDataTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseModelConfigurations\DataBaseModelConfigurations.csproj">
       <Project>{11CCD57B-FFEF-4C04-BCAC-540B9A7DD20A}</Project>
       <Name>DataBaseModelConfigurations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
-      <Project>{2C4E04EC-DCE7-476A-B64F-94693442F653}</Project>
-      <Name>DataBaseRepositoryTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
       <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
       <Name>DataBaseTools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repositories\Repositories.csproj">
-      <Project>{43a7781c-b11e-4283-9ca0-59072276c733}</Project>
-      <Name>Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
-      <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
-      <Name>RepositoryTools</Name>
+    <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
+      <Project>{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}</Project>
+      <Name>HelpingTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
-      <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
+      <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
       <Name>StorageModels</Name>
     </ProjectReference>
   </ItemGroup>

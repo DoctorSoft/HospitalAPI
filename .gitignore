@@ -18,3 +18,7 @@ HospitalWebAPI/CreateRandomDataTools/obj/
 HospitalWebAPI/HandleTools/obj/
 HospitalWebAPI/HandleToolsInterfaces/obj/
 HospitalWebAPI/Repositories/bin/
+HospitalWebAPI/DataBaseFiller/bin/
+HospitalWebAPI/DataBaseFiller/obj/
+HospitalWebAPI/HelpingTools/obj/
+HospitalWebAPI/HelpingTools/bin/
