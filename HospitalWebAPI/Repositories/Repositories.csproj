@@ -42,14 +42,24 @@
     <Compile Include="DataBaseRepositories\ClinicRepositories\ClinicRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\PatientRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\ReservationRepository.cs" />
+    <Compile Include="DataBaseRepositories\FunctionRepositories\DistributiveGroupRepository.cs" />
+    <Compile Include="DataBaseRepositories\FunctionRepositories\FunctionRepository.cs" />
+    <Compile Include="DataBaseRepositories\FunctionRepositories\GroupFunctionRepository.cs" />
+    <Compile Include="DataBaseRepositories\FunctionRepositories\UserFunctionRepository.cs" />
+    <Compile Include="DataBaseRepositories\HospitalRepositories\EmptyPlaceStatisticRepository.cs" />
+    <Compile Include="DataBaseRepositories\HospitalRepositories\HospitalRepository.cs" />
+    <Compile Include="DataBaseRepositories\HospitalRepositories\HospitalSectionProfileRepository.cs" />
+    <Compile Include="DataBaseRepositories\HospitalRepositories\SectionProfileRepository.cs" />
+    <Compile Include="DataBaseRepositories\HospitalRepositories\SectionRepository.cs" />
+    <Compile Include="DataBaseRepositories\MailboxRepositories\MessageRepository.cs" />
+    <Compile Include="DataBaseRepositories\UserRepositories\AccountRepository.cs" />
+    <Compile Include="DataBaseRepositories\UserRepositories\ClinicUserRepository.cs" />
+    <Compile Include="DataBaseRepositories\UserRepositories\HospitalUserRepository.cs" />
+    <Compile Include="DataBaseRepositories\UserRepositories\SessionRepository.cs" />
+    <Compile Include="DataBaseRepositories\UserRepositories\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataBaseRepositories\FunctionRepositories\" />
-    <Folder Include="DataBaseRepositories\HospitalRepositories\" />
-    <Folder Include="DataBaseRepositories\MailboxRepositories\" />
-    <Folder Include="DataBaseRepositories\UserRepositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DataBaseModelConfigurations\DataBaseModelConfigurations.csproj">
       <Project>{11ccd57b-ffef-4c04-bcac-540b9a7dd20a}</Project>
