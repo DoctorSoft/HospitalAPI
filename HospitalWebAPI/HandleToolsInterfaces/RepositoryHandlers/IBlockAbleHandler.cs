@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using StorageModels.Interfaces;
 
-namespace HandleTools.RepositoryHandlers
+namespace HandleToolsInterfaces.RepositoryHandlers
 {
     public interface IBlockAbleHandler<T>
         where T: IIdModel, IBlockAbleModel

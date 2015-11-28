@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using HandleTools.RepositoryHandlers;
+using HandleToolsInterfaces.RepositoryHandlers;
 using StorageModels.Enums;
 using StorageModels.Interfaces;
 
-namespace HandleToolsInterfaces.RepositoryHandlers
+namespace HandleTools.RepositoryHandlers
 {
     public class TwoSideShowingHandler<T> : ITwoSideShowingHandler<T>
         where T: IIdModel, IShowStatusModel

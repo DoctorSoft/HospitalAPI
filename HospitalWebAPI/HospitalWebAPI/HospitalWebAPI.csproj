@@ -136,7 +136,48 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CreateRandomDataTools\CreateRandomDataTools.csproj">
+      <Project>{087a278e-8e48-4555-8250-5a0989a78934}</Project>
+      <Name>CreateRandomDataTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBaseModelConfigurations\DataBaseModelConfigurations.csproj">
+      <Project>{11ccd57b-ffef-4c04-bcac-540b9a7dd20a}</Project>
+      <Name>DataBaseModelConfigurations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
+      <Project>{2c4e04ec-dce7-476a-b64f-94693442f653}</Project>
+      <Name>DataBaseRepositoryTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
+      <Project>{236788b4-a90d-4ac1-940b-d179b2f41bfd}</Project>
+      <Name>DataBaseTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HandleToolsInterfaces\HandleToolsInterfaces.csproj">
+      <Project>{eee4f2ce-3d7a-49bd-9cfc-a8f6ba2914d9}</Project>
+      <Name>HandleToolsInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HandleTools\HandleTools.csproj">
+      <Project>{47b3bb78-dcb8-4520-8aac-e6532df491ac}</Project>
+      <Name>HandleTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repositories\Repositories.csproj">
+      <Project>{43a7781c-b11e-4283-9ca0-59072276c733}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryDependencies\RepositoryDependencies.csproj">
+      <Project>{fa980697-1463-4727-bae6-82e3015b9f5e}</Project>
+      <Name>RepositoryDependencies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
+      <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
+      <Name>RepositoryTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StorageModels\StorageModels.csproj">
+      <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
+      <Name>StorageModels</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

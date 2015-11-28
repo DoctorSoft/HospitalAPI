@@ -71,6 +71,10 @@
       <Project>{11CCD57B-FFEF-4C04-BCAC-540B9A7DD20A}</Project>
       <Name>DataBaseModelConfigurations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
+      <Project>{2c4e04ec-dce7-476a-b64f-94693442f653}</Project>
+      <Name>DataBaseRepositoryTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
       <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
       <Name>DataBaseTools</Name>

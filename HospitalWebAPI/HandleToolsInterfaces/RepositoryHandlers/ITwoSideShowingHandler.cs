@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using StorageModels.Interfaces;
 
-namespace HandleTools.RepositoryHandlers
+namespace HandleToolsInterfaces.RepositoryHandlers
 {
     public interface ITwoSideShowingHandler<T>
         where T: IIdModel, IShowStatusModel

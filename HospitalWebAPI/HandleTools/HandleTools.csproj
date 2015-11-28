@@ -41,11 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryHandlers\IBlockAbleHandler.cs" />
-    <Compile Include="RepositoryHandlers\ITwoSideShowingHandler.cs" />
+    <Compile Include="RepositoryHandlers\BlockAbleHandler.cs" />
+    <Compile Include="RepositoryHandlers\TwoSideShowingHandler.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\HandleToolsInterfaces\HandleToolsInterfaces.csproj">
+      <Project>{eee4f2ce-3d7a-49bd-9cfc-a8f6ba2914d9}</Project>
+      <Name>HandleToolsInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
       <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
       <Name>StorageModels</Name>
