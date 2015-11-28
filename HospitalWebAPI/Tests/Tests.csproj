@@ -59,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CreateRandomDataTest\HospitalModelCreatorTest.cs" />
     <Compile Include="DataBaseTests\ConnectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CreateRandomDataTools\CreateRandomDataTools.csproj">
+      <Project>{087A278E-8E48-4555-8250-5A0989A78934}</Project>
+      <Name>CreateRandomDataTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseModelConfigurations\DataBaseModelConfigurations.csproj">
       <Project>{11CCD57B-FFEF-4C04-BCAC-540B9A7DD20A}</Project>
       <Name>DataBaseModelConfigurations</Name>

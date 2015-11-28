@@ -12,22 +12,22 @@ namespace CreateRandomDataTools.CreationSettings
 
         public bool CreateHospitals()
         {
-            return false;
+            return true;
         }
 
         public bool CreateClinics()
         {
-            return false;
+            return true;
         }
 
         public bool CreateFunctions()
         {
-            return false;
+            return true;
         }
 
         public bool CreateDistributiveGroups()
         {
-            return false;
+            return true;
         }
     }
 }
