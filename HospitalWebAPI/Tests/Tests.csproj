@@ -62,7 +62,6 @@
     <Compile Include="CreateRandomDataTest\CheckForNulllModelCreatorsTest.cs" />
     <Compile Include="DataBaseTests\ConnectionTest.cs" />
     <Compile Include="HttpRequestTests\APIClientTest.cs" />
-    <Compile Include="HttpRequestTests\UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryTests\PersonDataAPITest.cs" />
   </ItemGroup>
