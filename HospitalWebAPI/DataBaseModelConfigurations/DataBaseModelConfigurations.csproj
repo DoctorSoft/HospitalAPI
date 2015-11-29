@@ -54,9 +54,10 @@
   <ItemGroup>
     <Compile Include="ConfigurationFactories\OriginalConfigurationFactory.cs" />
     <Compile Include="Configurations\ClinicModels\ClinicDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\ClinicModels\ClinicHospitalAccessDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\PatientDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\ReservationDataBaseConfiguration.cs" />
-    <Compile Include="Configurations\FunctionModels\DistributiveGroupDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\FunctionModels\FunctionalGroupDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\FunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\GroupFunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\UserFunctionDataBaseConfiguration.cs" />
@@ -71,16 +72,13 @@
     <Compile Include="Configurations\UserModels\HospitalUserDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\SessionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\UserDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\UserModels\UserTypeDataBaseConfiguration.cs" />
     <Compile Include="Contexts\OriginalDataBaseContext.cs" />
     <Compile Include="Contexts\TestDataBaseContext.cs" />
     <Compile Include="Dependencies\DataBaseNinjectModule.cs" />
-    <Compile Include="Migrations\201511261810193_INIT.cs" />
-    <Compile Include="Migrations\201511261810193_INIT.Designer.cs">
-      <DependentUpon>201511261810193_INIT.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511292115035_RenameReferenceIds.cs" />
-    <Compile Include="Migrations\201511292115035_RenameReferenceIds.Designer.cs">
-      <DependentUpon>201511292115035_RenameReferenceIds.cs</DependentUpon>
+    <Compile Include="Migrations\201511292317110_Init.cs" />
+    <Compile Include="Migrations\201511292317110_Init.Designer.cs">
+      <DependentUpon>201511292317110_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,11 +98,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511261810193_INIT.resx">
-      <DependentUpon>201511261810193_INIT.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511292115035_RenameReferenceIds.resx">
-      <DependentUpon>201511292115035_RenameReferenceIds.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511292317110_Init.resx">
+      <DependentUpon>201511292317110_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

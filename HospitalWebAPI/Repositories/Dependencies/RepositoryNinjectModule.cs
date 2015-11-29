@@ -1,9 +1,11 @@
 ﻿using Ninject.Modules;
+using Repositories.AnotherRepositories.RemoteAPIRepositories;
 using Repositories.DataBaseRepositories.ClinicRepositories;
 using Repositories.DataBaseRepositories.FunctionRepositories;
 using Repositories.DataBaseRepositories.HospitalRepositories;
 using Repositories.DataBaseRepositories.MailboxRepositories;
 using Repositories.DataBaseRepositories.UserRepositories;
+using RepositoryTools.Interfaces.PrivateInterfaces.AnotherRepositories.RemoteAPIRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
@@ -21,7 +23,7 @@ namespace Repositories.Dependencies
             Bind<IClinicRepository>().To<ClinicRepository>();
             Bind<IPatientRepository>().To<PatientRepository>();
             Bind<IReservationRepository>().To<ReservationRepository>();
-            Bind<IDistributiveGroupRepository>().To<DistributiveGroupRepository>();
+            Bind<IFunctionalGroupRepository>().To<FunctionalGroupRepository>();
             Bind<IFunctionRepository>().To<FunctionRepository>();
             Bind<IGroupFunctionRepository>().To<GroupFunctionRepository>();
             Bind<IUserFunctionRepository>().To<UserFunctionRepository>();
@@ -36,6 +38,10 @@ namespace Repositories.Dependencies
             Bind<IHospitalUserRepository>().To<HospitalUserRepository>();
             Bind<ISessionRepository>().To<SessionRepository>();
             Bind<IUserRepository>().To<UserRepository>();
+            Bind<IUserTypeRepository>().To<UserTypeRepository>();
+            Bind<IClinicHospitalAccessRepository>().To<ClinicHospitalAccessRepository>();
+
+            Bind<IPersonDataAPIRepository>().To<PersonDataAPIRepository>();
         }
     }
 }

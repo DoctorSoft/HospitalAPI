@@ -14,11 +14,11 @@ namespace Tests.CreateRandomDataTest
             Assert.IsNotNull(clinicsList);
         }
         [TestMethod]
-        public void ReturnDistributiveGroupsList()
+        public void ReturnFunctionalGroupsList()
         {
-            var distributiveGroup = new DistributiveGroupModelCreator();
-            var distributiveGroupsList = distributiveGroup.GetList();
-            Assert.IsNotNull(distributiveGroupsList);
+            var modelCreator = new FunctionalGroupModelCreator();
+            var models = modelCreator.GetList();
+            Assert.IsNotNull(models);
         }
         [TestMethod]
         public void ReturnFunctionsList()

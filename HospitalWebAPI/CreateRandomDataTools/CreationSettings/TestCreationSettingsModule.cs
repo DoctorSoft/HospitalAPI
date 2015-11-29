@@ -25,7 +25,7 @@ namespace CreateRandomDataTools.CreationSettings
             return true;
         }
 
-        public bool CreateDistributiveGroups()
+        public bool CreateFunctionalGroups()
         {
             return true;
         }

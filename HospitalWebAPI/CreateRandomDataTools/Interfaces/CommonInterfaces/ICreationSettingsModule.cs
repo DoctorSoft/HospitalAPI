@@ -10,6 +10,6 @@
 
         bool CreateFunctions();
 
-        bool CreateDistributiveGroups();
+        bool CreateFunctionalGroups();
     }
 }

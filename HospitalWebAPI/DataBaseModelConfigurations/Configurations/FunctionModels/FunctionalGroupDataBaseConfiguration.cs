@@ -4,13 +4,13 @@ using StorageModels.Models.FunctionModels;
 
 namespace DataBaseModelConfigurations.Configurations.FunctionModels
 {
-    public class DistributiveGroupDataBaseConfiguration : EntityTypeConfiguration<DistributiveGroupStorageModel>
+    public class FunctionalGroupDataBaseConfiguration : EntityTypeConfiguration<FunctionalGroupStorageModel>
     {
-        public DistributiveGroupDataBaseConfiguration()
+        public FunctionalGroupDataBaseConfiguration()
         {
             // Table name
 
-            this.ToTable("DistributiveGroups");
+            this.ToTable("FunctionalGroups");
 
             // Primary key
 
@@ -23,7 +23,8 @@ namespace DataBaseModelConfigurations.Configurations.FunctionModels
 
             // Links to tables
 
-            this.HasMany(model => model.GroupFunctions).WithRequired(link => link.DistributiveGroup).HasForeignKey(model => model.DistributiveGroupId);
+            this.HasMany(model => model.GroupFunctions).WithRequired(link => link.FunctionalGroup).HasForeignKey(model => model.FunctionalGroupId);
+            this.HasRequired(model => model.UserType).WithMany(model => model.FunctionalGroups).HasForeignKey(model => model.UserTypeId);
         }
     }
 }

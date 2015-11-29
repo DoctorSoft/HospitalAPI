@@ -4,9 +4,9 @@ using StorageModels.Models.FunctionModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
-    public class DistributiveGroupModelCreator : IDistributiveGroupModelCreator
+    public class FunctionalGroupModelCreator : IFunctionalGroupModelCreator
     {
-        public IEnumerable<DistributiveGroupStorageModel> GetList()
+        public IEnumerable<FunctionalGroupStorageModel> GetList()
         {
             return null;
         }

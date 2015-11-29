@@ -11,7 +11,7 @@ namespace StorageModels.Models.HospitalModels
 
         //
 
-        public DateTime Date { get; set; }
+        public string Name { get; set; }
 
         //
 

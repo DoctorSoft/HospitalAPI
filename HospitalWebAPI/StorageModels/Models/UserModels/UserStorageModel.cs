@@ -15,7 +15,6 @@ namespace StorageModels.Models.UserModels
         //
 
         public string Name { get; set; }
-        public UserType UserType { get; set; }
 
         //
 
@@ -25,5 +24,10 @@ namespace StorageModels.Models.UserModels
         public HospitalUserStorageModel HospitalUser { get; set; }
         public ICollection<MessageStorageModel> MessagesTo { get; set; }
         public ICollection<MessageStorageModel> MessagesFrom { get; set; }
+        public UserTypeStorageModel UserType { get; set; }
+
+        //
+
+        public int UserTypeId { get; set; }
     }
 }

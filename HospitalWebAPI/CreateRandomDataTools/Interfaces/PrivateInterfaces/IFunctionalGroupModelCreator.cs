@@ -3,7 +3,7 @@ using StorageModels.Models.FunctionModels;
 
 namespace CreateRandomDataTools.Interfaces.PrivateInterfaces
 {
-    public interface IDistributiveGroupModelCreator : IRandomModelListCreator<DistributiveGroupStorageModel>
+    public interface IFunctionalGroupModelCreator : IRandomModelListCreator<FunctionalGroupStorageModel>
     {
     }
 }

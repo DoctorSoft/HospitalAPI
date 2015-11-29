@@ -19,7 +19,7 @@ namespace DataBaseFiller.Dependencies
             // Creators
 
             Bind<IClinicModelCreator>().To<ClinicModelCreator>();
-            Bind<IDistributiveGroupModelCreator>().To<DistributiveGroupModelCreator>();
+            Bind<IFunctionalGroupModelCreator>().To<FunctionalGroupModelCreator>();
             Bind<IFunctionModelCreator>().To<FunctionModelCreator>();
             Bind<IHospitalModelCreator>().To<HospitalModelCreator>();
             Bind<ISectionModelCreator>().To<SectionModelCreator>();

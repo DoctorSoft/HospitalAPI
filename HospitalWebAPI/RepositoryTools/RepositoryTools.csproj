@@ -43,10 +43,11 @@
     <Compile Include="Interfaces\CommonInterfaces\IReadOnlyRepository.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IUpdateAbleRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\AnotherRepositories\RemoteAPIRepositories\IPersonDataAPIRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicHospitalAccessRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IPatientRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IReservationRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IDistributiveGroupRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IFunctionalGroupRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IFunctionRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IGroupFunctionRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IUserFunctionRepository.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IHospitalUserRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\ISessionRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IUserRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IUserTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

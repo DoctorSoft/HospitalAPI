@@ -20,7 +20,6 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(model => model.Name).IsRequired();
-            this.Property(model => model.UserType).IsRequired();
 
             // Links to tables
 
@@ -30,6 +29,7 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
             this.HasOptional(model => model.Account).WithRequired(link => link.User);
             this.HasOptional(model => model.ClinicUser).WithRequired(link => link.User);
             this.HasOptional(model => model.HospitalUser).WithRequired(link => link.User);
+            this.HasRequired(model => model.UserType).WithMany(model => model.Users).HasForeignKey(model => model.UserTypeId);
         }
     }
 }
