@@ -8,17 +8,7 @@ namespace CreateRandomDataTools.DataCreators
     {
         public IEnumerable<FunctionStorageModel> GetList()
         {
-            var firstFunction = new FunctionStorageModel
-            {
-                IsBlocked = false,
-                Id = 0,
-                Name = "Function 1"
-            };
-
-            return new List<FunctionStorageModel>
-            {
-                firstFunction
-            };
+            return null;
         }
     }
 }

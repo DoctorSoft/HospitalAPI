@@ -59,7 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CreateRandomDataTest\HospitalModelCreatorTest.cs" />
+    <Compile Include="CreateRandomDataTest\CheckForNulllModelCreatorsTest.cs" />
     <Compile Include="DataBaseTests\ConnectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -10,31 +10,122 @@ namespace CreateRandomDataTools.DataCreators
         {
             // TODO: Create list of sections with profiles
 
-            var firstSectionProfile = new SectionStorageModel
+            var sectionProfilesList = new List<SectionStorageModel>
             {
-                IsBlocked = false,
-                Id = 0,
-                Name = "Some Name",
-                SectionProfiles = new List<SectionProfileStorageModel>
+                new SectionStorageModel()
                 {
-                    new SectionProfileStorageModel
+                    IsBlocked = false,
+                    Id = 0,
+                    Name = "Терапевтические и неврологические",
+                    SectionProfiles = new List<SectionProfileStorageModel>
                     {
-                        IsBlocked = false,
-                        Name = "Some Name Profile"
-                    },
-                    new SectionProfileStorageModel
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Кардиологическое"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Пульмонологическое"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Неврологическое"
+                        }
+                    }
+                },
+                new SectionStorageModel()
+                {
+                    IsBlocked = false,
+                    Id = 1,
+                    Name = "Хирургические",
+                    SectionProfiles = new List<SectionProfileStorageModel>
                     {
-                        IsBlocked = false,
-                        Name = "Some Name Profile 2"
-                    },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Хирургическое"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Гнойной хирургии"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Нейрохирургическое"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Ожоговое"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Травматологическое"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Урологическое"
+                        }
+                    }
+                },
+                new SectionStorageModel()
+                {
+                    IsBlocked = false,
+                    Id = 2,
+                    Name = "Реанимационно-анестезиологические",
+                    SectionProfiles = new List<SectionProfileStorageModel>
+                    {
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Реанимации и интенсивной терапии"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Анестезиологии и реанимации"
+                        }
+                    }
+                },
+                new SectionStorageModel()
+                {
+                    IsBlocked = false,
+                    Id = 3,
+                    Name = "Параклинические",
+                    SectionProfiles = new List<SectionProfileStorageModel>
+                    {
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Операционное"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Анестезиологии"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Переливания крови"
+                        },
+                        new SectionProfileStorageModel
+                        {
+                            IsBlocked = false,
+                            Name = "Гипербарической оксигенации"
+                        }
+                    }
                 }
             };
 
-            return new List<SectionStorageModel>
-            {
-                firstSectionProfile
-            };
-
+            return sectionProfilesList;
         }
     }
 }
