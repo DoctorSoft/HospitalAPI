@@ -27,7 +27,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
             // Links to tables
 
             this.HasMany(model => model.ClinicUsers).WithRequired(link => link.Clinic);
-            this.HasMany(model => model.Reservations).WithRequired(link => link.Clinic);
+            this.HasMany(model => model.Reservations).WithRequired(link => link.Clinic).HasForeignKey(model => model.ClinicId);
         }
     }
 }

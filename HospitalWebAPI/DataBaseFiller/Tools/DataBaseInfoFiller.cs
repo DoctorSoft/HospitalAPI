@@ -1,7 +1,9 @@
-﻿using CreateRandomDataTools.Interfaces.CommonInterfaces;
+﻿using System.Collections.Generic;
+using CreateRandomDataTools.Interfaces.CommonInterfaces;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using DataBaseFiller.Interfaces;
 using DataBaseTools.Interfaces;
+using StorageModels.Interfaces;
 using StorageModels.Models.ClinicModels;
 using StorageModels.Models.FunctionModels;
 using StorageModels.Models.HospitalModels;
@@ -42,54 +44,64 @@ namespace DataBaseFiller.Tools
             FillDistributiveGroupModels();
         }
 
+
+        protected virtual void FillList<T>(IEnumerable<T> models, bool fillApprove = true)
+            where T: class, IIdModel
+        {
+            if (!fillApprove)
+            {
+                return;
+            }
+
+            var fillList = models;
+
+            if (fillList == null)
+            {
+                return;
+            }
+
+            _dataBaseContext.Set<T>().AddRange(fillList);
+            _dataBaseContext.SaveChanges();
+        }
+
         protected virtual void FillSectionModels()
         {
-            if (_creationSettingsModule.CreateSections())
-            {
-                var fillList = _sectionModelCreator.GetList();
-                _dataBaseContext.Set<SectionStorageModel>().AddRange(fillList);
-                _dataBaseContext.SaveChanges();
-            }
+            var models = _sectionModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateSections();
+
+            FillList(models, fillApprove);
         }
 
         protected virtual void FillHospitalModels()
         {
-            if (_creationSettingsModule.CreateHospitals())
-            {
-                var fillList = _hospitalModelCreator.GetList();
-                _dataBaseContext.Set<HospitalStorageModel>().AddRange(fillList);
-                _dataBaseContext.SaveChanges();
-            }
+            var models = _hospitalModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateHospitals();
+
+            FillList(models, fillApprove);
         }
 
         protected virtual void FillClinicModels()
         {
-            if (_creationSettingsModule.CreateClinics())
-            {
-                var fillList = _clinicModelCreator.GetList();
-                _dataBaseContext.Set<ClinicStorageModel>().AddRange(fillList);
-                _dataBaseContext.SaveChanges();
-            }
+            var models = _clinicModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateClinics();
+
+            FillList(models, fillApprove);
         }
 
         protected virtual void FillFunctionModels()
         {
-            if (_creationSettingsModule.CreateFunctions())
-            {
-                var fillList = _functionModelCreator.GetList();
-                _dataBaseContext.Set<FunctionStorageModel>().AddRange(fillList);
-                _dataBaseContext.SaveChanges();
-            }
+            var models = _functionModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateFunctions();
+
+            FillList(models, fillApprove);
         }
 
         protected virtual void FillDistributiveGroupModels()
         {
-            if (_creationSettingsModule.CreateDistributiveGroups())
-            {
-                var fillList = _distributiveGroupModelCreator.GetList();
-                _dataBaseContext.Set<DistributiveGroupStorageModel>().AddRange(fillList);
-                _dataBaseContext.SaveChanges();
-            }
+            var models = _distributiveGroupModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateDistributiveGroups();
+
+            FillList(models, fillApprove);
         }
     }
 }

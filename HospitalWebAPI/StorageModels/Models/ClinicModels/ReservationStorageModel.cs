@@ -20,5 +20,9 @@ namespace StorageModels.Models.ClinicModels
         public EmptyPlaceStatisticStorageModel EmptyPlaceStatistic { get; set; }
         public ClinicStorageModel Clinic { get; set; }
         public PatientStorageModel Patient { get; set; }
+
+        //
+
+        public int ClinicId { get; set; }
     }
 }
