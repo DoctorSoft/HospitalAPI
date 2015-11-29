@@ -22,8 +22,8 @@ namespace DataBaseModelConfigurations.Configurations.FunctionModels
 
             // Links to tables
 
-            this.HasRequired(model => model.DistributiveGroup).WithMany(link => link.GroupFunctions);
-            this.HasRequired(model => model.Function).WithMany(link => link.GroupFunctions);
+            this.HasRequired(model => model.DistributiveGroup).WithMany(link => link.GroupFunctions).HasForeignKey(model => model.DistributiveGroupId);
+            this.HasRequired(model => model.Function).WithMany(link => link.GroupFunctions).HasForeignKey(model => model.FunctionId);
         }
     }
 }

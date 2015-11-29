@@ -24,7 +24,7 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
 
             // Links to tables
 
-            this.HasMany(model => model.Sessions).WithRequired(link => link.Account);
+            this.HasMany(model => model.Sessions).WithRequired(link => link.Account).HasForeignKey(model => model.AccountId);
             this.HasRequired(model => model.User).WithOptional(link => link.Account);
         }
     }

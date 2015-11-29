@@ -10,5 +10,10 @@ namespace StorageModels.Models.FunctionModels
 
         public DistributiveGroupStorageModel DistributiveGroup { get; set; }
         public FunctionStorageModel Function { get; set; }
+
+        //
+
+        public int DistributiveGroupId { get; set; }
+        public int FunctionId { get; set; }
     }
 }

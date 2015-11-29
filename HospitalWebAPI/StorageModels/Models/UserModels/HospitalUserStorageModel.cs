@@ -11,5 +11,9 @@ namespace StorageModels.Models.UserModels
 
         public UserStorageModel User { get; set; }
         public HospitalStorageModel Hospital { get; set; }
+
+        //
+
+        public int HospitalId { get; set; }
     }
 }

@@ -23,8 +23,8 @@ namespace DataBaseModelConfigurations.Configurations.FunctionModels
 
             // Links to tables
 
-            this.HasMany(model => model.GroupFunctions).WithRequired(link => link.Function);
-            this.HasMany(model => model.UserFunctions).WithRequired(link => link.Function);
+            this.HasMany(model => model.GroupFunctions).WithRequired(link => link.Function).HasForeignKey(model => model.FunctionId);
+            this.HasMany(model => model.UserFunctions).WithRequired(link => link.Function).HasForeignKey(model => model.FunctionId);
         }
     }
 }

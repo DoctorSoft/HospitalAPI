@@ -16,5 +16,9 @@ namespace StorageModels.Models.HospitalModels
 
         public ICollection<HospitalSectionProfileStorageModel> HospitalSectionProfiles { get; set; }
         public SectionStorageModel Section { get; set; }
+
+        //
+
+        public int SectionId { get; set; }
     }
 }

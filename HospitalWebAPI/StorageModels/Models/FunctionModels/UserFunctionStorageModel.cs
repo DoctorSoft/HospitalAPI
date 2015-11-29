@@ -12,5 +12,10 @@ namespace StorageModels.Models.FunctionModels
 
         public UserStorageModel User { get; set; }
         public FunctionStorageModel Function { get; set; }
+
+        //
+
+        public int UserId { get; set; }
+        public int FunctionId { get; set; }
     }
 }

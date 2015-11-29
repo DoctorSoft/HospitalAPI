@@ -24,6 +24,8 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
             // Links to tables
 
             this.HasRequired(model => model.Reservation).WithOptional(link => link.Patient);
+
+            //
         }
     }
 }

@@ -24,7 +24,7 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
 
             // Links to tables
 
-            this.HasMany(model => model.SectionProfiles).WithRequired(link => link.Section);
+            this.HasMany(model => model.SectionProfiles).WithRequired(link => link.Section).HasForeignKey(model => model.SectionId);
         }
     }
 }

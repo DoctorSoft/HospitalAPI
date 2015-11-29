@@ -24,5 +24,7 @@ namespace StorageModels.Models.ClinicModels
         //
 
         public int ClinicId { get; set; }
+        public int EmptyPlaceStatisticId { get; set; }
+
     }
 }

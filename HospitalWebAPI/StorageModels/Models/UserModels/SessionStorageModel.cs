@@ -14,6 +14,10 @@ namespace StorageModels.Models.UserModels
 
         //
 
-        public AccountStorageModel Account { get; set; }
+        public AccountStorageModel Account { get; set; }       
+        
+        //
+
+        public int AccountId { get; set; }
     }
 }

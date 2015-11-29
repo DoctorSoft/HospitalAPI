@@ -12,5 +12,9 @@ namespace StorageModels.Models.UserModels
         public UserStorageModel User { get; set; }
         public ClinicStorageModel Clinic { get; set; }
 
+        //
+
+        public int ClinicId { get; set; }
+
     }
 }

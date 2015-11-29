@@ -23,7 +23,7 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
             // Links to tables
 
             this.HasRequired(model => model.User).WithOptional(link => link.HospitalUser);
-            this.HasRequired(model => model.Hospital).WithMany(link => link.HospitalUsers);
+            this.HasRequired(model => model.Hospital).WithMany(link => link.HospitalUsers).HasForeignKey(model => model.HospitalId);
         }
     }
 }

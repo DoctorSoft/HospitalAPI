@@ -22,8 +22,8 @@ namespace DataBaseModelConfigurations.Configurations.FunctionModels
 
             // Links to tables
 
-            this.HasRequired(model => model.Function).WithMany(link => link.UserFunctions);
-            this.HasRequired(model => model.User).WithMany(link => link.UserFunctions);  
+            this.HasRequired(model => model.Function).WithMany(link => link.UserFunctions).HasForeignKey(model => model.FunctionId);
+            this.HasRequired(model => model.User).WithMany(link => link.UserFunctions).HasForeignKey(model => model.UserId);  
         }
     }
 }

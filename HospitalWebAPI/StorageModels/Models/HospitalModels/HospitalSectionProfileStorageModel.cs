@@ -18,5 +18,10 @@ namespace StorageModels.Models.HospitalModels
         public HospitalStorageModel Hospital { get; set; }
         public ICollection<EmptyPlaceStatisticStorageModel> EmptyPlaceStatistics { get; set; }
         public SectionProfileStorageModel SectionProfile { get; set; }
+
+        //
+
+        public int HospitalId { get; set; }
+        public int SectionProfileId { get; set; }
     }
 }

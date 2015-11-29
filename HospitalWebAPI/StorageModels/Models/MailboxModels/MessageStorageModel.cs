@@ -23,5 +23,9 @@ namespace StorageModels.Models.MailboxModels
         public UserStorageModel UserTo { get; set; }
         public UserStorageModel UserFrom { get; set; }
 
+        //
+
+        public int UserId { get; set; }
+        
     }
 }

@@ -13,5 +13,6 @@ namespace StorageModels.Models.ClinicModels
         //
 
         public ReservationStorageModel Reservation { get; set; }
+
     }
 }

@@ -24,7 +24,7 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
             // Links to tables
 
             this.HasRequired(model => model.User).WithOptional(link => link.ClinicUser);
-            this.HasRequired(model => model.Clinic).WithMany(link => link.ClinicUsers);
+            this.HasRequired(model => model.Clinic).WithMany(link => link.ClinicUsers).HasForeignKey(model => model.ClinicId);
         }
     }
 }
