@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnotherRepositories\RemoteAPIRepositories\PersonDataAPIRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\ClinicRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\PatientRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\ReservationRepository.cs" />
@@ -83,6 +84,10 @@
     <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
       <Project>{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}</Project>
       <Name>HelpingTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteServicesTools\RemoteServicesTools.csproj">
+      <Project>{BDC88114-1004-44E9-85AF-5D793A4C19EF}</Project>
+      <Name>RemoteServicesTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
       <Project>{26A323FE-637C-414F-8924-6E76A4756C08}</Project>

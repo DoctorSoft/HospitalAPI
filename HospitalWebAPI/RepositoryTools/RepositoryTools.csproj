@@ -42,6 +42,7 @@
     <Compile Include="Interfaces\CommonInterfaces\IAddAbleRepository.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IReadOnlyRepository.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IUpdateAbleRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\AnotherRepositories\RemoteAPIRepositories\IPersonDataAPIRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IPatientRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IReservationRepository.cs" />
