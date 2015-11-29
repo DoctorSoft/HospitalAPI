@@ -29,8 +29,8 @@ namespace DataBaseModelConfigurations.Configurations.MailboxModels
 
             // Links to tables
 
-            this.HasRequired(model => model.UserFrom).WithMany(link => link.MessagesFrom).HasForeignKey(model => model.UserId).WillCascadeOnDelete(false);
-            this.HasRequired(model => model.UserTo).WithMany(link => link.MessagesTo).HasForeignKey(model => model.UserId).WillCascadeOnDelete(false);
+            this.HasRequired(model => model.UserFrom).WithMany(link => link.MessagesFrom).HasForeignKey(model => model.UserFromId).WillCascadeOnDelete(false);
+            this.HasRequired(model => model.UserTo).WithMany(link => link.MessagesTo).HasForeignKey(model => model.UserToId).WillCascadeOnDelete(false);
         }
     }
 }

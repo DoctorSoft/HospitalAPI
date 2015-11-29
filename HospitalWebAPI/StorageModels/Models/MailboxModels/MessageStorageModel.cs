@@ -25,7 +25,9 @@ namespace StorageModels.Models.MailboxModels
 
         //
 
-        public int UserId { get; set; }
+        public int UserToId { get; set; }
+
+        public int UserFromId { get; set; }
         
     }
 }

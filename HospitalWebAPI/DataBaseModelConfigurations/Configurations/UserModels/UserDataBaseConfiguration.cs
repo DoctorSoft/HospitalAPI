@@ -25,8 +25,8 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
             // Links to tables
 
             this.HasMany(model => model.UserFunctions).WithRequired(link => link.User).HasForeignKey(model => model.UserId);
-            this.HasMany(model => model.MessagesTo).WithRequired(link => link.UserTo).HasForeignKey(model => model.UserId).WillCascadeOnDelete(false);
-            this.HasMany(model => model.MessagesFrom).WithRequired(link => link.UserFrom).HasForeignKey(model => model.UserId).WillCascadeOnDelete(false);
+            this.HasMany(model => model.MessagesTo).WithRequired(link => link.UserTo).HasForeignKey(model => model.UserToId).WillCascadeOnDelete(false);
+            this.HasMany(model => model.MessagesFrom).WithRequired(link => link.UserFrom).HasForeignKey(model => model.UserFromId).WillCascadeOnDelete(false);
             this.HasOptional(model => model.Account).WithRequired(link => link.User);
             this.HasOptional(model => model.ClinicUser).WithRequired(link => link.User);
             this.HasOptional(model => model.HospitalUser).WithRequired(link => link.User);

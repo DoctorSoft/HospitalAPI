@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201511261810193_INIT.Designer.cs">
       <DependentUpon>201511261810193_INIT.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511292115035_RenameReferenceIds.cs" />
+    <Compile Include="Migrations\201511292115035_RenameReferenceIds.Designer.cs">
+      <DependentUpon>201511292115035_RenameReferenceIds.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -98,6 +102,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511261810193_INIT.resx">
       <DependentUpon>201511261810193_INIT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511292115035_RenameReferenceIds.resx">
+      <DependentUpon>201511292115035_RenameReferenceIds.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
