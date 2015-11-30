@@ -72,6 +72,14 @@
     <Folder Include="AbstractTools\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Repositories\Repositories.csproj">
+      <Project>{43A7781C-B11E-4283-9CA0-59072276C733}</Project>
+      <Name>Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
+      <Project>{26A323FE-637C-414F-8924-6E76A4756C08}</Project>
+      <Name>RepositoryTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
       <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
       <Name>StorageModels</Name>

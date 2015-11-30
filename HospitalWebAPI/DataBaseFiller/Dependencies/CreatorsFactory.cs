@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using DataBaseFiller.Interfaces;
 using DataBaseModelConfigurations.Dependencies;
 using Ninject;
+using RemoteServicesTools.Dependencies;
+using Repositories.Dependencies;
 
 namespace DataBaseFiller.Dependencies
 {
@@ -13,7 +15,10 @@ namespace DataBaseFiller.Dependencies
     {
         public IDataBaseInfoFiller GetFiller()
         {
-            var kernel = new StandardKernel(new DataBaseNinjectModule(), new CreatorsNinjectModule());
+            var kernel = new StandardKernel(new DataBaseNinjectModule(),
+                                            new CreatorsNinjectModule(), 
+                                            new RepositoriesNinjectModule(), 
+                                            new RemoteServicesNinjectModule());
 
             return kernel.Get<IDataBaseInfoFiller>();
         }

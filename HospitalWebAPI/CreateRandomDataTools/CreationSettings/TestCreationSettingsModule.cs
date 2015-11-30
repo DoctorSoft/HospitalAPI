@@ -7,22 +7,22 @@ namespace CreateRandomDataTools.CreationSettings
     {
         public bool CreateSections()
         {
-            return false;
+            return true;
         }
 
         public bool CreateHospitals()
         {
-            return false;
+            return true;
         }
 
         public bool CreateClinics()
         {
-            return false;
+            return true;
         }
 
         public bool CreateFunctions()
         {
-            return false;
+            return true;
         }
 
         public bool CreateUserTypes()
