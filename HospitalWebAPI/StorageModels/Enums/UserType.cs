@@ -4,6 +4,8 @@
     {
         ClinicUser = 0,
         HospitalUser = 1,
-        Bot = 2
+        Bot = 2,
+        Administrator = 3,
+        Reviewer = 4
     }
 }

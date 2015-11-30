@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\PrivateInterfaces\IFunctionModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IHospitalModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ISectionModelCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IUserTypeModelCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
