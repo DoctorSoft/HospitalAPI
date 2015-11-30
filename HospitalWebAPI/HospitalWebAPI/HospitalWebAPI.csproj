@@ -157,6 +157,10 @@
       <Project>{47b3bb78-dcb8-4520-8aac-e6532df491ac}</Project>
       <Name>HandleTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
+      <Project>{47a288e7-d7ef-4f2a-81a7-23c4a5148e60}</Project>
+      <Name>HelpingTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Repositories\Repositories.csproj">
       <Project>{43a7781c-b11e-4283-9ca0-59072276c733}</Project>
       <Name>Repositories</Name>
