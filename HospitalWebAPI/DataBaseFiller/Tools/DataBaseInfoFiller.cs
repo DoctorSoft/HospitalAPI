@@ -28,19 +28,19 @@ namespace DataBaseFiller.Tools
         private readonly IDataBaseContext _dataBaseContext;
         private readonly ICreationSettingsModule _creationSettingsModule;
 
-        public DataBaseInfoFiller(IClinicModelCreator clinicModelCreator,
+        public DataBaseInfoFiller(IDataBaseContext dataBaseContext, IClinicModelCreator clinicModelCreator,
             IFunctionalGroupModelCreator functionalGroupModelCreator, IFunctionModelCreator functionModelCreator,
-            IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator, IDataBaseContext dataBaseContext, ICreationSettingsModule creationSettingsModule, 
+            IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator, ICreationSettingsModule creationSettingsModule, 
             IUserTypeModelCreator userTypeModelCreator, IClinicUserModelCreator clinicUserModelCreator, IHospitalUserModelCreator hospitalUserModelCreator, IClinicBotModelCreator clinicBotModelCreator,
             IHospitalBotModelCreator hospitalBotModelCreator, IAdministratorModelCreator administratorModelCreator, IUserFunctionModelCreator userFunctionModelCreator)
         {
+            _dataBaseContext = dataBaseContext;
+
             _clinicModelCreator = clinicModelCreator;
             _functionalGroupModelCreator = functionalGroupModelCreator;
             _functionModelCreator = functionModelCreator;
             _hospitalModelCreator = hospitalModelCreator;
             _sectionModelCreator = sectionModelCreator;
-
-            _dataBaseContext = dataBaseContext;
             _creationSettingsModule = creationSettingsModule;
             _userTypeModelCreator = userTypeModelCreator;
             _clinicUserModelCreator = clinicUserModelCreator;
