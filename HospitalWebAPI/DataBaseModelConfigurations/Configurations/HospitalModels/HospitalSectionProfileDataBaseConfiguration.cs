@@ -19,7 +19,7 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
             // Properties
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(model => model.Date).IsRequired();
+            this.Property(model => model.Name).IsRequired();
             this.Property(model => model.IsBlocked).IsRequired();
 
             // Links to tables

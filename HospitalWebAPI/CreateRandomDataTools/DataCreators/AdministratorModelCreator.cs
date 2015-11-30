@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
-using StorageModels.Models.FunctionModels;
+using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
-    public class DistributiveGroupModelCreator : IDistributiveGroupModelCreator
+    public class AdministratorModelCreator : IAdministratorModelCreator
     {
-        public IEnumerable<DistributiveGroupStorageModel> GetList()
+        public IEnumerable<UserStorageModel> GetList()
         {
             return null;
         }

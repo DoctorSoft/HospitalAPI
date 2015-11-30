@@ -44,10 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnotherRepositories\RemoteAPIRepositories\PersonDataAPIRepository.cs" />
+    <Compile Include="DataBaseRepositories\ClinicRepositories\ClinicHospitalAccessRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\ClinicRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\PatientRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\ReservationRepository.cs" />
-    <Compile Include="DataBaseRepositories\FunctionRepositories\DistributiveGroupRepository.cs" />
+    <Compile Include="DataBaseRepositories\FunctionRepositories\FunctionalGroupRepository.cs" />
     <Compile Include="DataBaseRepositories\FunctionRepositories\FunctionRepository.cs" />
     <Compile Include="DataBaseRepositories\FunctionRepositories\GroupFunctionRepository.cs" />
     <Compile Include="DataBaseRepositories\FunctionRepositories\UserFunctionRepository.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="DataBaseRepositories\UserRepositories\HospitalUserRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\SessionRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\UserRepository.cs" />
+    <Compile Include="DataBaseRepositories\UserRepositories\UserTypeRepository.cs" />
     <Compile Include="Dependencies\RepositoryNinjectModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -48,10 +48,11 @@
     <Compile Include="Interfaces\IBlockAbleModel.cs" />
     <Compile Include="Interfaces\IIdModel.cs" />
     <Compile Include="Interfaces\IShowStatusModel.cs" />
+    <Compile Include="Models\ClinicModels\ClinicHospitalAccessStorageModel.cs" />
     <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
     <Compile Include="Models\ClinicModels\PatientStorageModel.cs" />
     <Compile Include="Models\ClinicModels\ReservationStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\DistributiveGroupStorageModel.cs" />
+    <Compile Include="Models\FunctionModels\FunctionalGroupStorageModel.cs" />
     <Compile Include="Models\FunctionModels\FunctionStorageModel.cs" />
     <Compile Include="Models\FunctionModels\GroupFunctionStorageModel.cs" />
     <Compile Include="Models\FunctionModels\UserFunctionStorageModel.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Models\UserModels\HospitalUserStorageModel.cs" />
     <Compile Include="Models\UserModels\SessionStorageModel.cs" />
     <Compile Include="Models\UserModels\UserStorageModel.cs" />
+    <Compile Include="Models\UserModels\UserTypeStorageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

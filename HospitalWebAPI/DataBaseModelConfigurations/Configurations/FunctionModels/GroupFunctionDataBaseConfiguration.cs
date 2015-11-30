@@ -22,7 +22,7 @@ namespace DataBaseModelConfigurations.Configurations.FunctionModels
 
             // Links to tables
 
-            this.HasRequired(model => model.DistributiveGroup).WithMany(link => link.GroupFunctions).HasForeignKey(model => model.DistributiveGroupId);
+            this.HasRequired(model => model.FunctionalGroup).WithMany(link => link.GroupFunctions).HasForeignKey(model => model.FunctionalGroupId);
             this.HasRequired(model => model.Function).WithMany(link => link.GroupFunctions).HasForeignKey(model => model.FunctionId);
         }
     }

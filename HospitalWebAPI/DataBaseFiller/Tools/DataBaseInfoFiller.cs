@@ -13,7 +13,7 @@ namespace DataBaseFiller.Tools
     public class DataBaseInfoFiller : IDataBaseInfoFiller
     {
         private readonly IClinicModelCreator _clinicModelCreator;
-        private readonly IDistributiveGroupModelCreator _distributiveGroupModelCreator;
+        private readonly IFunctionalGroupModelCreator _functionalGroupModelCreator;
         private readonly IFunctionModelCreator _functionModelCreator;
         private readonly IHospitalModelCreator _hospitalModelCreator;
         private readonly ISectionModelCreator _sectionModelCreator;
@@ -22,11 +22,11 @@ namespace DataBaseFiller.Tools
         private readonly ICreationSettingsModule _creationSettingsModule;
 
         public DataBaseInfoFiller(IClinicModelCreator clinicModelCreator,
-            IDistributiveGroupModelCreator distributiveGroupModelCreator, IFunctionModelCreator functionModelCreator,
+            IFunctionalGroupModelCreator functionalGroupModelCreator, IFunctionModelCreator functionModelCreator,
             IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator, IDataBaseContext dataBaseContext, ICreationSettingsModule creationSettingsModule)
         {
             _clinicModelCreator = clinicModelCreator;
-            _distributiveGroupModelCreator = distributiveGroupModelCreator;
+            _functionalGroupModelCreator = functionalGroupModelCreator;
             _functionModelCreator = functionModelCreator;
             _hospitalModelCreator = hospitalModelCreator;
             _sectionModelCreator = sectionModelCreator;
@@ -41,7 +41,7 @@ namespace DataBaseFiller.Tools
             FillHospitalModels();
             FillClinicModels();
             FillFunctionModels();
-            FillDistributiveGroupModels();
+            FillFunctionalGroupModels();
         }
 
 
@@ -96,10 +96,10 @@ namespace DataBaseFiller.Tools
             FillList(models, fillApprove);
         }
 
-        protected virtual void FillDistributiveGroupModels()
+        protected virtual void FillFunctionalGroupModels()
         {
-            var models = _distributiveGroupModelCreator.GetList();
-            var fillApprove = _creationSettingsModule.CreateDistributiveGroups();
+            var models = _functionalGroupModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateFunctionalGroups();
 
             FillList(models, fillApprove);
         }
