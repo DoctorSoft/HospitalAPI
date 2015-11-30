@@ -169,13 +169,10 @@
       <Project>{47a288e7-d7ef-4f2a-81a7-23c4a5148e60}</Project>
       <Name>HelpingTools</Name>
     </ProjectReference>
-<<<<<<< HEAD
-=======
     <ProjectReference Include="..\RemoteServicesTools\RemoteServicesTools.csproj">
       <Project>{bdc88114-1004-44e9-85af-5d793a4c19ef}</Project>
       <Name>RemoteServicesTools</Name>
     </ProjectReference>
->>>>>>> 23bc958fb44105c403b6f5b91da1f16bc12f5fce
     <ProjectReference Include="..\Repositories\Repositories.csproj">
       <Project>{43a7781c-b11e-4283-9ca0-59072276c733}</Project>
       <Name>Repositories</Name>
