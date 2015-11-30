@@ -17,13 +17,22 @@ namespace DataBaseFiller.Tools
         private readonly IFunctionModelCreator _functionModelCreator;
         private readonly IHospitalModelCreator _hospitalModelCreator;
         private readonly ISectionModelCreator _sectionModelCreator;
+        private readonly IUserTypeModelCreator _userTypeModelCreator;
+        private readonly IClinicUserModelCreator _clinicUserModelCreator;
+        private readonly IHospitalUserModelCreator _hospitalUserModelCreator;
+        private readonly IClinicBotModelCreator _clinicBotModelCreator;
+        private readonly IHospitalBotModelCreator _hospitalBotModelCreator;
+        private readonly IAdministratorModelCreator _administratorModelCreator;
+        private readonly IUserFunctionModelCreator _userFunctionModelCreator;
 
         private readonly IDataBaseContext _dataBaseContext;
         private readonly ICreationSettingsModule _creationSettingsModule;
 
         public DataBaseInfoFiller(IClinicModelCreator clinicModelCreator,
             IFunctionalGroupModelCreator functionalGroupModelCreator, IFunctionModelCreator functionModelCreator,
-            IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator, IDataBaseContext dataBaseContext, ICreationSettingsModule creationSettingsModule)
+            IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator, IDataBaseContext dataBaseContext, ICreationSettingsModule creationSettingsModule, 
+            IUserTypeModelCreator userTypeModelCreator, IClinicUserModelCreator clinicUserModelCreator, IHospitalUserModelCreator hospitalUserModelCreator, IClinicBotModelCreator clinicBotModelCreator,
+            IHospitalBotModelCreator hospitalBotModelCreator, IAdministratorModelCreator administratorModelCreator, IUserFunctionModelCreator userFunctionModelCreator)
         {
             _clinicModelCreator = clinicModelCreator;
             _functionalGroupModelCreator = functionalGroupModelCreator;
@@ -33,6 +42,13 @@ namespace DataBaseFiller.Tools
 
             _dataBaseContext = dataBaseContext;
             _creationSettingsModule = creationSettingsModule;
+            _userTypeModelCreator = userTypeModelCreator;
+            _clinicUserModelCreator = clinicUserModelCreator;
+            _hospitalUserModelCreator = hospitalUserModelCreator;
+            _clinicBotModelCreator = clinicBotModelCreator;
+            _hospitalBotModelCreator = hospitalBotModelCreator;
+            _administratorModelCreator = administratorModelCreator;
+            _userFunctionModelCreator = userFunctionModelCreator;
         }
 
         public void FillDataBase()
@@ -42,6 +58,13 @@ namespace DataBaseFiller.Tools
             FillClinicModels();
             FillFunctionModels();
             FillFunctionalGroupModels();
+            FillUserTypeModels();
+            FillClinicUserModels();
+            FillHospitalUserModels();
+            FillClinicBotModels();
+            FillHospitalBotModels();
+            FillAdministratorModels();
+            FillUserFunctionModels();
         }
 
 
@@ -100,6 +123,62 @@ namespace DataBaseFiller.Tools
         {
             var models = _functionalGroupModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateFunctionalGroups();
+
+            FillList(models, fillApprove);
+        }
+
+        protected virtual void FillUserTypeModels()
+        {
+            var models = _userTypeModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateUserTypes();
+
+            FillList(models, fillApprove);
+        }
+
+        protected virtual void FillClinicUserModels()
+        {
+            var models = _clinicUserModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateClinicUsers();
+
+            FillList(models, fillApprove);
+        }
+
+        protected virtual void FillHospitalUserModels()
+        {
+            var models = _hospitalUserModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateHospitalUsers();
+
+            FillList(models, fillApprove);
+        }
+
+        protected virtual void FillClinicBotModels()
+        {
+            var models = _clinicBotModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateClinicBots();
+
+            FillList(models, fillApprove);
+        }
+
+        protected virtual void FillHospitalBotModels()
+        {
+            var models = _hospitalBotModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateHospitalBots();
+
+            FillList(models, fillApprove);
+        }
+
+        protected virtual void FillAdministratorModels()
+        {
+            var models = _administratorModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateAdministrators();
+
+            FillList(models, fillApprove);
+        }
+
+        protected virtual void FillUserFunctionModels()
+        {
+            var models = _userFunctionModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateUserFunctions();
 
             FillList(models, fillApprove);
         }
