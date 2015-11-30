@@ -23,6 +23,13 @@ namespace DataBaseFiller.Dependencies
             Bind<IFunctionModelCreator>().To<FunctionModelCreator>();
             Bind<IHospitalModelCreator>().To<HospitalModelCreator>();
             Bind<ISectionModelCreator>().To<SectionModelCreator>();
+            Bind<IUserTypeModelCreator>().To<UserTypeModelCreator>();
+            Bind<IClinicUserModelCreator>().To<ClinicUserModelCreator>();
+            Bind<IHospitalUserModelCreator>().To<HospitalUserModelCreator>();
+            Bind<IClinicBotModelCreator>().To<ClinicBotModelCreator>();
+            Bind<IHospitalBotModelCreator>().To<HospitalBotModelCreator>();
+            Bind<IAdministratorModelCreator>().To<AdministratorModelCreator>();
+            Bind<IUserFunctionModelCreator>().To<UserFunctionModelCreator>();
 
             // Fillers
 
