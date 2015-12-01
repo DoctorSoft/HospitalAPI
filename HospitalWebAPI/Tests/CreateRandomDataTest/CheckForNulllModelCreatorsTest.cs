@@ -1,5 +1,8 @@
 ﻿using CreateRandomDataTools.DataCreators;
+using DataBaseModelConfigurations.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repositories.DataBaseRepositories.HospitalRepositories;
+using Repositories.DataBaseRepositories.UserRepositories;
 
 namespace Tests.CreateRandomDataTest
 {
@@ -23,7 +26,7 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnClinicsList()
         {
-            var clinic = new ClinicModelCreator();
+            var clinic = new ClinicModelCreator(new HospitalRepository(new TestDataBaseContext()));
             var resoultList = clinic.GetList();
             Assert.IsNotNull(resoultList);
         }
@@ -37,7 +40,7 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnFunctionalGroupsList()
         {
-            var modelCreator = new FunctionalGroupModelCreator();
+            var modelCreator = new FunctionalGroupModelCreator(new UserTypeRepository(new TestDataBaseContext()));
             var resoultList = modelCreator.GetList();
             Assert.IsNotNull(resoultList);
         }
