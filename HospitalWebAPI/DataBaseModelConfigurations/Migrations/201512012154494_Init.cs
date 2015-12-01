@@ -266,7 +266,7 @@ namespace DataBaseModelConfigurations.Migrations
                 "dbo.UserTypes",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         IsBlocked = c.Boolean(nullable: false),
                         Name = c.String(),
                         UserType = c.Int(nullable: false),

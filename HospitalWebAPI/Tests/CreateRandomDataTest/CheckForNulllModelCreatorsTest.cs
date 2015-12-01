@@ -1,6 +1,7 @@
 ﻿using CreateRandomDataTools.DataCreators;
 using DataBaseModelConfigurations.Contexts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Repositories.DataBaseRepositories.FunctionRepositories;
 using Repositories.DataBaseRepositories.HospitalRepositories;
 using Repositories.DataBaseRepositories.UserRepositories;
 
@@ -9,6 +10,8 @@ namespace Tests.CreateRandomDataTest
     [TestClass]
     public class CheckForNulllModelCreatorsTest
     {
+        private readonly TestDataBaseContext context = new TestDataBaseContext();
+
         [TestMethod]
         public void ReturnAdministratorsList()
         {
@@ -26,7 +29,7 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnClinicsList()
         {
-            var clinic = new ClinicModelCreator(new HospitalRepository(new TestDataBaseContext()));
+            var clinic = new ClinicModelCreator(new HospitalRepository(context));
             var resoultList = clinic.GetList();
             Assert.IsNotNull(resoultList);
         }
@@ -40,7 +43,7 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnFunctionalGroupsList()
         {
-            var modelCreator = new FunctionalGroupModelCreator(new UserTypeRepository(new TestDataBaseContext()));
+            var modelCreator = new FunctionalGroupModelCreator(new UserTypeRepository(context), new FunctionRepository(context));
             var resoultList = modelCreator.GetList();
             Assert.IsNotNull(resoultList);
         }

@@ -76,9 +76,9 @@
     <Compile Include="Contexts\OriginalDataBaseContext.cs" />
     <Compile Include="Contexts\TestDataBaseContext.cs" />
     <Compile Include="Dependencies\DataBaseNinjectModule.cs" />
-    <Compile Include="Migrations\201511292317110_Init.cs" />
-    <Compile Include="Migrations\201511292317110_Init.Designer.cs">
-      <DependentUpon>201511292317110_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201512012154494_Init.cs" />
+    <Compile Include="Migrations\201512012154494_Init.Designer.cs">
+      <DependentUpon>201512012154494_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,8 +98,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511292317110_Init.resx">
-      <DependentUpon>201511292317110_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512012154494_Init.resx">
+      <DependentUpon>201512012154494_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

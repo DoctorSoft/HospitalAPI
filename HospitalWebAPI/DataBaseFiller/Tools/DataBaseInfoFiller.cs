@@ -56,9 +56,9 @@ namespace DataBaseFiller.Tools
             FillSectionModels();
             FillHospitalModels();
             FillClinicModels();
+            FillUserTypeModels();
             FillFunctionModels();
             FillFunctionalGroupModels();
-            FillUserTypeModels();
             FillClinicUserModels();
             FillHospitalUserModels();
             FillClinicBotModels();
