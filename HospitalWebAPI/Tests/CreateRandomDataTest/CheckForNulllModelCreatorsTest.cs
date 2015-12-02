@@ -20,9 +20,7 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnAdministratorsList()
         {
-            var administrator = new AdministratorModelCreator(new ClinicRepository(context), 
-                new UserTypeRepository(context), new PasswordHashManager(),
-                new AccountNameCalculator(new ExtendedRandom()));
+            var administrator = new AdministratorModelCreator(new UserTypeRepository(context), new PasswordHashManager());
             var resoultList = administrator.GetList();
             Assert.IsNotNull(resoultList);
         }
