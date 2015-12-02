@@ -20,14 +20,16 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnAdministratorsList()
         {
-            var administrator = new AdministratorModelCreator();
+            var administrator = new AdministratorModelCreator(new ClinicRepository(context), 
+                new UserTypeRepository(context), new PasswordHashManager(),
+                new AccountNameCalculator(new ExtendedRandom()));
             var resoultList = administrator.GetList();
             Assert.IsNotNull(resoultList);
         }
         [TestMethod]
         public void ReturnClinicBotsList()
         {
-            var clinicBot = new ClinicBotModelCreator();
+            var clinicBot = new ClinicBotModelCreator(new ClinicRepository(context), new UserTypeRepository(context));
             var resoultList = clinicBot.GetList();
             Assert.IsNotNull(resoultList);
         }
@@ -41,8 +43,7 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnClinicUsersList()
         {
-            var clinicUser = new ClinicUserModelCreator
-                (new PersonDataAPIRepository(new APIDataBrowser()),
+            var clinicUser = new ClinicUserModelCreator(new PersonDataAPIRepository(new APIDataBrowser()),
                     new ClinicRepository(context),
                     new UserTypeRepository(context),
                     new PasswordHashManager(),

@@ -7,52 +7,52 @@ namespace CreateRandomDataTools.CreationSettings
     {
         public bool CreateSections()
         {
-            return true;
+            return false;
         }
 
         public bool CreateHospitals()
         {
-            return true;
+            return false;
         }
 
         public bool CreateClinics()
         {
-            return true;
+            return false;
         }
 
         public bool CreateFunctions()
         {
-            return true;
+            return false;
         }
 
         public bool CreateUserTypes()
         {
-            return true;
+            return false;
         }
 
         public bool CreateFunctionalGroups()
         {
-            return true;
+            return false;
         }
 
         public bool CreateClinicUsers()
         {
-            return true;
+            return false;
         }
 
         public bool CreateHospitalUsers()
         {
-            return true;
+            return false;
         }
 
         public bool CreateClinicBots()
         {
-            return true;
+            return false;
         }
 
         public bool CreateHospitalBots()
         {
-            return true;
+            return false;
         }
 
         public bool CreateAdministrators()
@@ -62,7 +62,7 @@ namespace CreateRandomDataTools.CreationSettings
 
         public bool CreateUserFunctions()
         {
-            return true;
+            return false;
         }
     }
 }

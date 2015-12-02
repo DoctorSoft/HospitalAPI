@@ -3,7 +3,7 @@ using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.Interfaces.PrivateInterfaces
 {
-    public interface IClinicBotModelCreator : IRandomModelListCreator<UserStorageModel>
+    public interface IClinicBotModelCreator : IRandomModelListCreator<ClinicUserStorageModel>
     {
     }
 }
