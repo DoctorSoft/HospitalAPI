@@ -1,6 +1,11 @@
 ﻿using CreateRandomDataTools.DataCreators;
 using DataBaseModelConfigurations.Contexts;
+using HelpingTools.CalculationTools;
+using HelpingTools.ExtentionTools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RemoteServicesTools.Tools;
+using Repositories.AnotherRepositories.RemoteAPIRepositories;
+using Repositories.DataBaseRepositories.ClinicRepositories;
 using Repositories.DataBaseRepositories.FunctionRepositories;
 using Repositories.DataBaseRepositories.HospitalRepositories;
 using Repositories.DataBaseRepositories.UserRepositories;
@@ -36,7 +41,13 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnClinicUsersList()
         {
-            var clinicUser = new ClinicUserModelCreator();
+            var clinicUser = new ClinicUserModelCreator
+                (new PersonDataAPIRepository(new APIDataBrowser()),
+                    new ClinicRepository(context),
+                    new UserTypeRepository(context),
+                    new PasswordHashManager(),
+                    new AccountNameCalculator(new ExtendedRandom()));
+
             var resoultList = clinicUser.GetList();
             Assert.IsNotNull(resoultList);
         }

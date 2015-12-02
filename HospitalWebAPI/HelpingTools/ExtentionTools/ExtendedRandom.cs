@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HelpingTools.Interfaces;
 
 namespace HelpingTools.ExtentionTools
 {
-    public class ExtendedRandom : Random
+    public class ExtendedRandom : Random, IExtendedRandom
     {
         public bool GetRandomBool(int truePercent = 50)
         {

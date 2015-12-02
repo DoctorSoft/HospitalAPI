@@ -12,7 +12,7 @@ namespace Repositories.AnotherRepositories.RemoteAPIRepositories
     {
         private readonly IAPIDataBrowser _apiDataBrowser;
         private IEnumerable<PersonDataAPIStorageModel> _models;
-        private const int Count = 10;
+        private const int Count = 100;
         private const string Url = "http://randus.ru/api.php";
         private const string FirstNameKey = "fname";
         private const string LastNameKey = "lname";
@@ -56,6 +56,11 @@ namespace Repositories.AnotherRepositories.RemoteAPIRepositories
 
         public PersonDataAPIStorageModel GetModelById(int id)
         {
+            if (id == 0)
+            {
+                return GetRandomModel();
+            }
+
             var models = GetModels();
             return models.SingleOrDefault(model => model.Id == id);
         }

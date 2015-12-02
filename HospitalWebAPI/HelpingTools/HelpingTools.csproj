@@ -43,16 +43,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculationTools\AccountNameCalculator.cs" />
+    <Compile Include="CalculationTools\PasswordHashManager.cs" />
+    <Compile Include="Dependencies\ToolsNinjectModule.cs" />
     <Compile Include="ExtentionTools\ExtendedRandom.cs" />
+    <Compile Include="ExtentionTools\Md5Encryptor.cs" />
+    <Compile Include="Interfaces\IAccountNameCalculator.cs" />
+    <Compile Include="Interfaces\IExtendedRandom.cs" />
+    <Compile Include="Interfaces\IPasswordHashManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dependencies\" />
     <Folder Include="GenerationTools\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataBaseFiller.Interfaces;
+﻿using DataBaseFiller.Interfaces;
 using DataBaseModelConfigurations.Dependencies;
+using HelpingTools.Dependencies;
 using Ninject;
 using RemoteServicesTools.Dependencies;
 using Repositories.Dependencies;
@@ -18,7 +14,8 @@ namespace DataBaseFiller.Dependencies
             var kernel = new StandardKernel(new DataBaseNinjectModule(),
                                             new CreatorsNinjectModule(), 
                                             new RepositoriesNinjectModule(), 
-                                            new RemoteServicesNinjectModule());
+                                            new RemoteServicesNinjectModule(),
+                                            new ToolsNinjectModule());
 
             return kernel.Get<IDataBaseInfoFiller>();
         }
