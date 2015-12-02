@@ -68,7 +68,9 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnHospitalBotsList()
         {
-            var hospitalBot = new HospitalBotModelCreator();
+            var hospitalBot = new HospitalBotModelCreator
+                (new HospitalRepository(context),
+                new UserTypeRepository(context));
             var resoultList = hospitalBot.GetList();
             Assert.IsNotNull(resoultList);
         }
@@ -82,7 +84,13 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnHospitalUsersList()
         {
-            var hospitalUser = new HospitalUserModelCreator();
+            var hospitalUser = new HospitalUserModelCreator
+                (new PersonDataAPIRepository(new APIDataBrowser()),
+                    new HospitalRepository(context),
+                    new UserTypeRepository(context),
+                    new PasswordHashManager(),
+                    new AccountNameCalculator(new ExtendedRandom()));
+
             var resoultList = hospitalUser.GetList();
             Assert.IsNotNull(resoultList);
         }
