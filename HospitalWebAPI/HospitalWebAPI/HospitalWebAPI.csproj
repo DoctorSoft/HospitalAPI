@@ -185,6 +185,14 @@
       <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
       <Name>RepositoryTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceModels\ServiceModels.csproj">
+      <Project>{db6c6140-3ed6-4c70-9338-b2eba37d99cc}</Project>
+      <Name>ServiceModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{7668db91-1f76-4f2b-8530-e89ca9b4026c}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
       <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
       <Name>StorageModels</Name>

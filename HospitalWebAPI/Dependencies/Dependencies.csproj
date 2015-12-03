@@ -59,6 +59,7 @@
     <Compile Include="NinjectModules\DataBaseNinjectModule.cs" />
     <Compile Include="NinjectModules\RemoteServicesNinjectModule.cs" />
     <Compile Include="NinjectModules\RepositoryNinjectModule.cs" />
+    <Compile Include="NinjectModules\ServicesNinjectModule.cs" />
     <Compile Include="NinjectModules\ToolsNinjectModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,6 +108,10 @@
     <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
       <Project>{26A323FE-637C-414F-8924-6E76A4756C08}</Project>
       <Name>RepositoryTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{7668DB91-1F76-4F2B-8530-E89CA9B4026C}</Project>
+      <Name>Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
       <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>

@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteServicesTools", "Remo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dependencies", "Dependencies\Dependencies.csproj", "{BAB7986B-95E1-4951-B744-211B0D518FAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{7668DB91-1F76-4F2B-8530-E89CA9B4026C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModels", "ServiceModels\ServiceModels.csproj", "{DB6C6140-3ED6-4C70-9338-B2EBA37D99CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,14 @@ Global
 		{BAB7986B-95E1-4951-B744-211B0D518FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB7986B-95E1-4951-B744-211B0D518FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB7986B-95E1-4951-B744-211B0D518FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7668DB91-1F76-4F2B-8530-E89CA9B4026C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7668DB91-1F76-4F2B-8530-E89CA9B4026C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7668DB91-1F76-4F2B-8530-E89CA9B4026C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7668DB91-1F76-4F2B-8530-E89CA9B4026C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB6C6140-3ED6-4C70-9338-B2EBA37D99CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB6C6140-3ED6-4C70-9338-B2EBA37D99CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB6C6140-3ED6-4C70-9338-B2EBA37D99CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB6C6140-3ED6-4C70-9338-B2EBA37D99CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
