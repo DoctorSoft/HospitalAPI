@@ -9,6 +9,7 @@ using Repositories.DataBaseRepositories.ClinicRepositories;
 using Repositories.DataBaseRepositories.FunctionRepositories;
 using Repositories.DataBaseRepositories.HospitalRepositories;
 using Repositories.DataBaseRepositories.UserRepositories;
+using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
 
 namespace Tests.CreateRandomDataTest
 {
@@ -103,7 +104,10 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnUserFunctionsList()
         {
-            var userFunction = new UserFunctionModelCreator();
+            var userFunction = new UserFunctionModelCreator
+                (new UserRepository(context),
+                    new GroupFunctionRepository(context)
+                );
             var resoultList = userFunction.GetList();
             Assert.IsNotNull(resoultList);
         }
