@@ -62,7 +62,7 @@ namespace CreateRandomDataTools.CreationSettings
 
         public bool CreateUserFunctions()
         {
-            return false;
+            return true;
         }
     }
 }

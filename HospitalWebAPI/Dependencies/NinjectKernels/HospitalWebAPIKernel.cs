@@ -6,7 +6,7 @@ namespace Dependencies.NinjectKernels
     public class HospitalWebAPIKernel : StandardKernel
     {
         public HospitalWebAPIKernel()
-            : base(new RemoteServicesNinjectModule(), new RepositoriesNinjectModule(), new ToolsNinjectModule(), new ServicesNinjectModule())
+            : base(new RemoteServicesNinjectModule(), new RepositoriesNinjectModule(), new ToolsNinjectModule(), new ServicesNinjectModule(), new DataBaseNinjectModule())
         {
             
         }

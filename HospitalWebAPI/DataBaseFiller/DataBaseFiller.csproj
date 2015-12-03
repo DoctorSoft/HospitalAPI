@@ -73,6 +73,10 @@
       <Project>{11CCD57B-FFEF-4C04-BCAC-540B9A7DD20A}</Project>
       <Name>DataBaseModelConfigurations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
+      <Project>{2c4e04ec-dce7-476a-b64f-94693442f653}</Project>
+      <Name>DataBaseRepositoryTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
       <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
       <Name>DataBaseTools</Name>
@@ -80,6 +84,14 @@
     <ProjectReference Include="..\Dependencies\Dependencies.csproj">
       <Project>{bab7986b-95e1-4951-b744-211b0d518fab}</Project>
       <Name>Dependencies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HandleToolsInterfaces\HandleToolsInterfaces.csproj">
+      <Project>{eee4f2ce-3d7a-49bd-9cfc-a8f6ba2914d9}</Project>
+      <Name>HandleToolsInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HandleTools\HandleTools.csproj">
+      <Project>{47b3bb78-dcb8-4520-8aac-e6532df491ac}</Project>
+      <Name>HandleTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
       <Project>{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}</Project>
@@ -96,6 +108,14 @@
     <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
       <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
       <Name>RepositoryTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceModels\ServiceModels.csproj">
+      <Project>{db6c6140-3ed6-4c70-9338-b2eba37d99cc}</Project>
+      <Name>ServiceModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{7668db91-1f76-4f2b-8530-e89ca9b4026c}</Project>
+      <Name>Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
       <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>

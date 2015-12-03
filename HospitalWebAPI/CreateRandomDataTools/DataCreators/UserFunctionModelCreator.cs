@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
@@ -10,28 +11,48 @@ namespace CreateRandomDataTools.DataCreators
     public class UserFunctionModelCreator : IUserFunctionModelCreator
     {
         private readonly IUserRepository _userRepository;
+        private readonly IFunctionalGroupRepository _functionalGroupRepository;
         private readonly IGroupFunctionRepository _groupFunctionRepository;
 
-        public UserFunctionModelCreator(IUserRepository userRepository, IGroupFunctionRepository groupFunctionRepository)
+        public UserFunctionModelCreator(IUserRepository userRepository, IFunctionalGroupRepository functionalGroupRepository, IGroupFunctionRepository groupFunctionRepository)
         {
             _userRepository = userRepository;
+            _functionalGroupRepository = functionalGroupRepository;
             _groupFunctionRepository = groupFunctionRepository;
+        }
+
+        private class TypeFunctionSelectorModel
+        {
+            public int UserTypeId { get; set; }
+
+            public IEnumerable<GroupFunctionStorageModel> GroupFunctions { get; set; }
         }
 
         public IEnumerable<UserFunctionStorageModel> GetList()
         {
-            var users = _userRepository.GetModels().ToList();
-            var results = users.SelectMany(model => GetFunctionsList(model.UserTypeId));
+            var groupFunctions = _groupFunctionRepository.GetModels().ToList();
+
+            var functionSelectors = _functionalGroupRepository
+                .GetModels()
+                .Select(model => new TypeFunctionSelectorModel
+                {
+                    UserTypeId = model.UserTypeId,
+                    GroupFunctions = groupFunctions.Where(storageModel => storageModel.FunctionalGroupId == model.Id)
+                }).ToList();
+
+            var results = _userRepository
+                .GetModels()
+                .SelectMany(model => functionSelectors
+                    .Where(selectorModel => selectorModel.UserTypeId == model.UserTypeId)
+                    .SelectMany(selectorModel => selectorModel.GroupFunctions)
+                    .Select(selectorModel => new UserFunctionStorageModel
+                    {
+                        FunctionId = selectorModel.FunctionId,
+                        IsBlocked = false,
+                        UserId = model.Id
+                    }));
 
             return results;
-        }
-
-        protected virtual IEnumerable<UserFunctionStorageModel> GetFunctionsList(int userTypeId)
-        {
-            var groupFunctions = _groupFunctionRepository.GetModels().ToList();
-            var result = groupFunctions.Where(model => model.Id == userTypeId);
-
-            return null;
         }
     }
 }

@@ -141,10 +141,6 @@
       <Project>{087a278e-8e48-4555-8250-5a0989a78934}</Project>
       <Name>CreateRandomDataTools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataBaseFiller\DataBaseFiller.csproj">
-      <Project>{8e5752c3-f88b-42cc-9ddf-8c39e44bbea0}</Project>
-      <Name>DataBaseFiller</Name>
-    </ProjectReference>
     <ProjectReference Include="..\DataBaseModelConfigurations\DataBaseModelConfigurations.csproj">
       <Project>{11ccd57b-ffef-4c04-bcac-540b9a7dd20a}</Project>
       <Name>DataBaseModelConfigurations</Name>
@@ -196,10 +192,6 @@
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
       <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
       <Name>StorageModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tests\Tests.csproj">
-      <Project>{777a5b14-9fc7-4219-8262-298a89b0be4e}</Project>
-      <Name>Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
