@@ -3,7 +3,7 @@ using HelpingTools.ExtentionTools;
 using HelpingTools.Interfaces;
 using Ninject.Modules;
 
-namespace HelpingTools.Dependencies
+namespace Dependencies.NinjectModules
 {
     public class ToolsNinjectModule : NinjectModule
     {

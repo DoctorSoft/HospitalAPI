@@ -157,6 +157,10 @@
       <Project>{236788b4-a90d-4ac1-940b-d179b2f41bfd}</Project>
       <Name>DataBaseTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dependencies\Dependencies.csproj">
+      <Project>{bab7986b-95e1-4951-b744-211b0d518fab}</Project>
+      <Name>Dependencies</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HandleToolsInterfaces\HandleToolsInterfaces.csproj">
       <Project>{eee4f2ce-3d7a-49bd-9cfc-a8f6ba2914d9}</Project>
       <Name>HandleToolsInterfaces</Name>

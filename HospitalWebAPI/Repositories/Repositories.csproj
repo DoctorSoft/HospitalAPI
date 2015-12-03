@@ -64,7 +64,6 @@
     <Compile Include="DataBaseRepositories\UserRepositories\SessionRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\UserRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\UserTypeRepository.cs" />
-    <Compile Include="Dependencies\RepositoryNinjectModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +99,7 @@
       <Name>StorageModels</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

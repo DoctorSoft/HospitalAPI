@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dependencies\RemoteServicesNinjectModule.cs" />
     <Compile Include="Interfaces\IAPIDataBrowser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\APIDataBrowser.cs" />

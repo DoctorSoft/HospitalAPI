@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8E5752C3-F88B-42CC-9DDF-8C39E44BBEA0}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{BAB7986B-95E1-4951-B744-211B0D518FAB}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataBaseFiller</RootNamespace>
-    <AssemblyName>DataBaseFiller</AssemblyName>
+    <RootNamespace>Dependencies</RootNamespace>
+    <AssemblyName>Dependencies</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -55,15 +53,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tools\CreatorsFactory.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="NinjectKernels\DataBaseFillerKernel.cs" />
+    <Compile Include="NinjectKernels\HospitalWebAPIKernel.cs" />
+    <Compile Include="NinjectModules\CreatorsNinjectModule.cs" />
+    <Compile Include="NinjectModules\DataBaseNinjectModule.cs" />
+    <Compile Include="NinjectModules\RemoteServicesNinjectModule.cs" />
+    <Compile Include="NinjectModules\RepositoryNinjectModule.cs" />
+    <Compile Include="NinjectModules\ToolsNinjectModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CreateRandomDataTools\CreateRandomDataTools.csproj">
       <Project>{087A278E-8E48-4555-8250-5A0989A78934}</Project>
@@ -73,32 +76,40 @@
       <Project>{11CCD57B-FFEF-4C04-BCAC-540B9A7DD20A}</Project>
       <Name>DataBaseModelConfigurations</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
+      <Project>{2C4E04EC-DCE7-476A-B64F-94693442F653}</Project>
+      <Name>DataBaseRepositoryTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
       <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
       <Name>DataBaseTools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Dependencies\Dependencies.csproj">
-      <Project>{bab7986b-95e1-4951-b744-211b0d518fab}</Project>
-      <Name>Dependencies</Name>
+    <ProjectReference Include="..\HandleToolsInterfaces\HandleToolsInterfaces.csproj">
+      <Project>{eee4f2ce-3d7a-49bd-9cfc-a8f6ba2914d9}</Project>
+      <Name>HandleToolsInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HandleTools\HandleTools.csproj">
+      <Project>{47b3bb78-dcb8-4520-8aac-e6532df491ac}</Project>
+      <Name>HandleTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
-      <Project>{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}</Project>
+      <Project>{47a288e7-d7ef-4f2a-81a7-23c4a5148e60}</Project>
       <Name>HelpingTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\RemoteServicesTools\RemoteServicesTools.csproj">
-      <Project>{bdc88114-1004-44e9-85af-5d793a4c19ef}</Project>
+      <Project>{BDC88114-1004-44E9-85AF-5D793A4C19EF}</Project>
       <Name>RemoteServicesTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\Repositories\Repositories.csproj">
-      <Project>{43a7781c-b11e-4283-9ca0-59072276c733}</Project>
+      <Project>{43A7781C-B11E-4283-9CA0-59072276C733}</Project>
       <Name>Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
-      <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
+      <Project>{26A323FE-637C-414F-8924-6E76A4756C08}</Project>
       <Name>RepositoryTools</Name>
     </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
-      <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
+      <Project>{ed4e3f28-a5df-410a-bf89-29f0ec2c5e71}</Project>
       <Name>StorageModels</Name>
     </ProjectReference>
   </ItemGroup>

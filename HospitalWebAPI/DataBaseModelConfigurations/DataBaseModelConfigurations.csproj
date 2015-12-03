@@ -75,7 +75,6 @@
     <Compile Include="Configurations\UserModels\UserTypeDataBaseConfiguration.cs" />
     <Compile Include="Contexts\OriginalDataBaseContext.cs" />
     <Compile Include="Contexts\TestDataBaseContext.cs" />
-    <Compile Include="Dependencies\DataBaseNinjectModule.cs" />
     <Compile Include="Migrations\201512012154494_Init.cs" />
     <Compile Include="Migrations\201512012154494_Init.Designer.cs">
       <DependentUpon>201512012154494_Init.cs</DependentUpon>

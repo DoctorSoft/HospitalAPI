@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using CreateRandomDataTools.Interfaces.CommonInterfaces;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
-using DataBaseFiller.Interfaces;
 using DataBaseTools.Interfaces;
 using StorageModels.Interfaces;
-using StorageModels.Models.ClinicModels;
-using StorageModels.Models.FunctionModels;
-using StorageModels.Models.HospitalModels;
 
-namespace DataBaseFiller.Tools
+namespace CreateRandomDataTools.Fillers
 {
     public class DataBaseInfoFiller : IDataBaseInfoFiller
     {

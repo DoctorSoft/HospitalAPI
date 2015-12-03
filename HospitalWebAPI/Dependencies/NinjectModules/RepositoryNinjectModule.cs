@@ -12,7 +12,7 @@ using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 
-namespace Repositories.Dependencies
+namespace Dependencies.NinjectModules
 {
     public class RepositoriesNinjectModule : NinjectModule
     {

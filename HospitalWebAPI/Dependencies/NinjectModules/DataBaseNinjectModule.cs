@@ -3,7 +3,7 @@ using DataBaseModelConfigurations.Contexts;
 using DataBaseTools.Interfaces;
 using Ninject.Modules;
 
-namespace DataBaseModelConfigurations.Dependencies
+namespace Dependencies.NinjectModules
 {
     public class DataBaseNinjectModule : NinjectModule
     {

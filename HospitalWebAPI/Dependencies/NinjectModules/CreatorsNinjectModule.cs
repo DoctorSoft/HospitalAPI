@@ -1,12 +1,11 @@
 ﻿using CreateRandomDataTools.CreationSettings;
 using CreateRandomDataTools.DataCreators;
+using CreateRandomDataTools.Fillers;
 using CreateRandomDataTools.Interfaces.CommonInterfaces;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
-using DataBaseFiller.Interfaces;
-using DataBaseFiller.Tools;
 using Ninject.Modules;
 
-namespace DataBaseFiller.Dependencies
+namespace Dependencies.NinjectModules
 {
     public class CreatorsNinjectModule : NinjectModule
     {

@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,6 +61,8 @@
     <Compile Include="DataCreators\SectionModelCreator.cs" />
     <Compile Include="DataCreators\UserFunctionModelCreator.cs" />
     <Compile Include="DataCreators\UserTypeModelCreator.cs" />
+    <Compile Include="Fillers\DataBaseInfoFiller.cs" />
+    <Compile Include="Interfaces\CommonInterfaces\IDataBaseInfoFiller.cs" />
     <Compile Include="Interfaces\CommonInterfaces\ICreationSettingsModule.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IRandomModelListCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IAdministratorModelCreator.cs" />
@@ -72,6 +83,10 @@
     <Folder Include="AbstractTools\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
+      <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
+      <Name>DataBaseTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
       <Project>{47A288E7-D7EF-4F2A-81A7-23C4A5148E60}</Project>
       <Name>HelpingTools</Name>
@@ -88,6 +103,10 @@
       <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
       <Name>StorageModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

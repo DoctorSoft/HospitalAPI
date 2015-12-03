@@ -25,3 +25,5 @@ HospitalWebAPI/HelpingTools/bin/
 HospitalWebAPI/RemoteServicesTools/obj/
 HospitalWebAPI/RemoteServicesTools/bin/
 HospitalWebAPI/CreateRandomDataTools/bin/
+HospitalWebAPI/Dependencies/obj/
+HospitalWebAPI/Dependencies/bin/

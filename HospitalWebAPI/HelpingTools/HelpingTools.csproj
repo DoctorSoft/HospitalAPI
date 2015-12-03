@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="CalculationTools\AccountNameCalculator.cs" />
     <Compile Include="CalculationTools\PasswordHashManager.cs" />
-    <Compile Include="Dependencies\ToolsNinjectModule.cs" />
     <Compile Include="ExtentionTools\ExtendedRandom.cs" />
     <Compile Include="ExtentionTools\Md5Encryptor.cs" />
     <Compile Include="Interfaces\IAccountNameCalculator.cs" />

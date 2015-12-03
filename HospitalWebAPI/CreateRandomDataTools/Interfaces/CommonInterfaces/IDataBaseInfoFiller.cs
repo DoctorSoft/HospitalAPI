@@ -1,4 +1,4 @@
-﻿namespace DataBaseFiller.Interfaces
+﻿namespace CreateRandomDataTools.Interfaces.CommonInterfaces
 {
     public interface IDataBaseInfoFiller
     {

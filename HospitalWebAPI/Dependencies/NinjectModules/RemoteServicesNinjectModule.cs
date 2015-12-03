@@ -2,7 +2,7 @@
 using RemoteServicesTools.Interfaces;
 using RemoteServicesTools.Tools;
 
-namespace RemoteServicesTools.Dependencies
+namespace Dependencies.NinjectModules
 {
     public class RemoteServicesNinjectModule : NinjectModule
     {
