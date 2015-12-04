@@ -3,7 +3,7 @@
 namespace RepositoryTools.Interfaces.CommonInterfaces
 {
     public interface IUpdateAbleRepository<T> : IReadOnlyRepository<T> 
-        where T : IIdModel
+        where T : class, IIdModel
     {
         void Update(int id, T model);
 

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Xml;
 using DataBaseTools.Interfaces;
 using RepositoryTools.Interfaces;
 using RepositoryTools.Interfaces.CommonInterfaces;

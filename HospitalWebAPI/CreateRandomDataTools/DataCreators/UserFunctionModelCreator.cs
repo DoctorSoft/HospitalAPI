@@ -30,14 +30,14 @@ namespace CreateRandomDataTools.DataCreators
 
         public IEnumerable<UserFunctionStorageModel> GetList()
         {
-            var groupFunctions = _groupFunctionRepository.GetModels().ToList();
+            //var groupFunctions = ((DbSet<GroupFunctionStorageModel>)_groupFunctionRepository.GetModels()).Include(model => );
 
-            var functionSelectors = _functionalGroupRepository
-                .GetModels()
+            var functionSelectors = ((DbSet<FunctionalGroupStorageModel>)_functionalGroupRepository.GetModels())
+                .Include(model => model.GroupFunctions)
                 .Select(model => new TypeFunctionSelectorModel
                 {
                     UserTypeId = model.UserTypeId,
-                    GroupFunctions = groupFunctions.Where(storageModel => storageModel.FunctionalGroupId == model.Id)
+                    GroupFunctions = model.GroupFunctions
                 }).ToList();
 
             var results = _userRepository
