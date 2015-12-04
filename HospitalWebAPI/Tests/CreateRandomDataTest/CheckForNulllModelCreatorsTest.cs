@@ -105,7 +105,7 @@ namespace Tests.CreateRandomDataTest
         public void ReturnUserFunctionsList()
         {
             var userFunction = new UserFunctionModelCreator(new UserRepository(context),
-                new FunctionalGroupRepository(context), new GroupFunctionRepository(context));
+                new FunctionalGroupRepository(context));
             var resoultList = userFunction.GetList();
             Assert.IsNotNull(resoultList);
         }

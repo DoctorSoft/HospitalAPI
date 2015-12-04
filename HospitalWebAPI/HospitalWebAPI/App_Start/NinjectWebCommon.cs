@@ -1,3 +1,5 @@
+using Dependencies.NinjectKernels;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(HospitalWebAPI.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(HospitalWebAPI.App_Start.NinjectWebCommon), "Stop")]
 
@@ -39,7 +41,7 @@ namespace HospitalWebAPI.App_Start
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            var kernel = new HospitalWebAPIKernel();
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
@@ -61,6 +63,7 @@ namespace HospitalWebAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            
         }        
     }
 }

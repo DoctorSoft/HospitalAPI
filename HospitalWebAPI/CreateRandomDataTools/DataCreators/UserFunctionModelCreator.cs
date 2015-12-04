@@ -12,13 +12,11 @@ namespace CreateRandomDataTools.DataCreators
     {
         private readonly IUserRepository _userRepository;
         private readonly IFunctionalGroupRepository _functionalGroupRepository;
-        private readonly IGroupFunctionRepository _groupFunctionRepository;
 
-        public UserFunctionModelCreator(IUserRepository userRepository, IFunctionalGroupRepository functionalGroupRepository, IGroupFunctionRepository groupFunctionRepository)
+        public UserFunctionModelCreator(IUserRepository userRepository, IFunctionalGroupRepository functionalGroupRepository)
         {
             _userRepository = userRepository;
             _functionalGroupRepository = functionalGroupRepository;
-            _groupFunctionRepository = groupFunctionRepository;
         }
 
         private class TypeFunctionSelectorModel
@@ -30,8 +28,6 @@ namespace CreateRandomDataTools.DataCreators
 
         public IEnumerable<UserFunctionStorageModel> GetList()
         {
-            //var groupFunctions = ((DbSet<GroupFunctionStorageModel>)_groupFunctionRepository.GetModels()).Include(model => );
-
             var functionSelectors = ((DbSet<FunctionalGroupStorageModel>)_functionalGroupRepository.GetModels())
                 .Include(model => model.GroupFunctions)
                 .Select(model => new TypeFunctionSelectorModel
