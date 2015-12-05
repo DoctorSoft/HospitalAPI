@@ -1,4 +1,4 @@
-﻿using CreateRandomDataTools.Interfaces;
+﻿using System.Web.Configuration;
 using CreateRandomDataTools.Interfaces.CommonInterfaces;
 
 namespace CreateRandomDataTools.CreationSettings
@@ -7,62 +7,62 @@ namespace CreateRandomDataTools.CreationSettings
     {
         public bool CreateSections()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateSections"]);
         }
 
         public bool CreateHospitals()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateHospitals"]);
         }
 
         public bool CreateClinics()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateClinics"]);
         }
 
         public bool CreateFunctions()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateFunctions"]);
         }
 
         public bool CreateUserTypes()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateUserTypes"]);
         }
 
         public bool CreateFunctionalGroups()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateFunctionalGroups"]);
         }
 
         public bool CreateClinicUsers()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateClinicUsers"]);
         }
 
         public bool CreateHospitalUsers()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateHospitalUsers"]);
         }
 
         public bool CreateClinicBots()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateClinicBots"]);
         }
 
         public bool CreateHospitalBots()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateHospitalBots"]);
         }
 
         public bool CreateAdministrators()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateAdministrators"]);
         }
 
         public bool CreateUserFunctions()
         {
-            return true;
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateUserFunctions"]);
         }
     }
 }

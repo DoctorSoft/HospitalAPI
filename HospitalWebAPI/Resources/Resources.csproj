@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7668DB91-1F76-4F2B-8530-E89CA9B4026C}</ProjectGuid>
+    <ProjectGuid>{674C4ED8-7BB0-4FC1-9297-F4663BD4BD50}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Services</RootNamespace>
-    <AssemblyName>Services</AssemblyName>
+    <RootNamespace>Resources</RootNamespace>
+    <AssemblyName>Resources</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,40 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizationServices\AuthorizationService.cs" />
-    <Compile Include="Interfaces\AuthorizationServices\IAuthorizationService.cs" />
+    <Compile Include="MainResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\DataBaseRepositoryTools\DataBaseRepositoryTools.csproj">
-      <Project>{2C4E04EC-DCE7-476A-B64F-94693442F653}</Project>
-      <Name>DataBaseRepositoryTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
-      <Project>{47a288e7-d7ef-4f2a-81a7-23c4a5148e60}</Project>
-      <Name>HelpingTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Repositories\Repositories.csproj">
-      <Project>{43a7781c-b11e-4283-9ca0-59072276c733}</Project>
-      <Name>Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RepositoryTools\RepositoryTools.csproj">
-      <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
-      <Name>RepositoryTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{674C4ED8-7BB0-4FC1-9297-F4663BD4BD50}</Project>
-      <Name>Resources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ServiceModels\ServiceModels.csproj">
-      <Project>{DB6C6140-3ED6-4C70-9338-B2EBA37D99CC}</Project>
-      <Name>ServiceModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StorageModels\StorageModels.csproj">
-      <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
-      <Name>StorageModels</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="MainResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

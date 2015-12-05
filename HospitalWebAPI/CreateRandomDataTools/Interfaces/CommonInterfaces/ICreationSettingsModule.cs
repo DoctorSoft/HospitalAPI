@@ -2,29 +2,29 @@
 {
     public interface ICreationSettingsModule
     {
-        bool CreateSections(); // Section Storage Model (With Section Profile)
+        bool CreateSections(); 
 
-        bool CreateHospitals(); // Hospital Storage Model 
+        bool CreateHospitals(); 
 
-        bool CreateClinics(); // Clinic Storage Model
+        bool CreateClinics(); 
 
-        bool CreateFunctions(); // Function Storage Model
+        bool CreateFunctions(); 
 
-        bool CreateUserTypes(); // User Type Storage Model
+        bool CreateUserTypes(); 
 
-        bool CreateFunctionalGroups(); // Functional Group Storage Model (With Group Functions)
+        bool CreateFunctionalGroups(); 
 
-        bool CreateClinicUsers(); // Clinic User Storage Model (With User and Account)
+        bool CreateClinicUsers(); 
 
-        bool CreateHospitalUsers(); // Hospital User Storage Model (With User and Account)
+        bool CreateHospitalUsers(); 
 
-        bool CreateClinicBots(); // User Storage Model
+        bool CreateClinicBots(); 
 
-        bool CreateHospitalBots(); // User Storage Model
+        bool CreateHospitalBots(); 
 
-        bool CreateAdministrators(); // User Storage Model
+        bool CreateAdministrators(); 
 
-        bool CreateUserFunctions(); // User Function Storage Model
+        bool CreateUserFunctions(); 
 
     }
 }

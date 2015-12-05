@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using HelpingTools.Interfaces;
-using Repositories.DataBaseRepositories.UserRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using Resources;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.AuthorizationCommandAnswers;
 using ServiceModels.ServiceCommands.AuthorizationCommands;
@@ -38,7 +38,7 @@ namespace Services.AuthorizationServices
                 new CommandAnswerError
                 {
                     Code = 401,
-                    Title = "Authorization Error"
+                    Title = MainResources.ErrorAuthorization_401
                 }
             };
 

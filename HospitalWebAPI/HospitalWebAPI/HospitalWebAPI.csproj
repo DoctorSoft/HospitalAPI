@@ -182,6 +182,10 @@
       <Project>{26a323fe-637c-414f-8924-6e76a4756c08}</Project>
       <Name>RepositoryTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{674c4ed8-7bb0-4fc1-9297-f4663bd4bd50}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceModels\ServiceModels.csproj">
       <Project>{db6c6140-3ed6-4c70-9338-b2eba37d99cc}</Project>
       <Name>ServiceModels</Name>

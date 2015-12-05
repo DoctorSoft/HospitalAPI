@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="NinjectKernels\DataBaseFillerKernel.cs" />
     <Compile Include="NinjectKernels\HospitalWebAPIKernel.cs" />
+    <Compile Include="NinjectKernels\TestAppKernel.cs" />
     <Compile Include="NinjectModules\CreatorsNinjectModule.cs" />
     <Compile Include="NinjectModules\DataBaseNinjectModule.cs" />
     <Compile Include="NinjectModules\RemoteServicesNinjectModule.cs" />
