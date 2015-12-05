@@ -27,8 +27,8 @@ namespace Repositories.AnotherRepositories.RemoteAPIRepositories
             var dictionary = _apiDataBrowser.GetData<Dictionary<string, object>>(Url);
             return new PersonDataAPIStorageModel
             {
-                FirstName = dictionary[FirstNameKey].ToString(),
-                LastName = dictionary[LastNameKey].ToString()
+                FirstName = dictionary[FirstNameKey].ToString().Split(' ').First(),
+                LastName = dictionary[LastNameKey].ToString().Split(' ').First()
             };
         }
 
