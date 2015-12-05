@@ -3,7 +3,7 @@ using StorageModels.Models.FunctionModels;
 
 namespace RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories
 {
-    public interface IFunctionRepository : IUpdateAbleRepository<FunctionStorageModel>
+    public interface IFunctionRepository : IAddAbleRepository<FunctionStorageModel>
     {
     }
 }

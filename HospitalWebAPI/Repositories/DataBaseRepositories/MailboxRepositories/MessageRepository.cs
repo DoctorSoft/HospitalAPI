@@ -5,7 +5,7 @@ using StorageModels.Models.MailboxModels;
 
 namespace Repositories.DataBaseRepositories.MailboxRepositories
 {
-    public class MessageRepository : AbstractUpdateAbleDataBaseRepository<MessageStorageModel>, IMessageRepository
+    public class MessageRepository : AbstractAddAbleDataBaseRepository<MessageStorageModel>, IMessageRepository
     {
         public MessageRepository(IDataBaseContext context) : base(context)
         {

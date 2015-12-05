@@ -5,7 +5,7 @@ using StorageModels.Models.FunctionModels;
 
 namespace Repositories.DataBaseRepositories.FunctionRepositories
 {
-    public class FunctionRepository : AbstractUpdateAbleDataBaseRepository<FunctionStorageModel>, IFunctionRepository
+    public class FunctionRepository : AbstractAddAbleDataBaseRepository<FunctionStorageModel>, IFunctionRepository
     {
         public FunctionRepository(IDataBaseContext context) : base(context)
         {

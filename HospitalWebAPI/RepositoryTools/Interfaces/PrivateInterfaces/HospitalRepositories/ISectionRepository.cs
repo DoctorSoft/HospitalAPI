@@ -3,7 +3,7 @@ using StorageModels.Models.HospitalModels;
 
 namespace RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories
 {
-    public interface ISectionRepository : IUpdateAbleRepository<SectionStorageModel>
+    public interface ISectionRepository : IAddAbleRepository<SectionStorageModel>
     {
     }
 }

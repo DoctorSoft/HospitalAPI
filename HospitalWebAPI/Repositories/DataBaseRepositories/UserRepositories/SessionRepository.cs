@@ -5,7 +5,7 @@ using StorageModels.Models.UserModels;
 
 namespace Repositories.DataBaseRepositories.UserRepositories
 {
-    public class SessionRepository : AbstractUpdateAbleDataBaseRepository<SessionStorageModel>, ISessionRepository
+    public class SessionRepository : AbstractAddAbleDataBaseRepository<SessionStorageModel>, ISessionRepository
     {
         public SessionRepository(IDataBaseContext context) : base(context)
         {

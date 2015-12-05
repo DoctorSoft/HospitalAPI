@@ -3,7 +3,7 @@ using StorageModels.Models.ClinicModels;
 
 namespace RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories
 {
-    public interface IClinicRepository : IUpdateAbleRepository<ClinicStorageModel>
+    public interface IClinicRepository : IAddAbleRepository<ClinicStorageModel>
     {
     }
 }

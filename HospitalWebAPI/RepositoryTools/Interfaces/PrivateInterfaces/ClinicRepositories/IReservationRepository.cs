@@ -3,7 +3,7 @@ using StorageModels.Models.ClinicModels;
 
 namespace RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories
 {
-    public interface IReservationRepository : IUpdateAbleRepository<ReservationStorageModel>
+    public interface IReservationRepository : IAddAbleRepository<ReservationStorageModel>
     {
     }
 }

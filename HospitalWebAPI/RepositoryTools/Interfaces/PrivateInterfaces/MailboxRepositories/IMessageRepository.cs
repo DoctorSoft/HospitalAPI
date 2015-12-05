@@ -3,7 +3,7 @@ using StorageModels.Models.MailboxModels;
 
 namespace RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories
 {
-    public interface IMessageRepository : IUpdateAbleRepository<MessageStorageModel>
+    public interface IMessageRepository : IAddAbleRepository<MessageStorageModel>
     {
     }
 }

@@ -5,7 +5,7 @@ using StorageModels.Models.HospitalModels;
 
 namespace Repositories.DataBaseRepositories.HospitalRepositories
 {
-    public class SectionRepository: AbstractUpdateAbleDataBaseRepository<SectionStorageModel>, ISectionRepository
+    public class SectionRepository : AbstractAddAbleDataBaseRepository<SectionStorageModel>, ISectionRepository
     {
         public SectionRepository(IDataBaseContext context) : base(context)
         {

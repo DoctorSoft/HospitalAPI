@@ -5,7 +5,7 @@ using StorageModels.Models.ClinicModels;
 
 namespace Repositories.DataBaseRepositories.ClinicRepositories
 {
-    public class ClinicRepository : AbstractUpdateAbleDataBaseRepository<ClinicStorageModel>, IClinicRepository
+    public class ClinicRepository : AbstractAddAbleDataBaseRepository<ClinicStorageModel>, IClinicRepository
     {
         public ClinicRepository(IDataBaseContext context) : base(context)
         {

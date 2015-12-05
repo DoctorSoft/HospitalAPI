@@ -3,7 +3,7 @@ using StorageModels.Models.UserModels;
 
 namespace RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories
 {
-    public interface ISessionRepository : IUpdateAbleRepository<SessionStorageModel>
+    public interface ISessionRepository : IAddAbleRepository<SessionStorageModel>
     {
     }
 }

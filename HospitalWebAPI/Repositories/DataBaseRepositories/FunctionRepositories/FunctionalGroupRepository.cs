@@ -5,7 +5,7 @@ using StorageModels.Models.FunctionModels;
 
 namespace Repositories.DataBaseRepositories.FunctionRepositories
 {
-    public class FunctionalGroupRepository : AbstractUpdateAbleDataBaseRepository<FunctionalGroupStorageModel>, IFunctionalGroupRepository
+    public class FunctionalGroupRepository : AbstractAddAbleDataBaseRepository<FunctionalGroupStorageModel>, IFunctionalGroupRepository
     {
         public FunctionalGroupRepository(IDataBaseContext context) : base(context)
         {

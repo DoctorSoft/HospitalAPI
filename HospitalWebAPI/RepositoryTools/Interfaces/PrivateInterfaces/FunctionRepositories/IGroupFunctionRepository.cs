@@ -3,7 +3,7 @@ using StorageModels.Models.FunctionModels;
 
 namespace RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories
 {
-    public interface IGroupFunctionRepository : IUpdateAbleRepository<GroupFunctionStorageModel>
+    public interface IGroupFunctionRepository : IAddAbleRepository<GroupFunctionStorageModel>
     {
     }
 }

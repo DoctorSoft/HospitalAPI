@@ -5,7 +5,7 @@ using StorageModels.Models.HospitalModels;
 
 namespace Repositories.DataBaseRepositories.HospitalRepositories
 {
-    public class EmptyPlaceStatisticRepository : AbstractUpdateAbleDataBaseRepository<EmptyPlaceStatisticStorageModel>, IEmptyPlaceStatisticRepository
+    public class EmptyPlaceStatisticRepository : AbstractAddAbleDataBaseRepository<EmptyPlaceStatisticStorageModel>, IEmptyPlaceStatisticRepository
     {
         public EmptyPlaceStatisticRepository(IDataBaseContext context) : base(context)
         {

@@ -4,6 +4,7 @@ using CreateRandomDataTools.Fillers;
 using CreateRandomDataTools.Interfaces.CommonInterfaces;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using Ninject.Modules;
+using Ninject.Web.Common;
 
 namespace Dependencies.NinjectModules
 {
@@ -13,26 +14,26 @@ namespace Dependencies.NinjectModules
         {
             // Settings
 
-            Bind<ICreationSettingsModule>().To<TestCreationSettingsModule>();
+            Bind<ICreationSettingsModule>().To<TestCreationSettingsModule>().InRequestScope();
 
             // Creators
 
-            Bind<IClinicModelCreator>().To<ClinicModelCreator>();
-            Bind<IFunctionalGroupModelCreator>().To<FunctionalGroupModelCreator>();
-            Bind<IFunctionModelCreator>().To<FunctionModelCreator>();
-            Bind<IHospitalModelCreator>().To<HospitalModelCreator>();
-            Bind<ISectionModelCreator>().To<SectionModelCreator>();
-            Bind<IUserTypeModelCreator>().To<UserTypeModelCreator>();
-            Bind<IClinicUserModelCreator>().To<ClinicUserModelCreator>();
-            Bind<IHospitalUserModelCreator>().To<HospitalUserModelCreator>();
-            Bind<IClinicBotModelCreator>().To<ClinicBotModelCreator>();
-            Bind<IHospitalBotModelCreator>().To<HospitalBotModelCreator>();
-            Bind<IAdministratorModelCreator>().To<AdministratorModelCreator>();
-            Bind<IUserFunctionModelCreator>().To<UserFunctionModelCreator>();
+            Bind<IClinicModelCreator>().To<ClinicModelCreator>().InRequestScope();
+            Bind<IFunctionalGroupModelCreator>().To<FunctionalGroupModelCreator>().InRequestScope();
+            Bind<IFunctionModelCreator>().To<FunctionModelCreator>().InRequestScope();
+            Bind<IHospitalModelCreator>().To<HospitalModelCreator>().InRequestScope();
+            Bind<ISectionModelCreator>().To<SectionModelCreator>().InRequestScope();
+            Bind<IUserTypeModelCreator>().To<UserTypeModelCreator>().InRequestScope();
+            Bind<IClinicUserModelCreator>().To<ClinicUserModelCreator>().InRequestScope();
+            Bind<IHospitalUserModelCreator>().To<HospitalUserModelCreator>().InRequestScope();
+            Bind<IClinicBotModelCreator>().To<ClinicBotModelCreator>().InRequestScope();
+            Bind<IHospitalBotModelCreator>().To<HospitalBotModelCreator>().InRequestScope();
+            Bind<IAdministratorModelCreator>().To<AdministratorModelCreator>().InRequestScope();
+            Bind<IUserFunctionModelCreator>().To<UserFunctionModelCreator>().InRequestScope();
 
             // Fillers
 
-            Bind<IDataBaseInfoFiller>().To<DataBaseInfoFiller>();
+            Bind<IDataBaseInfoFiller>().To<DataBaseInfoFiller>().InRequestScope();
         }
     }
 }

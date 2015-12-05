@@ -1,4 +1,5 @@
 ﻿using Ninject.Modules;
+using Ninject.Web.Common;
 using Repositories.AnotherRepositories.RemoteAPIRepositories;
 using Repositories.DataBaseRepositories.ClinicRepositories;
 using Repositories.DataBaseRepositories.FunctionRepositories;
@@ -20,28 +21,28 @@ namespace Dependencies.NinjectModules
         {
             // Repositories
 
-            Bind<IClinicRepository>().To<ClinicRepository>();
-            Bind<IPatientRepository>().To<PatientRepository>();
-            Bind<IReservationRepository>().To<ReservationRepository>();
-            Bind<IFunctionalGroupRepository>().To<FunctionalGroupRepository>();
-            Bind<IFunctionRepository>().To<FunctionRepository>();
-            Bind<IGroupFunctionRepository>().To<GroupFunctionRepository>();
-            Bind<IUserFunctionRepository>().To<UserFunctionRepository>();
-            Bind<IEmptyPlaceStatisticRepository>().To<EmptyPlaceStatisticRepository>();
-            Bind<IHospitalRepository>().To<HospitalRepository>();
-            Bind<IHospitalSectionProfileRepository>().To<HospitalSectionProfileRepository>();
-            Bind<ISectionProfileRepository>().To<SectionProfileRepository>();
-            Bind<ISectionRepository>().To<SectionRepository>();
-            Bind<IMessageRepository>().To<MessageRepository>();
-            Bind<IAccountRepository>().To<AccountRepository>();
-            Bind<IClinicUserRepository>().To<ClinicUserRepository>();
-            Bind<IHospitalUserRepository>().To<HospitalUserRepository>();
-            Bind<ISessionRepository>().To<SessionRepository>();
-            Bind<IUserRepository>().To<UserRepository>();
-            Bind<IUserTypeRepository>().To<UserTypeRepository>();
-            Bind<IClinicHospitalAccessRepository>().To<ClinicHospitalAccessRepository>();
+            Bind<IClinicRepository>().To<ClinicRepository>().InRequestScope();
+            Bind<IPatientRepository>().To<PatientRepository>().InRequestScope();
+            Bind<IReservationRepository>().To<ReservationRepository>().InRequestScope();
+            Bind<IFunctionalGroupRepository>().To<FunctionalGroupRepository>().InRequestScope();
+            Bind<IFunctionRepository>().To<FunctionRepository>().InRequestScope();
+            Bind<IGroupFunctionRepository>().To<GroupFunctionRepository>().InRequestScope();
+            Bind<IUserFunctionRepository>().To<UserFunctionRepository>().InRequestScope();
+            Bind<IEmptyPlaceStatisticRepository>().To<EmptyPlaceStatisticRepository>().InRequestScope();
+            Bind<IHospitalRepository>().To<HospitalRepository>().InRequestScope();
+            Bind<IHospitalSectionProfileRepository>().To<HospitalSectionProfileRepository>().InRequestScope();
+            Bind<ISectionProfileRepository>().To<SectionProfileRepository>().InRequestScope();
+            Bind<ISectionRepository>().To<SectionRepository>().InRequestScope();
+            Bind<IMessageRepository>().To<MessageRepository>().InRequestScope();
+            Bind<IAccountRepository>().To<AccountRepository>().InRequestScope();
+            Bind<IClinicUserRepository>().To<ClinicUserRepository>().InRequestScope();
+            Bind<IHospitalUserRepository>().To<HospitalUserRepository>().InRequestScope();
+            Bind<ISessionRepository>().To<SessionRepository>().InRequestScope();
+            Bind<IUserRepository>().To<UserRepository>().InRequestScope();
+            Bind<IUserTypeRepository>().To<UserTypeRepository>().InRequestScope();
+            Bind<IClinicHospitalAccessRepository>().To<ClinicHospitalAccessRepository>().InRequestScope();
 
-            Bind<IPersonDataAPIRepository>().To<PersonDataAPIRepository>();
+            Bind<IPersonDataAPIRepository>().To<PersonDataAPIRepository>().InRequestScope();
         }
     }
 }
