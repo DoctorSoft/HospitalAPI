@@ -91,12 +91,18 @@ namespace CreateRandomDataTools.DataCreators
 
         protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForAdministratorUser(IEnumerable<FunctionStorageModel> functions)
         {
-            return new List<GroupFunctionStorageModel>();
+            return functions.Select(model => new GroupFunctionStorageModel
+            {
+                FunctionId = model.Id,
+            }).ToList();
         }
 
         protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForReviewerUser(IEnumerable<FunctionStorageModel> functions)
         {
-            return new List<GroupFunctionStorageModel>();
+            return new List<GroupFunctionStorageModel>
+            {
+                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.WatchRegistrationStatistic)
+            };
         }
     }
 }

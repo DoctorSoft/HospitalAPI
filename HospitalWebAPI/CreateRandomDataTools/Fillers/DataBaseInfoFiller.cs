@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CreateRandomDataTools.Interfaces.CommonInterfaces;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using DataBaseTools.Interfaces;
+using Resources;
 using StorageModels.Interfaces;
 
 namespace CreateRandomDataTools.Fillers
@@ -24,20 +26,25 @@ namespace CreateRandomDataTools.Fillers
         private readonly IDataBaseContext _dataBaseContext;
         private readonly ICreationSettingsModule _creationSettingsModule;
 
-        public DataBaseInfoFiller(IDataBaseContext dataBaseContext, IClinicModelCreator clinicModelCreator,
+        private readonly string _startMessageText = "";
+
+
+        public DataBaseInfoFiller(IDataBaseContext dataBaseContext, ICreationSettingsModule creationSettingsModule, IClinicModelCreator clinicModelCreator,
             IFunctionalGroupModelCreator functionalGroupModelCreator, IFunctionModelCreator functionModelCreator,
-            IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator, ICreationSettingsModule creationSettingsModule, 
+            IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator,  
             IUserTypeModelCreator userTypeModelCreator, IClinicUserModelCreator clinicUserModelCreator, IHospitalUserModelCreator hospitalUserModelCreator, IClinicBotModelCreator clinicBotModelCreator,
             IHospitalBotModelCreator hospitalBotModelCreator, IAdministratorModelCreator administratorModelCreator, IUserFunctionModelCreator userFunctionModelCreator)
         {
             _dataBaseContext = dataBaseContext;
+            _creationSettingsModule = creationSettingsModule;
+
+            _startMessageText = MainResources.FillerLoadingMessage;
 
             _clinicModelCreator = clinicModelCreator;
             _functionalGroupModelCreator = functionalGroupModelCreator;
             _functionModelCreator = functionModelCreator;
             _hospitalModelCreator = hospitalModelCreator;
             _sectionModelCreator = sectionModelCreator;
-            _creationSettingsModule = creationSettingsModule;
             _userTypeModelCreator = userTypeModelCreator;
             _clinicUserModelCreator = clinicUserModelCreator;
             _hospitalUserModelCreator = hospitalUserModelCreator;
@@ -47,24 +54,25 @@ namespace CreateRandomDataTools.Fillers
             _userFunctionModelCreator = userFunctionModelCreator;
         }
 
-        public void FillDataBase()
+        public void FillDataBase(Func<string, bool> showStatusFunction = null)
         {
-            FillSectionModels();
-            FillHospitalModels();
-            FillClinicModels();
-            FillUserTypeModels();
-            FillFunctionModels();
-            FillFunctionalGroupModels();
-            FillClinicUserModels();
-            FillHospitalUserModels();
-            FillClinicBotModels();
-            FillHospitalBotModels();
-            FillAdministratorModels();
-            FillUserFunctionModels();
+            var percents = 0;
+
+            FillSectionModels(showStatusFunction, percents += 8);
+            FillHospitalModels(showStatusFunction, percents += 8);
+            FillClinicModels(showStatusFunction, percents += 8);
+            FillUserTypeModels(showStatusFunction, percents += 8);
+            FillFunctionModels(showStatusFunction, percents += 8);
+            FillFunctionalGroupModels(showStatusFunction, percents += 8);
+            FillClinicUserModels(showStatusFunction, percents += 8);
+            FillHospitalUserModels(showStatusFunction, percents += 8);
+            FillClinicBotModels(showStatusFunction, percents += 8);
+            FillHospitalBotModels(showStatusFunction, percents += 8);
+            FillAdministratorModels(showStatusFunction, percents + 8);
+            FillUserFunctionModels(showStatusFunction, 100);
         }
 
-
-        protected virtual void FillList<T>(IEnumerable<T> models, bool fillApprove = true)
+        protected virtual void FillList<T>(IEnumerable<T> models, Func<string, bool> showStatusFunction = null, int percentCount = 0, bool fillApprove = true)
             where T: class, IIdModel
         {
             if (!fillApprove)
@@ -81,102 +89,107 @@ namespace CreateRandomDataTools.Fillers
 
             _dataBaseContext.Set<T>().AddRange(fillList);
             _dataBaseContext.SaveChanges();
+
+            if (showStatusFunction != null)
+            {
+                showStatusFunction(string.Format("{0} : {1}%", _startMessageText, percentCount));
+            }
         }
 
-        protected virtual void FillSectionModels()
+        protected virtual void FillSectionModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _sectionModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateSections();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillHospitalModels()
+        protected virtual void FillHospitalModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _hospitalModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateHospitals();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillClinicModels()
+        protected virtual void FillClinicModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _clinicModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateClinics();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillFunctionModels()
+        protected virtual void FillFunctionModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _functionModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateFunctions();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillFunctionalGroupModels()
+        protected virtual void FillFunctionalGroupModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _functionalGroupModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateFunctionalGroups();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillUserTypeModels()
+        protected virtual void FillUserTypeModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _userTypeModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateUserTypes();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillClinicUserModels()
+        protected virtual void FillClinicUserModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _clinicUserModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateClinicUsers();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillHospitalUserModels()
+        protected virtual void FillHospitalUserModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _hospitalUserModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateHospitalUsers();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillClinicBotModels()
+        protected virtual void FillClinicBotModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _clinicBotModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateClinicBots();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillHospitalBotModels()
+        protected virtual void FillHospitalBotModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _hospitalBotModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateHospitalBots();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillAdministratorModels()
+        protected virtual void FillAdministratorModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _administratorModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateAdministrators();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillUserFunctionModels()
+        protected virtual void FillUserFunctionModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
             var models = _userFunctionModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateUserFunctions();
 
-            FillList(models, fillApprove);
+            FillList(models, showStatusFunction, percentCount, fillApprove);
         }
     }
 }

@@ -68,5 +68,14 @@ namespace Resources {
                 return ResourceManager.GetString("ErrorAuthorization_401", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filling completed on.
+        /// </summary>
+        public static string FillerLoadingMessage {
+            get {
+                return ResourceManager.GetString("FillerLoadingMessage", resourceCulture);
+            }
+        }
     }
 }

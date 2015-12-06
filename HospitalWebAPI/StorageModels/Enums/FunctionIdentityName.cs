@@ -17,6 +17,10 @@
         GetClinicWarningNotices = 104,
 
 
-        SendAutoWarningNotices = 200
+        SendAutoWarningNotices = 200,
+
+        // 300+ numbers are for administrator functions only (By default admin can do everything)
+
+        WatchRegistrationStatistic = 400
     }
 }

@@ -104,6 +104,10 @@
       <Project>{26A323FE-637C-414F-8924-6E76A4756C08}</Project>
       <Name>RepositoryTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{674c4ed8-7bb0-4fc1-9297-f4663bd4bd50}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
       <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
       <Name>StorageModels</Name>

@@ -1,4 +1,5 @@
-﻿using DataBaseFiller.Tools;
+﻿using System;
+using DataBaseFiller.Tools;
 
 namespace DataBaseFiller
 {
@@ -9,7 +10,11 @@ namespace DataBaseFiller
             var factory = new CreatorsFactory();
             var filler = factory.GetFiller();
 
-            filler.FillDataBase();
+            filler.FillDataBase(s =>
+            {
+                Console.WriteLine(s);
+                return true;
+            });
         }
     }
 }

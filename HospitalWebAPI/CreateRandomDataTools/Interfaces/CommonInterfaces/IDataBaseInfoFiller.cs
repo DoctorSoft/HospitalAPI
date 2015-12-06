@@ -1,7 +1,9 @@
-﻿namespace CreateRandomDataTools.Interfaces.CommonInterfaces
+﻿using System;
+
+namespace CreateRandomDataTools.Interfaces.CommonInterfaces
 {
     public interface IDataBaseInfoFiller
     {
-        void FillDataBase();
+        void FillDataBase(Func<string, bool> showStatusFunction = null);
     }
 }

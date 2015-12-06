@@ -28,7 +28,7 @@ namespace CreateRandomDataTools.DataCreators
 
         public IEnumerable<UserFunctionStorageModel> GetList()
         {
-            var functionSelectors = ((DbSet<FunctionalGroupStorageModel>)_functionalGroupRepository.GetModels())
+            var functionSelectors = ((IDbSet<FunctionalGroupStorageModel>)_functionalGroupRepository.GetModels())
                 .Include(model => model.GroupFunctions)
                 .Select(model => new TypeFunctionSelectorModel
                 {
