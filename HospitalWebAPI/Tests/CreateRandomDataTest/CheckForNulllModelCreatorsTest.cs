@@ -26,10 +26,10 @@ namespace Tests.CreateRandomDataTest
             Assert.IsNotNull(resoultList);
         }
         [TestMethod]
-        public void ReturnClinicBotsList()
+        public void ReturnBotsList()
         {
-            var clinicBot = new ClinicBotModelCreator(new ClinicRepository(context), new UserTypeRepository(context));
-            var resoultList = clinicBot.GetList();
+            var bot = new BotModelCreator(new UserTypeRepository(context));
+            var resoultList = bot.GetList();
             Assert.IsNotNull(resoultList);
         }
         [TestMethod]
@@ -63,15 +63,6 @@ namespace Tests.CreateRandomDataTest
         {
             var function = new FunctionModelCreator();
             var resoultList = function.GetList();
-            Assert.IsNotNull(resoultList);
-        }
-        [TestMethod]
-        public void ReturnHospitalBotsList()
-        {
-            var hospitalBot = new HospitalBotModelCreator
-                (new HospitalRepository(context),
-                new UserTypeRepository(context));
-            var resoultList = hospitalBot.GetList();
             Assert.IsNotNull(resoultList);
         }
         [TestMethod]

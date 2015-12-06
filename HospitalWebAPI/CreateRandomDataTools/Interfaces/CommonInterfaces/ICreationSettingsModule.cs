@@ -16,11 +16,9 @@
 
         bool CreateClinicUsers(); 
 
-        bool CreateHospitalUsers(); 
+        bool CreateHospitalUsers();
 
-        bool CreateClinicBots(); 
-
-        bool CreateHospitalBots(); 
+        bool CreateBots();
 
         bool CreateAdministrators(); 
 

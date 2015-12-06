@@ -51,12 +51,11 @@
   <ItemGroup>
     <Compile Include="CreationSettings\TestCreationSettingsModule.cs" />
     <Compile Include="DataCreators\AdministratorModelCreator.cs" />
-    <Compile Include="DataCreators\ClinicBotModelCreator.cs" />
+    <Compile Include="DataCreators\BotModelCreator.cs" />
     <Compile Include="DataCreators\ClinicModelCreator.cs" />
     <Compile Include="DataCreators\ClinicUserModelCreator.cs" />
     <Compile Include="DataCreators\FunctionalGroupModelCreator.cs" />
     <Compile Include="DataCreators\FunctionModelCreator.cs" />
-    <Compile Include="DataCreators\HospitalBotModelCreator.cs" />
     <Compile Include="DataCreators\HospitalModelCreator.cs" />
     <Compile Include="DataCreators\HospitalUserModelCreator.cs" />
     <Compile Include="DataCreators\SectionModelCreator.cs" />
@@ -67,12 +66,11 @@
     <Compile Include="Interfaces\CommonInterfaces\ICreationSettingsModule.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IRandomModelListCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IAdministratorModelCreator.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\IClinicBotModelCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IBotModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IClinicModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IClinicUserModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IFunctionalGroupModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IFunctionModelCreator.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\IHospitalBotModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IHospitalModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IHospitalUserModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ISectionModelCreator.cs" />

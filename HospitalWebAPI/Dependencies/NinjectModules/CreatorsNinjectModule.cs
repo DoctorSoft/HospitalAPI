@@ -26,8 +26,7 @@ namespace Dependencies.NinjectModules
             Bind<IUserTypeModelCreator>().To<UserTypeModelCreator>().InRequestScope();
             Bind<IClinicUserModelCreator>().To<ClinicUserModelCreator>().InRequestScope();
             Bind<IHospitalUserModelCreator>().To<HospitalUserModelCreator>().InRequestScope();
-            Bind<IClinicBotModelCreator>().To<ClinicBotModelCreator>().InRequestScope();
-            Bind<IHospitalBotModelCreator>().To<HospitalBotModelCreator>().InRequestScope();
+            Bind<IBotModelCreator>().To<BotModelCreator>().InRequestScope();
             Bind<IAdministratorModelCreator>().To<AdministratorModelCreator>().InRequestScope();
             Bind<IUserFunctionModelCreator>().To<UserFunctionModelCreator>().InRequestScope();
 

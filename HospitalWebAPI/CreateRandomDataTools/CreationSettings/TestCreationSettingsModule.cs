@@ -45,14 +45,9 @@ namespace CreateRandomDataTools.CreationSettings
             return bool.Parse(WebConfigurationManager.AppSettings["CreateHospitalUsers"]);
         }
 
-        public bool CreateClinicBots()
+        public bool CreateBots()
         {
-            return bool.Parse(WebConfigurationManager.AppSettings["CreateClinicBots"]);
-        }
-
-        public bool CreateHospitalBots()
-        {
-            return bool.Parse(WebConfigurationManager.AppSettings["CreateHospitalBots"]);
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateBots"]);
         }
 
         public bool CreateAdministrators()
