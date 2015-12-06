@@ -1,4 +1,4 @@
-﻿using StorageModels.Enums;
+﻿using Enums.Enums;
 
 namespace StorageModels.Interfaces
 {

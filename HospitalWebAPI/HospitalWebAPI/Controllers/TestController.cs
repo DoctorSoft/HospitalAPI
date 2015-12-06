@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using HospitalWebAPI.Filters;
 using Repositories.DataBaseRepositories.UserRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 
@@ -18,8 +19,9 @@ namespace HospitalWebAPI.Controllers
             _userRepository = userRepository;
         }
 
-        // GET api/test
-        public IEnumerable<string> Get()
+        // GET api/test/token/{token}
+        [TokenAuthorizationFilter]
+        public IEnumerable<string> Get([FromUri]Guid token)
         {
             //Gets clinic users
             var list = _userRepository.GetModels().Where(model => model.UserTypeId == 1).Select(model => model.Name).ToList();

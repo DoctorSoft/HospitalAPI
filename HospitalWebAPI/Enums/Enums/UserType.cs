@@ -1,4 +1,4 @@
-﻿namespace StorageModels.Enums
+﻿namespace Enums.Enums
 {
     public enum UserType
     {

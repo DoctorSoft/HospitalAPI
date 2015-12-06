@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page is not found.
+        /// </summary>
+        public static string ErrorPageIsNotFound_404 {
+            get {
+                return ResourceManager.GetString("ErrorPageIsNotFound_404", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filling completed on.
         /// </summary>
         public static string FillerLoadingMessage {

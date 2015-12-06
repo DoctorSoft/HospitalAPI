@@ -15,6 +15,12 @@ namespace HospitalWebAPI
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "TokenAbleApi",
+                routeTemplate: "api/Token/{token}/{controller}/{id}/",
+                defaults: new { id = RouteParameter.Optional, token = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

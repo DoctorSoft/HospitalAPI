@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
+using Enums.Enums;
 using HelpingTools.Interfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.AnotherRepositories.RemoteAPIRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
-using StorageModels.Enums;
 using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators

@@ -1,5 +1,5 @@
 ﻿using System;
-using StorageModels.Enums;
+using Enums.Enums;
 using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
 

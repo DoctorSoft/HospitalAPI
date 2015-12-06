@@ -123,6 +123,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Filters\TokenAuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -157,6 +158,10 @@
     <ProjectReference Include="..\Dependencies\Dependencies.csproj">
       <Project>{bab7986b-95e1-4951-b744-211b0d518fab}</Project>
       <Name>Dependencies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Enums\Enums.csproj">
+      <Project>{3248d9c8-3bbb-4f77-95d9-b1e66e66fc0b}</Project>
+      <Name>Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\HandleToolsInterfaces\HandleToolsInterfaces.csproj">
       <Project>{eee4f2ce-3d7a-49bd-9cfc-a8f6ba2914d9}</Project>

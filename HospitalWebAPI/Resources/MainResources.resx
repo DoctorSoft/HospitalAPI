@@ -120,6 +120,9 @@
   <data name="ErrorAuthorization_401" xml:space="preserve">
     <value>Authorization Error</value>
   </data>
+  <data name="ErrorPageIsNotFound_404" xml:space="preserve">
+    <value>Page is not found</value>
+  </data>
   <data name="FillerLoadingMessage" xml:space="preserve">
     <value>Filling completed on</value>
   </data>

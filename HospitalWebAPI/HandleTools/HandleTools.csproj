@@ -46,6 +46,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Enums\Enums.csproj">
+      <Project>{3248D9C8-3BBB-4F77-95D9-B1E66E66FC0B}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HandleToolsInterfaces\HandleToolsInterfaces.csproj">
       <Project>{eee4f2ce-3d7a-49bd-9cfc-a8f6ba2914d9}</Project>
       <Name>HandleToolsInterfaces</Name>

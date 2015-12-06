@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="AuthorizationServices\AuthorizationService.cs" />
     <Compile Include="Interfaces\AuthorizationServices\IAuthorizationService.cs" />
+    <Compile Include="Interfaces\SessionServices\ISessionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionServices\SessionService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

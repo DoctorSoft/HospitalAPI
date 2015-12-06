@@ -1,5 +1,4 @@
-﻿using StorageModels.Enums;
-using StorageModels.Interfaces;
+﻿using StorageModels.Interfaces;
 using System.Collections.Generic;
 using StorageModels.Models.UserModels;
 

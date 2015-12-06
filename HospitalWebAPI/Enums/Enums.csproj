@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</ProjectGuid>
+    <ProjectGuid>{3248D9C8-3BBB-4F77-95D9-B1E66E66FC0B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StorageModels</RootNamespace>
-    <AssemblyName>StorageModels</AssemblyName>
+    <RootNamespace>Enums</RootNamespace>
+    <AssemblyName>Enums</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,37 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AnotherModels\RemoteAPIModels\PersonDataAPIStorageModel.cs" />
-    <Compile Include="Interfaces\IBlockAbleModel.cs" />
-    <Compile Include="Interfaces\IIdModel.cs" />
-    <Compile Include="Interfaces\IShowStatusModel.cs" />
-    <Compile Include="Models\ClinicModels\ClinicHospitalAccessStorageModel.cs" />
-    <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
-    <Compile Include="Models\ClinicModels\PatientStorageModel.cs" />
-    <Compile Include="Models\ClinicModels\ReservationStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\FunctionalGroupStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\FunctionStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\GroupFunctionStorageModel.cs" />
-    <Compile Include="Models\FunctionModels\UserFunctionStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\EmptyPlaceStatisticStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\HospitalSectionProfileStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\HospitalStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\SectionProfileStorageModel.cs" />
-    <Compile Include="Models\HospitalModels\SectionStorageModel.cs" />
-    <Compile Include="Models\MailboxModels\MessageStorageModel.cs" />
-    <Compile Include="Models\UserModels\AccountStorageModel.cs" />
-    <Compile Include="Models\UserModels\ClinicUserStorageModel.cs" />
-    <Compile Include="Models\UserModels\HospitalUserStorageModel.cs" />
-    <Compile Include="Models\UserModels\SessionStorageModel.cs" />
-    <Compile Include="Models\UserModels\UserStorageModel.cs" />
-    <Compile Include="Models\UserModels\UserTypeStorageModel.cs" />
+    <Compile Include="Enums\FunctionIdentityName.cs" />
+    <Compile Include="Enums\MessageType.cs" />
+    <Compile Include="Enums\ReservationStatus.cs" />
+    <Compile Include="Enums\TwoSideShowStatus.cs" />
+    <Compile Include="Enums\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Enums\Enums.csproj">
-      <Project>{3248D9C8-3BBB-4F77-95D9-B1E66E66FC0B}</Project>
-      <Name>Enums</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

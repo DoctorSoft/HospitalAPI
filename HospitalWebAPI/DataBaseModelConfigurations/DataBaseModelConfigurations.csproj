@@ -91,6 +91,10 @@
       <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
       <Name>DataBaseTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Enums\Enums.csproj">
+      <Project>{3248D9C8-3BBB-4F77-95D9-B1E66E66FC0B}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StorageModels\StorageModels.csproj">
       <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
       <Name>StorageModels</Name>

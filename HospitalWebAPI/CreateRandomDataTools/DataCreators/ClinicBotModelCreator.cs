@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
+using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
-using StorageModels.Enums;
 using StorageModels.Models.ClinicModels;
 using StorageModels.Models.UserModels;
 

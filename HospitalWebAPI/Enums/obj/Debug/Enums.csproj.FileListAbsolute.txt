@@ -1,0 +1,4 @@
+D:\!HospitalWebAPI\HospitalWebAPI\Enums\bin\Debug\Enums.dll
+D:\!HospitalWebAPI\HospitalWebAPI\Enums\bin\Debug\Enums.pdb
+D:\!HospitalWebAPI\HospitalWebAPI\Enums\obj\Debug\Enums.dll
+D:\!HospitalWebAPI\HospitalWebAPI\Enums\obj\Debug\Enums.pdb

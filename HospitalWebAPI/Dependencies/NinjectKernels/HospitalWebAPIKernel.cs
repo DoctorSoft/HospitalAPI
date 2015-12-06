@@ -1,5 +1,6 @@
 ﻿using Dependencies.NinjectModules;
 using Ninject;
+using Ninject.Web.WebApi;
 
 namespace Dependencies.NinjectKernels
 {
