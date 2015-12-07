@@ -2,13 +2,11 @@
 
 namespace HospitalMVC.Controllers
 {
-    public class HomeController : Controller
+    public class LogInController : Controller
     {
+        // GET: LogIn
         public ActionResult Index()
         {
-            // For test
-            return RedirectToAction("Index", "LogIn");
-
             return View();
         }
     }
