@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
-using HelpingTools.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using Resources;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.SessionCommandAnswers;
@@ -10,11 +12,11 @@ namespace Services.SessionServices
 {
     public class SessionService : ISessionService
     {
-        private readonly IExtendedRandom _extendedRandom;
+        private readonly ISessionRepository _sessionRepository;
 
-        public SessionService(IExtendedRandom extendedRandom)
+        public SessionService(ISessionRepository sessionRepository)
         {
-            _extendedRandom = extendedRandom;
+            _sessionRepository = sessionRepository;
         }
 
         public List<CommandAnswerError> GetAccessDeniedErrors()
@@ -29,13 +31,19 @@ namespace Services.SessionServices
             };
         }
 
+        public bool CheckPresenceOfToken(Guid token)
+        {
+            var session = _sessionRepository.GetModels().Any(model => model.Token == token);
+            return session;
+        }
+
         public IsTokenHasAccessToFunctionCommandAnswer IsTokenHasAccessToFunction(IsTokenHasAccessToFunctionCommand command)
         {
             // TODO: change this module for real functional
 
             var result = new IsTokenHasAccessToFunctionCommandAnswer
             {
-                HasAccess = _extendedRandom.GetRandomBool()
+                HasAccess = CheckPresenceOfToken(command.Token)
             };
 
             if (!result.HasAccess)
