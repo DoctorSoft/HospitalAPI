@@ -19,6 +19,7 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
             // Properties
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(model => model.IsBlocked).IsRequired();
             this.Property(model => model.StartTime).IsRequired();
             this.Property(model => model.Token).IsRequired();
 
