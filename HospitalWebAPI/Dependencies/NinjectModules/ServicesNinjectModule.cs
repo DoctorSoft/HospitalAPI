@@ -1,6 +1,4 @@
 ﻿using Ninject.Modules;
-using Ninject.Web.Common;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using Services.AuthorizationServices;
 using Services.Interfaces.AuthorizationServices;
 using Services.Interfaces.SessionServices;
@@ -12,8 +10,8 @@ namespace Dependencies.NinjectModules
     {
         public override void Load()
         {
-            Bind<IAuthorizationService>().To<AuthorizationService>().InRequestScope();
-            Bind<ISessionService>().To<SessionService>().InRequestScope();
+            Bind<IAuthorizationService>().To<AuthorizationService>().InThreadScope();
+            Bind<ISessionService>().To<SessionService>().InThreadScope();
         }
     }
 }

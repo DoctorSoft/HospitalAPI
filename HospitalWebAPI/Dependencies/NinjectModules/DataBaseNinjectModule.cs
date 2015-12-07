@@ -2,7 +2,6 @@
 using DataBaseModelConfigurations.Contexts;
 using DataBaseTools.Interfaces;
 using Ninject.Modules;
-using Ninject.Web.Common;
 
 namespace Dependencies.NinjectModules
 {
@@ -10,8 +9,8 @@ namespace Dependencies.NinjectModules
     {
         public override void Load()
         {
-            Bind<IDataBaseConfigurationFactory>().To<OriginalConfigurationFactory>().InRequestScope();
-            Bind<IDataBaseContext>().To<TestDataBaseContext>().InRequestScope(); // Change it on OriginalDataBaseContext
+            Bind<IDataBaseConfigurationFactory>().To<OriginalConfigurationFactory>().InThreadScope();
+            Bind<IDataBaseContext>().To<TestDataBaseContext>().InThreadScope(); // Change it on OriginalDataBaseContext
         }
     }
 }

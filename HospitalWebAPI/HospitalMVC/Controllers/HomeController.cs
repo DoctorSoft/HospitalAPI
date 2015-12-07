@@ -1,14 +1,14 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using HospitalMVC.Filters;
 
 namespace HospitalMVC.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        [TokenAuthorizationFilter]
+        public ActionResult Index(Guid token)
         {
-            // For test
-            return RedirectToAction("Index", "LogIn");
-
             return View();
         }
     }
