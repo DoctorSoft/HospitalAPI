@@ -19,6 +19,7 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
             // Properties
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            this.Property(model => model.IsBlocked).IsRequired();
             this.Property(model => model.HashedPassword).IsRequired();
             this.Property(model => model.Login).IsRequired();
 
