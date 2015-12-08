@@ -3,9 +3,10 @@ using StorageModels.Interfaces;
 
 namespace StorageModels.Models.UserModels
 {
-    public class SessionStorageModel : IIdModel
+    public class SessionStorageModel : IIdModel, IBlockAbleModel
     {
         public int Id { get; set; }
+        public bool IsBlocked { get; set; }
 
         //
 

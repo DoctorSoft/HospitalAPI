@@ -2,7 +2,6 @@
 using HelpingTools.ExtentionTools;
 using HelpingTools.Interfaces;
 using Ninject.Modules;
-using Ninject.Web.Common;
 
 namespace Dependencies.NinjectModules
 {
@@ -10,9 +9,9 @@ namespace Dependencies.NinjectModules
     {
         public override void Load()
         {
-            Bind<IPasswordHashManager>().To<PasswordHashManager>().InRequestScope();
-            Bind<IExtendedRandom>().To<ExtendedRandom>().InRequestScope();
-            Bind<IAccountNameCalculator>().To<AccountNameCalculator>().InRequestScope();
+            Bind<IPasswordHashManager>().To<PasswordHashManager>().InThreadScope();
+            Bind<IExtendedRandom>().To<ExtendedRandom>().InThreadScope();
+            Bind<IAccountNameCalculator>().To<AccountNameCalculator>().InThreadScope();
         }
     }
 }
