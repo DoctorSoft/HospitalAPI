@@ -19,10 +19,6 @@ namespace HospitalMVC.Filters
 
         private const string TokenName = "Token";
 
-        private const string ErrorControllerName = "Error";
-
-        private const string Error404Action = "Error404";
-
         private const string AuthorizationControllerName = "LogIn";
 
         private const string AuthorizationAction = "Index";
@@ -39,9 +35,10 @@ namespace HospitalMVC.Filters
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            // TODO: Make refactoring
             if (!filterContext.ActionParameters.ContainsKey(TokenName) || filterContext.ActionParameters[TokenName] == null)
             {
-                filterContext.Result = GetRedirectResult(ErrorControllerName, Error404Action);
+                filterContext.Result = GetRedirectResult(AuthorizationControllerName, AuthorizationAction);
                 return;
             }
 

@@ -1,23 +1,25 @@
 ﻿@using ServiceModels.ServiceCommands.AuthorizationCommands
 
+@model GetTokenByUserCredentialsCommand
+
 @{
     Layout = null;
 }
 
-@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"}))
+@using (Html.BeginForm("Authorize", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
 {
     @Html.AntiForgeryToken()
-
-    var model = new GetTokenByUserCredentialsCommand();
     
     <div class="panel">
-        <div class="label">@Html.DisplayNameFor(o => model.Login)</div> 
-        <div class="text-primary">@Html.TextBoxFor(o => model.Login)</div>
+        <div class="label">@Html.ValidationMessageFor(command => command.Login)</div> 
+        <div class="label">@Html.DisplayNameFor(o => o.Login)</div> 
+        <div class="text-primary">@Html.TextBoxFor(o => o.Login)</div>
     </div>
 
     <div class="panel">
-        <div class="label">@Html.DisplayNameFor(o => model.Password)</div>
-        <div class="text-primary">@Html.TextBoxFor(o => model.Password)</div>
+        <div class="label">@Html.ValidationMessageFor(command => command.Password)</div> 
+        <div class="label">@Html.DisplayNameFor(o => o.Password)</div>
+        <div class="text-primary">@Html.TextBoxFor(o => o.Password)</div>
     </div>
     
     <input class="text-primary" type="submit"/>

@@ -18,6 +18,9 @@ namespace Services.AuthorizationServices
         private readonly ISessionRepository _sessionRepository;
 
         private readonly IPasswordHashManager _passwordHashManager;
+
+        private const string ErrorFieldName = "Login";
+
         public AuthorizationService(IAccountRepository accountRepository, ISessionRepository sessionRepository, IPasswordHashManager passwordHashManager)
         {
             _accountRepository = accountRepository;
@@ -38,7 +41,8 @@ namespace Services.AuthorizationServices
                 new CommandAnswerError
                 {
                     Code = 401,
-                    Title = MainResources.ErrorAuthorization_401
+                    Title = MainResources.ErrorAuthorization_401,
+                    FieldName = ErrorFieldName
                 }
             };
 
