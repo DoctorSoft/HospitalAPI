@@ -5,6 +5,6 @@ namespace ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers
 {
     public class GetUserMainPageInformationCommandAnswer : AbstractCommandAnswer
     {
-        public UserType UserType { get; set; }
+        public UserAccountType UserType { get; set; }
     }
 }

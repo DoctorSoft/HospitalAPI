@@ -19,10 +19,7 @@ namespace Services.MainPageServices
         // TODO: Implement this method
         public GetUserMainPageInformationCommandAnswer GetUserMainPageInformation(GetUserMainPageInformationCommand command)
         {
-            var resultUserType = _extendedRandom.GetRandomValueFromList(new List<UserType>
-            {
-                UserType.ClinicUser, UserType.HospitalUser, UserType.Administrator, UserType.Reviewer
-            });
+            var resultUserType = _extendedRandom.GetRandomEnumValue<UserAccountType>();
 
             return new GetUserMainPageInformationCommandAnswer
             {

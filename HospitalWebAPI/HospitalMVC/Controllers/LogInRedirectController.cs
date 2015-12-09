@@ -12,7 +12,7 @@ namespace HospitalMVC.Controllers
     {
         private readonly IMainPageService _mainPageService;
 
-        private readonly Dictionary<UserType, KeyValuePair<string, string>> _actionDictionary;
+        private readonly Dictionary<UserAccountType, KeyValuePair<string, string>> _actionDictionary;
 
         private const string LogInActionName = "Index";
         private const string LogInControllerName = "LogIn";
@@ -22,12 +22,13 @@ namespace HospitalMVC.Controllers
             _mainPageService = mainPageService;
 
             // This controller action library. If you want to rename or remove any actions from home controllers then make changes here too.
-            _actionDictionary = new Dictionary<UserType, KeyValuePair<string, string>>
+            _actionDictionary = new Dictionary<UserAccountType, KeyValuePair<string, string>>
             {
-                {UserType.ClinicUser, new KeyValuePair<string, string>("HospitalUserHomePage", "Index")},
-                {UserType.HospitalUser, new KeyValuePair<string, string>("ClinicUserHomePage", "Index")},
-                {UserType.Administrator, new KeyValuePair<string, string>("AdministratorHomePage", "Index")},
-                {UserType.Reviewer, new KeyValuePair<string, string>("ReviewerHomePage", "Index")}
+                {UserAccountType.HospitalUserAccount, new KeyValuePair<string, string>("HospitalUserHomePage", "Index")},
+                {UserAccountType.ClinicUserAccount, new KeyValuePair<string, string>("ClinicUserHomePage", "Index")},
+                {UserAccountType.AdministratorAccount, new KeyValuePair<string, string>("AdministratorHomePage", "Index")},
+                {UserAccountType.ReviewerAccount, new KeyValuePair<string, string>("ReviewerHomePage", "Index")},
+                {UserAccountType.None, new KeyValuePair<string, string>("LogIn", "Index")}
             };
         }
 
