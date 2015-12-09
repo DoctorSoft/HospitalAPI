@@ -11,6 +11,9 @@ namespace HospitalMVC.Controllers
     {
         private readonly IAuthorizationService _authorizationService;
 
+        private const string RedirectControllerName = "LogInRedirect";
+        private const string RedirectActionName = "RedirectToMainPage";
+
         public LogInController(IAuthorizationService authorizationService)
         {
             _authorizationService = authorizationService;
@@ -29,7 +32,7 @@ namespace HospitalMVC.Controllers
 
             if (!model.Errors.Any())
             {
-                return RedirectToAction("Index", "Home", new {token = model.Token});
+                return RedirectToAction(RedirectActionName, RedirectControllerName, new { Token = model.Token });
             }
             
             foreach (var error in model.Errors)

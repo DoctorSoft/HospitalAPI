@@ -1,7 +1,9 @@
 ﻿using Ninject.Modules;
 using Services.AuthorizationServices;
 using Services.Interfaces.AuthorizationServices;
+using Services.Interfaces.MainPageServices;
 using Services.Interfaces.SessionServices;
+using Services.MainPageServices;
 using Services.SessionServices;
 
 namespace Dependencies.NinjectModules
@@ -12,6 +14,7 @@ namespace Dependencies.NinjectModules
         {
             Bind<IAuthorizationService>().To<AuthorizationService>().InThreadScope();
             Bind<ISessionService>().To<SessionService>().InThreadScope();
+            Bind<IMainPageService>().To<MainPageService>().InThreadScope();
         }
     }
 }

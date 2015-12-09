@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace HelpingTools.Interfaces
 {
@@ -20,5 +21,7 @@ namespace HelpingTools.Interfaces
         IEnumerable<int> GenerateRandomList(int count, int minValue, int maxValue);
 
         IEnumerable<int> GenerateRandomList(int count, int maxValue);
+
+        T GetRandomEnumValue<T>();
     }
 }

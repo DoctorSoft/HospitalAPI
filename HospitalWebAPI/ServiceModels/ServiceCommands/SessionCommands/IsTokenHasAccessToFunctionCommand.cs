@@ -2,7 +2,7 @@
 using Enums.Enums;
 using ServiceModels.ModelTools;
 
-namespace ServiceModels.ServiceCommands.SessionCommsnds
+namespace ServiceModels.ServiceCommands.SessionCommands
 {
     public class IsTokenHasAccessToFunctionCommand : AbstractTokenCommand
     {

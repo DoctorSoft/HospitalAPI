@@ -8,7 +8,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Enums.Enums;
 using Ninject;
-using ServiceModels.ServiceCommands.SessionCommsnds;
+using ServiceModels.ServiceCommands.SessionCommands;
 using Services.Interfaces.SessionServices;
 
 namespace HospitalWebAPI.Filters

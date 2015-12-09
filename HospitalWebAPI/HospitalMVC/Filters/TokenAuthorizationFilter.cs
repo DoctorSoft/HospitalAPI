@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Enums.Enums;
 using Ninject;
-using ServiceModels.ServiceCommands.SessionCommsnds;
+using ServiceModels.ServiceCommands.SessionCommands;
 using Services.Interfaces.SessionServices;
 
 namespace HospitalMVC.Filters

@@ -1,5 +1,5 @@
 ﻿using ServiceModels.ServiceCommandAnswers.SessionCommandAnswers;
-using ServiceModels.ServiceCommands.SessionCommsnds;
+using ServiceModels.ServiceCommands.SessionCommands;
 
 namespace Services.Interfaces.SessionServices
 {

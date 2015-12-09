@@ -45,9 +45,11 @@
     <Compile Include="ModelTools\CommandAnswerError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCommandAnswers\AuthorizationCommandAnswers\GetTokenByUserCredentialsCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\SessionCommandAnswers\IsTokenHasAccessToFunctionCommandAnswer.cs" />
     <Compile Include="ServiceCommands\AuthorizationCommands\GetTokenByUserCredentialsCommand.cs" />
-    <Compile Include="ServiceCommands\SessionCommsnds\IsTokenHasAccessToFunctionCommand.cs" />
+    <Compile Include="ServiceCommands\MainPageCommands\GetUserMainPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\SessionCommands\IsTokenHasAccessToFunctionCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Enums\Enums.csproj">

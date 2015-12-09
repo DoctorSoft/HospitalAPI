@@ -5,7 +5,7 @@ using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using Resources;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.SessionCommandAnswers;
-using ServiceModels.ServiceCommands.SessionCommsnds;
+using ServiceModels.ServiceCommands.SessionCommands;
 using Services.Interfaces.SessionServices;
 
 namespace Services.SessionServices
@@ -31,7 +31,7 @@ namespace Services.SessionServices
             };
         }
 
-        public bool CheckPresenceOfToken(Guid token)
+        public bool CheckPresenceOfToken(Guid? token)
         {
             var session = _sessionRepository.GetModels().Any(model => model.Token == token);
             return session;

@@ -178,9 +178,14 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\ClinicUserHomePageController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\AdministratorHomePageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HospitalUserHomePageController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
+    <Compile Include="Controllers\LogInRedirectController.cs" />
+    <Compile Include="Controllers\ReviewerHomePageController.cs" />
     <Compile Include="Filters\TokenAuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -230,15 +235,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\AdministratorHomePage\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\LogIn\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\HospitalUserHomePage\Index.cshtml" />
+    <Content Include="Views\ClinicUserHomePage\Index.cshtml" />
+    <Content Include="Views\ReviewerHomePage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\LogInRedirect\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

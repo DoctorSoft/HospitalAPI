@@ -51,5 +51,11 @@ namespace HelpingTools.ExtentionTools
         {
             return GenerateRandomList(count, 0, maxValue);
         }
+
+        public T GetRandomEnumValue<T>()
+        {
+            var enumList = Enum.GetNames(typeof (T)).Cast<T>().ToList();
+            return GetRandomValueFromList(enumList);
+        }
     }
 }

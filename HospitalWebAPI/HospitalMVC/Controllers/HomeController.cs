@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using HospitalMVC.Filters;
 
 namespace HospitalMVC.Controllers
 {
     public class HomeController : Controller
     {
-        [TokenAuthorizationFilter]
-        public ActionResult Index(Guid token)
+        private const string RedirectControllerName = "LogInRedirect";
+        private const string RedirectActionName = "RedirectToMainPage";
+
+        // GET: Home
+        public ActionResult Index()
         {
-            return View();
+            return RedirectToAction(RedirectActionName, RedirectControllerName);
         }
     }
 }
