@@ -1,4 +1,6 @@
-﻿using HelpingTools.CalculationTools;
+﻿using HandleTools.RepositoryHandlers;
+using HandleToolsInterfaces.RepositoryHandlers;
+using HelpingTools.CalculationTools;
 using HelpingTools.ExtentionTools;
 using HelpingTools.Interfaces;
 using Ninject.Modules;
@@ -12,6 +14,7 @@ namespace Dependencies.NinjectModules
             Bind<IPasswordHashManager>().To<PasswordHashManager>().InThreadScope();
             Bind<IExtendedRandom>().To<ExtendedRandom>().InThreadScope();
             Bind<IAccountNameCalculator>().To<AccountNameCalculator>().InThreadScope();
+            Bind<IBlockAbleHandler>().To<BlockAbleHandler>().InThreadScope();
         }
     }
 }

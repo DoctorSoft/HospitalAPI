@@ -61,6 +61,10 @@
       <Project>{3248D9C8-3BBB-4F77-95D9-B1E66E66FC0B}</Project>
       <Name>Enums</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HandleToolsInterfaces\HandleToolsInterfaces.csproj">
+      <Project>{EEE4F2CE-3D7A-49BD-9CFC-A8F6BA2914D9}</Project>
+      <Name>HandleToolsInterfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
       <Project>{47a288e7-d7ef-4f2a-81a7-23c4a5148e60}</Project>
       <Name>HelpingTools</Name>
