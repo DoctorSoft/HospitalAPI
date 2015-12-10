@@ -1,26 +1,64 @@
-﻿@using ServiceModels.ServiceCommands.AuthorizationCommands
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
 
-@model GetTokenByUserCredentialsCommand
+    </head>
+    <body>
 
-@{
-    Layout = null;
-}
+        @using ServiceModels.ServiceCommands.AuthorizationCommands
 
-@using (Html.BeginForm("Authorize", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="panel">
-        <div class="label">@Html.ValidationMessageFor(command => command.Login)</div> 
-        <div class="label">@Html.DisplayNameFor(o => o.Login)</div> 
-        <div class="text-primary">@Html.TextBoxFor(o => o.Login)</div>
-    </div>
+        @model GetTokenByUserCredentialsCommand
 
-    <div class="panel">
-        <div class="label">@Html.ValidationMessageFor(command => command.Password)</div> 
-        <div class="label">@Html.DisplayNameFor(o => o.Password)</div>
-        <div class="text-primary">@Html.TextBoxFor(o => o.Password)</div>
-    </div>
-    
-    <input class="text-primary" type="submit"/>
-}
+        @{
+            Layout = null;
+        }
+
+        @using (Html.BeginForm("Authorize", "Login", FormMethod.Post, new { id = "logoutForm"}))
+        {
+            @Html.AntiForgeryToken()
+
+        @*<div class="panel">
+                <div class="label">@Html.ValidationMessageFor(command => command.Login)</div>
+                <div class="label">@Html.DisplayNameFor(o => o.Login)</div>
+                <div class="text-primary">@Html.TextBoxFor(o => o.Login)</div>
+            </div>
+
+            <div class="panel">
+                <div class="label">@Html.ValidationMessageFor(command => command.Password)</div>
+                <div class="label">@Html.DisplayNameFor(o => o.Password)</div>
+                <div class="text-primary">@Html.TextBoxFor(o => o.Password)</div>
+            </div>*@
+
+            <div>
+                <div class="input-group center-block container form-signin">
+
+                    <h2 class="form-signin-heading">Please sign in</h2>
+                    <div class="input-group">
+                        <div class="h4 col-lg-4">@Html.DisplayNameFor(o => o.Login)</div>
+                        <div class="col-lg-6">@Html.TextBoxFor(o => o.Login)</div>
+                    </div>
+                    <div class="input-group">
+                        <div class="h4 col-lg-4">@Html.DisplayNameFor(o => o.Password)</div>
+                        <div class="col-lg-6">@Html.TextBoxFor(o => o.Password)</div>
+                    </div>
+                    <div class="input-group col-lg-12">
+                        <div class="col-lg-8">
+                            
+                        </div>
+                        <div class="col-lg-1">
+                            <input class="btn btn-sm btn-primary" type="submit" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    </body>
+
+</html>
