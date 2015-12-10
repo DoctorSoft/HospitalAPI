@@ -6,7 +6,7 @@ namespace HospitalMVC.Controllers
 {
     public class AdministratorHomePageController : Controller
     {
-        [TokenAuthorizationFilter]
+        [TokenAuthorizationFilter()]
         public ActionResult Index(Guid token)
         {
             //TODO: Change Guid token to command
