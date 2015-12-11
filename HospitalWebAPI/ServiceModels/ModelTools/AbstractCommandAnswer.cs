@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ServiceModels.ModelTools
 {
@@ -9,6 +10,6 @@ namespace ServiceModels.ModelTools
             Errors = new List<CommandAnswerError>();
         }
 
-        public List<CommandAnswerError> Errors { get; set; } 
+        public List<CommandAnswerError> Errors { get; set; }
     }
 }

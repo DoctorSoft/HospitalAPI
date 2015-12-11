@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
+using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
+using ServiceModels.ServiceCommands.MainPageCommands;
 
 namespace HospitalMVC.Controllers
 {
@@ -12,10 +14,14 @@ namespace HospitalMVC.Controllers
     {
         // GET: ClinicUserHomePage
         [TokenAuthorizationFilter(FunctionIdentityName.MakeEmptyPlaceReservation)]
-        public ActionResult Index(Guid token)
+        public ActionResult Index(GetClinicUserMainPageInformationCommand command)
         {
             //TODO: Change Guid token to command
-            return View();
+            var answer = new GetClinicUserMainPageInformationCommandAnswer
+            {
+                Token = (Guid) command.Token
+            };
+            return View(answer);
         }
     }
 }

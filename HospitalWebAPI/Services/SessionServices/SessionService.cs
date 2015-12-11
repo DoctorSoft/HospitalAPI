@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using HandleToolsInterfaces.RepositoryHandlers;
@@ -120,7 +121,8 @@ namespace Services.SessionServices
         {
             var result = new IsTokenHasAccessToFunctionCommandAnswer
             {
-                HasAccess = CheckPresenceOfToken(command)
+                HasAccess = CheckPresenceOfToken(command),
+                Token = (Guid)command.Token
             };
 
             if (!result.HasAccess)

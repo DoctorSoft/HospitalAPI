@@ -3,8 +3,7 @@ using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.AuthorizationCommandAnswers
 {
-    public class GetTokenByUserCredentialsCommandAnswer : AbstractCommandAnswer
+    public class GetTokenByUserCredentialsCommandAnswer : AbstractTokenCommandAnswer
     {
-        public Guid Token { get; set; }
     }
 }

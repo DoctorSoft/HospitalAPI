@@ -45,8 +45,10 @@
   <ItemGroup>
     <Compile Include="AuthorizationServices\AuthorizationService.cs" />
     <Compile Include="Interfaces\AuthorizationServices\IAuthorizationService.cs" />
+    <Compile Include="Interfaces\MainMenuServices\IMainMenuService.cs" />
     <Compile Include="Interfaces\MainPageServices\IMainPageService.cs" />
     <Compile Include="Interfaces\SessionServices\ISessionService.cs" />
+    <Compile Include="MainMenuServices\MainMenuService.cs" />
     <Compile Include="MainPageServices\MainPageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionServices\SessionService.cs" />

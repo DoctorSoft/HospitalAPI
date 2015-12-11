@@ -2,7 +2,7 @@
 
 namespace ServiceModels.ServiceCommandAnswers.SessionCommandAnswers
 {
-    public class IsTokenHasAccessToFunctionCommandAnswer : AbstractCommandAnswer
+    public class IsTokenHasAccessToFunctionCommandAnswer : AbstractTokenCommandAnswer
     {
         public bool HasAccess { get; set; }
     }

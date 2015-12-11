@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Enums.Enums;
 using HelpingTools.Interfaces;
 using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
@@ -23,7 +24,8 @@ namespace Services.MainPageServices
 
             return new GetUserMainPageInformationCommandAnswer
             {
-                UserType = resultUserType
+                UserType = resultUserType,
+                Token = (Guid)command.Token
             };
         }
     }

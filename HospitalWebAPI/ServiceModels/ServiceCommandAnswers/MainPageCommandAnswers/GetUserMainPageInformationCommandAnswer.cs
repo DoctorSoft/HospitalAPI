@@ -3,7 +3,7 @@ using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers
 {
-    public class GetUserMainPageInformationCommandAnswer : AbstractCommandAnswer
+    public class GetUserMainPageInformationCommandAnswer : AbstractTokenCommandAnswer
     {
         public UserAccountType UserType { get; set; }
     }

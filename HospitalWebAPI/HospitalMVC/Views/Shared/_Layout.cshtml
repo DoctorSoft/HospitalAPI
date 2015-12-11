@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Enums.Enums
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -22,15 +23,43 @@
         </div>
     </div>
     
+    
+    
     <div class="navbar-left">
         <ul class="nav nav-pills nav-stacked btn-toolbar">
             @*Links to add to main menu*@
-            <li>@Html.ActionLink("Открыть регистрацию", "Index", "Home")</li>
-            <li>@Html.ActionLink("Изменить данные регистрации", "Index", "Home")</li>
-            <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home")</li>
+            @if (ViewBag.FunctionList.Contains(MainMenuItem.OpenHospitalRegistrations))
+            {
+                <li>@Html.ActionLink("Открыть регистрацию", "Index", "Home")</li>
+            }
+            
+            @if (ViewBag.FunctionList.Contains(MainMenuItem.ChangeHospitalRegistrations))
+            {
+                <li>@Html.ActionLink("Изменить данные регистрации", "Index", "Home")</li>
+            }
+            
+            @if (ViewBag.FunctionList.Contains(MainMenuItem.ShowHospitalNotices))
+            {
+                <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home")</li>
+            }
+            
+            @if (ViewBag.FunctionList.Contains(MainMenuItem.MakeClinicRegistration))
+            {
+                <li>@Html.ActionLink("Зарегистрировать", "Index", "Home")</li>
+            }
+
+            @if (ViewBag.FunctionList.Contains(MainMenuItem.BreakClinicRegistration))
+            {
+                <li>@Html.ActionLink("Отменить регистрацию", "Index", "Home")</li>
+            }
+
+            @if (ViewBag.FunctionList.Contains(MainMenuItem.ShowClinicNotices))
+            {
+                <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home")</li>
+            }
         </ul>
     </div>
-
+    
     <div class="container body-content">
         @RenderBody()
         <hr />

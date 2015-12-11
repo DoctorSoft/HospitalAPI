@@ -5,7 +5,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Enums.Enums;
 using Ninject;
+using ServiceModels.ModelTools;
+using ServiceModels.ServiceCommands.MainMenuCommands;
 using ServiceModels.ServiceCommands.SessionCommands;
+using Services.Interfaces.MainMenuServices;
 using Services.Interfaces.SessionServices;
 
 namespace HospitalMVC.Filters
@@ -15,9 +18,13 @@ namespace HospitalMVC.Filters
         [Inject]
         public ISessionService SessionService { get; set; }
 
+        [Inject]
+        public IMainMenuService MainMenuService { get; set; }
+
+
         private readonly List<FunctionIdentityName> _functions;
 
-        private const string TokenName = "Token";
+        private const string TokenName = "command";
 
         private const string AuthorizationControllerName = "LogIn";
 
@@ -42,7 +49,15 @@ namespace HospitalMVC.Filters
                 return;
             }
 
-            var token = Guid.Parse(filterContext.ActionParameters[TokenName].ToString());
+            var requestCommand = filterContext.ActionParameters[TokenName] as AbstractTokenCommand;
+
+            if (requestCommand == null)
+            {
+                filterContext.Result = GetRedirectResult(AuthorizationControllerName, AuthorizationAction);
+                return;
+            }
+
+            var token = requestCommand.Token;
 
             var command = new IsTokenHasAccessToFunctionCommand
             {
@@ -59,6 +74,35 @@ namespace HospitalMVC.Filters
             }
 
             base.OnActionExecuting(filterContext);
+        }
+
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            var viewResult = filterContext.Result as ViewResultBase;
+            var viewBag = filterContext.Controller.ViewBag;
+            //AbstractTokenCommandAnswer;
+
+            if (viewResult == null)
+            {
+                viewBag.FunctionList = new List<MainMenuItem>();
+                base.OnActionExecuted(filterContext);
+            }
+
+            var model = viewResult.Model as AbstractTokenCommandAnswer;
+
+            if (model == null)
+            {
+                viewBag.FunctionList = new List<MainMenuItem>();
+                base.OnActionExecuted(filterContext);
+            }
+
+            var result = MainMenuService.GetMainMenuItems(new GetMainMenuItemsCommand
+            {
+                Token = model.Token
+            });
+            viewBag.FunctionList = result.MainMenuItems;
+
+            base.OnActionExecuted(filterContext);
         }
     }
 }
