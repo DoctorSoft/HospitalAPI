@@ -7,21 +7,24 @@ using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
 using ServiceModels.ServiceCommands.MainPageCommands;
+using Services.Interfaces.MainPageServices;
 
 namespace HospitalMVC.Controllers
 {
     public class ClinicUserHomePageController : Controller
     {
+        private readonly IMainPageService _mainPageService;
+        public ClinicUserHomePageController(IMainPageService mainPageService)
+        {
+            _mainPageService = mainPageService;
+        }
         // GET: ClinicUserHomePage
         [TokenAuthorizationFilter(FunctionIdentityName.MakeEmptyPlaceReservation)]
         public ActionResult Index(GetClinicUserMainPageInformationCommand command)
         {
-            //TODO: Change Guid token to command
-            var answer = new GetClinicUserMainPageInformationCommandAnswer
-            {
-                Token = (Guid) command.Token
-            };
-            return View(answer);
+           var answer = _mainPageService.GetClinicUserMainPageInformation(command);
+
+           return View(answer);
         }
     }
 }
