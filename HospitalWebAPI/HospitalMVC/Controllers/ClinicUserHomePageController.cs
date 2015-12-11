@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Enums.Enums;
 using HospitalMVC.Filters;
 
 namespace HospitalMVC.Controllers
@@ -10,7 +11,7 @@ namespace HospitalMVC.Controllers
     public class ClinicUserHomePageController : Controller
     {
         // GET: ClinicUserHomePage
-        [TokenAuthorizationFilter]
+        [TokenAuthorizationFilter(FunctionIdentityName.MakeEmptyPlaceReservation)]
         public ActionResult Index(Guid token)
         {
             //TODO: Change Guid token to command

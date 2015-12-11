@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Enums.Enums;
 using HospitalWebAPI.Filters;
 using Repositories.DataBaseRepositories.UserRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
@@ -20,7 +21,7 @@ namespace HospitalWebAPI.Controllers
         }
 
         // GET api/test/token/{token}
-        [TokenAuthorizationFilter]
+        [TokenAuthorizationFilter(FunctionIdentityName.GetClinicWarningNotices)]
         public IEnumerable<string> Get([FromUri]Guid token)
         {
             //Gets clinic users

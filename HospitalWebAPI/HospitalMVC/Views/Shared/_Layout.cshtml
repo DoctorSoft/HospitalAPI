@@ -19,15 +19,18 @@
                 </button>
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @*Links to add to main menu*@
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                </ul>
-                @*@Html.Partial("_LoginPartial")*@
-            </div>
         </div>
     </div>
+    
+    <div class="navbar-left">
+        <ul class="nav nav-pills nav-stacked btn-toolbar">
+            @*Links to add to main menu*@
+            <li>@Html.ActionLink("Открыть регистрацию", "Index", "Home")</li>
+            <li>@Html.ActionLink("Изменить данные регистрации", "Index", "Home")</li>
+            <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home")</li>
+        </ul>
+    </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
