@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enums.Enums;
+using ServiceModels.ModelTools.Entities;
 using ServiceModels.ServiceCommandAnswers.MainMenuCommandAnswers;
 using ServiceModels.ServiceCommands.MainMenuCommands;
 using Services.Interfaces.MainMenuServices;
@@ -14,22 +15,44 @@ namespace Services.MainMenuServices
 
             return new GetMainMenuItemsCommandAnswer
             {
-                MainMenuItems = new List<MainMenuItem>
+                MainMenuTabs = new List<MainMenuTab>
                 {
-                    MainMenuItem.ShowHospitalNotices,
-                    MainMenuItem.ShowClinicNotices,
-                    MainMenuItem.OpenHospitalRegistrations,
-                    MainMenuItem.MakeClinicRegistration,
-                    MainMenuItem.ChangeHospitalRegistrations,
-                    MainMenuItem.BreakClinicRegistration
-                },
+                    new MainMenuTab
+                    {
+                        ActionName = "Index",
+                        ControllerName = "Home",
+                        IsActive = true,
+                        IsEnabled = true,
+                        Label = "Home Page"
+                    },
 
-                DisabledMainMenuItems = new List<MainMenuItem>
-                {
-                    MainMenuItem.BreakClinicRegistration,
-                    MainMenuItem.OpenHospitalRegistrations
+                    new MainMenuTab
+                    {
+                        ActionName = "Index",
+                        ControllerName = "Home",
+                        IsActive = false,
+                        IsEnabled = true,
+                        Label = "Зарегистрировать"
+                    },
+
+                    new MainMenuTab
+                    {
+                        ActionName = "Index",
+                        ControllerName = "Home",
+                        IsActive = false,
+                        IsEnabled = false,
+                        Label = "Неактивное окно"
+                    },
+
+                    new MainMenuTab
+                    {
+                        ActionName = "Index",
+                        ControllerName = "Home",
+                        IsActive = false,
+                        IsEnabled = true,
+                        Label = "Посмотреть сообщения"
+                    },
                 }
-
             };
         }
     }

@@ -26,77 +26,25 @@
     @*TODO: Create way to resolve it*@ 
     
     <div class="navbar-left">
-        <ul class="nav nav-pills nav-stacked btn-toolbar">
+        <ul class="nav nav-pills nav-stacked btn-toolbar ">
             @*Links to add to main menu*@
-            @if (ViewBag.FunctionList.Contains(MainMenuItem.OpenHospitalRegistrations))
-            {
-                if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.OpenHospitalRegistrations))
-                {
-                    <li class="disabled">@Html.ActionLink("Открыть регистрацию", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Открыть регистрацию", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-            }
             
-            @if (ViewBag.FunctionList.Contains(MainMenuItem.ChangeHospitalRegistrations))
+            @foreach (var nextTab in ViewBag.MainMenuTabs)
             {
-                if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.ChangeHospitalRegistrations))
+                if (!nextTab.IsEnabled)
                 {
-                    <li class="disabled">@Html.ActionLink("Изменить данные регистрации", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                    <li class="disabled">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Изменить данные регистрации", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-            }
-            
-            @if (ViewBag.FunctionList.Contains(MainMenuItem.ShowHospitalNotices))
-            {
-                if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.ShowHospitalNotices))
-                {
-                    <li class="disabled">@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-            }
-            
-            @if (ViewBag.FunctionList.Contains(MainMenuItem.MakeClinicRegistration))
-            {
-                if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.MakeClinicRegistration))
-                {
-                    <li class="disabled">@Html.ActionLink("Зарегистрировать", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Зарегистрировать", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-            }
-
-            @if (ViewBag.FunctionList.Contains(MainMenuItem.BreakClinicRegistration))
-            {
-                if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.BreakClinicRegistration))
-                {
-                    <li class="disabled">@Html.ActionLink("Отменить регистрацию", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Отменить регистрацию", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-            }
-
-            @if (ViewBag.FunctionList.Contains(MainMenuItem.ShowClinicNotices))
-            {
-                if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.ShowClinicNotices))
-                {
-                    <li class="disabled">@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                    if (nextTab.IsActive)
+                    {
+                        <li class="active">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                    }
                 }
             }
         </ul>

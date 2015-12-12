@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using Enums.Enums;
 using ServiceModels.ModelTools;
+using ServiceModels.ModelTools.Entities;
 
 namespace ServiceModels.ServiceCommandAnswers.MainMenuCommandAnswers
 {
     public class GetMainMenuItemsCommandAnswer : AbstractCommandAnswer
     {
-        public List<MainMenuItem> MainMenuItems { get; set; }
-
-        public List<MainMenuItem> DisabledMainMenuItems { get; set; }  
+        public List<MainMenuTab> MainMenuTabs { get; set; } 
     }
 }

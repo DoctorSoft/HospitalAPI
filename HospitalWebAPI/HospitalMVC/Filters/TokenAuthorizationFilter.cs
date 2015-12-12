@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.UI.WebControls;
 using Enums.Enums;
 using Ninject;
 using ServiceModels.ModelTools;
@@ -99,9 +100,9 @@ namespace HospitalMVC.Filters
             {
                 Token = model.Token
             });
-            viewBag.FunctionList = result.MainMenuItems;
-            viewBag.DisabledFunctionList = result.DisabledMainMenuItems;
+
             viewBag.Token = model.Token;
+            viewBag.MainMenuTabs = result.MainMenuTabs;
 
             base.OnActionExecuted(filterContext);
         }
