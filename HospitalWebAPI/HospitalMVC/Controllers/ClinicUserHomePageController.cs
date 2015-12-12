@@ -18,7 +18,8 @@ namespace HospitalMVC.Controllers
         {
             _mainPageService = mainPageService;
         }
-        // GET: ClinicUserHomePage
+
+        
         [TokenAuthorizationFilter(FunctionIdentityName.MakeEmptyPlaceReservation)]
         public ActionResult Index(GetClinicUserMainPageInformationCommand command)
         {

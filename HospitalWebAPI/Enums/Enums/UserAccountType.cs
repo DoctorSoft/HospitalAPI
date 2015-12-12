@@ -4,8 +4,8 @@
     {
         ClinicUserAccount = 0,
         HospitalUserAccount = 1,
-        AdministratorAccount = 2,
-        ReviewerAccount = 3,
-        None = 4
+        None = 2,
+        AdministratorAccount = 3,
+        ReviewerAccount = 4,
     }
 }

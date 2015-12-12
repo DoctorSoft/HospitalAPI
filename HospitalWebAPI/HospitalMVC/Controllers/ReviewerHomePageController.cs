@@ -15,7 +15,7 @@ namespace HospitalMVC.Controllers
         {
             _mainPageService = mainPageService;
         }
-        // GET: ReviewerHomePage
+        
         [TokenAuthorizationFilter]
         public ActionResult Index(GetReviewerMainPageInformationCommand command)
         {

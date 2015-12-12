@@ -7,5 +7,7 @@ namespace ServiceModels.ServiceCommandAnswers.MainMenuCommandAnswers
     public class GetMainMenuItemsCommandAnswer : AbstractCommandAnswer
     {
         public List<MainMenuItem> MainMenuItems { get; set; }
+
+        public List<MainMenuItem> DisabledMainMenuItems { get; set; }  
     }
 }

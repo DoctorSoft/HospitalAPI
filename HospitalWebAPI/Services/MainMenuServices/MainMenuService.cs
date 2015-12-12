@@ -22,7 +22,14 @@ namespace Services.MainMenuServices
                     MainMenuItem.MakeClinicRegistration,
                     MainMenuItem.ChangeHospitalRegistrations,
                     MainMenuItem.BreakClinicRegistration
+                },
+
+                DisabledMainMenuItems = new List<MainMenuItem>
+                {
+                    MainMenuItem.BreakClinicRegistration,
+                    MainMenuItem.OpenHospitalRegistrations
                 }
+
             };
         }
     }

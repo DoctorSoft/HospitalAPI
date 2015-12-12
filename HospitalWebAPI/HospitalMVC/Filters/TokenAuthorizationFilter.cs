@@ -80,7 +80,6 @@ namespace HospitalMVC.Filters
         {
             var viewResult = filterContext.Result as ViewResultBase;
             var viewBag = filterContext.Controller.ViewBag;
-            //AbstractTokenCommandAnswer;
 
             if (viewResult == null)
             {
@@ -101,6 +100,8 @@ namespace HospitalMVC.Filters
                 Token = model.Token
             });
             viewBag.FunctionList = result.MainMenuItems;
+            viewBag.DisabledFunctionList = result.DisabledMainMenuItems;
+            viewBag.Token = model.Token;
 
             base.OnActionExecuted(filterContext);
         }
