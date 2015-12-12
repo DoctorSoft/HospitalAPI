@@ -32,11 +32,11 @@
             {
                 if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.OpenHospitalRegistrations))
                 {
-                    <li class="disabled">@Html.ActionLink("Открыть регистрацию", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li class="disabled">@Html.ActionLink("Открыть регистрацию", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Открыть регистрацию", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li>@Html.ActionLink("Открыть регистрацию", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
             }
             
@@ -44,11 +44,11 @@
             {
                 if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.ChangeHospitalRegistrations))
                 {
-                    <li class="disabled">@Html.ActionLink("Изменить данные регистрации", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li class="disabled">@Html.ActionLink("Изменить данные регистрации", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Изменить данные регистрации", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li>@Html.ActionLink("Изменить данные регистрации", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
             }
             
@@ -56,11 +56,11 @@
             {
                 if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.ShowHospitalNotices))
                 {
-                    <li class="disabled">@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li class="disabled">@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
             }
             
@@ -68,11 +68,11 @@
             {
                 if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.MakeClinicRegistration))
                 {
-                    <li class="disabled">@Html.ActionLink("Зарегистрировать", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li class="disabled">@Html.ActionLink("Зарегистрировать", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Зарегистрировать", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li>@Html.ActionLink("Зарегистрировать", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
             }
 
@@ -80,11 +80,11 @@
             {
                 if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.BreakClinicRegistration))
                 {
-                    <li class="disabled">@Html.ActionLink("Отменить регистрацию", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li class="disabled">@Html.ActionLink("Отменить регистрацию", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Отменить регистрацию", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li>@Html.ActionLink("Отменить регистрацию", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
             }
 
@@ -92,11 +92,11 @@
             {
                 if (ViewBag.DisabledFunctionList.Contains(MainMenuItem.ShowClinicNotices))
                 {
-                    <li class="disabled">@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li class="disabled">@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
                 else
                 {
-                    <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token })</li>
+                    <li>@Html.ActionLink("Просмотреть уведомления", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                 }
             }
         </ul>
