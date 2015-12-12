@@ -126,4 +126,25 @@
   <data name="FillerLoadingMessage" xml:space="preserve">
     <value>Filling completed on</value>
   </data>
+  <data name="MenuItemBreakClinicRegistration" xml:space="preserve">
+    <value>Отменить регистрацию</value>
+  </data>
+  <data name="MenuItemChangeHospitalRegistrations" xml:space="preserve">
+    <value>Изменить регистрацию</value>
+  </data>
+  <data name="MenuItemExit" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="MenuItemHomePage" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="MenuItemMakeClinicRegistration" xml:space="preserve">
+    <value>Зарегистрировать</value>
+  </data>
+  <data name="MenuItemOpenHospitalRegistrations" xml:space="preserve">
+    <value>Открыть регистрацию</value>
+  </data>
+  <data name="MenuItemViewNotices" xml:space="preserve">
+    <value>Просмотреть сообщения</value>
+  </data>
 </root>
