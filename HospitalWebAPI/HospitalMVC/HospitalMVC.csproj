@@ -178,13 +178,19 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\BreakClinicRegistrationPageController.cs" />
+    <Compile Include="Controllers\ChangeHospitalRegistrationPageController.cs" />
+    <Compile Include="Controllers\ClinicNoticesPageController.cs" />
     <Compile Include="Controllers\ClinicUserHomePageController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\AdministratorHomePageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HospitalNoticesPageController.cs" />
+    <Compile Include="Controllers\HospitalRegistrationsPageController.cs" />
     <Compile Include="Controllers\HospitalUserHomePageController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\LogInRedirectController.cs" />
+    <Compile Include="Controllers\MakeClinicRegistrationPageController.cs" />
     <Compile Include="Controllers\ReviewerHomePageController.cs" />
     <Compile Include="Filters\TokenAuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -243,6 +249,12 @@
     <Content Include="Views\HospitalUserHomePage\Index.cshtml" />
     <Content Include="Views\ClinicUserHomePage\Index.cshtml" />
     <Content Include="Views\ReviewerHomePage\Index.cshtml" />
+    <Content Include="Views\HospitalRegistrationsPage\Index.cshtml" />
+    <Content Include="Views\ChangeHospitalRegistrationPage\Index.cshtml" />
+    <Content Include="Views\HospitalNoticesPage\Index.cshtml" />
+    <Content Include="Views\MakeClinicRegistrationPage\Index.cshtml" />
+    <Content Include="Views\BreakClinicRegistrationPage\Index.cshtml" />
+    <Content Include="Views\ClinicNoticesPage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
