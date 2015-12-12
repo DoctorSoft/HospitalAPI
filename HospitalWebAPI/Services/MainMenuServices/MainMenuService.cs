@@ -53,7 +53,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemExit
                     }
@@ -76,7 +76,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemMakeClinicRegistration
                     },
@@ -84,7 +84,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemBreakClinicRegistration
                     },
@@ -92,7 +92,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemViewNotices
                     },
@@ -100,7 +100,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemExit
                     }
@@ -122,7 +122,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemOpenHospitalRegistrations
                     },
@@ -130,7 +130,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemChangeHospitalRegistrations
                     },
@@ -138,7 +138,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemViewNotices
                     },
@@ -146,7 +146,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemExit
                     }
@@ -169,7 +169,7 @@ namespace Services.MainMenuServices
                     {
                         ActionName = "Index",
                         ControllerName = "Home",
-                        IsActive = true,
+                        IsActive = false,
                         IsEnabled = true,
                         Label = MainResources.MenuItemExit
                     }
