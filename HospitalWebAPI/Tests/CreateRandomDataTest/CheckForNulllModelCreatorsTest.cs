@@ -21,7 +21,7 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnAdministratorsList()
         {
-            var administrator = new AdministratorModelCreator(new UserTypeRepository(context), new PasswordHashManager());
+            var administrator = new AdministratorAndReviewerModelsCreator(new UserTypeRepository(context), new PasswordHashManager());
             var resoultList = administrator.GetList();
             Assert.IsNotNull(resoultList);
         }

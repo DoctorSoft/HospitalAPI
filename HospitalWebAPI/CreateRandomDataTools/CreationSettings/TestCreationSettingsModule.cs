@@ -50,9 +50,9 @@ namespace CreateRandomDataTools.CreationSettings
             return bool.Parse(WebConfigurationManager.AppSettings["CreateBots"]);
         }
 
-        public bool CreateAdministrators()
+        public bool CreateAdministratorsAndReviewers()
         {
-            return bool.Parse(WebConfigurationManager.AppSettings["CreateAdministrators"]);
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateAdministratorsAndReviewers"]);
         }
 
         public bool CreateUserFunctions()

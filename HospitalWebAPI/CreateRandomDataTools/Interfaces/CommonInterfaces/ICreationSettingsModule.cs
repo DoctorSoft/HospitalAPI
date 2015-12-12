@@ -20,7 +20,7 @@
 
         bool CreateBots();
 
-        bool CreateAdministrators(); 
+        bool CreateAdministratorsAndReviewers(); 
 
         bool CreateUserFunctions(); 
 

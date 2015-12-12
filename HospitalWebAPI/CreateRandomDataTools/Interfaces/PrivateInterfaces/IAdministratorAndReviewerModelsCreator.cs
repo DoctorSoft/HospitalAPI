@@ -3,7 +3,7 @@ using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.Interfaces.PrivateInterfaces
 {
-    public interface IAdministratorModelCreator : IRandomModelListCreator<UserStorageModel>
+    public interface IAdministratorAndReviewerModelsCreator : IRandomModelListCreator<UserStorageModel>
     {
     }
 }

@@ -19,7 +19,7 @@ namespace CreateRandomDataTools.Fillers
         private readonly IClinicUserModelCreator _clinicUserModelCreator;
         private readonly IHospitalUserModelCreator _hospitalUserModelCreator;
         private readonly IBotModelCreator _botModelCreator;
-        private readonly IAdministratorModelCreator _administratorModelCreator;
+        private readonly IAdministratorAndReviewerModelsCreator _administratorAndReviewerModelsCreator;
         private readonly IUserFunctionModelCreator _userFunctionModelCreator;
 
         private readonly IDataBaseContext _dataBaseContext;
@@ -32,7 +32,7 @@ namespace CreateRandomDataTools.Fillers
             IFunctionalGroupModelCreator functionalGroupModelCreator, IFunctionModelCreator functionModelCreator,
             IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator,  
             IUserTypeModelCreator userTypeModelCreator, IClinicUserModelCreator clinicUserModelCreator, IHospitalUserModelCreator hospitalUserModelCreator, IBotModelCreator botModelCreator,
-            IAdministratorModelCreator administratorModelCreator, IUserFunctionModelCreator userFunctionModelCreator)
+            IAdministratorAndReviewerModelsCreator administratorAndReviewerModelsCreator, IUserFunctionModelCreator userFunctionModelCreator)
         {
             _dataBaseContext = dataBaseContext;
             _creationSettingsModule = creationSettingsModule;
@@ -48,7 +48,7 @@ namespace CreateRandomDataTools.Fillers
             _clinicUserModelCreator = clinicUserModelCreator;
             _hospitalUserModelCreator = hospitalUserModelCreator;
             _botModelCreator = botModelCreator;
-            _administratorModelCreator = administratorModelCreator;
+            _administratorAndReviewerModelsCreator = administratorAndReviewerModelsCreator;
             _userFunctionModelCreator = userFunctionModelCreator;
         }
 
@@ -67,7 +67,7 @@ namespace CreateRandomDataTools.Fillers
             FillClinicUserModels(showStatusFunction, percents += percentIncrementation);
             FillHospitalUserModels(showStatusFunction, percents += percentIncrementation);
             FillBotModels(showStatusFunction, percents += percentIncrementation);
-            FillAdministratorModels(showStatusFunction, percents + percentIncrementation);
+            FillAdministratorAndReviewerModels(showStatusFunction, percents + percentIncrementation);
             FillUserFunctionModels(showStatusFunction, 100);
         }
 
@@ -167,10 +167,10 @@ namespace CreateRandomDataTools.Fillers
             FillList(models, showStatusFunction, percentCount, fillApprove);
         }
 
-        protected virtual void FillAdministratorModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
+        protected virtual void FillAdministratorAndReviewerModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
-            var models = _administratorModelCreator.GetList();
-            var fillApprove = _creationSettingsModule.CreateAdministrators();
+            var models = _administratorAndReviewerModelsCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateAdministratorsAndReviewers();
 
             FillList(models, showStatusFunction, percentCount, fillApprove);
         }

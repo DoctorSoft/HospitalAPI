@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CreationSettings\TestCreationSettingsModule.cs" />
-    <Compile Include="DataCreators\AdministratorModelCreator.cs" />
+    <Compile Include="DataCreators\AdministratorAndReviewerModelsCreator.cs" />
     <Compile Include="DataCreators\BotModelCreator.cs" />
     <Compile Include="DataCreators\ClinicModelCreator.cs" />
     <Compile Include="DataCreators\ClinicUserModelCreator.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="Interfaces\CommonInterfaces\IDataBaseInfoFiller.cs" />
     <Compile Include="Interfaces\CommonInterfaces\ICreationSettingsModule.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IRandomModelListCreator.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\IAdministratorModelCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IAdministratorAndReviewerModelsCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IBotModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IClinicModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IClinicUserModelCreator.cs" />

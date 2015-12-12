@@ -8,7 +8,7 @@ using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
-    public class AdministratorModelCreator : IAdministratorModelCreator
+    public class AdministratorAndReviewerModelsCreator : IAdministratorAndReviewerModelsCreator
     {
         private readonly IUserTypeRepository _userTypeRepository;
 
@@ -17,7 +17,10 @@ namespace CreateRandomDataTools.DataCreators
         private const string AdminLogin = "Admin";
         private const string AdminPassword = "12345";
 
-        public AdministratorModelCreator(IUserTypeRepository userTypeRepository,
+        private const string ReviewerLogin = "Смотритель";
+        private const string ReviewerPassword = "12345";
+
+        public AdministratorAndReviewerModelsCreator(IUserTypeRepository userTypeRepository,
             IPasswordHashManager passwordHashManager)
         {
             _userTypeRepository = userTypeRepository;
@@ -26,14 +29,33 @@ namespace CreateRandomDataTools.DataCreators
         }
         public IEnumerable<UserStorageModel> GetList()
         {
-            var userTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.Administrator).Id;
+            var adminTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.Administrator).Id;
+            var reviewerTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.Reviewer).Id;
 
             var results = new List<UserStorageModel>
             {
-                GetAdmin(userTypeId)
+                GetAdmin(adminTypeId),
+                GetReviewer(reviewerTypeId)
             };
 
             return results;
+        }
+
+        protected virtual UserStorageModel GetReviewer(int userTypeId)
+        {
+            var adminUser = new UserStorageModel
+            {
+                Name = ReviewerLogin,
+                UserTypeId = userTypeId,
+                Account = new AccountStorageModel
+                {
+                    HashedPassword = _passwordHashManager.GetPasswordHash(ReviewerPassword),
+                    IsBlocked = false,
+                    Login = ReviewerLogin,
+                }
+            };
+
+            return adminUser;
         }
 
         protected virtual UserStorageModel GetAdmin(int userTypeId)
