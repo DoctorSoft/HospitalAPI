@@ -2,7 +2,7 @@
 
 namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
 {
-    class GetMakeClinicRegistrationsPageInformationCommand : AbstractTokenCommand
+    public class GetMakeClinicRegistrationsPageInformationCommand : AbstractTokenCommand
     {
     }
 }
