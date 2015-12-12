@@ -3,6 +3,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Enums.Enums;
+using HandleToolsInterfaces.Converters;
+using HandleToolsInterfaces.RepositoryHandlers;
 using HelpingTools.Interfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
@@ -18,30 +20,40 @@ namespace Services.MainPageServices
         private readonly IAccountRepository _accountRepository;
         private readonly IUserTypeRepository _userTypeRepository;
 
+        private readonly IUserToAccountTypeConverter _userToAccountTypeConverter;
+        private readonly IBlockAbleHandler _blockAbleHandler;
 
-        public MainPageService(ISessionRepository sessionRepository, IAccountRepository accountRepository, IUserTypeRepository userTypeRepository)
+
+        public MainPageService(ISessionRepository sessionRepository, IAccountRepository accountRepository, IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, IBlockAbleHandler blockAbleHandler)
         {
             _sessionRepository = sessionRepository;
             _accountRepository = accountRepository;
             _userTypeRepository = userTypeRepository;
+            _userToAccountTypeConverter = userToAccountTypeConverter;
+            _blockAbleHandler = blockAbleHandler;
         }
 
         protected virtual SessionStorageModel GetSession(GetUserMainPageInformationCommand command)
         {
-            var currentSession = _sessionRepository.GetModels().FirstOrDefault(model => model.Token == command.Token);
+            var currentSession = _blockAbleHandler.GetAccessAbleModels(_sessionRepository.GetModels())
+                .FirstOrDefault(model => model.Token == command.Token);
 
             return currentSession;
         }
 
         protected virtual UserStorageModel GetUserBySession(SessionStorageModel session)
         {
-            var currentUser = ((IDbSet<AccountStorageModel>)
+            var currentAccount = _blockAbleHandler.GetAccessAbleModels(((IDbSet<AccountStorageModel>)
             _accountRepository.GetModels())
-            .Include(model => model.User)
-            .FirstOrDefault(model => model.Id == session.AccountId)
-            .User;
+            .Include(model => model.User))
+            .FirstOrDefault(model => model.Id == session.AccountId);
 
-            return currentUser;
+            if (currentAccount == null)
+            {
+                return null;
+            }
+
+            return currentAccount.User;
         }
 
         protected virtual UserType GetUserType(UserStorageModel user)
@@ -51,27 +63,31 @@ namespace Services.MainPageServices
             return userType.UserType;
         }
 
-        // TODO: Implement this method
         public GetUserMainPageInformationCommandAnswer GetUserMainPageInformation(GetUserMainPageInformationCommand command)
         {
             var currentSession = GetSession(command);
 
-            var currentUser = GetUserBySession(currentSession);
-            var userType = GetUserType(currentUser);
-            UserAccountType resultUserType;
-
-            switch (userType)
+            if (currentSession == null)
             {
-
-                case UserType.ClinicUser: resultUserType = UserAccountType.ClinicUserAccount; break;
-                case UserType.HospitalUser: resultUserType = UserAccountType.HospitalUserAccount; break;
-                case UserType.Bot: resultUserType = UserAccountType.None; break;
-                case UserType.Administrator: resultUserType = UserAccountType.AdministratorAccount; break;
-                case UserType.Reviewer: resultUserType = UserAccountType.ReviewerAccount; break;
-                default:
-                    resultUserType = UserAccountType.None;
-                    break;
+                return new GetUserMainPageInformationCommandAnswer
+                {
+                    UserType = UserAccountType.None,
+                };
             }
+
+            var currentUser = GetUserBySession(currentSession);
+
+            if (currentUser == null)
+            {
+                return new GetUserMainPageInformationCommandAnswer
+                {
+                    UserType = UserAccountType.None,
+                };
+            }
+
+            var userType = GetUserType(currentUser);
+            var resultUserType = _userToAccountTypeConverter.Convert(userType);
+
             return new GetUserMainPageInformationCommandAnswer
             {
                 UserType = resultUserType,

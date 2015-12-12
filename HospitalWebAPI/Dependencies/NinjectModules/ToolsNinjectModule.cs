@@ -1,4 +1,6 @@
-﻿using HandleTools.RepositoryHandlers;
+﻿using HandleTools.Converters;
+using HandleTools.RepositoryHandlers;
+using HandleToolsInterfaces.Converters;
 using HandleToolsInterfaces.RepositoryHandlers;
 using HelpingTools.CalculationTools;
 using HelpingTools.ExtentionTools;
@@ -15,6 +17,7 @@ namespace Dependencies.NinjectModules
             Bind<IExtendedRandom>().To<ExtendedRandom>().InThreadScope();
             Bind<IAccountNameCalculator>().To<AccountNameCalculator>().InThreadScope();
             Bind<IBlockAbleHandler>().To<BlockAbleHandler>().InThreadScope();
+            Bind<IUserToAccountTypeConverter>().To<UserToAccountTypeConverter>().InThreadScope();
         }
     }
 }
