@@ -4,11 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using HandleToolsInterfaces.RepositoryHandlers;
 using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using Resources;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.SessionCommandAnswers;
 using ServiceModels.ServiceCommands.SessionCommands;
+using Services.Interfaces.ServiceTools;
 using Services.Interfaces.SessionServices;
 using StorageModels.Models.FunctionModels;
 using StorageModels.Models.UserModels;
@@ -17,21 +17,19 @@ namespace Services.SessionServices
 {
     public class SessionService : ISessionService
     {
-        private readonly ISessionRepository _sessionRepository;
         private readonly IUserFunctionRepository _userFunctionRepository;
         private readonly IFunctionRepository _functionRepository;
-        private readonly IAccountRepository _accountRepository;
 
         private readonly IBlockAbleHandler _blockAbleHandler;
+        private readonly ITokenManager _tokenManager;
 
-        public SessionService(ISessionRepository sessionRepository, IUserFunctionRepository userFunctionRepository,
-            IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, IAccountRepository accountRepository)
+        public SessionService(IUserFunctionRepository userFunctionRepository,
+            IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager)
         {
-            _sessionRepository = sessionRepository;
             _userFunctionRepository = userFunctionRepository;
             _functionRepository = functionRepository;
             _blockAbleHandler = blockAbleHandler;
-            _accountRepository = accountRepository;
+            this._tokenManager = tokenManager;
         }
 
         public List<CommandAnswerError> GetAccessDeniedErrors()
@@ -46,30 +44,11 @@ namespace Services.SessionServices
             };
         }
 
-        protected virtual SessionStorageModel GetSession(IsTokenHasAccessToFunctionCommand command)
-        {
-            var unblockedSessions = _blockAbleHandler.GetAccessAbleModels(_sessionRepository.GetModels());
-            var currentSession = unblockedSessions.FirstOrDefault(model => model.Token == command.Token);
-
-            return currentSession;
-        }
-
-        protected virtual UserStorageModel GetUserBySession(SessionStorageModel session)
-        {
-            var currentAccount = _blockAbleHandler.GetAccessAbleModels(((IDbSet<AccountStorageModel>)
-            _accountRepository.GetModels())
-            .Include(model => model.User))
-            .FirstOrDefault(model => model.Id == session.AccountId);
-
-            return currentAccount == null ? null : currentAccount.User;
-        }
-
         protected virtual IEnumerable<UserFunctionStorageModel> GetUserFunctionsByUser(UserStorageModel user)
         {
-            var result =
-                _blockAbleHandler.GetAccessAbleModels(_userFunctionRepository.GetModels())
-                    .Where(model => model.UserId == user.Id)
-                    .ToList();
+            var result = _blockAbleHandler.GetAccessAbleModels(_userFunctionRepository.GetModels())
+                .Where(model => model.UserId == user.Id)
+                .ToList();
 
             return result;
         }
@@ -95,14 +74,7 @@ namespace Services.SessionServices
 
         protected virtual bool CheckPresenceOfToken(IsTokenHasAccessToFunctionCommand command)
         {
-            var currentSession = GetSession(command);
-
-            if (currentSession == null)
-            {
-                return false; 
-            }
-
-            var user = GetUserBySession(currentSession);
+            var user = _tokenManager.GetUserByToken(command.Token);
 
             if (user == null)
             {

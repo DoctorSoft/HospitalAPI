@@ -56,18 +56,12 @@ namespace Services.AuthorizationServices
 
         protected virtual bool IsRightCredentials(GetTokenByUserCredentialsCommand command, AccountStorageModel userAccount)
         {
-
             if (userAccount == null)
             {
                 return false;
             }
 
-            if (!_passwordHashManager.IsCorrectPassword(command.Password, userAccount.HashedPassword))
-            {
-                return false;
-            }
-
-            return true;
+            return _passwordHashManager.IsCorrectPassword(command.Password, userAccount.HashedPassword);
         }
 
         protected virtual SessionStorageModel GetNewSession(AccountStorageModel userAccount)
@@ -75,7 +69,7 @@ namespace Services.AuthorizationServices
             var newToken = Guid.NewGuid();
             var startTime = DateTime.Now;
 
-            var newSession = new SessionStorageModel()
+            var newSession = new SessionStorageModel
             {
                 AccountId = userAccount.Id,
                 StartTime = startTime,
