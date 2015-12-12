@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Enums.Enums;
-using HospitalMVC.Filters;
-using Microsoft.Ajax.Utilities;
 using ServiceModels.ServiceCommands.MainPageCommands;
 using Services.Interfaces.MainPageServices;
 

@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using HospitalMVC.Filters;
+using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
+using Services.Interfaces.HospitalRegistrationsService;
 
 namespace HospitalMVC.Controllers
 {
     public class HospitalRegistrationsPageController : Controller
     {
-        // GET: HospitalRegistrationsPage
-        public ActionResult Index()
+        private readonly IHospitalRegistrationsService _hospitalRegistrationsService;
+
+        public HospitalRegistrationsPageController(IHospitalRegistrationsService hospitalRegistrationsService)
         {
-            return View();
+            _hospitalRegistrationsService = hospitalRegistrationsService;
+        }
+
+        // GET: HospitalRegistrationsPage
+        [TokenAuthorizationFilter]
+        public ActionResult Index(GetOpenHospitalRegistrationsPageInformationCommand command)
+        {
+            var answer = _hospitalRegistrationsService.GetOpenHospitalRegistrationsPageInformation(command);
+            return View(answer);
         }
     }
 }

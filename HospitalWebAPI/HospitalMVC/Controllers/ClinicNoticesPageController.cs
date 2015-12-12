@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using HospitalMVC.Filters;
+using ServiceModels.ServiceCommands.NoticesCommands;
+using Services.Interfaces.NoticesService;
 
 namespace HospitalMVC.Controllers
 {
     public class ClinicNoticesPageController : Controller
     {
-        // GET: ClinicNoticesPage
-        public ActionResult Index()
+        private readonly INoticesService _noticesService;
+
+        public ClinicNoticesPageController(INoticesService noticesService)
         {
-            return View();
+            _noticesService = noticesService;
+        }
+
+        // GET: ClinicNoticesPage
+        [TokenAuthorizationFilter]
+        public ActionResult Index(GetClinicNoticesPageInformationCommand command)
+        {
+            var answer = _noticesService.GetClinicNoticesPageInformation(command);
+            return View(answer);
         }
     }
 }

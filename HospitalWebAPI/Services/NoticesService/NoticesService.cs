@@ -16,7 +16,7 @@ namespace Services.NoticesService
             };
         }
 
-        public GetHospitalNoticesPageInformationCommandAnswer GetHospitalNoticesPageInformationCommand(
+        public GetHospitalNoticesPageInformationCommandAnswer GetHospitalNoticesPageInformation(
             GetHospitalNoticesPageInformationCommand command)
         {
             return new GetHospitalNoticesPageInformationCommandAnswer

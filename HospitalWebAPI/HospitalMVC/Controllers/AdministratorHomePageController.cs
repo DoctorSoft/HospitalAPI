@@ -1,7 +1,5 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using HospitalMVC.Filters;
-using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
 using ServiceModels.ServiceCommands.MainPageCommands;
 using Services.Interfaces.MainPageServices;
 

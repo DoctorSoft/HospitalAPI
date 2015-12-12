@@ -1,7 +1,5 @@
-﻿using System.Data.Entity.Core.Metadata.Edm;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
-using System.Web.Routing;
 using ServiceModels.ServiceCommands.AuthorizationCommands;
 using Services.Interfaces.AuthorizationServices;
 

@@ -8,7 +8,7 @@ namespace Services.Interfaces.NoticesService
         GetClinicNoticesPageInformationCommandAnswer GetClinicNoticesPageInformation(
             GetClinicNoticesPageInformationCommand command);
 
-        GetHospitalNoticesPageInformationCommandAnswer GetHospitalNoticesPageInformationCommand(
+        GetHospitalNoticesPageInformationCommandAnswer GetHospitalNoticesPageInformation(
             GetHospitalNoticesPageInformationCommand command);
     }
 }
