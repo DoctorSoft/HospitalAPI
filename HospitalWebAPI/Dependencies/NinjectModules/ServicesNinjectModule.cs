@@ -3,9 +3,11 @@ using Services.AuthorizationServices;
 using Services.Interfaces.AuthorizationServices;
 using Services.Interfaces.MainMenuServices;
 using Services.Interfaces.MainPageServices;
+using Services.Interfaces.ServiceTools;
 using Services.Interfaces.SessionServices;
 using Services.MainMenuServices;
 using Services.MainPageServices;
+using Services.ServiceTools;
 using Services.SessionServices;
 
 namespace Dependencies.NinjectModules
@@ -14,6 +16,10 @@ namespace Dependencies.NinjectModules
     {
         public override void Load()
         {
+            // Tools
+            Bind<ITokenManager>().To<TokenManager>().InThreadScope();
+
+            // Services
             Bind<IAuthorizationService>().To<AuthorizationService>().InThreadScope();
             Bind<ISessionService>().To<SessionService>().InThreadScope();
             Bind<IMainPageService>().To<MainPageService>().InThreadScope();

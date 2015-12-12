@@ -1,54 +1,29 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using Enums.Enums;
 using HandleToolsInterfaces.Converters;
-using HandleToolsInterfaces.RepositoryHandlers;
-using HelpingTools.Interfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
 using ServiceModels.ServiceCommands.MainPageCommands;
 using Services.Interfaces.MainPageServices;
+using Services.Interfaces.ServiceTools;
 using StorageModels.Models.UserModels;
 
 namespace Services.MainPageServices
 {
     public class MainPageService : IMainPageService
     {
-        private readonly ISessionRepository _sessionRepository;
-        private readonly IAccountRepository _accountRepository;
         private readonly IUserTypeRepository _userTypeRepository;
 
         private readonly IUserToAccountTypeConverter _userToAccountTypeConverter;
-        private readonly IBlockAbleHandler _blockAbleHandler;
+        private readonly ITokenManager _tokenManager;
 
 
-        public MainPageService(ISessionRepository sessionRepository, IAccountRepository accountRepository, IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, IBlockAbleHandler blockAbleHandler)
+        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager)
         {
-            _sessionRepository = sessionRepository;
-            _accountRepository = accountRepository;
             _userTypeRepository = userTypeRepository;
             _userToAccountTypeConverter = userToAccountTypeConverter;
-            _blockAbleHandler = blockAbleHandler;
-        }
-
-        protected virtual SessionStorageModel GetSession(GetUserMainPageInformationCommand command)
-        {
-            var currentSession = _blockAbleHandler.GetAccessAbleModels(_sessionRepository.GetModels())
-                .FirstOrDefault(model => model.Token == command.Token);
-
-            return currentSession;
-        }
-
-        protected virtual UserStorageModel GetUserBySession(SessionStorageModel session)
-        {
-            var currentAccount = _blockAbleHandler.GetAccessAbleModels(((IDbSet<AccountStorageModel>)
-            _accountRepository.GetModels())
-            .Include(model => model.User))
-            .FirstOrDefault(model => model.Id == session.AccountId);
-
-            return currentAccount == null ? null : currentAccount.User;
+            _tokenManager = tokenManager;
         }
 
         protected virtual UserType GetUserType(UserStorageModel user)
@@ -60,17 +35,7 @@ namespace Services.MainPageServices
 
         public GetUserMainPageInformationCommandAnswer GetUserMainPageInformation(GetUserMainPageInformationCommand command)
         {
-            var currentSession = GetSession(command);
-
-            if (currentSession == null)
-            {
-                return new GetUserMainPageInformationCommandAnswer
-                {
-                    UserType = UserAccountType.None,
-                };
-            }
-
-            var currentUser = GetUserBySession(currentSession);
+            var currentUser = _tokenManager.GetUserByToken(command.Token);
 
             if (currentUser == null)
             {
