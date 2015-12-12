@@ -44,6 +44,7 @@
     <Compile Include="ModelTools\AbstractTokenCommand.cs" />
     <Compile Include="ModelTools\AbstractTokenCommandAnswer.cs" />
     <Compile Include="ModelTools\CommandAnswerError.cs" />
+    <Compile Include="ModelTools\Entities\MainMenuItemValue.cs" />
     <Compile Include="ModelTools\Entities\MainMenuTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCommandAnswers\AuthorizationCommandAnswers\GetTokenByUserCredentialsCommandAnswer.cs" />

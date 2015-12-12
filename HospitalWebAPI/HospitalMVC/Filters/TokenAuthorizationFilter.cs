@@ -6,6 +6,7 @@ using System.Web.Routing;
 using System.Web.UI.WebControls;
 using Enums.Enums;
 using Ninject;
+using Resources;
 using ServiceModels.ModelTools;
 using ServiceModels.ModelTools.Entities;
 using ServiceModels.ServiceCommandAnswers.MainMenuCommandAnswers;
@@ -33,9 +34,30 @@ namespace HospitalMVC.Filters
 
         private const string AuthorizationAction = "Index";
 
+        private readonly Dictionary<MainMenuItem, MainMenuTab> _mainMenuTabs; 
+
         public TokenAuthorizationFilter(params FunctionIdentityName[] functions)
         {
             this._functions = functions.ToList();
+
+            _mainMenuTabs = new Dictionary<MainMenuItem, MainMenuTab>()
+            {
+                {MainMenuItem.OpenHospitalRegistrations, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalRegistrationsPage", Label = MainResources.MenuItemOpenHospitalRegistrations }},
+                {MainMenuItem.ChangeHospitalRegistrations, new MainMenuTab { ActionName = "Index", ControllerName = "ChangeHospitalRegistrationsPage", Label = MainResources.MenuItemChangeHospitalRegistrations }},
+                {MainMenuItem.HospitalNotices, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalNoticesPage", Label = MainResources.MenuItemViewNotices }},
+                {MainMenuItem.HospitalMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalUserHomePage", Label = MainResources.MenuItemHomePage }},
+
+                {MainMenuItem.MakeClinicRegistration, new MainMenuTab { ActionName = "Index", ControllerName = "MakeClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},
+                {MainMenuItem.BreakClinicRegistration, new MainMenuTab { ActionName = "Index", ControllerName = "BreakClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},
+                {MainMenuItem.ClinicNotices, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicNoticesPage", Label = MainResources.MenuItemViewNotices }},
+                {MainMenuItem.ClinicMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicUserHomePage", Label = MainResources.MenuItemHomePage }},
+
+                {MainMenuItem.AdministratorMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "AdministratorHomePage", Label = MainResources.MenuItemHomePage }},
+
+                {MainMenuItem.ReviewerMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReviewerHomePage", Label = MainResources.MenuItemHomePage }},
+
+                {MainMenuItem.LogOut, new MainMenuTab { ActionName = "Index", ControllerName = "LigIn", Label = MainResources.MenuItemExit }},
+            };
         }
 
         protected virtual RedirectToRouteResult GetRedirectResult(string controller, string action)
@@ -109,6 +131,22 @@ namespace HospitalMVC.Filters
             return result;
         }
 
+        protected virtual List<MainMenuTab> ConvertToTabList(List<MainMenuItemValue> values)
+        {
+            var result = new List<MainMenuTab>();
+
+            foreach (var value in values)
+            {
+                var nextTab = _mainMenuTabs[value.MainMenuItem];
+                nextTab.IsActive = value.IsActive;
+                nextTab.IsEnabled = value.IsEnabled;
+
+                result.Add(nextTab);
+            }
+
+            return result;
+        }
+
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             var viewBag = filterContext.Controller.ViewBag;
@@ -124,7 +162,7 @@ namespace HospitalMVC.Filters
             var result = GetMainMenuItemsCommandAnswerByAnswer(model);
 
             viewBag.Token = model.Token;
-            viewBag.MainMenuTabs = result.MainMenuTabs;
+            viewBag.MainMenuTabs = ConvertToTabList(result.MainMenuTabs);
 
             base.OnActionExecuted(filterContext);
         }

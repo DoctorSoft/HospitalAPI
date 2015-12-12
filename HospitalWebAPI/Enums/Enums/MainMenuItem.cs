@@ -14,6 +14,8 @@
 
         AdministratorMainPage = 200,
 
-        ReviewerMainPage = 300
+        ReviewerMainPage = 300,
+
+        LogOut = 1000
     }
 }
