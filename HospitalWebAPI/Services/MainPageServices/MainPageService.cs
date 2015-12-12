@@ -48,12 +48,7 @@ namespace Services.MainPageServices
             .Include(model => model.User))
             .FirstOrDefault(model => model.Id == session.AccountId);
 
-            if (currentAccount == null)
-            {
-                return null;
-            }
-
-            return currentAccount.User;
+            return currentAccount == null ? null : currentAccount.User;
         }
 
         protected virtual UserType GetUserType(UserStorageModel user)

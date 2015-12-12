@@ -4,16 +4,16 @@
     {
         OpenHospitalRegistrations = 0,
         ChangeHospitalRegistrations = 1,
-        ShowHospitalNotices = 2,
-        ShowHospitalMainPage = 3,
+        HospitalNotices = 2,
+        HospitalMainPage = 3,
 
         MakeClinicRegistration = 100,
         BreakClinicRegistration = 101,
-        ShowClinicNotices = 103,
-        ShowClinicMainPage = 104,
+        ClinicNotices = 103,
+        ClinicMainPage = 104,
 
-        ShowAdministratorMainPage = 200,
+        AdministratorMainPage = 200,
 
-        ShowReviewerMainPage = 300
+        ReviewerMainPage = 300
     }
 }

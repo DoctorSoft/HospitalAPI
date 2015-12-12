@@ -56,12 +56,12 @@ namespace Services.SessionServices
 
         protected virtual UserStorageModel GetUserBySession(SessionStorageModel session)
         {
-            var user = _blockAbleHandler.GetAccessAbleModels(((IDbSet<AccountStorageModel>) _accountRepository.GetModels())
-                .Include(model => model.User))
-                .FirstOrDefault(model => model.Id == session.AccountId)
-                .User;
+            var currentAccount = _blockAbleHandler.GetAccessAbleModels(((IDbSet<AccountStorageModel>)
+            _accountRepository.GetModels())
+            .Include(model => model.User))
+            .FirstOrDefault(model => model.Id == session.AccountId);
 
-            return user;
+            return currentAccount == null ? null : currentAccount.User;
         }
 
         protected virtual IEnumerable<UserFunctionStorageModel> GetUserFunctionsByUser(UserStorageModel user)
