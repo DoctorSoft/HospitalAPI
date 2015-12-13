@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI.WebControls;
+using Dependencies.NinjectFactories;
 using Enums.Enums;
 using Ninject;
 using Resources;
@@ -19,11 +20,17 @@ namespace HospitalMVC.Filters
 {
     public class TokenAuthorizationFilter : ActionFilterAttribute
     {
-        [Inject]
+        /*[Inject]
         public ISessionService SessionService { get; set; }
 
         [Inject]
-        public IMainMenuService MainMenuService { get; set; }
+        public IMainMenuService MainMenuService { get; set; }*/
+        
+        [Inject]
+        public IMainMenuServiceFactory MainMenuServiceFactory { get; set; }
+
+        [Inject]
+        public ISessionServiceFactory SessionServiceFactory { get; set; }
 
 
         private readonly List<FunctionIdentityName> _functions;
@@ -87,7 +94,8 @@ namespace HospitalMVC.Filters
                 Token = token
             };
 
-            var answer = SessionService.IsTokenHasAccessToFunction(newCommand);
+            var sessionService = SessionServiceFactory.CreateSessionService();
+            var answer = sessionService.IsTokenHasAccessToFunction(newCommand);
 
             return answer.HasAccess;
         }
@@ -126,7 +134,8 @@ namespace HospitalMVC.Filters
                 Token = answer.Token
             };
 
-            var result = MainMenuService.GetMainMenuItems(command);
+            var mainMenuService = MainMenuServiceFactory.CreateMainMenuService();
+            var result = mainMenuService.GetMainMenuItems(command);
 
             return result;
         }

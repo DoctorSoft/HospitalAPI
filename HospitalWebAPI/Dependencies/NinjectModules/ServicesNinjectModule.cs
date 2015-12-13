@@ -1,4 +1,6 @@
-﻿using Ninject.Modules;
+﻿using Dependencies.NinjectFactories;
+using Ninject.Extensions.Factory;
+using Ninject.Modules;
 using Services.AuthorizationServices;
 using Services.ClinicRegistrationsServices;
 using Services.HospitalRegistrationsService;
@@ -33,6 +35,10 @@ namespace Dependencies.NinjectModules
             Bind<IClinicRegistrationsService>().To<ClinicRegistrationsService>().InThreadScope();
             Bind<IHospitalRegistrationsService>().To<HospitalRegistrationsService>().InThreadScope();
             Bind<INoticesService>().To<NoticesService>().InThreadScope();
+
+            //Factories
+            Bind<ISessionServiceFactory>().ToFactory();
+            Bind<IMainMenuServiceFactory>().ToFactory();
         }
     }
 }
