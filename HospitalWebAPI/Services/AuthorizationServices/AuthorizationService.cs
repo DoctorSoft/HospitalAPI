@@ -105,5 +105,12 @@ namespace Services.AuthorizationServices
                 Token = newSession.Token
             };
         }
+
+        public LogOutUserByTokenCommandAnswer LogOutUserByToken(LogOutUserByTokenCommand command)
+        {
+            // TODO: Implement this method
+
+            return new LogOutUserByTokenCommandAnswer();
+        }
     }
 }

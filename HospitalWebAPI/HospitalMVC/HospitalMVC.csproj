@@ -198,6 +198,7 @@
     <Compile Include="Controllers\HospitalUserHomePageController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\LogInRedirectController.cs" />
+    <Compile Include="Controllers\LogOutController.cs" />
     <Compile Include="Controllers\MakeClinicRegistrationPageController.cs" />
     <Compile Include="Controllers\ReviewerHomePageController.cs" />
     <Compile Include="Filters\TokenAuthorizationFilter.cs" />
@@ -269,6 +270,7 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\LogInRedirect\" />
+    <Folder Include="Views\LogOut\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
