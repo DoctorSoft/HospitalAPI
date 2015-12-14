@@ -88,11 +88,21 @@ namespace Services.AuthorizationServices
             _accountRepository.SaveChanges();
         }
 
+        protected bool IsRightCommandData(GetTokenByUserCredentialsCommand command)
+        {
+            return !(string.IsNullOrWhiteSpace(command.Login) || string.IsNullOrWhiteSpace(command.Password));
+        }
+
         public GetTokenByUserCredentialsCommandAnswer GetTokenByUserCredentials(GetTokenByUserCredentialsCommand command)
         {
-            var userAccount = GetUserAccountByCommand(command);
-
             var errorAnswer = GetErrorAnswer();
+
+            if (!IsRightCommandData(command))
+            {
+                return errorAnswer;
+            }
+
+            var userAccount = GetUserAccountByCommand(command);
 
             if (!IsRightCredentials(command, userAccount))
             {
