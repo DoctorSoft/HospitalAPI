@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HandleToolsInterfaces.RepositoryHandlers;
 using HelpingTools.Interfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using Resources;
@@ -18,15 +19,17 @@ namespace Services.AuthorizationServices
         private readonly ISessionRepository _sessionRepository;
 
         private readonly IPasswordHashManager _passwordHashManager;
+        private readonly IBlockAbleHandler _blockAbleHandler;
 
         private const string ErrorFieldName = "Login";
 
-        public AuthorizationService(IAccountRepository accountRepository, ISessionRepository sessionRepository, IPasswordHashManager passwordHashManager)
+        public AuthorizationService(IAccountRepository accountRepository, ISessionRepository sessionRepository, IPasswordHashManager passwordHashManager, IBlockAbleHandler blockAbleHandler)
         {
             _accountRepository = accountRepository;
             _sessionRepository = sessionRepository;
 
             _passwordHashManager = passwordHashManager;
+            _blockAbleHandler = blockAbleHandler;
         }
 
         protected virtual AccountStorageModel GetUserAccountByCommand(GetTokenByUserCredentialsCommand command)
@@ -108,8 +111,14 @@ namespace Services.AuthorizationServices
 
         public LogOutUserByTokenCommandAnswer LogOutUserByToken(LogOutUserByTokenCommand command)
         {
-            // TODO: Implement this method
+            var token = command.Token;
 
+            var session = _sessionRepository.GetModels().FirstOrDefault(model => model.Token == token);
+            _blockAbleHandler.BlockModel(session);
+
+            _sessionRepository.Update(session.Id, session);
+            _sessionRepository.SaveChanges();
+            
             return new LogOutUserByTokenCommandAnswer();
         }
     }
