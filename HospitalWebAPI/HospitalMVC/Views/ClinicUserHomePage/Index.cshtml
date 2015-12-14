@@ -1,8 +1,23 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Clinic User Home Page</h2>
+<h2>Clinic User Home Page till</h2>
 
+<p>Здравствуйте, @ViewBag.UserName !</p>
+
+@{
+    if (!ViewBag.reservationStatus)
+    {
+        @:<p> В данный момент регистрация мест в больницах недоступна.</p>
+        @:<p> Вы можете начать регистрацию с @ViewBag.startTimeReservation.<p>
+    }
+    else
+    {
+        @:<p> Если Вы хотите зарегистрировать место, то @Html.ActionLink("нажмите сюда", "Index", "MakeClinicRegistrationPage")</p>
+        @:<p> Если Вы хотите отменить регистрацию, то @Html.ActionLink("нажмите сюда", "Index", "BreakClinicRegistrationPage")</p>   
+    }
+}
+
+@*view messages*@
