@@ -14,12 +14,12 @@ namespace Services.MainMenuServices
     public class MainMenuService : IMainMenuService
     {
         private readonly IUserFunctionManager _userFunctionManager;
-        private readonly IFunctionaNameToMainMenuItemConverter _functionaNameToMainMenuItemConverter;
+        private readonly IFunctionsNameToMainMenuItemConverter _functionsNameToMainMenuItemConverter;
 
-        public MainMenuService(IUserFunctionManager userFunctionManager, IFunctionaNameToMainMenuItemConverter functionaNameToMainMenuItemConverter)
+        public MainMenuService(IUserFunctionManager userFunctionManager, IFunctionsNameToMainMenuItemConverter functionsNameToMainMenuItemConverter)
         {
             _userFunctionManager = userFunctionManager;
-            _functionaNameToMainMenuItemConverter = functionaNameToMainMenuItemConverter;
+            _functionsNameToMainMenuItemConverter = functionsNameToMainMenuItemConverter;
         }
 
         protected virtual IEnumerable<MainMenuItemValue> ChangeMainMenuItemsByCommand(
@@ -27,7 +27,7 @@ namespace Services.MainMenuServices
         {
             // TODO: Implement this method
 
-            var results = mainMenuItemValues.Where(value => (int)value.MainMenuItem % 100 == 0 && value.MainMenuItem != MainMenuItem.LogOut).ToList();
+            var results = mainMenuItemValues.Where(value => value.MainMenuItem == command.ActivatedMainMenu).ToList();
 
             results.ForEach(value => value.IsActive = true);
 
@@ -41,7 +41,7 @@ namespace Services.MainMenuServices
             var enumList = Enum.GetValues(typeof (MainMenuItem)).Cast<MainMenuItem>().ToList();
 
             var tabs = userFunctions
-                .Select(model => _functionaNameToMainMenuItemConverter.Convert(model.FunctionIdentityName))
+                .Select(model => _functionsNameToMainMenuItemConverter.Convert(model.FunctionIdentityName))
                 .Where(enumList.Contains)
                 .Select(item => new MainMenuItemValue { IsEnabled = true, IsActive = false, MainMenuItem = item })
                 .ToList();

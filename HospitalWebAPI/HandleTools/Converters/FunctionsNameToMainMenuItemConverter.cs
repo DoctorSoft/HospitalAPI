@@ -3,7 +3,7 @@ using HandleToolsInterfaces.Converters;
 
 namespace HandleTools.Converters
 {
-    public class FunctionaNameToMainMenuItemConverter : IFunctionaNameToMainMenuItemConverter
+    public class FunctionsNameToMainMenuItemConverter : IFunctionsNameToMainMenuItemConverter
     {
         public MainMenuItem Convert(FunctionIdentityName name)
         {

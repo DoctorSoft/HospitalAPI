@@ -2,7 +2,7 @@
 
 namespace HandleToolsInterfaces.Converters
 {
-    public interface IFunctionaNameToMainMenuItemConverter
+    public interface IFunctionsNameToMainMenuItemConverter
     {
         MainMenuItem Convert(FunctionIdentityName name);
     }

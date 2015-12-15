@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Dependencies.NinjectFactories;
 using Enums.Enums;
+using HandleToolsInterfaces.Converters;
 using Ninject;
 using Resources;
 using ServiceModels.ModelTools;
@@ -21,6 +22,9 @@ namespace HospitalMVC.Filters
 
         [Inject]
         public ISessionServiceFactory SessionServiceFactory { get; set; }
+
+        [Inject]
+        public IFunctionsNameToMainMenuItemConverter FunctionsNameToMainMenuItemConverter { get; set; }
 
 
         private readonly List<FunctionIdentityName> _functions;
@@ -131,11 +135,20 @@ namespace HospitalMVC.Filters
             return model;
         }
 
+        protected virtual MainMenuItem GetActivatedMainMenuItem()
+        {
+            var value = (FunctionIdentityName)_functions.Max(name => (int)name);
+            var result = FunctionsNameToMainMenuItemConverter.Convert(value);
+
+            return result;
+        }
+
         protected virtual GetMainMenuItemsCommandAnswer GetMainMenuItemsCommandAnswerByAnswer(AbstractTokenCommandAnswer answer)
         {
             var command = new GetMainMenuItemsCommand
             {
-                Token = answer.Token
+                Token = answer.Token,
+                ActivatedMainMenu = GetActivatedMainMenuItem()
             };
 
             var mainMenuService = MainMenuServiceFactory.CreateMainMenuService();

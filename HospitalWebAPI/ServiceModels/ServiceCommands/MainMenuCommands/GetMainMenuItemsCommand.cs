@@ -5,6 +5,6 @@ namespace ServiceModels.ServiceCommands.MainMenuCommands
 {
     public class GetMainMenuItemsCommand : AbstractTokenCommand
     {
-        MainMenuItem ActivatedMainMenu { get; set; }
+        public MainMenuItem ActivatedMainMenu { get; set; }
     }
 }

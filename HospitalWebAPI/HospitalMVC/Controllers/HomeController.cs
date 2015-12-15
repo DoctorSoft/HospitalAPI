@@ -9,9 +9,9 @@ namespace HospitalMVC.Controllers
         private const string RedirectActionName = "RedirectToMainPage";
 
         // GET: Home
-        public ActionResult Index(Guid? Token)
+        public ActionResult Index(Guid? token)
         {
-            return RedirectToAction(RedirectActionName, RedirectControllerName, new { Token = Token });
+            return RedirectToAction(RedirectActionName, RedirectControllerName, new { Token = token });
         }
     }
 }

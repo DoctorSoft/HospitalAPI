@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommands.NoticesCommands;
 using Services.Interfaces.NoticesService;
@@ -15,7 +16,7 @@ namespace HospitalMVC.Controllers
         }
 
         // GET: HospitalNoticesPage
-        [TokenAuthorizationFilter]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserShowMessages)]
         public ActionResult Index(GetHospitalNoticesPageInformationCommand command)
         {
             var answer = _noticesService.GetHospitalNoticesPageInformation(command);

@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
@@ -15,7 +16,7 @@ namespace HospitalMVC.Controllers
         }
 
         // GET: BreakClinicRegistrationPage
-        [TokenAuthorizationFilter]
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserBreakRegistrations)]
         public ActionResult Index(GetBreakClinicRegistrationsPageInformationCommand command)
         {
             var answer = _clinicRegistrationsService.GetBreakClinicRegistrationsPageInformation(command);

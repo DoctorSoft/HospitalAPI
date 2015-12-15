@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
@@ -15,7 +16,7 @@ namespace HospitalMVC.Controllers
         }
 
         // GET: MakeClinicRegistrationPage
-        [TokenAuthorizationFilter]
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserMakeRegistrations)]
         public ActionResult Index(GetMakeClinicRegistrationsPageInformationCommand command)
         {
             var answer = _clinicRegistrationsService.GetMakeClinicRegistrationsPageInformation(command);

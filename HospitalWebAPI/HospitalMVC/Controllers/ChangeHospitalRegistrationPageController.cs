@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
@@ -15,7 +16,7 @@ namespace HospitalMVC.Controllers
         }
 
         // GET: ChangeHospitalRegistrationPage
-        [TokenAuthorizationFilter]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
         public ActionResult Index(GetChangeHospitalRegistrationsPageInformationCommand command)
         {
             var answer = _hospitalRegistrationsService.GetChangeHospitalRegistrationsPageInformation(command);

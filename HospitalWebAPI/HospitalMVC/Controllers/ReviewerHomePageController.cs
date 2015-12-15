@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommands.MainPageCommands;
 using Services.Interfaces.MainPageServices;
@@ -14,7 +15,7 @@ namespace HospitalMVC.Controllers
             _mainPageService = mainPageService;
         }
         
-        [TokenAuthorizationFilter]
+        [TokenAuthorizationFilter(FunctionIdentityName.ReviewerPrimaryAccess)]
         public ActionResult Index(GetReviewerMainPageInformationCommand command)
         {
             var answer = _mainPageService.GetReviewerMainPageInformation(command);
