@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\AccessType.cs" />
     <Compile Include="Enums\FunctionIdentityName.cs" />
     <Compile Include="Enums\MainMenuItem.cs" />
     <Compile Include="Enums\MessageType.cs" />

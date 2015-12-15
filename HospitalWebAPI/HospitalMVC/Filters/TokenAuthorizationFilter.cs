@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.UI.WebControls;
 using Dependencies.NinjectFactories;
 using Enums.Enums;
 using Ninject;
@@ -13,8 +11,6 @@ using ServiceModels.ModelTools.Entities;
 using ServiceModels.ServiceCommandAnswers.MainMenuCommandAnswers;
 using ServiceModels.ServiceCommands.MainMenuCommands;
 using ServiceModels.ServiceCommands.SessionCommands;
-using Services.Interfaces.MainMenuServices;
-using Services.Interfaces.SessionServices;
 
 namespace HospitalMVC.Filters
 {
@@ -32,8 +28,10 @@ namespace HospitalMVC.Filters
         private const string TokenName = "command";
 
         private const string AuthorizationControllerName = "LogIn";
+        private const string AuthorizationActionName = "Index";
 
-        private const string AuthorizationAction = "Index";
+        private const string LoginRedirectControllerName = "LogInRedirect";
+        private const string LoginRedirectActionName = "RedirectToMainPage";
 
         private readonly Dictionary<MainMenuItem, MainMenuTab> _mainMenuTabs; 
 
@@ -61,9 +59,9 @@ namespace HospitalMVC.Filters
             };
         }
 
-        protected virtual RedirectToRouteResult GetRedirectResult(string controller, string action)
+        protected virtual RedirectToRouteResult GetRedirectResult(string controller, string action, string token = "")
         {
-            return new RedirectToRouteResult(new RouteValueDictionary { { "controller", controller }, { "action", action } });
+            return new RedirectToRouteResult(new RouteValueDictionary { { "controller", controller }, { "action", action }, { "token", token } });
         }
 
         protected virtual AbstractTokenCommand GetCommandByFilterContext(ActionExecutingContext filterContext)
@@ -78,8 +76,13 @@ namespace HospitalMVC.Filters
             return requestCommand;
         }
 
-        protected virtual bool GetAccessByCommand(AbstractTokenCommand command)
+        protected virtual AccessType GetAccessByCommand(AbstractTokenCommand command)
         {
+            if (command == null)
+            {
+                return AccessType.Denied;
+            }
+
             var token = command.Token;
 
             var newCommand = new IsTokenHasAccessToFunctionCommand
@@ -91,16 +94,23 @@ namespace HospitalMVC.Filters
             var sessionService = SessionServiceFactory.CreateSessionService();
             var answer = sessionService.IsTokenHasAccessToFunction(newCommand);
 
-            return answer.HasAccess;
+            return answer.AccessType;
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var requestCommand = GetCommandByFilterContext(filterContext);
+            var accessType = GetAccessByCommand(requestCommand);
 
-            if (requestCommand == null || !GetAccessByCommand(requestCommand))
+            if (accessType == AccessType.Denied)
             {
-                filterContext.Result = GetRedirectResult(AuthorizationControllerName, AuthorizationAction);
+                filterContext.Result = GetRedirectResult(AuthorizationControllerName, AuthorizationActionName);
+                return;
+            }
+
+            if (accessType == AccessType.Redirected)
+            {
+                filterContext.Result = GetRedirectResult(LoginRedirectControllerName, LoginRedirectActionName, requestCommand.Token.ToString() );
                 return;
             }
 

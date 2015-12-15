@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
+using Enums.Enums;
 using HandleToolsInterfaces.RepositoryHandlers;
 using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
 using Resources;
@@ -72,26 +72,31 @@ namespace Services.SessionServices
             return result;
         }
 
-        protected virtual bool CheckPresenceOfToken(IsTokenHasAccessToFunctionCommand command)
+        protected virtual AccessType CheckPresenceOfToken(IsTokenHasAccessToFunctionCommand command)
         {
             var userFunctions = _userFunctionManager.GetFunctionsByToken(command.Token);
+
+            if (!userFunctions.Any())
+            {
+                return AccessType.Denied;
+            }
 
             var functions = GetFunctionsByCommand(command);
 
             var result = PossessAllFunctions(functions, userFunctions);
 
-            return result;
+            return result ? AccessType.Accepted : AccessType.Redirected;
         }
 
         public IsTokenHasAccessToFunctionCommandAnswer IsTokenHasAccessToFunction(IsTokenHasAccessToFunctionCommand command)
         {
             var result = new IsTokenHasAccessToFunctionCommandAnswer
             {
-                HasAccess = CheckPresenceOfToken(command),
+                AccessType = CheckPresenceOfToken(command),
                 Token = (Guid)command.Token
             };
 
-            if (!result.HasAccess)
+            if (result.AccessType == AccessType.Denied)
             {
                 result.Errors = GetAccessDeniedErrors();
             }

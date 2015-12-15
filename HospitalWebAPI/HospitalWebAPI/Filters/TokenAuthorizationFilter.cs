@@ -44,9 +44,15 @@ namespace HospitalWebAPI.Filters
 
             var answer = SessionService.IsTokenHasAccessToFunction(command);
 
-            if (!answer.HasAccess)
+            if (answer.AccessType == AccessType.Denied)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            if (answer.AccessType == AccessType.Redirected)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return;
             }
 
             base.OnActionExecuting(actionContext);

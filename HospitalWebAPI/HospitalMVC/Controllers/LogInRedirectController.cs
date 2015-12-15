@@ -31,7 +31,6 @@ namespace HospitalMVC.Controllers
         }
 
         // GET: SingInRedirect
-        //[TokenAuthorizationFilter]
         public ActionResult RedirectToMainPage(GetUserMainPageInformationCommand command)
         {
             if (command == null || command.Token == null)
