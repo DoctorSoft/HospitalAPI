@@ -9,5 +9,10 @@ namespace HandleTools.Converters
         {
             return (UserAccountType) (int) userType;
         }
+
+        public UserType Convert(UserAccountType userType)
+        {
+            return (UserType)(int)userType;
+        }
     }
 }

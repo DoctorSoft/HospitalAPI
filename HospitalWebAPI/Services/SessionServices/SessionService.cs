@@ -21,15 +21,15 @@ namespace Services.SessionServices
         private readonly IFunctionRepository _functionRepository;
 
         private readonly IBlockAbleHandler _blockAbleHandler;
-        private readonly ITokenManager _tokenManager;
+        private readonly IUserFunctionManager _userFunctionManager;
 
         public SessionService(IUserFunctionRepository userFunctionRepository,
-            IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager)
+            IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager, IUserFunctionManager userFunctionManager)
         {
             _userFunctionRepository = userFunctionRepository;
             _functionRepository = functionRepository;
             _blockAbleHandler = blockAbleHandler;
-            this._tokenManager = tokenManager;
+            _userFunctionManager = userFunctionManager;
         }
 
         public List<CommandAnswerError> GetAccessDeniedErrors()
@@ -63,10 +63,10 @@ namespace Services.SessionServices
             return result;
         }
 
-        protected virtual bool PossessAllFunctions(IEnumerable<FunctionStorageModel> functions, IEnumerable<UserFunctionStorageModel> userFunctions)
+        protected virtual bool PossessAllFunctions(IEnumerable<FunctionStorageModel> functions, IEnumerable<FunctionStorageModel> userFunctions)
         {
             var result =
-                functions.All(model => userFunctions.Select(storageModel => storageModel.FunctionId)
+                functions.All(model => userFunctions.Select(storageModel => storageModel.Id)
                     .Contains(model.Id));
 
             return result;
@@ -74,14 +74,8 @@ namespace Services.SessionServices
 
         protected virtual bool CheckPresenceOfToken(IsTokenHasAccessToFunctionCommand command)
         {
-            var user = _tokenManager.GetUserByToken(command.Token);
+            var userFunctions = _userFunctionManager.GetFunctionsByToken(command.Token);
 
-            if (user == null)
-            {
-                return false;
-            }
-
-            var userFunctions = GetUserFunctionsByUser(user);
             var functions = GetFunctionsByCommand(command);
 
             var result = PossessAllFunctions(functions, userFunctions);

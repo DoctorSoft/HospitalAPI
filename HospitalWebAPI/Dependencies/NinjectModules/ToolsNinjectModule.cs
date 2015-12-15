@@ -18,6 +18,7 @@ namespace Dependencies.NinjectModules
             Bind<IAccountNameCalculator>().To<AccountNameCalculator>().InThreadScope();
             Bind<IBlockAbleHandler>().To<BlockAbleHandler>().InThreadScope();
             Bind<IUserToAccountTypeConverter>().To<UserToAccountTypeConverter>().InThreadScope();
+            Bind<IFunctionaNameToMainMenuItemConverter>().To<FunctionaNameToMainMenuItemConverter>().InThreadScope();
         }
     }
 }

@@ -53,12 +53,14 @@
     <Compile Include="Interfaces\MainPageServices\IMainPageService.cs" />
     <Compile Include="Interfaces\NoticesService\INoticesService.cs" />
     <Compile Include="Interfaces\ServiceTools\ITokenManager.cs" />
+    <Compile Include="Interfaces\ServiceTools\IUserFunctionManager.cs" />
     <Compile Include="Interfaces\SessionServices\ISessionService.cs" />
     <Compile Include="MainMenuServices\MainMenuService.cs" />
     <Compile Include="MainPageServices\MainPageService.cs" />
     <Compile Include="NoticesService\NoticesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceTools\TokenManager.cs" />
+    <Compile Include="ServiceTools\UserFunctionManager.cs" />
     <Compile Include="SessionServices\SessionService.cs" />
   </ItemGroup>
   <ItemGroup />

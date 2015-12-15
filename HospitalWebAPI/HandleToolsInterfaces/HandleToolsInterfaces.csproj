@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\IFunctionaNameToMainMenuItemConverter.cs" />
     <Compile Include="Converters\IUserToAccountTypeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryHandlers\IBlockAbleHandler.cs" />

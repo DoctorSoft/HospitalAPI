@@ -20,12 +20,6 @@ namespace HospitalMVC.Filters
 {
     public class TokenAuthorizationFilter : ActionFilterAttribute
     {
-        /*[Inject]
-        public ISessionService SessionService { get; set; }
-
-        [Inject]
-        public IMainMenuService MainMenuService { get; set; }*/
-        
         [Inject]
         public IMainMenuServiceFactory MainMenuServiceFactory { get; set; }
 
