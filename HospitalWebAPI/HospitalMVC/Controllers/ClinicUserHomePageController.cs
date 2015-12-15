@@ -24,7 +24,7 @@ namespace HospitalMVC.Controllers
             _tokenManager = tokenManager;
         }
 
-        [TokenAuthorizationFilter(FunctionIdentityName.MakeEmptyPlaceReservation)]
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess)]
         public ActionResult Index(GetClinicUserMainPageInformationCommand command)
         {
             var answer = _mainPageService.GetClinicUserMainPageInformation(command);

@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Enums.Enums;
 using HandleToolsInterfaces.Converters;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
-using Resources;
 using ServiceModels.ModelTools.Entities;
 using ServiceModels.ServiceCommandAnswers.MainMenuCommandAnswers;
 using ServiceModels.ServiceCommands.MainMenuCommands;
 using Services.Interfaces.MainMenuServices;
 using Services.Interfaces.ServiceTools;
-using Services.ServiceTools;
 using StorageModels.Models.UserModels;
 
 namespace Services.MainMenuServices
@@ -30,15 +28,15 @@ namespace Services.MainMenuServices
 
             _mainMenuItems = new Dictionary<MainMenuItem, MainMenuItemValue>
             {
-                {MainMenuItem.OpenHospitalRegistrations, new MainMenuItemValue { MainMenuItem = MainMenuItem.OpenHospitalRegistrations}},
-                {MainMenuItem.ChangeHospitalRegistrations, new MainMenuItemValue { MainMenuItem = MainMenuItem.ChangeHospitalRegistrations}},
-                {MainMenuItem.HospitalNotices, new MainMenuItemValue { MainMenuItem = MainMenuItem.HospitalNotices}},
-                {MainMenuItem.HospitalMainPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.HospitalMainPage}},
+                {MainMenuItem.ClinicUserMainPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.ClinicUserMainPage}},
+                {MainMenuItem.ClinicUserMakeRegistrationsPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.ClinicUserMakeRegistrationsPage}},
+                {MainMenuItem.ClinicUserBreakRegistrationsPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.ClinicUserBreakRegistrationsPage}},
+                {MainMenuItem.ClinicUserShowMessagesPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.ClinicUserShowMessagesPage}},
 
-                {MainMenuItem.MakeClinicRegistration, new MainMenuItemValue { MainMenuItem = MainMenuItem.MakeClinicRegistration}},
-                {MainMenuItem.BreakClinicRegistration, new MainMenuItemValue { MainMenuItem = MainMenuItem.BreakClinicRegistration}},
-                {MainMenuItem.ClinicNotices, new MainMenuItemValue { MainMenuItem = MainMenuItem.ClinicNotices}},
-                {MainMenuItem.ClinicMainPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.ClinicMainPage}},
+                {MainMenuItem.HospitalUserMainPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.HospitalUserMainPage}},
+                {MainMenuItem.HospitalUserFillEmptyPlacesPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.HospitalUserFillEmptyPlacesPage}},
+                {MainMenuItem.HospitalUserChangeEmptyPlacesPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.HospitalUserChangeEmptyPlacesPage}},
+                {MainMenuItem.HospitalUserShowMessagesPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.HospitalUserShowMessagesPage}},
 
                 {MainMenuItem.AdministratorMainPage, new MainMenuItemValue { MainMenuItem = MainMenuItem.AdministratorMainPage}},
 
@@ -55,35 +53,22 @@ namespace Services.MainMenuServices
             return userType.UserType;
         }
 
-        protected virtual List<MainMenuItemValue> GetAdministartorValues()
+        protected virtual IEnumerable<MainMenuItemValue> GetFunctionsByDiapason(int minValue, int maxValue)
         {
-            var result = new List<MainMenuItemValue>
-            {
-                _mainMenuItems[MainMenuItem.AdministratorMainPage],
-                _mainMenuItems[MainMenuItem.LogOut]
-            };
+            var results =
+                Enum.GetValues(typeof(MainMenuItem))
+                    .Cast<MainMenuItem>()
+                    .Where(name => ((int)name) >= minValue && ((int)name) < maxValue)
+                    .ToList();
 
-            foreach (var value in result)
-            {
-                value.IsActive = false;
-                value.IsEnabled = true;
-            }
+            results.Add(MainMenuItem.LogOut);
 
-            result[0].IsActive = true;
-
-            return result;
+            return results.Select(item => _mainMenuItems[item]).ToList();
         }
 
         protected virtual List<MainMenuItemValue> GetClinicUserValues()
         {
-            var result = new List<MainMenuItemValue>
-            {
-                _mainMenuItems[MainMenuItem.MakeClinicRegistration],
-                _mainMenuItems[MainMenuItem.BreakClinicRegistration],
-                _mainMenuItems[MainMenuItem.ClinicMainPage],
-                _mainMenuItems[MainMenuItem.ClinicNotices],
-                _mainMenuItems[MainMenuItem.LogOut]
-            };
+            var result = GetFunctionsByDiapason(200, 300).ToList();
 
             foreach (var value in result)
             {
@@ -98,14 +83,22 @@ namespace Services.MainMenuServices
 
         protected virtual List<MainMenuItemValue> GetHospitalUserValues()
         {
-            var result = new List<MainMenuItemValue>
+            var result = GetFunctionsByDiapason(100, 200).ToList();
+
+            foreach (var value in result)
             {
-                _mainMenuItems[MainMenuItem.OpenHospitalRegistrations],
-                _mainMenuItems[MainMenuItem.ChangeHospitalRegistrations],
-                _mainMenuItems[MainMenuItem.HospitalMainPage],
-                _mainMenuItems[MainMenuItem.HospitalNotices],
-                _mainMenuItems[MainMenuItem.LogOut]
-            };
+                value.IsActive = false;
+                value.IsEnabled = true;
+            }
+
+            result[0].IsActive = true;
+
+            return result;
+        }
+
+        protected virtual List<MainMenuItemValue> GetAdministartorValues()
+        {
+            var result = GetFunctionsByDiapason(400, 500).ToList();
 
             foreach (var value in result)
             {
@@ -120,11 +113,7 @@ namespace Services.MainMenuServices
 
         protected virtual List<MainMenuItemValue> GetReviewerValues()
         {
-            var result = new List<MainMenuItemValue>
-            {
-                _mainMenuItems[MainMenuItem.ReviewerMainPage],
-                _mainMenuItems[MainMenuItem.LogOut]
-            };
+            var result = GetFunctionsByDiapason(500, 600).ToList();
 
             foreach (var value in result)
             {
@@ -158,146 +147,7 @@ namespace Services.MainMenuServices
             {
                 return GetReviewerValues();
             }
-            /*List<MainMenuTab> listItemsMenu;
-            if (userAccountType.Equals(UserAccountType.AdministratorAccount))
-            {
-                listItemsMenu = new List<MainMenuTab>
-                {
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = true,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemHomePage
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemExit
-                    }
-                };
-                return listItemsMenu;
-            }
-            else if (userAccountType.Equals(UserAccountType.ClinicUserAccount))
-            {
-                listItemsMenu = new List<MainMenuTab>
-                {
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = true,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemHomePage
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemMakeClinicRegistration
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemBreakClinicRegistration
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemViewNotices
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemExit
-                    }
-                };
-                return listItemsMenu;
-            } else if (userAccountType.Equals(UserAccountType.HospitalUserAccount))
-            {
-                listItemsMenu = new List<MainMenuTab>
-                {
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = true,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemHomePage
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemOpenHospitalRegistrations
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemChangeHospitalRegistrations
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemViewNotices
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemExit
-                    }
-                };
-                return listItemsMenu;
-            }
-            else if (userAccountType.Equals(UserAccountType.ReviewerAccount))
-            {
-                listItemsMenu = new List<MainMenuTab>
-                {
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = true,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemHomePage
-                    },
-                    new MainMenuTab
-                    {
-                        ActionName = "Index",
-                        ControllerName = "Home",
-                        IsActive = false,
-                        IsEnabled = true,
-                        Label = MainResources.MenuItemExit
-                    }
-                };
-                return listItemsMenu;
-            }*/
+
             return new List<MainMenuItemValue>();
         }
 

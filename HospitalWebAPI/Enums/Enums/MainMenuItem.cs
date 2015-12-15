@@ -2,20 +2,25 @@
 {
     public enum MainMenuItem
     {
-        OpenHospitalRegistrations = 0,
-        ChangeHospitalRegistrations = 1,
-        HospitalNotices = 2,
-        HospitalMainPage = 3,
+        // CommonFunctions >= 1000;
+        LogOut = 1000,
 
-        MakeClinicRegistration = 100,
-        BreakClinicRegistration = 101,
-        ClinicNotices = 103,
-        ClinicMainPage = 104,
+        //HospitalUserItems 100 <= x < 200
+        HospitalUserMainPage = 100,        
+        HospitalUserFillEmptyPlacesPage = 101,
+        HospitalUserChangeEmptyPlacesPage = 102,
+        HospitalUserShowMessagesPage = 103,  
 
-        AdministratorMainPage = 200,
+        //ClinicUserFunctions 200 <= x < 300
+        ClinicUserMainPage = 200,          
+        ClinicUserMakeRegistrationsPage = 201,
+        ClinicUserBreakRegistrationsPage = 202,
+        ClinicUserShowMessagesPage = 203, 
 
-        ReviewerMainPage = 300,
+        //AdministratorFunctions 400 <= x < 500
+        AdministratorMainPage = 400,  
 
-        LogOut = 1000
+        //ReviewerFunctions 500 <= x < 600
+        ReviewerMainPage = 500
     }
 }

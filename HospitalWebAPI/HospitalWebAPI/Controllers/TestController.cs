@@ -21,7 +21,7 @@ namespace HospitalWebAPI.Controllers
         }
 
         // GET api/test/token/{token}
-        [TokenAuthorizationFilter(FunctionIdentityName.GetClinicWarningNotices)]
+        [TokenAuthorizationFilter(FunctionIdentityName.AdministratorPrimaryAccess)]
         public IEnumerable<string> Get([FromUri]Guid token)
         {
             //Gets clinic users

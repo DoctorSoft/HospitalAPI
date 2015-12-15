@@ -56,53 +56,46 @@ namespace CreateRandomDataTools.DataCreators
             };
         }
 
+        protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsByDiapason(int minValue, int maxValue, IEnumerable<FunctionStorageModel> functions, bool addLogOutFunction = true)
+        {
+            var results =
+                Enum.GetValues(typeof(FunctionIdentityName))
+                    .Cast<FunctionIdentityName>()
+                    .Where(name => ((int)name) >= minValue && ((int)name) < maxValue)
+                    .Select(name => GenerateGroupFunctionStorageModelWrap(functions, name))
+                    .ToList();
+
+            if (addLogOutFunction)
+            {
+                results.Add(GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.LogOut));
+            }
+
+            return results;
+        }
+
         protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForHospitalUser(IEnumerable<FunctionStorageModel> functions)
         {
-            return new List<GroupFunctionStorageModel>
-            {
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.BreakEmptyPlaceReservationsByHospital),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.EditEmptyPlacesByHospital),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.FillHospitalEmptyPlaces),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.GetHospitalWarningNotices),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.WatchEmptyPalacesByHospital),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.WatchEmptyPlaceReservationByHospital)
-            };
+            return GetFunctionsByDiapason(100, 200, functions);
         }
 
         protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForClinicUser(IEnumerable<FunctionStorageModel> functions)
         {
-            return new List<GroupFunctionStorageModel>
-            {
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.WatchEmptyPlacesList),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.MakeEmptyPlaceReservation),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.BreakEmptyPlaceReservationByClinic),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.WatchEmptyPlaceReservationsByClinic),
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.GetClinicWarningNotices)
-            };
+            return GetFunctionsByDiapason(200, 300, functions);
         }
 
         protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForBotUser(IEnumerable<FunctionStorageModel> functions)
         {
-            return new List<GroupFunctionStorageModel>
-            {
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.SendAutoWarningNotices)
-            };
+            return GetFunctionsByDiapason(300, 400, functions, false);
         }
 
         protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForAdministratorUser(IEnumerable<FunctionStorageModel> functions)
         {
-            return functions.Select(model => new GroupFunctionStorageModel
-            {
-                FunctionId = model.Id,
-            }).ToList();
+            return GetFunctionsByDiapason(400, 500, functions);
         }
 
         protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForReviewerUser(IEnumerable<FunctionStorageModel> functions)
         {
-            return new List<GroupFunctionStorageModel>
-            {
-                GenerateGroupFunctionStorageModelWrap(functions, FunctionIdentityName.WatchRegistrationStatistic)
-            };
+            return GetFunctionsByDiapason(500, 600, functions);
         }
     }
 }

@@ -49,15 +49,15 @@ namespace HospitalMVC.Filters
 
             _mainMenuTabs = new Dictionary<MainMenuItem, MainMenuTab>()
             {
-                {MainMenuItem.OpenHospitalRegistrations, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalRegistrationsPage", Label = MainResources.MenuItemOpenHospitalRegistrations }},
-                {MainMenuItem.ChangeHospitalRegistrations, new MainMenuTab { ActionName = "Index", ControllerName = "ChangeHospitalRegistrationPage", Label = MainResources.MenuItemChangeHospitalRegistrations }},
-                {MainMenuItem.HospitalNotices, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalNoticesPage", Label = MainResources.MenuItemViewNotices }},
-                {MainMenuItem.HospitalMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalUserHomePage", Label = MainResources.MenuItemHomePage }},
+                {MainMenuItem.HospitalUserFillEmptyPlacesPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalRegistrationsPage", Label = MainResources.MenuItemOpenHospitalRegistrations }},
+                {MainMenuItem.HospitalUserChangeEmptyPlacesPage, new MainMenuTab { ActionName = "Index", ControllerName = "ChangeHospitalRegistrationPage", Label = MainResources.MenuItemChangeHospitalRegistrations }},
+                {MainMenuItem.HospitalUserShowMessagesPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalNoticesPage", Label = MainResources.MenuItemViewNotices }},
+                {MainMenuItem.HospitalUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalUserHomePage", Label = MainResources.MenuItemHomePage }},
 
-                {MainMenuItem.MakeClinicRegistration, new MainMenuTab { ActionName = "Index", ControllerName = "MakeClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},
-                {MainMenuItem.BreakClinicRegistration, new MainMenuTab { ActionName = "Index", ControllerName = "BreakClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},
-                {MainMenuItem.ClinicNotices, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicNoticesPage", Label = MainResources.MenuItemViewNotices }},
-                {MainMenuItem.ClinicMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicUserHomePage", Label = MainResources.MenuItemHomePage }},
+                {MainMenuItem.ClinicUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeClinicRegistrationPage", Label = MainResources.MenuItemMakeClinicRegistration }},
+                {MainMenuItem.ClinicUserBreakRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "BreakClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},
+                {MainMenuItem.ClinicUserShowMessagesPage, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicNoticesPage", Label = MainResources.MenuItemViewNotices }},
+                {MainMenuItem.ClinicUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicUserHomePage", Label = MainResources.MenuItemHomePage }},
 
                 {MainMenuItem.AdministratorMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "AdministratorHomePage", Label = MainResources.MenuItemHomePage }},
 

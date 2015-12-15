@@ -16,7 +16,7 @@ namespace HospitalMVC.Controllers
         }
 
         
-        [TokenAuthorizationFilter(FunctionIdentityName.EditEmptyPlacesByHospital)]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess)]
         public ActionResult Index(GetHospitalUserMainPageInformationCommand command)
         {
             var answer = _mainPageService.GetHospitalUserMainPageInformation(command);
