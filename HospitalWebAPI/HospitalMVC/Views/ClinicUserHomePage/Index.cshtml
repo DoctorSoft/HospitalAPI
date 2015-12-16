@@ -1,29 +1,31 @@
-﻿@{
+﻿@model ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers.GetClinicUserMainPageInformationCommandAnswer
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Clinic User Home Page</h2>
 
-<p>Здравствуйте, @ViewBag.UserName !</p>
+<p>Здравствуйте, @Model.UserName!</p>
 
 @{
-    if ((bool)!ViewBag.reservationStatus)
+    if ((bool)!@Model.ReservationStatus)
     {
         @:<pre> В данный момент регистрация мест в больницах недоступна.
-        @: Вы можете начать регистрацию с @ViewBag.startTimeReservation.</pre>
+        @: Вы можете начать регистрацию с @Model.StartTimeReservation.</pre>
     }
     else
     {
         @:<text> Если Вы хотите зарегистрировать место, то @Html.ActionLink("нажмите сюда", "Index", "MakeClinicRegistrationPage")
-        @: Если Вы хотите отменить регистрацию, то @Html.ActionLink("нажмите сюда", "Index", "BreakClinicRegistrationPage")</pre>   
+        @: Если Вы хотите отменить регистрацию, то @Html.ActionLink("нажмите сюда", "Index", "BreakClinicRegistrationPage")</text>   
     }
 }
 <p>Если Вы хотите просмотреть ваши личные сообщения, то @Html.ActionLink("нажмите сюда", "Index", "ClinicNoticesPage")</p>
 
 @{
-    if (ViewBag.CountNewNotices > 0)
+    if (Model.CountNewNotices > 0)
     {
-        <p>У Вас @ViewBag.CountNewNotices непрочитанное сообщение</p>
+        <p>У Вас @Model.CountNewNotices непрочитанное сообщение</p>
     }
 }
