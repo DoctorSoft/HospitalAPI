@@ -20,17 +20,15 @@ namespace Services.MainPageServices
 
         private readonly IUserToAccountTypeConverter _userToAccountTypeConverter;
         private readonly ITokenManager _tokenManager;
-
-        private readonly IClinicRegistrationTimeRepository _clinicRegistrationTimeRepository;
-
-
-        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository, IClinicRegistrationTimeRepository clinicRegistrationTimeRepository)
+        private readonly ISettingsManager _settingsManager;
+        
+        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository, ISettingsManager settingsManager)
         {
             _userTypeRepository = userTypeRepository;
             _userToAccountTypeConverter = userToAccountTypeConverter;
             _tokenManager = tokenManager;
             _messageRepository = messageRepository;
-            _clinicRegistrationTimeRepository = clinicRegistrationTimeRepository;
+            _settingsManager = settingsManager;
         }
 
         protected virtual UserType GetUserType(UserStorageModel user)
@@ -54,6 +52,7 @@ namespace Services.MainPageServices
                     .Where(model => model.UserToId == user.Id).Count(model => !model.IsRead);
             return countNewNotices;
         }
+
         public GetUserMainPageInformationCommandAnswer GetUserMainPageInformation(GetUserMainPageInformationCommand command)
         {
             var currentUser = _tokenManager.GetUserByToken(command.Token);
@@ -91,10 +90,9 @@ namespace Services.MainPageServices
             GetClinicUserMainPageInformationCommand command)
         {
             var currentUser = _tokenManager.GetUserByToken(command.Token);
-            const string startTimeRegistration = "10:00";
-            const string endTimeRegistration = "19:00";
+            var clinicRegistrationTime = _settingsManager.GetClinicRegistration();
 
-            var reservationStatus = GetReservationStatus(startTimeRegistration, endTimeRegistration);
+            var reservationStatus = GetReservationStatus(clinicRegistrationTime.StartTime, clinicRegistrationTime.EndTime);
 
             var countNewNotices = GetCountNewNotices(currentUser);
 
@@ -102,8 +100,8 @@ namespace Services.MainPageServices
             {
                 Token = (Guid) command.Token,
                 UserName = currentUser.Name,
-                StartTimeReservation = startTimeRegistration,
-                EndTimeReservation = endTimeRegistration,
+                StartTimeReservation = clinicRegistrationTime.StartTime,
+                EndTimeReservation = clinicRegistrationTime.EndTime,
                 ReservationStatus = reservationStatus,
                 CountNewNotices = countNewNotices
             };
