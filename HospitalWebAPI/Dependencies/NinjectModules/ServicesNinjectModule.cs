@@ -26,6 +26,7 @@ namespace Dependencies.NinjectModules
         {
             // Tools
             Bind<ITokenManager>().To<TokenManager>().InThreadScope();
+            Bind<ISettingsManager>().To<SettingsManager>().InThreadScope();
             Bind<IUserFunctionManager>().To<UserFunctionManager>().InThreadScope();
 
             // Services
