@@ -112,7 +112,7 @@ namespace HospitalMVC.Filters
                 return;
             }
 
-            if (accessType == AccessType.Redirected)
+            if (accessType == AccessType.Redirected || accessType == AccessType.Disabled)
             {
                 filterContext.Result = GetRedirectResult(LoginRedirectControllerName, LoginRedirectActionName, requestCommand.Token.ToString() );
                 return;

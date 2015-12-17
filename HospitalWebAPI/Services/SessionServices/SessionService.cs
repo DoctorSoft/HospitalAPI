@@ -44,15 +44,6 @@ namespace Services.SessionServices
             };
         }
 
-        protected virtual IEnumerable<UserFunctionStorageModel> GetUserFunctionsByUser(UserStorageModel user)
-        {
-            var result = _blockAbleHandler.GetAccessAbleModels(_userFunctionRepository.GetModels())
-                .Where(model => model.UserId == user.Id)
-                .ToList();
-
-            return result;
-        }
-
         protected virtual IEnumerable<FunctionStorageModel> GetFunctionsByCommand(IsTokenHasAccessToFunctionCommand command)
         {
             var result =
@@ -83,13 +74,35 @@ namespace Services.SessionServices
 
             var functions = GetFunctionsByCommand(command);
 
-            var result = PossessAllFunctions(functions, userFunctions);
+            var result = PossessAllFunctions(functions, userFunctions.Select(access => access.FunctionStorageModel));
 
-            return result ? AccessType.Accepted : AccessType.Redirected;
+            var checkedFunctions = userFunctions
+                .Where(item => functions.Select(value => value.FunctionIdentityName).Contains(item.FunctionStorageModel.FunctionIdentityName));
+
+            if (!result)
+            {
+                return AccessType.Redirected;
+            }
+
+            if (checkedFunctions.Any(access => access.AccessType == AccessType.Disabled))
+            {
+                return AccessType.Disabled;
+            }
+
+            return AccessType.Accepted;
         }
 
         public IsTokenHasAccessToFunctionCommandAnswer IsTokenHasAccessToFunction(IsTokenHasAccessToFunctionCommand command)
         {
+            if (command.Token == null)
+            {
+                return new IsTokenHasAccessToFunctionCommandAnswer
+                {
+                    Errors = GetAccessDeniedErrors(),
+                    AccessType = AccessType.Denied
+                };
+            }
+            
             var result = new IsTokenHasAccessToFunctionCommandAnswer
             {
                 AccessType = CheckPresenceOfToken(command),

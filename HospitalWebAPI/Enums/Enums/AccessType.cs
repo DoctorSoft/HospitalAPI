@@ -4,6 +4,7 @@
     {
         Accepted = 0,
         Denied = 1,
-        Redirected = 2
+        Redirected = 2,
+        Disabled = 3
     }
 }

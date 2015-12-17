@@ -34,6 +34,13 @@ namespace Services.MainMenuServices
             return mainMenuItemValues;
         }
 
+        protected class AccessItem
+        {
+            public MainMenuItem MainMenuItem { get; set; }
+
+            public bool IsEnabled { get; set; }
+        }
+
         public GetMainMenuItemsCommandAnswer GetMainMenuItems(GetMainMenuItemsCommand command)
         {
             var userFunctions = _userFunctionManager.GetFunctionsByToken(command.Token);
@@ -41,9 +48,13 @@ namespace Services.MainMenuServices
             var enumList = Enum.GetValues(typeof (MainMenuItem)).Cast<MainMenuItem>().ToList();
 
             var tabs = userFunctions
-                .Select(model => _functionsNameToMainMenuItemConverter.Convert(model.FunctionIdentityName))
-                .Where(enumList.Contains)
-                .Select(item => new MainMenuItemValue { IsEnabled = true, IsActive = false, MainMenuItem = item })
+                .Select(model => new AccessItem
+                {
+                    IsEnabled = model.AccessType == AccessType.Accepted,
+                    MainMenuItem = _functionsNameToMainMenuItemConverter.Convert(model.FunctionStorageModel.FunctionIdentityName)
+                })
+                .Where(item => enumList.Contains(item.MainMenuItem))
+                .Select(item => new MainMenuItemValue { IsEnabled = item.IsEnabled, IsActive = false, MainMenuItem = item.MainMenuItem })
                 .ToList();
 
             var resultTabs = ChangeMainMenuItemsByCommand(tabs, command).ToList();

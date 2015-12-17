@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using ServiceModels.ModelTools.Entities;
 using StorageModels.Models.FunctionModels;
 
 namespace Services.Interfaces.ServiceTools
 {
     public interface IUserFunctionManager
     {
-        IEnumerable<FunctionStorageModel> GetFunctionsByToken(Guid? token);
+        IEnumerable<FunctionAccess> GetFunctionsByToken(Guid? token);
     }
 }

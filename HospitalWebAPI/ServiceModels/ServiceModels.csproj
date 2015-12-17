@@ -44,6 +44,7 @@
     <Compile Include="ModelTools\AbstractTokenCommand.cs" />
     <Compile Include="ModelTools\AbstractTokenCommandAnswer.cs" />
     <Compile Include="ModelTools\CommandAnswerError.cs" />
+    <Compile Include="ModelTools\Entities\FunctionAccess.cs" />
     <Compile Include="ModelTools\Entities\MainMenuItemValue.cs" />
     <Compile Include="ModelTools\Entities\MainMenuTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,6 +83,10 @@
     <ProjectReference Include="..\Enums\Enums.csproj">
       <Project>{3248d9c8-3bbb-4f77-95d9-b1e66e66fc0b}</Project>
       <Name>Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StorageModels\StorageModels.csproj">
+      <Project>{ED4E3F28-A5DF-410A-BF89-29F0EC2C5E71}</Project>
+      <Name>StorageModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
