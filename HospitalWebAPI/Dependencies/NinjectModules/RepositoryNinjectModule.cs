@@ -21,6 +21,7 @@ namespace Dependencies.NinjectModules
             // Repositories
 
             Bind<IClinicRepository>().To<ClinicRepository>().InThreadScope();
+            Bind<IClinicRegistrationTimeRepository>().To<ClinicRegistrationTimeRepository>().InThreadScope();
             Bind<IPatientRepository>().To<PatientRepository>().InThreadScope();
             Bind<IReservationRepository>().To<ReservationRepository>().InThreadScope();
             Bind<IFunctionalGroupRepository>().To<FunctionalGroupRepository>().InThreadScope();

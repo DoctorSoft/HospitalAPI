@@ -2,6 +2,7 @@
 using System.Linq;
 using Enums.Enums;
 using HandleToolsInterfaces.Converters;
+using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
@@ -20,13 +21,16 @@ namespace Services.MainPageServices
         private readonly IUserToAccountTypeConverter _userToAccountTypeConverter;
         private readonly ITokenManager _tokenManager;
 
+        private readonly IClinicRegistrationTimeRepository _clinicRegistrationTimeRepository;
 
-        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository)
+
+        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository, IClinicRegistrationTimeRepository clinicRegistrationTimeRepository)
         {
             _userTypeRepository = userTypeRepository;
             _userToAccountTypeConverter = userToAccountTypeConverter;
             _tokenManager = tokenManager;
             _messageRepository = messageRepository;
+            _clinicRegistrationTimeRepository = clinicRegistrationTimeRepository;
         }
 
         protected virtual UserType GetUserType(UserStorageModel user)
