@@ -53,6 +53,7 @@
     <Compile Include="DataCreators\AdministratorAndReviewerModelsCreator.cs" />
     <Compile Include="DataCreators\BotModelCreator.cs" />
     <Compile Include="DataCreators\ClinicModelCreator.cs" />
+    <Compile Include="DataCreators\ClinicRegistrationTimeModelCreator.cs" />
     <Compile Include="DataCreators\ClinicUserModelCreator.cs" />
     <Compile Include="DataCreators\FunctionalGroupModelCreator.cs" />
     <Compile Include="DataCreators\FunctionModelCreator.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Interfaces\PrivateInterfaces\ISectionModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IUserFunctionModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IUserTypeModelCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IClinicRegistrationTimeModelCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

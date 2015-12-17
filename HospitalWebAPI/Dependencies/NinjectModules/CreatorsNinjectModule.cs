@@ -18,6 +18,7 @@ namespace Dependencies.NinjectModules
             // Creators
 
             Bind<IClinicModelCreator>().To<ClinicModelCreator>().InThreadScope();
+            Bind<IClinicRegistrationTimeModelCreator>().To<ClinicRegistrationTimeModelCreator>().InThreadScope();
             Bind<IFunctionalGroupModelCreator>().To<FunctionalGroupModelCreator>().InThreadScope();
             Bind<IFunctionModelCreator>().To<FunctionModelCreator>().InThreadScope();
             Bind<IHospitalModelCreator>().To<HospitalModelCreator>().InThreadScope();

@@ -6,7 +6,9 @@
 
         bool CreateHospitals(); 
 
-        bool CreateClinics(); 
+        bool CreateClinics();
+
+        bool CreateClinicsRegistrationTime(); 
 
         bool CreateFunctions(); 
 

@@ -57,6 +57,7 @@
     <Compile Include="Configurations\ClinicModels\ClinicHospitalAccessDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\PatientDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\ReservationDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\ClinicModels\ClinicRegistrationTimeDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\FunctionalGroupDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\FunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\GroupFunctionDataBaseConfiguration.cs" />
@@ -82,6 +83,10 @@
     <Compile Include="Migrations\201512071917562_Init1.cs" />
     <Compile Include="Migrations\201512071917562_Init1.Designer.cs">
       <DependentUpon>201512071917562_Init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512171915577_Init2.cs" />
+    <Compile Include="Migrations\201512171915577_Init2.Designer.cs">
+      <DependentUpon>201512171915577_Init2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512071917562_Init1.resx">
       <DependentUpon>201512071917562_Init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512171915577_Init2.resx">
+      <DependentUpon>201512171915577_Init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

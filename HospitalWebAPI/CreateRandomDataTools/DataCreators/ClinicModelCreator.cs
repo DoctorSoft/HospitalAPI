@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
@@ -37,7 +38,7 @@ namespace CreateRandomDataTools.DataCreators
                     Id = 0,
                     Name = "Гродненская центральная городская поликлиника",
                     Address = "г. Гродно, ул. Транспортная, 3",
-                    ClinicHospitalAccesses = GetAccesses(hospitals)
+                    ClinicHospitalAccesses = GetAccesses(hospitals),
                 },
                 new ClinicStorageModel
                 {
