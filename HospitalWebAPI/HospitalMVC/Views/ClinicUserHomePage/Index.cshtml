@@ -1,4 +1,5 @@
-﻿@model ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers.GetClinicUserMainPageInformationCommandAnswer
+﻿@using System.Security.Principal
+@model ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers.GetClinicUserMainPageInformationCommandAnswer
 
 @{
     ViewBag.Title = "Index";
@@ -21,7 +22,7 @@
         @: Если Вы хотите отменить регистрацию, то @Html.ActionLink("нажмите сюда", "Index", "BreakClinicRegistrationPage")</text>   
     }
 }
-<p>Если Вы хотите просмотреть ваши личные сообщения, то @Html.ActionLink("нажмите сюда", "Index", "ClinicNoticesPage")</p>
+<p>Если Вы хотите просмотреть ваши личные сообщения, то @Html.ActionLink("нажмите сюда", "Index", "ClinicNoticesPage", new { Token = ViewBag.Token }, new object())</p>
 
 @{
     if (Model.CountNewNotices > 0)

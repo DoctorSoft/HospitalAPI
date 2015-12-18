@@ -33,7 +33,7 @@
             {
                 if (!nextTab.IsEnabled)
                 {
-                    <li class="disabled">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                    <li class="disabled"><a class="nav">@nextTab.Label</a></li>
                 }
                 else
                 {
