@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201512171915577_Init2.Designer.cs">
       <DependentUpon>201512171915577_Init2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512181857242_ChangeSettingsTimeSpan.cs" />
+    <Compile Include="Migrations\201512181857242_ChangeSettingsTimeSpan.Designer.cs">
+      <DependentUpon>201512181857242_ChangeSettingsTimeSpan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512171915577_Init2.resx">
       <DependentUpon>201512171915577_Init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512181857242_ChangeSettingsTimeSpan.resx">
+      <DependentUpon>201512181857242_ChangeSettingsTimeSpan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

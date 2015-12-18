@@ -15,8 +15,8 @@ namespace CreateRandomDataTools.DataCreators
                 new ClinicRegistrationTimeStorageModel
                 {
                     DateCreate = DateTime.Now,
-                    StartTime = "10:00",
-                    EndTime = "19:00"
+                    StartTime = new TimeSpan(0, 10, 0, 0),
+                    EndTime = new TimeSpan(0, 19, 0, 0)
                 }
             };
 

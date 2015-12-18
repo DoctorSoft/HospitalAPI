@@ -37,13 +37,11 @@ namespace Services.MainPageServices
 
             return userType.UserType;
         }
-        public bool GetReservationStatus(string startTimeRegistration, string endTimeRegistration)
+        public bool GetReservationStatus(TimeSpan startTimeRegistration, TimeSpan endTimeRegistration)
         {
-            var startTime = TimeSpan.Parse(startTimeRegistration);
-            var endTime = TimeSpan.Parse(endTimeRegistration);
             var now = DateTime.Now.TimeOfDay;
 
-            return now >= startTime && now <= endTime;
+            return now >= startTimeRegistration && now <= endTimeRegistration;
         }
         public int? GetCountNewNotices(UserStorageModel user)
         {
@@ -90,7 +88,7 @@ namespace Services.MainPageServices
             GetClinicUserMainPageInformationCommand command)
         {
             var currentUser = _tokenManager.GetUserByToken(command.Token);
-            var clinicRegistrationTime = _settingsManager.GetClinicRegistration();
+            var clinicRegistrationTime = _settingsManager.GetRegistrationSettings();
 
             var reservationStatus = GetReservationStatus(clinicRegistrationTime.StartTime, clinicRegistrationTime.EndTime);
 

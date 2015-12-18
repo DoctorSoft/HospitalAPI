@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using Enums.Enums;
 using HandleToolsInterfaces.RepositoryHandlers;
@@ -18,13 +19,25 @@ namespace Services.ServiceTools
 
         private readonly IBlockAbleHandler _blockAbleHandler;
         private readonly ITokenManager _tokenManager;
+        private readonly ISettingsManager _settingsManager;
 
-        public UserFunctionManager(IUserFunctionRepository userFunctionRepository, IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager)
+        private readonly Dictionary<FunctionIdentityName, Func<Guid, bool>> _functions; 
+
+        public UserFunctionManager(IUserFunctionRepository userFunctionRepository, IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager, ISettingsManager settingsManager)
         {
             _userFunctionRepository = userFunctionRepository;
             _functionRepository = functionRepository;
             _blockAbleHandler = blockAbleHandler;
             _tokenManager = tokenManager;
+            _settingsManager = settingsManager;
+
+            _functions = new Dictionary<FunctionIdentityName, Func<Guid, bool>>
+            {
+                {FunctionIdentityName.HospitalUserChangeEmptyPlaces, this.IsHospitalUserChangeEmptyPlacesEnabled},
+                {FunctionIdentityName.HospitalUserFillEmptyPlaces, this.IsHospitalUserFillEmptyPlacesFunctionEnables},
+                {FunctionIdentityName.ClinicUserMakeRegistrations, this.IsClinicUserMakeRegistrationsEnabled},
+                {FunctionIdentityName.ClinicUserBreakRegistrations, this.IsClinicUserBreakRegistrationsEnabled}
+            };
         }
 
         protected virtual IEnumerable<UserFunctionStorageModel> GetUserFunctionsByUser(UserStorageModel user)
@@ -48,19 +61,31 @@ namespace Services.ServiceTools
             return result;
         }
 
-        protected virtual bool IsFunctionsEnabled(FunctionIdentityName function)
+        protected virtual bool IsHospitalUserFillEmptyPlacesFunctionEnables(Guid token)
         {
-            if (function == FunctionIdentityName.HospitalUserFillEmptyPlaces)
-            {
-                return false;
-            }
-
-            if (function == FunctionIdentityName.ClinicUserBreakRegistrations)
-            {
-                return false;
-            }
-
             return true;
+        }
+
+        protected virtual bool IsClinicUserBreakRegistrationsEnabled(Guid token)
+        {
+            return true;
+        }
+
+        protected virtual bool IsClinicUserMakeRegistrationsEnabled(Guid token)
+        {
+            var settings = _settingsManager.GetRegistrationSettings();
+            var now = DateTime.Now.TimeOfDay;
+            return settings.StartTime <= now && now <= settings.EndTime;
+        }
+
+        protected virtual bool IsHospitalUserChangeEmptyPlacesEnabled(Guid token)
+        {
+            return true;
+        }
+
+        protected virtual bool IsFunctionsEnabled(FunctionIdentityName function, Guid token)
+        {
+            return !_functions.ContainsKey(function) || _functions[function](token);
         }
 
         public IEnumerable<FunctionAccess> GetFunctionsByToken(Guid? token)
@@ -77,7 +102,7 @@ namespace Services.ServiceTools
 
             var functionAccesses = resultFunctions.Select(model => new FunctionAccess
             {
-                AccessType = IsFunctionsEnabled(model.FunctionIdentityName) ? AccessType.Accepted : AccessType.Disabled,
+                AccessType = IsFunctionsEnabled(model.FunctionIdentityName, (Guid)token) ? AccessType.Accepted : AccessType.Disabled,
                 FunctionStorageModel = model
 
             });

@@ -7,8 +7,8 @@ namespace ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers
     {
         public string UserName { get; set; }
         public bool? ReservationStatus { get; set; }
-        public string StartTimeReservation { get; set; }
-        public string EndTimeReservation { get; set; }
+        public TimeSpan StartTimeReservation { get; set; }
+        public TimeSpan EndTimeReservation { get; set; }
         public int? CountNewNotices { get; set; }
     }
 }

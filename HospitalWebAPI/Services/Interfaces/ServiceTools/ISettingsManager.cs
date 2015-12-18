@@ -4,7 +4,7 @@ namespace Services.Interfaces.ServiceTools
 {
     public interface ISettingsManager
     {
-        ClinicRegistrationTimeStorageModel GetClinicRegistration();
+        ClinicRegistrationTimeStorageModel GetRegistrationSettings();
     }
 }
  
