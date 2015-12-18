@@ -20,16 +20,20 @@ namespace Services.ServiceTools
         private readonly IBlockAbleHandler _blockAbleHandler;
         private readonly ITokenManager _tokenManager;
         private readonly ISettingsManager _settingsManager;
+        private readonly IClinicManager _clinicManager;
+        private readonly IClinicReservationsManager _clinicReservationsManager;
 
         private readonly Dictionary<FunctionIdentityName, Func<Guid, bool>> _functions; 
 
-        public UserFunctionManager(IUserFunctionRepository userFunctionRepository, IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager, ISettingsManager settingsManager)
+        public UserFunctionManager(IUserFunctionRepository userFunctionRepository, IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager, ISettingsManager settingsManager, IClinicManager clinicManager, IClinicReservationsManager clinicReservationsManager)
         {
             _userFunctionRepository = userFunctionRepository;
             _functionRepository = functionRepository;
             _blockAbleHandler = blockAbleHandler;
             _tokenManager = tokenManager;
             _settingsManager = settingsManager;
+            _clinicManager = clinicManager;
+            _clinicReservationsManager = clinicReservationsManager;
 
             _functions = new Dictionary<FunctionIdentityName, Func<Guid, bool>>
             {
@@ -66,24 +70,37 @@ namespace Services.ServiceTools
             return true;
         }
 
-        protected virtual bool IsClinicUserBreakRegistrationsEnabled(Guid token)
+        public virtual bool IsClinicUserBreakRegistrationsEnabled(Guid token)
         {
-            return true;
+            var firstCondition = IsClinicUserMakeRegistrationsEnabled(token);
+
+            var user = _tokenManager.GetUserByToken(token);
+            var clinic = _clinicManager.GetClinicByUser(user);
+
+            if (clinic == null)
+            {
+                return false;
+            }
+
+            var reservations = _clinicReservationsManager.GetTodaysReservations(clinic);
+            var secondCondition = reservations.Any();
+
+            return firstCondition && secondCondition;
         }
 
-        protected virtual bool IsClinicUserMakeRegistrationsEnabled(Guid token)
+        public virtual bool IsClinicUserMakeRegistrationsEnabled(Guid token)
         {
             var settings = _settingsManager.GetRegistrationSettings();
             var now = DateTime.Now.TimeOfDay;
             return settings.StartTime <= now && now <= settings.EndTime;
         }
 
-        protected virtual bool IsHospitalUserChangeEmptyPlacesEnabled(Guid token)
+        public virtual bool IsHospitalUserChangeEmptyPlacesEnabled(Guid token)
         {
             return true;
         }
 
-        protected virtual bool IsFunctionsEnabled(FunctionIdentityName function, Guid token)
+        public virtual bool IsFunctionsEnabled(FunctionIdentityName function, Guid token)
         {
             return !_functions.ContainsKey(function) || _functions[function](token);
         }

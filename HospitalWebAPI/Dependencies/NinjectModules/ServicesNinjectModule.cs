@@ -28,6 +28,8 @@ namespace Dependencies.NinjectModules
             Bind<ITokenManager>().To<TokenManager>().InThreadScope();
             Bind<ISettingsManager>().To<SettingsManager>().InThreadScope();
             Bind<IUserFunctionManager>().To<UserFunctionManager>().InThreadScope();
+            Bind<IClinicManager>().To<ClinicManager>().InThreadScope();
+            Bind<IClinicReservationsManager>().To<ClinicReservationsManager>().InThreadScope();
 
             // Services
             Bind<IAuthorizationService>().To<AuthorizationService>().InThreadScope();
