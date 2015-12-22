@@ -1,4 +1,5 @@
 ﻿@using System.Security.Principal
+
 @model ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers.GetClinicUserMainPageInformationCommandAnswer
 
 @{
@@ -6,27 +7,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Clinic User Home Page</h2>
+@Html.WriteTitlePage("Clinic User Home Page", "h2")
 
-<p>Здравствуйте, @Model.UserName!</p>
+@Html.WriteTextAndVariable("Здравствуйте, ", @Model.UserName, "!", "p")
 
 @{
     if ((bool)!@Model.ReservationStatus)
     {
-        @:<pre> В данный момент регистрация мест в больницах недоступна.
-        @: Вы можете начать регистрацию с @Model.StartTimeReservation.</pre>
+        @Html.WriteText("В данный момент регистрация мест в больницах недоступна.", "p")
+        @Html.WriteTextAndVariable("Вы можете начать регистрацию с ", @Model.StartTimeReservation.ToString(), ".", "p")
     }
     else
     {
-        @:<text> Если Вы хотите зарегистрировать место, то @Html.ActionLink("нажмите сюда", "Index", "MakeClinicRegistrationPage")
-        @: Если Вы хотите отменить регистрацию, то @Html.ActionLink("нажмите сюда", "Index", "BreakClinicRegistrationPage")</text>   
+        @Html.WriteTextAndUrl("Если Вы хотите зарегистрировать место, то", "Index", "MakeClinicRegistrationPage", "нажмите сюда", false, "p")
+        @Html.WriteTextAndUrl("Если Вы хотите отменить регистрацию, то", "Index", "BreakClinicRegistrationPage", "нажмите сюда", false, "p")
     }
 }
-<p>Если Вы хотите просмотреть ваши личные сообщения, то @Html.ActionLink("нажмите сюда", "Index", "ClinicNoticesPage", new { Token = ViewBag.Token }, new object())</p>
 
+@Html.WriteTextAndUrl("Если Вы хотите просмотреть ваши личные сообщения, то", "Index", "ClinicNoticesPage", "нажмите сюда", true, "p")
+ 
 @{
     if (Model.CountNewNotices > 0)
     {
-        <p>У Вас @Model.CountNewNotices непрочитанное сообщение</p>
+        @Html.WriteTextAndVariable("У Вас", @Model.CountNewNotices.ToString(), "непрочитанное сообщение", "p") 
     }
 }

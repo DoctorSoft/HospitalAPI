@@ -8,13 +8,31 @@ namespace HtmlHelpers.GeneralHtmlHelper
 {
     public static class GeneralHtmlHelper
     {
-        public static MvcHtmlString InsertText(string text, string tagName)
+        public static MvcHtmlString WriteTitlePage(
+            this HtmlHelper htmlHelper,
+            string title,
+            string tagName)
+        {
+            var newTag = new TagBuilder(tagName);
+            newTag.SetInnerText(title);
+            return new MvcHtmlString(newTag.ToString());
+        }
+
+        public static MvcHtmlString WriteText(
+            this HtmlHelper htmlHelper, 
+            string text, 
+            string tagName)
         {
             var newTag = new TagBuilder(tagName);
             newTag.SetInnerText(text);
             return new MvcHtmlString(newTag.ToString());
         }
-        public static MvcHtmlString InsertText(string textBefore, string variable, string textAfter, string tagName)
+        public static MvcHtmlString WriteTextAndVariable(
+            this HtmlHelper htmlHelper,
+            string textBefore, 
+            string variable, 
+            string textAfter, 
+            string tagName)
         {
             var newTag = new TagBuilder(tagName);
             var finishString = String.Format("{0} {1} {2}", textBefore, variable, textAfter);
@@ -22,30 +40,28 @@ namespace HtmlHelpers.GeneralHtmlHelper
             return new MvcHtmlString(newTag.ToString());
         }
 
-        public static MvcHtmlString InsertTextAndUrl(
+        public static MvcHtmlString WriteTextAndUrl(
             this HtmlHelper htmlHelper,
             string textBefore,
             string action,
             string controller,
             string linkText,
-            string textAfter,
+            bool token,
             string tagName)
         {
-            var newTag = new TagBuilder(tagName);
-            var url = htmlHelper.ActionLink(linkText, action, controller);
-            var finishString = String.Format("{0} {1} {2}", textBefore, url, textAfter);
-            newTag.SetInnerText(finishString);
-            return new MvcHtmlString(newTag.ToString());
+            string url;
+            if (token)
+            {
+                url =
+                    htmlHelper.ActionLink(linkText, action, controller, new {Token = htmlHelper.ViewBag.Token},
+                        new object()).ToHtmlString();
+            }
+            else
+            {
+                url = htmlHelper.ActionLink(linkText, action, controller).ToHtmlString();
+            }
+            var resultString = String.Format("{0} {1}", textBefore, url);
+            return new MvcHtmlString(resultString);
         }
-
-        /*public static MvcHtmlString InsertTextAndUrlByToken(string textBefore, string action, string controller, string token, string linkText, string textAfter, string tagName)
-        {
-            var domain = Environment.UserDomainName;
-            var newTag = new TagBuilder(tagName);
-            var url = String.Format("<a href='{0}'/'{1}'/'{2}'/Token/'{3}'>{4}</a>", domain, action, controller, token, linkText);
-            var finishString = String.Format("{0} {1} {2}", textBefore, url, textAfter);
-            newTag.SetInnerText(finishString);
-            return new MvcHtmlString(newTag.ToString());
-        }*/
     }
 }
