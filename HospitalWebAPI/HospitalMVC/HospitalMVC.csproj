@@ -76,6 +76,7 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mobile" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -318,6 +319,10 @@
     <ProjectReference Include="..\HelpingTools\HelpingTools.csproj">
       <Project>{47a288e7-d7ef-4f2a-81a7-23c4a5148e60}</Project>
       <Name>HelpingTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HtmlHelpers\HtmlHelpers.csproj">
+      <Project>{cc475824-01fe-4442-835e-97724d533c0c}</Project>
+      <Name>HtmlHelpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\RemoteServicesTools\RemoteServicesTools.csproj">
       <Project>{bdc88114-1004-44e9-85af-5d793a4c19ef}</Project>
