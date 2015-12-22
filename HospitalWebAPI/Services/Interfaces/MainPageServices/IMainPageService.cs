@@ -18,5 +18,8 @@ namespace Services.Interfaces.MainPageServices
 
         GetReviewerMainPageInformationCommandAnswer GetReviewerMainPageInformation(
             GetReviewerMainPageInformationCommand command);
+
+        GetReceptionUserMainPageInformationCommandAnswer GetReceptionUserMainPageInformation(
+            GetReceptionUserMainPageInformationCommand command);
     }
 }

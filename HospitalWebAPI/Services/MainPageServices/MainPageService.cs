@@ -124,5 +124,15 @@ namespace Services.MainPageServices
             };
             return answer;
         }
+
+        public GetReceptionUserMainPageInformationCommandAnswer GetReceptionUserMainPageInformation(
+            GetReceptionUserMainPageInformationCommand command)
+        {
+            var answer = new GetReceptionUserMainPageInformationCommandAnswer
+            {
+                Token = (Guid)command.Token
+            };
+            return answer;
+        }
     }
 }

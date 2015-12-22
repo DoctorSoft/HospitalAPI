@@ -10,11 +10,13 @@ using Services.Interfaces.HospitalRegistrationsService;
 using Services.Interfaces.MainMenuServices;
 using Services.Interfaces.MainPageServices;
 using Services.Interfaces.NoticesService;
+using Services.Interfaces.ReceptionMarkingServices;
 using Services.Interfaces.ServiceTools;
 using Services.Interfaces.SessionServices;
 using Services.MainMenuServices;
 using Services.MainPageServices;
 using Services.NoticesService;
+using Services.ReceptionMarkingServices;
 using Services.ServiceTools;
 using Services.SessionServices;
 
@@ -39,6 +41,7 @@ namespace Dependencies.NinjectModules
             Bind<IClinicRegistrationsService>().To<ClinicRegistrationsService>().InThreadScope();
             Bind<IHospitalRegistrationsService>().To<HospitalRegistrationsService>().InThreadScope();
             Bind<INoticesService>().To<NoticesService>().InThreadScope();
+            Bind<IReceptionMarkingService>().To<ReceptionMarkingService>().InThreadScope();
 
             //Factories
             Bind<ISessionServiceFactory>().ToFactory();

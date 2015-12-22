@@ -7,5 +7,6 @@
         None = 2,
         AdministratorAccount = 3,
         ReviewerAccount = 4,
+        ReceptionUserAccount = 5
     }
 }

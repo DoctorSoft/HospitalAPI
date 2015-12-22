@@ -52,6 +52,7 @@
     <Compile Include="Interfaces\MainMenuServices\IMainMenuService.cs" />
     <Compile Include="Interfaces\MainPageServices\IMainPageService.cs" />
     <Compile Include="Interfaces\NoticesService\INoticesService.cs" />
+    <Compile Include="Interfaces\ReceptionMarkingServices\IReceptionMarkingService.cs" />
     <Compile Include="Interfaces\ServiceTools\IClinicReservationsManager.cs" />
     <Compile Include="Interfaces\ServiceTools\IClinicManager.cs" />
     <Compile Include="Interfaces\ServiceTools\ISettingsManager.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="MainPageServices\MainPageService.cs" />
     <Compile Include="NoticesService\NoticesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceptionMarkingServices\ReceptionMarkingService.cs" />
     <Compile Include="ServiceTools\ClinicManager.cs" />
     <Compile Include="ServiceTools\ClinicReservationsManager.cs" />
     <Compile Include="ServiceTools\SettingsManager.cs" />

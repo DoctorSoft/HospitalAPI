@@ -115,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home Page.
+        ///   Looks up a localized string similar to Главная страница.
         /// </summary>
         public static string MenuItemHomePage {
             get {
@@ -133,11 +133,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отметить прибывшего пациента.
+        /// </summary>
+        public static string MenuItemMarkClients {
+            get {
+                return ResourceManager.GetString("MenuItemMarkClients", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Открыть регистрацию.
         /// </summary>
         public static string MenuItemOpenHospitalRegistrations {
             get {
                 return ResourceManager.GetString("MenuItemOpenHospitalRegistrations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Отменить отметку.
+        /// </summary>
+        public static string MenuItemsUnmarkClients {
+            get {
+                return ResourceManager.GetString("MenuItemsUnmarkClients", resourceCulture);
             }
         }
         

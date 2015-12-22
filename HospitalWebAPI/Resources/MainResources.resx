@@ -136,13 +136,19 @@
     <value>Выход</value>
   </data>
   <data name="MenuItemHomePage" xml:space="preserve">
-    <value>Home Page</value>
+    <value>Главная страница</value>
   </data>
   <data name="MenuItemMakeClinicRegistration" xml:space="preserve">
     <value>Зарегистрировать</value>
   </data>
+  <data name="MenuItemMarkClients" xml:space="preserve">
+    <value>Отметить прибывшего пациента</value>
+  </data>
   <data name="MenuItemOpenHospitalRegistrations" xml:space="preserve">
     <value>Открыть регистрацию</value>
+  </data>
+  <data name="MenuItemsUnmarkClients" xml:space="preserve">
+    <value>Отменить отметку</value>
   </data>
   <data name="MenuItemViewNotices" xml:space="preserve">
     <value>Просмотреть сообщения</value>

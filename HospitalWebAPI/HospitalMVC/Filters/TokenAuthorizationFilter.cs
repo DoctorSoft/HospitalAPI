@@ -55,6 +55,10 @@ namespace HospitalMVC.Filters
                 {MainMenuItem.ClinicUserShowMessagesPage, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicNoticesPage", Label = MainResources.MenuItemViewNotices }},
                 {MainMenuItem.ClinicUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicUserHomePage", Label = MainResources.MenuItemHomePage }},
 
+                {MainMenuItem.ReceptionUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReceptionUserHomePage", Label = MainResources.MenuItemHomePage }},
+                {MainMenuItem.ReceptionUserMarkClientsPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReceptionUserMarkClientsPage", Label = MainResources.MenuItemMarkClients }},
+                {MainMenuItem.ReceptionUserUnmarkClientsPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReceptionUserUnmarkClientsPage", Label = MainResources.MenuItemsUnmarkClients }},
+
                 {MainMenuItem.AdministratorMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "AdministratorHomePage", Label = MainResources.MenuItemHomePage }},
 
                 {MainMenuItem.ReviewerMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReviewerHomePage", Label = MainResources.MenuItemHomePage }},

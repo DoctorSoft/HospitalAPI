@@ -200,6 +200,9 @@
     <Compile Include="Controllers\LogInRedirectController.cs" />
     <Compile Include="Controllers\LogOutController.cs" />
     <Compile Include="Controllers\MakeClinicRegistrationPageController.cs" />
+    <Compile Include="Controllers\ReceptionUserHomePageController.cs" />
+    <Compile Include="Controllers\ReceptionUserMarkClientsPageController.cs" />
+    <Compile Include="Controllers\ReceptionUserUnmarkClientsPageController.cs" />
     <Compile Include="Controllers\ReviewerHomePageController.cs" />
     <Compile Include="Filters\TokenAuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -264,6 +267,9 @@
     <Content Include="Views\MakeClinicRegistrationPage\Index.cshtml" />
     <Content Include="Views\BreakClinicRegistrationPage\Index.cshtml" />
     <Content Include="Views\ClinicNoticesPage\Index.cshtml" />
+    <Content Include="Views\ReceptionUserHomePage\Index.cshtml" />
+    <Content Include="Views\ReceptionUserMarkClientsPage\Index.cshtml" />
+    <Content Include="Views\ReceptionUserUnmarkClientsPage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

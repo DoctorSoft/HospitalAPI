@@ -26,6 +26,7 @@ namespace HospitalMVC.Controllers
                 {UserAccountType.ClinicUserAccount, new KeyValuePair<string, string>("ClinicUserHomePage", "Index")},
                 {UserAccountType.AdministratorAccount, new KeyValuePair<string, string>("AdministratorHomePage", "Index")},
                 {UserAccountType.ReviewerAccount, new KeyValuePair<string, string>("ReviewerHomePage", "Index")},
+                {UserAccountType.ReceptionUserAccount, new KeyValuePair<string, string>("ReceptionUserHomePage", "Index")},
                 {UserAccountType.None, new KeyValuePair<string, string>("LogIn", "Index")}
             };
         }

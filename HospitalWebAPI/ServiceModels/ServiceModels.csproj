@@ -58,10 +58,13 @@
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetAdministratorMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetClinicUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetHospitalUserMainPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReceptionUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReviewerMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicNoticesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalNoticesPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserMarkClientsPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserUnmarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\SessionCommandAnswers\IsTokenHasAccessToFunctionCommandAnswer.cs" />
     <Compile Include="ServiceCommands\AuthorizationCommands\GetTokenByUserCredentialsCommand.cs" />
     <Compile Include="ServiceCommands\AuthorizationCommands\LogOutUserByTokenCommand.cs" />
@@ -73,10 +76,13 @@
     <Compile Include="ServiceCommands\MainPageCommands\GetAdministratorMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetClinicUserMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetHospitalUserMainPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\MainPageCommands\GetReceptionUserMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetReviewerMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetUserMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetClinicNoticesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetHospitalNoticesPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserMarkClientsPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserUnmarkClientsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\SessionCommands\IsTokenHasAccessToFunctionCommand.cs" />
   </ItemGroup>
   <ItemGroup>
