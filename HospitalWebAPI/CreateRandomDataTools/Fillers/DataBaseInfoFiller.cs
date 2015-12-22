@@ -22,6 +22,7 @@ namespace CreateRandomDataTools.Fillers
         private readonly IBotModelCreator _botModelCreator;
         private readonly IAdministratorAndReviewerModelsCreator _administratorAndReviewerModelsCreator;
         private readonly IUserFunctionModelCreator _userFunctionModelCreator;
+        private readonly IReceptionUserModelCreator _receptionUserModelCreator;
 
         private readonly IDataBaseContext _dataBaseContext;
         private readonly ICreationSettingsModule _creationSettingsModule;
@@ -29,11 +30,16 @@ namespace CreateRandomDataTools.Fillers
         private readonly string _startMessageText = "";
 
 
-        public DataBaseInfoFiller(IDataBaseContext dataBaseContext, ICreationSettingsModule creationSettingsModule, IClinicModelCreator clinicModelCreator,
+        public DataBaseInfoFiller(IDataBaseContext dataBaseContext, ICreationSettingsModule creationSettingsModule,
+            IClinicModelCreator clinicModelCreator,
             IFunctionalGroupModelCreator functionalGroupModelCreator, IFunctionModelCreator functionModelCreator,
-            IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator,  
-            IUserTypeModelCreator userTypeModelCreator, IClinicUserModelCreator clinicUserModelCreator, IHospitalUserModelCreator hospitalUserModelCreator, IBotModelCreator botModelCreator,
-            IAdministratorAndReviewerModelsCreator administratorAndReviewerModelsCreator, IUserFunctionModelCreator userFunctionModelCreator, IClinicRegistrationTimeModelCreator clinicRegistrationTimeModelCreator)
+            IHospitalModelCreator hospitalModelCreator, ISectionModelCreator sectionModelCreator,
+            IUserTypeModelCreator userTypeModelCreator, IClinicUserModelCreator clinicUserModelCreator,
+            IHospitalUserModelCreator hospitalUserModelCreator, IBotModelCreator botModelCreator,
+            IAdministratorAndReviewerModelsCreator administratorAndReviewerModelsCreator,
+            IUserFunctionModelCreator userFunctionModelCreator,
+            IClinicRegistrationTimeModelCreator clinicRegistrationTimeModelCreator,
+            IReceptionUserModelCreator receptionUserModelCreator)
         {
             _dataBaseContext = dataBaseContext;
             _creationSettingsModule = creationSettingsModule;
@@ -52,13 +58,14 @@ namespace CreateRandomDataTools.Fillers
             _administratorAndReviewerModelsCreator = administratorAndReviewerModelsCreator;
             _userFunctionModelCreator = userFunctionModelCreator;
             _clinicRegistrationTimeModelCreator = clinicRegistrationTimeModelCreator;
+            _receptionUserModelCreator = receptionUserModelCreator;
         }
 
         public void FillDataBase(Func<string, bool> showStatusFunction = null)
         {
             var percents = 0;
 
-            const int percentIncrementation = 8;
+            const int percentIncrementation = 100 / 13;
 
             FillSectionModels(showStatusFunction, percents += percentIncrementation);
             FillHospitalModels(showStatusFunction, percents += percentIncrementation);
@@ -69,6 +76,7 @@ namespace CreateRandomDataTools.Fillers
             FillFunctionalGroupModels(showStatusFunction, percents += percentIncrementation);
             FillClinicUserModels(showStatusFunction, percents += percentIncrementation);
             FillHospitalUserModels(showStatusFunction, percents += percentIncrementation);
+            FillReceptionUserModels(showStatusFunction, percents += percentIncrementation);
             FillBotModels(showStatusFunction, percents += percentIncrementation);
             FillAdministratorAndReviewerModels(showStatusFunction, percents + percentIncrementation);
             FillUserFunctionModels(showStatusFunction, 100);
@@ -166,6 +174,14 @@ namespace CreateRandomDataTools.Fillers
         {
             var models = _hospitalUserModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateHospitalUsers();
+
+            FillList(models, showStatusFunction, percentCount, fillApprove);
+        }
+
+        protected virtual void FillReceptionUserModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
+        {
+            var models = _receptionUserModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateReceptionUsers();
 
             FillList(models, showStatusFunction, percentCount, fillApprove);
         }

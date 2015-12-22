@@ -6,6 +6,7 @@
         HospitalUser = 1,
         Bot = 2,
         Administrator = 3,
-        Reviewer = 4
+        Reviewer = 4,
+        ReceptionUser = 5
     }
 }
