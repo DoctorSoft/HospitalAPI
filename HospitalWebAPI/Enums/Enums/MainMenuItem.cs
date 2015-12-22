@@ -21,6 +21,11 @@
         AdministratorMainPage = 400,  
 
         //ReviewerFunctions 500 <= x < 600
-        ReviewerMainPage = 500
+        ReviewerMainPage = 500,
+
+        //ReceptionUserFunctions 600 <= x < 700
+        ReceptionUserMainPage = 600,       
+        ReceptionUserMarkClientsPage = 601,
+        ReceptionUserUnmarkClientsPage = 602
     }
 }

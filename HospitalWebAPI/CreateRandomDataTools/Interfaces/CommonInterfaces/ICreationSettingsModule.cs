@@ -20,6 +20,8 @@
 
         bool CreateHospitalUsers();
 
+        bool CreateReceptionUsers();
+
         bool CreateBots();
 
         bool CreateAdministratorsAndReviewers(); 

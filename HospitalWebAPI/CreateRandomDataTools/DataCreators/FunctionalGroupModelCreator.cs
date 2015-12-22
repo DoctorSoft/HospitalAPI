@@ -27,7 +27,8 @@ namespace CreateRandomDataTools.DataCreators
                 {UserType.HospitalUser, GetFunctionsForHospitalUser},
                 {UserType.Administrator, GetFunctionsForAdministratorUser},
                 {UserType.Bot, GetFunctionsForBotUser},
-                {UserType.Reviewer, GetFunctionsForReviewerUser}
+                {UserType.Reviewer, GetFunctionsForReviewerUser},
+                {UserType.ReceptionUser, GetFunctionsForReceptionUser}
             };
         }
 
@@ -96,6 +97,11 @@ namespace CreateRandomDataTools.DataCreators
         protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForReviewerUser(IEnumerable<FunctionStorageModel> functions)
         {
             return GetFunctionsByDiapason(500, 600, functions);
+        }
+
+        protected virtual IEnumerable<GroupFunctionStorageModel> GetFunctionsForReceptionUser(IEnumerable<FunctionStorageModel> functions)
+        {
+            return GetFunctionsByDiapason(600, 700, functions);
         }
     }
 }

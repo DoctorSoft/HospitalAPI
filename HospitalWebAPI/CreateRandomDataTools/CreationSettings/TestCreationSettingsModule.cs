@@ -50,6 +50,11 @@ namespace CreateRandomDataTools.CreationSettings
             return bool.Parse(WebConfigurationManager.AppSettings["CreateHospitalUsers"]);
         }
 
+        public bool CreateReceptionUsers()
+        {
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateReceptionUsers"]);
+        }
+
         public bool CreateBots()
         {
             return bool.Parse(WebConfigurationManager.AppSettings["CreateBots"]);
