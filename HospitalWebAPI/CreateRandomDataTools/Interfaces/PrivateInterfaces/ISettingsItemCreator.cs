@@ -3,7 +3,7 @@ using StorageModels.Models.ClinicModels;
 
 namespace CreateRandomDataTools.Interfaces.PrivateInterfaces
 {
-    public interface IClinicRegistrationTimeModelCreator : IRandomModelListCreator<SettingsItemStorageModel>
+    public interface ISettingsItemCreator : IRandomModelListCreator<SettingsItemStorageModel>
     {
     }
 }

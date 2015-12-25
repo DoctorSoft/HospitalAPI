@@ -11,7 +11,7 @@ namespace CreateRandomDataTools.Fillers
     public class DataBaseInfoFiller : IDataBaseInfoFiller
     {
         private readonly IClinicModelCreator _clinicModelCreator;
-        private readonly IClinicRegistrationTimeModelCreator _clinicRegistrationTimeModelCreator;
+        private readonly ISettingsItemCreator _settingsItemCreator;
         private readonly IFunctionalGroupModelCreator _functionalGroupModelCreator;
         private readonly IFunctionModelCreator _functionModelCreator;
         private readonly IHospitalModelCreator _hospitalModelCreator;
@@ -38,7 +38,7 @@ namespace CreateRandomDataTools.Fillers
             IHospitalUserModelCreator hospitalUserModelCreator, IBotModelCreator botModelCreator,
             IAdministratorAndReviewerModelsCreator administratorAndReviewerModelsCreator,
             IUserFunctionModelCreator userFunctionModelCreator,
-            IClinicRegistrationTimeModelCreator clinicRegistrationTimeModelCreator,
+            ISettingsItemCreator settingsItemCreator,
             IReceptionUserModelCreator receptionUserModelCreator)
         {
             _dataBaseContext = dataBaseContext;
@@ -57,7 +57,7 @@ namespace CreateRandomDataTools.Fillers
             _botModelCreator = botModelCreator;
             _administratorAndReviewerModelsCreator = administratorAndReviewerModelsCreator;
             _userFunctionModelCreator = userFunctionModelCreator;
-            _clinicRegistrationTimeModelCreator = clinicRegistrationTimeModelCreator;
+            _settingsItemCreator = settingsItemCreator;
             _receptionUserModelCreator = receptionUserModelCreator;
         }
 
@@ -132,8 +132,8 @@ namespace CreateRandomDataTools.Fillers
 
         protected virtual void FillClinicRegistrationTimeModels(Func<string, bool> showStatusFunction = null, int percentCount = 0)
         {
-            var models = _clinicRegistrationTimeModelCreator.GetList();
-            var fillApprove = _creationSettingsModule.CreateClinicsRegistrationTime();
+            var models = _settingsItemCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateSettingsItems();
 
             FillList(models, showStatusFunction, percentCount, fillApprove);
         }

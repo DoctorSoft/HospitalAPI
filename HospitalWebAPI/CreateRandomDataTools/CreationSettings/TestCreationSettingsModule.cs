@@ -20,9 +20,9 @@ namespace CreateRandomDataTools.CreationSettings
             return bool.Parse(WebConfigurationManager.AppSettings["CreateClinics"]);
         }
 
-        public bool CreateClinicsRegistrationTime()
+        public bool CreateSettingsItems()
         {
-            return bool.Parse(WebConfigurationManager.AppSettings["CreateClinicsRegistrationTime"]);
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateSettingsItems"]);
         }
 
         public bool CreateFunctions()

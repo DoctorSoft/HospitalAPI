@@ -8,7 +8,7 @@
 
         bool CreateClinics();
 
-        bool CreateClinicsRegistrationTime(); 
+        bool CreateSettingsItems(); 
 
         bool CreateFunctions(); 
 

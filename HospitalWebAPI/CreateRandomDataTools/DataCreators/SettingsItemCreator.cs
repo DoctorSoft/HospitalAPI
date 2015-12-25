@@ -5,7 +5,7 @@ using StorageModels.Models.ClinicModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
-    public class ClinicRegistrationTimeModelCreator : IClinicRegistrationTimeModelCreator
+    public class SettingsItemCreator : ISettingsItemCreator
 
     {
         public IEnumerable<SettingsItemStorageModel> GetList()
