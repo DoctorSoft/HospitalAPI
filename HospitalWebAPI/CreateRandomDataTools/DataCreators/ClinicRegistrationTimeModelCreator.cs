@@ -8,15 +8,13 @@ namespace CreateRandomDataTools.DataCreators
     public class ClinicRegistrationTimeModelCreator : IClinicRegistrationTimeModelCreator
 
     {
-        public IEnumerable<ClinicRegistrationTimeStorageModel> GetList()
+        public IEnumerable<SettingsItemStorageModel> GetList()
         {
-            var clinicRegistrationTimeList = new List<ClinicRegistrationTimeStorageModel>
+            var clinicRegistrationTimeList = new List<SettingsItemStorageModel>
             {
-                new ClinicRegistrationTimeStorageModel
+                new SettingsItemStorageModel
                 {
-                    DateCreate = DateTime.Now,
-                    StartTime = new TimeSpan(0, 10, 0, 0),
-                    EndTime = new TimeSpan(0, 19, 0, 0)
+                    DateCreate = DateTime.Now
                 }
             };
 

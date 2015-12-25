@@ -17,9 +17,9 @@ namespace CreateRandomDataTools.DataCreators
             _hospitalRepository = hospitalRepository;
         }
 
-        protected ICollection<ClinicHospitalAccessStorageModel> GetAccesses(IEnumerable<HospitalStorageModel> hospitals)
+        protected ICollection<ClinicHospitalPriorityStorageModel> GetAccesses(IEnumerable<HospitalStorageModel> hospitals)
         {
-            return hospitals.Select(model => new ClinicHospitalAccessStorageModel
+            return hospitals.Select(model => new ClinicHospitalPriorityStorageModel
             {
                 IsBlocked = false,
                 HospitalId = model.Id

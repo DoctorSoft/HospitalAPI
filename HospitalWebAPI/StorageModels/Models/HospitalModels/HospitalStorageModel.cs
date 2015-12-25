@@ -19,7 +19,7 @@ namespace StorageModels.Models.HospitalModels
 
         public ICollection<HospitalUserStorageModel> HospitalUsers { get; set; }
         public ICollection<HospitalSectionProfileStorageModel> HospitalSectionProfiles { get; set; }
-        public ICollection<ClinicHospitalAccessStorageModel> ClinicHospitalAccesses { get; set; }
+        public ICollection<ClinicHospitalPriorityStorageModel> ClinicHospitalAccesses { get; set; }
 
     }
 }

@@ -56,10 +56,10 @@
   <ItemGroup>
     <Compile Include="ConfigurationFactories\OriginalConfigurationFactory.cs" />
     <Compile Include="Configurations\ClinicModels\ClinicDataBaseConfiguration.cs" />
-    <Compile Include="Configurations\ClinicModels\ClinicHospitalAccessDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\ClinicModels\ClinicHospitalPriorityDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\PatientDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\ReservationDataBaseConfiguration.cs" />
-    <Compile Include="Configurations\ClinicModels\ClinicRegistrationTimeDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\ClinicModels\SettingsItemDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\FunctionalGroupDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\FunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\GroupFunctionDataBaseConfiguration.cs" />
@@ -103,6 +103,14 @@
     <Compile Include="Migrations\201512252121159_RenameEmptyPlaceByTyprStatisticTable.Designer.cs">
       <DependentUpon>201512252121159_RenameEmptyPlaceByTyprStatisticTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512252144507_ChangeTableFiendsAndRenameIncorrectNames.cs" />
+    <Compile Include="Migrations\201512252144507_ChangeTableFiendsAndRenameIncorrectNames.Designer.cs">
+      <DependentUpon>201512252144507_ChangeTableFiendsAndRenameIncorrectNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512252146525_RenamePriorityTable.cs" />
+    <Compile Include="Migrations\201512252146525_RenamePriorityTable.Designer.cs">
+      <DependentUpon>201512252146525_RenamePriorityTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -142,6 +150,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512252121159_RenameEmptyPlaceByTyprStatisticTable.resx">
       <DependentUpon>201512252121159_RenameEmptyPlaceByTyprStatisticTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512252144507_ChangeTableFiendsAndRenameIncorrectNames.resx">
+      <DependentUpon>201512252144507_ChangeTableFiendsAndRenameIncorrectNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512252146525_RenamePriorityTable.resx">
+      <DependentUpon>201512252146525_RenamePriorityTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

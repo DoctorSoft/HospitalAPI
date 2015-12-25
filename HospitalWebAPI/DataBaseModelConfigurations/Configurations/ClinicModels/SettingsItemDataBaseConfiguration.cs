@@ -4,13 +4,13 @@ using StorageModels.Models.ClinicModels;
 
 namespace DataBaseModelConfigurations.Configurations.ClinicModels
 {
-    class ClinicRegistrationTimeDataBaseConfiguration : EntityTypeConfiguration<ClinicRegistrationTimeStorageModel>
+    public class SettingsItemDataBaseConfiguration : EntityTypeConfiguration<SettingsItemStorageModel>
     {
-        public ClinicRegistrationTimeDataBaseConfiguration()
+        public SettingsItemDataBaseConfiguration()
         {
             // Table name
 
-            this.ToTable("ClinicsRegistrationTime");
+            this.ToTable("SettingsItems");
 
             // Primary key
 
@@ -19,8 +19,6 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
             // Properties
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(model => model.StartTime).IsRequired();
-            this.Property(model => model.EndTime).IsRequired();
             this.Property(model => model.DateCreate).IsRequired();
 
         }

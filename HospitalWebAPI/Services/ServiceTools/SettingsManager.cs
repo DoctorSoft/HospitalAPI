@@ -14,7 +14,7 @@ namespace Services.ServiceTools
             _clinicRegistrationTimeRepository = clinicRegistrationTimeRepository;
         }
 
-        public ClinicRegistrationTimeStorageModel GetRegistrationSettings()
+        public SettingsItemStorageModel GetRegistrationSettings()
         {
 
             var maxDate = _clinicRegistrationTimeRepository.GetModels().Max(model => model.DateCreate);

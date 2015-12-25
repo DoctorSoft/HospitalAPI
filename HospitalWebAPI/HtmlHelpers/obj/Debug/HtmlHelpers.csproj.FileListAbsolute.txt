@@ -35,4 +35,3 @@ D:\!HospitalWebAPI\HospitalWebAPI\HtmlHelpers\bin\System.Web.WebPages.Deployment
 D:\!HospitalWebAPI\HospitalWebAPI\HtmlHelpers\bin\System.Web.WebPages.Razor.xml
 D:\!HospitalWebAPI\HospitalWebAPI\HtmlHelpers\obj\Debug\HtmlHelpers.dll
 D:\!HospitalWebAPI\HospitalWebAPI\HtmlHelpers\obj\Debug\HtmlHelpers.pdb
-D:\!HospitalWebAPI\HospitalWebAPI\HtmlHelpers\obj\Debug\HtmlHelpers.csprojResolveAssemblyReference.cache

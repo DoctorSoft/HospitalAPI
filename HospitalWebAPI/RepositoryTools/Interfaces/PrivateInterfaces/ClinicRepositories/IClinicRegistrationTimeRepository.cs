@@ -3,7 +3,7 @@ using StorageModels.Models.ClinicModels;
 
 namespace RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories
 {
-    public interface IClinicRegistrationTimeRepository : IAddAbleRepository<ClinicRegistrationTimeStorageModel>
+    public interface IClinicRegistrationTimeRepository : IAddAbleRepository<SettingsItemStorageModel>
     {
     }
 }
