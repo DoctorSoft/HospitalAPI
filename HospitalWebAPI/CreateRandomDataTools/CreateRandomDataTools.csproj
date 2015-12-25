@@ -54,6 +54,7 @@
     <Compile Include="CreationSettings\TestCreationSettingsModule.cs" />
     <Compile Include="DataCreators\AdministratorAndReviewerModelsCreator.cs" />
     <Compile Include="DataCreators\BotModelCreator.cs" />
+    <Compile Include="DataCreators\ClinicHospitalPrioritiesCreator.cs" />
     <Compile Include="DataCreators\ClinicModelCreator.cs" />
     <Compile Include="DataCreators\SettingsItemCreator.cs" />
     <Compile Include="DataCreators\ClinicUserModelCreator.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Interfaces\PrivateInterfaces\IFunctionalGroupModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IFunctionModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IHospitalModelCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IClinicHospitalPrioritiesCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IHospitalUserModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IReceptionUserModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ISectionModelCreator.cs" />

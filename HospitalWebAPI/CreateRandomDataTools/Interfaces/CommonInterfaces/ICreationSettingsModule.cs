@@ -26,7 +26,9 @@
 
         bool CreateAdministratorsAndReviewers(); 
 
-        bool CreateUserFunctions(); 
+        bool CreateUserFunctions();
+
+        bool CreateClinicHospitalPriorities();
 
     }
 }

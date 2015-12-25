@@ -69,5 +69,10 @@ namespace CreateRandomDataTools.CreationSettings
         {
             return bool.Parse(WebConfigurationManager.AppSettings["CreateUserFunctions"]);
         }
+
+        public bool CreateClinicHospitalPriorities()
+        {
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateClinicHospitalPriorities"]);
+        }
     }
 }
