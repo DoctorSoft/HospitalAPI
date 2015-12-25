@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,6 +12,7 @@
     <AssemblyName>DataBaseModelConfigurations</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>18caaecb</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,6 +64,7 @@
     <Compile Include="Configurations\FunctionModels\FunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\GroupFunctionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\UserFunctionDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\HospitalModels\EmptyPlaceByTypeStatisticDataBaseConfiguration.cs" />
     <Compile Include="Configurations\HospitalModels\EmptyPlaceStatisticDataBaseConfiguration.cs" />
     <Compile Include="Configurations\HospitalModels\HospitalDataBaseConfiguration.cs" />
     <Compile Include="Configurations\HospitalModels\HospitalSectionProfileDataBaseConfiguration.cs" />
@@ -91,6 +94,14 @@
     <Compile Include="Migrations\201512181857242_ChangeSettingsTimeSpan.cs" />
     <Compile Include="Migrations\201512181857242_ChangeSettingsTimeSpan.Designer.cs">
       <DependentUpon>201512181857242_ChangeSettingsTimeSpan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512252116271_AddEmptyPlaceByTypeStatisticTable.cs" />
+    <Compile Include="Migrations\201512252116271_AddEmptyPlaceByTypeStatisticTable.Designer.cs">
+      <DependentUpon>201512252116271_AddEmptyPlaceByTypeStatisticTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512252121159_RenameEmptyPlaceByTyprStatisticTable.cs" />
+    <Compile Include="Migrations\201512252121159_RenameEmptyPlaceByTyprStatisticTable.Designer.cs">
+      <DependentUpon>201512252121159_RenameEmptyPlaceByTyprStatisticTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,8 +137,20 @@
     <EmbeddedResource Include="Migrations\201512181857242_ChangeSettingsTimeSpan.resx">
       <DependentUpon>201512181857242_ChangeSettingsTimeSpan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512252116271_AddEmptyPlaceByTypeStatisticTable.resx">
+      <DependentUpon>201512252116271_AddEmptyPlaceByTypeStatisticTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512252121159_RenameEmptyPlaceByTyprStatisticTable.resx">
+      <DependentUpon>201512252121159_RenameEmptyPlaceByTyprStatisticTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

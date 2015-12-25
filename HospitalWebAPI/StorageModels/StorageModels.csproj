@@ -52,6 +52,7 @@
     <Compile Include="Models\FunctionModels\FunctionStorageModel.cs" />
     <Compile Include="Models\FunctionModels\GroupFunctionStorageModel.cs" />
     <Compile Include="Models\FunctionModels\UserFunctionStorageModel.cs" />
+    <Compile Include="Models\HospitalModels\EmptyPlaceByTypeStatisticStorageModel.cs" />
     <Compile Include="Models\HospitalModels\EmptyPlaceStatisticStorageModel.cs" />
     <Compile Include="Models\HospitalModels\HospitalSectionProfileStorageModel.cs" />
     <Compile Include="Models\HospitalModels\HospitalStorageModel.cs" />

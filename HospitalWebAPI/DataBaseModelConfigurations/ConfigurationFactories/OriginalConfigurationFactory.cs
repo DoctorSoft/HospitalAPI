@@ -28,6 +28,7 @@ namespace DataBaseModelConfigurations.ConfigurationFactories
             builder.Configurations.Add(new HospitalDataBaseConfiguration());
             builder.Configurations.Add(new SectionDataBaseConfiguration());
             builder.Configurations.Add(new SectionProfileDataBaseConfiguration());
+            builder.Configurations.Add(new EmptyPlaceByTypeStatisticDataBaseConfiguration());
             
             builder.Configurations.Add(new ClinicDataBaseConfiguration());
             builder.Configurations.Add(new PatientDataBaseConfiguration());
