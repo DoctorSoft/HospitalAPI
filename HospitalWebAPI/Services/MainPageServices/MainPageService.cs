@@ -2,7 +2,6 @@
 using System.Linq;
 using Enums.Enums;
 using HandleToolsInterfaces.Converters;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
@@ -20,15 +19,13 @@ namespace Services.MainPageServices
 
         private readonly IUserToAccountTypeConverter _userToAccountTypeConverter;
         private readonly ITokenManager _tokenManager;
-        private readonly ISettingsManager _settingsManager;
-        
-        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository, ISettingsManager settingsManager)
+
+        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository)
         {
             _userTypeRepository = userTypeRepository;
             _userToAccountTypeConverter = userToAccountTypeConverter;
             _tokenManager = tokenManager;
             _messageRepository = messageRepository;
-            _settingsManager = settingsManager;
         }
 
         protected virtual UserType GetUserType(UserStorageModel user)
@@ -83,7 +80,6 @@ namespace Services.MainPageServices
             GetClinicUserMainPageInformationCommand command)
         {
             var currentUser = _tokenManager.GetUserByToken(command.Token);
-            var clinicRegistrationTime = _settingsManager.GetRegistrationSettings();
 
             var countNewNotices = GetCountNewNotices(currentUser);
 

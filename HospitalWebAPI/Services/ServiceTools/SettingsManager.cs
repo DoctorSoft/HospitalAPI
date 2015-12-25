@@ -7,18 +7,18 @@ namespace Services.ServiceTools
 {
     public class SettingsManager : ISettingsManager
     {
-        private readonly IClinicRegistrationTimeRepository _clinicRegistrationTimeRepository;
+        private readonly ISettingsItemRepository _settingsItemRepository;
 
-        public SettingsManager(IClinicRegistrationTimeRepository clinicRegistrationTimeRepository)
+        public SettingsManager(ISettingsItemRepository settingsItemRepository)
         {
-            _clinicRegistrationTimeRepository = clinicRegistrationTimeRepository;
+            _settingsItemRepository = settingsItemRepository;
         }
 
         public SettingsItemStorageModel GetRegistrationSettings()
         {
 
-            var maxDate = _clinicRegistrationTimeRepository.GetModels().Max(model => model.DateCreate);
-            var clinicRegistrationTime = _clinicRegistrationTimeRepository.GetModels().FirstOrDefault(model => model.DateCreate == maxDate);
+            var maxDate = _settingsItemRepository.GetModels().Max(model => model.DateCreate);
+            var clinicRegistrationTime = _settingsItemRepository.GetModels().FirstOrDefault(model => model.DateCreate == maxDate);
 
             return clinicRegistrationTime;
         }

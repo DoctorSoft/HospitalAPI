@@ -5,9 +5,9 @@ using StorageModels.Models.ClinicModels;
 
 namespace Repositories.DataBaseRepositories.ClinicRepositories
 {
-    public class ClinicRegistrationTimeRepository : AbstractAddAbleDataBaseRepository<SettingsItemStorageModel>, IClinicRegistrationTimeRepository
+    public class SettingsItemRepository : AbstractAddAbleDataBaseRepository<SettingsItemStorageModel>, ISettingsItemRepository
     {
-        public ClinicRegistrationTimeRepository(IDataBaseContext context) : base(context)
+        public SettingsItemRepository(IDataBaseContext context) : base(context)
         {
         }
     }
