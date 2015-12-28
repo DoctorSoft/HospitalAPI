@@ -21,7 +21,7 @@ namespace Dependencies.NinjectModules
             // Repositories
 
             Bind<IClinicRepository>().To<ClinicRepository>().InThreadScope();
-            Bind<IClinicRegistrationTimeRepository>().To<ClinicRegistrationTimeRepository>().InThreadScope();
+            Bind<ISettingsItemRepository>().To<SettingsItemRepository>().InThreadScope();
             Bind<IPatientRepository>().To<PatientRepository>().InThreadScope();
             Bind<IReservationRepository>().To<ReservationRepository>().InThreadScope();
             Bind<IFunctionalGroupRepository>().To<FunctionalGroupRepository>().InThreadScope();
@@ -40,7 +40,8 @@ namespace Dependencies.NinjectModules
             Bind<ISessionRepository>().To<SessionRepository>().InThreadScope();
             Bind<IUserRepository>().To<UserRepository>().InThreadScope();
             Bind<IUserTypeRepository>().To<UserTypeRepository>().InThreadScope();
-            Bind<IClinicHospitalAccessRepository>().To<ClinicHospitalAccessRepository>().InThreadScope();
+            Bind<IClinicHospitalPriorityRepository>().To<ClinicHospitalPriorityRepository>().InThreadScope();
+            Bind<IEmptyPlaceByTypeStatisticRepository>().To<EmptyPlaceByTypeStatisticRepository>().InThreadScope();
 
             Bind<IPersonDataAPIRepository>().To<PersonDataAPIRepository>().InThreadScope();
         }

@@ -9,8 +9,9 @@
         HospitalUserPrimaryAccess = 100,        // If this function is blocked then all hospital user functions are blocked (Equal function is ShowHomePage for hospital users)
         HospitalUserFillEmptyPlaces = 101,
         HospitalUserChangeEmptyPlaces = 102,
-        HospitalUserShowMessages = 103,         // If this function is block, function 104 is blocked too
+        HospitalUserShowMessages = 103,         // If this function is block, functions 104-105 are blocked too
         HospitalUserGetWarningMessages = 104,
+        HospitalUserSendDistributionMessages = 105,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserPrimaryAccess = 200,          // If this function is blocked then all clinic user functions are blocked (Equal function is ShowHomePage for clinic users)

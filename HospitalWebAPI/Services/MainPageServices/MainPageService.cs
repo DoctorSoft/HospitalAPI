@@ -2,7 +2,6 @@
 using System.Linq;
 using Enums.Enums;
 using HandleToolsInterfaces.Converters;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
@@ -20,15 +19,13 @@ namespace Services.MainPageServices
 
         private readonly IUserToAccountTypeConverter _userToAccountTypeConverter;
         private readonly ITokenManager _tokenManager;
-        private readonly ISettingsManager _settingsManager;
-        
-        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository, ISettingsManager settingsManager)
+
+        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository)
         {
             _userTypeRepository = userTypeRepository;
             _userToAccountTypeConverter = userToAccountTypeConverter;
             _tokenManager = tokenManager;
             _messageRepository = messageRepository;
-            _settingsManager = settingsManager;
         }
 
         protected virtual UserType GetUserType(UserStorageModel user)
@@ -37,12 +34,7 @@ namespace Services.MainPageServices
 
             return userType.UserType;
         }
-        public bool GetReservationStatus(TimeSpan startTimeRegistration, TimeSpan endTimeRegistration)
-        {
-            var now = DateTime.Now.TimeOfDay;
 
-            return now >= startTimeRegistration && now <= endTimeRegistration;
-        }
         public int? GetCountNewNotices(UserStorageModel user)
         {
             int? countNewNotices =
@@ -88,9 +80,6 @@ namespace Services.MainPageServices
             GetClinicUserMainPageInformationCommand command)
         {
             var currentUser = _tokenManager.GetUserByToken(command.Token);
-            var clinicRegistrationTime = _settingsManager.GetRegistrationSettings();
-
-            var reservationStatus = GetReservationStatus(clinicRegistrationTime.StartTime, clinicRegistrationTime.EndTime);
 
             var countNewNotices = GetCountNewNotices(currentUser);
 
@@ -98,9 +87,6 @@ namespace Services.MainPageServices
             {
                 Token = (Guid) command.Token,
                 UserName = currentUser.Name,
-                StartTimeReservation = clinicRegistrationTime.StartTime,
-                EndTimeReservation = clinicRegistrationTime.EndTime,
-                ReservationStatus = reservationStatus,
                 CountNewNotices = countNewNotices
             };
             return answer;

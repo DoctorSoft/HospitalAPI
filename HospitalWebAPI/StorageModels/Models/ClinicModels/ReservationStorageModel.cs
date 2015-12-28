@@ -17,14 +17,14 @@ namespace StorageModels.Models.ClinicModels
 
         //
 
-        public EmptyPlaceStatisticStorageModel EmptyPlaceStatistic { get; set; }
+        public EmptyPlaceByTypeStatisticStorageModel EmptyPlaceByTypeStatistic { get; set; }
         public ClinicStorageModel Clinic { get; set; }
         public PatientStorageModel Patient { get; set; }
 
         //
 
         public int ClinicId { get; set; }
-        public int EmptyPlaceStatisticId { get; set; }
+        public int EmptyPlaceByTypeStatisticId { get; set; }
 
     }
 }

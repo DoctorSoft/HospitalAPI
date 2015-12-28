@@ -8,7 +8,7 @@
 
         bool CreateClinics();
 
-        bool CreateClinicsRegistrationTime(); 
+        bool CreateSettingsItems(); 
 
         bool CreateFunctions(); 
 
@@ -26,7 +26,9 @@
 
         bool CreateAdministratorsAndReviewers(); 
 
-        bool CreateUserFunctions(); 
+        bool CreateUserFunctions();
+
+        bool CreateClinicHospitalPriorities();
 
     }
 }

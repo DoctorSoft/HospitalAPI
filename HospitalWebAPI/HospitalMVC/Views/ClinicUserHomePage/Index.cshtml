@@ -12,12 +12,6 @@
 @Html.WriteTextAndVariable("Здравствуйте, ", @Model.UserName, "!", "p")
 
 @{
-    if ((bool)!@Model.ReservationStatus)
-    {
-        @Html.WriteText("В данный момент регистрация мест в больницах недоступна.", "p")
-        @Html.WriteTextAndVariable("Вы можете начать регистрацию с ", @Model.StartTimeReservation.ToString(), ".", "p")
-    }
-    else
     {
         @Html.WriteTextAndUrl("Если Вы хотите зарегистрировать место, то", "Index", "MakeClinicRegistrationPage", "нажмите сюда", false, "p")
         @Html.WriteTextAndUrl("Если Вы хотите отменить регистрацию, то", "Index", "BreakClinicRegistrationPage", "нажмите сюда", false, "p")

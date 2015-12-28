@@ -28,12 +28,13 @@ namespace DataBaseModelConfigurations.ConfigurationFactories
             builder.Configurations.Add(new HospitalDataBaseConfiguration());
             builder.Configurations.Add(new SectionDataBaseConfiguration());
             builder.Configurations.Add(new SectionProfileDataBaseConfiguration());
+            builder.Configurations.Add(new EmptyPlaceByTypeStatisticDataBaseConfiguration());
             
             builder.Configurations.Add(new ClinicDataBaseConfiguration());
             builder.Configurations.Add(new PatientDataBaseConfiguration());
             builder.Configurations.Add(new ReservationDataBaseConfiguration());
-            builder.Configurations.Add(new ClinicRegistrationTimeDataBaseConfiguration());
-            builder.Configurations.Add(new ClinicHospitalAccessDataBaseConfiguration());
+            builder.Configurations.Add(new SettingsItemDataBaseConfiguration());
+            builder.Configurations.Add(new ClinicHospitalPriorityDataBaseConfiguration());
 
             builder.Configurations.Add(new FunctionalGroupDataBaseConfiguration());
             builder.Configurations.Add(new FunctionDataBaseConfiguration());

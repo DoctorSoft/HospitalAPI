@@ -52,8 +52,8 @@
     <Compile Include="Interfaces\CommonInterfaces\IReadOnlyRepository.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IUpdateAbleRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\AnotherRepositories\RemoteAPIRepositories\IPersonDataAPIRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicHospitalAccessRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicRegistrationTimeRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicHospitalPriorityRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\ISettingsItemRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IPatientRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IReservationRepository.cs" />
@@ -61,6 +61,7 @@
     <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IFunctionRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IGroupFunctionRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IUserFunctionRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IEmptyPlaceByTypeStatisticRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IEmptyPlaceStatisticRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IHospitalRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IHospitalSectionProfileRepository.cs" />

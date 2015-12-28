@@ -20,14 +20,12 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
             // Properties
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            this.Property(model => model.ManRoomCount).IsRequired();
-            this.Property(model => model.WomanRoomCount).IsRequired();
             this.Property(model => model.Date).IsRequired();
             this.Property(model => model.CreateTime).IsOptional();
 
             // Links to tables
 
-            this.HasMany(model => model.Reservations).WithRequired(link => link.EmptyPlaceStatistic).HasForeignKey(model => model.EmptyPlaceStatisticId);
+            this.HasMany(model => model.EmptyPlaceByTypeStatistics).WithRequired(link => link.EmptyPlaceStatistic).HasForeignKey(model => model.EmptyPlaceStatisticId);
             this.HasRequired(model => model.HospitalSectionProfile).WithMany(link => link.EmptyPlaceStatistics).HasForeignKey(model => model.HospitalSectionProfileId);  
         }
     }

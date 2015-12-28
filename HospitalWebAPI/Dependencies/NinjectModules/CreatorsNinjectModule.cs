@@ -18,7 +18,7 @@ namespace Dependencies.NinjectModules
             // Creators
 
             Bind<IClinicModelCreator>().To<ClinicModelCreator>().InThreadScope();
-            Bind<IClinicRegistrationTimeModelCreator>().To<ClinicRegistrationTimeModelCreator>().InThreadScope();
+            Bind<ISettingsItemCreator>().To<SettingsItemCreator>().InThreadScope();
             Bind<IFunctionalGroupModelCreator>().To<FunctionalGroupModelCreator>().InThreadScope();
             Bind<IFunctionModelCreator>().To<FunctionModelCreator>().InThreadScope();
             Bind<IHospitalModelCreator>().To<HospitalModelCreator>().InThreadScope();
@@ -30,6 +30,7 @@ namespace Dependencies.NinjectModules
             Bind<IBotModelCreator>().To<BotModelCreator>().InThreadScope();
             Bind<IAdministratorAndReviewerModelsCreator>().To<AdministratorAndReviewerModelsCreator>().InThreadScope();
             Bind<IUserFunctionModelCreator>().To<UserFunctionModelCreator>().InThreadScope();
+            Bind<IClinicHospitalPrioritiesCreator>().To<ClinicHospitalPrioritiesCreator>().InThreadScope();
 
             // Fillers
 

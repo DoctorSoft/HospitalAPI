@@ -35,13 +35,7 @@ namespace Services.ServiceTools
             _clinicManager = clinicManager;
             _clinicReservationsManager = clinicReservationsManager;
 
-            _functions = new Dictionary<FunctionIdentityName, Func<Guid, bool>>
-            {
-                {FunctionIdentityName.HospitalUserChangeEmptyPlaces, this.IsHospitalUserChangeEmptyPlacesEnabled},
-                {FunctionIdentityName.HospitalUserFillEmptyPlaces, this.IsHospitalUserFillEmptyPlacesFunctionEnables},
-                {FunctionIdentityName.ClinicUserMakeRegistrations, this.IsClinicUserMakeRegistrationsEnabled},
-                {FunctionIdentityName.ClinicUserBreakRegistrations, this.IsClinicUserBreakRegistrationsEnabled}
-            };
+            _functions = new Dictionary<FunctionIdentityName, Func<Guid, bool>>();  // No items now
         }
 
         protected virtual IEnumerable<UserFunctionStorageModel> GetUserFunctionsByUser(UserStorageModel user)
@@ -63,41 +57,6 @@ namespace Services.ServiceTools
                     .ToList();
 
             return result;
-        }
-
-        protected virtual bool IsHospitalUserFillEmptyPlacesFunctionEnables(Guid token)
-        {
-            return true;
-        }
-
-        public virtual bool IsClinicUserBreakRegistrationsEnabled(Guid token)
-        {
-            var firstCondition = IsClinicUserMakeRegistrationsEnabled(token);
-
-            var user = _tokenManager.GetUserByToken(token);
-            var clinic = _clinicManager.GetClinicByUser(user);
-
-            if (clinic == null)
-            {
-                return false;
-            }
-
-            var reservations = _clinicReservationsManager.GetTodaysReservations(clinic);
-            var secondCondition = reservations.Any();
-
-            return firstCondition && secondCondition;
-        }
-
-        public virtual bool IsClinicUserMakeRegistrationsEnabled(Guid token)
-        {
-            var settings = _settingsManager.GetRegistrationSettings();
-            var now = DateTime.Now.TimeOfDay;
-            return settings.StartTime <= now && now <= settings.EndTime;
-        }
-
-        public virtual bool IsHospitalUserChangeEmptyPlacesEnabled(Guid token)
-        {
-            return true;
         }
 
         public virtual bool IsFunctionsEnabled(FunctionIdentityName function, Guid token)
