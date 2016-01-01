@@ -153,4 +153,7 @@
   <data name="MenuItemViewNotices" xml:space="preserve">
     <value>Просмотреть сообщения</value>
   </data>
+  <data name="MenuItemSendDistributiveMessagesPage" xml:space="preserve">
+    <value>Разослать сообщения</value>
+  </data>
 </root>

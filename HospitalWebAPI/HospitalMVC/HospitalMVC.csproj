@@ -197,8 +197,8 @@
     <Compile Include="Controllers\AdministratorHomePageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalNoticesPageController.cs" />
-    <Compile Include="Controllers\HospitalRegistrationsPageController.cs" />
     <Compile Include="Controllers\HospitalUserHomePageController.cs" />
+    <Compile Include="Controllers\HospitalUserSendDistributiveMessagesPageController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\LogInRedirectController.cs" />
     <Compile Include="Controllers\LogOutController.cs" />
@@ -264,7 +264,6 @@
     <Content Include="Views\HospitalUserHomePage\Index.cshtml" />
     <Content Include="Views\ClinicUserHomePage\Index.cshtml" />
     <Content Include="Views\ReviewerHomePage\Index.cshtml" />
-    <Content Include="Views\HospitalRegistrationsPage\Index.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\Index.cshtml" />
     <Content Include="Views\HospitalNoticesPage\Index.cshtml" />
     <Content Include="Views\MakeClinicRegistrationPage\Index.cshtml" />
@@ -273,6 +272,7 @@
     <Content Include="Views\ReceptionUserHomePage\Index.cshtml" />
     <Content Include="Views\ReceptionUserMarkClientsPage\Index.cshtml" />
     <Content Include="Views\ReceptionUserUnmarkClientsPage\Index.cshtml" />
+    <Content Include="Views\HospitalUserSendDistributiveMessagesPage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

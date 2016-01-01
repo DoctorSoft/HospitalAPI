@@ -7,9 +7,9 @@
 
         //HospitalUserItems 100 <= x < 200
         HospitalUserMainPage = 100,        
-        HospitalUserFillEmptyPlacesPage = 101,
-        HospitalUserChangeEmptyPlacesPage = 102,
-        HospitalUserShowMessagesPage = 103,  
+        HospitalUserChangeEmptyPlacesPage = 101,
+        HospitalUserShowMessagesPage = 102,
+        HospitalUserSendDistributiveMessagesPage = 104,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserMainPage = 200,          

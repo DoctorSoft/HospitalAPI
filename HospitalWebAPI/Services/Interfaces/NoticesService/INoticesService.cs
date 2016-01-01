@@ -10,5 +10,8 @@ namespace Services.Interfaces.NoticesService
 
         GetHospitalNoticesPageInformationCommandAnswer GetHospitalNoticesPageInformation(
             GetHospitalNoticesPageInformationCommand command);
+
+        GetSendDistributiveMessagesPageInformationCommandAnswer GetSendDistributiveMessagesPageInformation(
+            GetSendDistributiveMessagesPageInformationCommand command);
     }
 }
