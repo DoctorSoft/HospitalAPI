@@ -35,7 +35,7 @@ namespace Tests.CreateRandomDataTest
         [TestMethod]
         public void ReturnClinicsList()
         {
-            var clinic = new ClinicModelCreator(new HospitalRepository(context));
+            var clinic = new ClinicModelCreator();
             var resoultList = clinic.GetList();
             Assert.IsNotNull(resoultList);
         }

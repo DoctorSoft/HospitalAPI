@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -21,6 +22,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>8620d08c</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -195,8 +197,8 @@
     <Compile Include="Controllers\AdministratorHomePageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalNoticesPageController.cs" />
-    <Compile Include="Controllers\HospitalRegistrationsPageController.cs" />
     <Compile Include="Controllers\HospitalUserHomePageController.cs" />
+    <Compile Include="Controllers\HospitalUserSendDistributiveMessagesPageController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\LogInRedirectController.cs" />
     <Compile Include="Controllers\LogOutController.cs" />
@@ -262,7 +264,6 @@
     <Content Include="Views\HospitalUserHomePage\Index.cshtml" />
     <Content Include="Views\ClinicUserHomePage\Index.cshtml" />
     <Content Include="Views\ReviewerHomePage\Index.cshtml" />
-    <Content Include="Views\HospitalRegistrationsPage\Index.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\Index.cshtml" />
     <Content Include="Views\HospitalNoticesPage\Index.cshtml" />
     <Content Include="Views\MakeClinicRegistrationPage\Index.cshtml" />
@@ -271,6 +272,7 @@
     <Content Include="Views\ReceptionUserHomePage\Index.cshtml" />
     <Content Include="Views\ReceptionUserMarkClientsPage\Index.cshtml" />
     <Content Include="Views\ReceptionUserUnmarkClientsPage\Index.cshtml" />
+    <Content Include="Views\HospitalUserSendDistributiveMessagesPage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -381,6 +383,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -10,16 +10,13 @@ namespace StorageModels.Models.HospitalModels
         public int Id { get; set; }
 
         //
-
-        public int ManRoomCount { get; set; }
-        public int WomanRoomCount { get; set; }
         public DateTime Date { get; set; }
         public DateTime? CreateTime { get; set; }
 
         //
 
         public HospitalSectionProfileStorageModel HospitalSectionProfile { get; set; }
-        public ICollection<ReservationStorageModel> Reservations { get; set; }
+        public ICollection<EmptyPlaceByTypeStatisticStorageModel> EmptyPlaceByTypeStatistics { get; set; }
 
         //
 

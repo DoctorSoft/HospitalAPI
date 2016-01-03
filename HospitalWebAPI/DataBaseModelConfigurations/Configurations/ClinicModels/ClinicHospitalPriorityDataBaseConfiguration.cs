@@ -4,13 +4,13 @@ using StorageModels.Models.ClinicModels;
 
 namespace DataBaseModelConfigurations.Configurations.ClinicModels
 {
-    public class ClinicHospitalAccessDataBaseConfiguration : EntityTypeConfiguration<ClinicHospitalAccessStorageModel>
+    public class ClinicHospitalPriorityDataBaseConfiguration : EntityTypeConfiguration<ClinicHospitalPriorityStorageModel>
     {
-        public ClinicHospitalAccessDataBaseConfiguration()
+        public ClinicHospitalPriorityDataBaseConfiguration()
         {
             // Table name
 
-            this.ToTable("ClinicHospitalAccesses");
+            this.ToTable("ClinicHospitalPriorities");
 
             // Primary key
 
@@ -20,6 +20,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(model => model.IsBlocked).IsRequired();
+            this.Property(model => model.Priority).IsRequired();
 
             // Links to tables
 

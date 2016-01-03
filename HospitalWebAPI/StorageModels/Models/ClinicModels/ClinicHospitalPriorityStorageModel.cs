@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using StorageModels.Interfaces;
+﻿using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
 
 namespace StorageModels.Models.ClinicModels
 {
-    public class ClinicHospitalAccessStorageModel : IIdModel, IBlockAbleModel
+    public class ClinicHospitalPriorityStorageModel : IIdModel, IBlockAbleModel
     {
         public int Id { get; set; }
 
@@ -15,6 +14,8 @@ namespace StorageModels.Models.ClinicModels
         public ClinicStorageModel Clinic { get; set; }
 
         public HospitalStorageModel Hospital { get; set; }
+
+        public int Priority { get; set; }
 
         //
 

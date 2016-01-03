@@ -24,5 +24,14 @@ namespace Services.NoticesService
                 Token = (Guid)command.Token
             };
         }
+
+        public GetSendDistributiveMessagesPageInformationCommandAnswer GetSendDistributiveMessagesPageInformation(
+            GetSendDistributiveMessagesPageInformationCommand command)
+        {
+            return new GetSendDistributiveMessagesPageInformationCommandAnswer
+            {
+                Token = (Guid)command.Token
+            };
+        }
     }
 }

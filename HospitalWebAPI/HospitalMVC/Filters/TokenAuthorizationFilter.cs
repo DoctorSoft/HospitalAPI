@@ -45,7 +45,7 @@ namespace HospitalMVC.Filters
 
             _mainMenuTabs = new Dictionary<MainMenuItem, MainMenuTab>()
             {
-                {MainMenuItem.HospitalUserFillEmptyPlacesPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalRegistrationsPage", Label = MainResources.MenuItemOpenHospitalRegistrations }},
+                {MainMenuItem.HospitalUserSendDistributiveMessagesPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalUserSendDistributiveMessagesPage", Label = MainResources.MenuItemSendDistributiveMessagesPage }},
                 {MainMenuItem.HospitalUserChangeEmptyPlacesPage, new MainMenuTab { ActionName = "Index", ControllerName = "ChangeHospitalRegistrationPage", Label = MainResources.MenuItemChangeHospitalRegistrations }},
                 {MainMenuItem.HospitalUserShowMessagesPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalNoticesPage", Label = MainResources.MenuItemViewNotices }},
                 {MainMenuItem.HospitalUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalUserHomePage", Label = MainResources.MenuItemHomePage }},

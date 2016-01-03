@@ -1,4 +1,5 @@
-﻿using StorageModels.Interfaces;
+﻿using Enums.Enums;
+using StorageModels.Interfaces;
 
 namespace StorageModels.Models.ClinicModels
 {
@@ -9,6 +10,16 @@ namespace StorageModels.Models.ClinicModels
         //
 
         public string Code { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int Age { get; set; }
+
+        public Sex Sex { get; set; }
+
+        public string PhoneNumber { get; set; }
 
         //
 
