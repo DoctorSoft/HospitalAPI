@@ -19,12 +19,12 @@
     }
     else
     {
-        @Html.WriteTextAndUrl("Если Вы хотите зарегистрировать место, то", "Index", "MakeClinicRegistrationPage", "нажмите сюда", false, "p")
-        @Html.WriteTextAndUrl("Если Вы хотите отменить регистрацию, то", "Index", "BreakClinicRegistrationPage", "нажмите сюда", false, "p")
+        @Html.WriteTextAndUrl("Если Вы хотите зарегистрировать место, то", "Index", "MakeClinicRegistrationPage", "нажмите сюда")
+        @Html.WriteTextAndUrl("Если Вы хотите отменить регистрацию, то", "Index", "BreakClinicRegistrationPage", "нажмите сюда")
     }
 }
 
-@Html.WriteTextAndUrl("Если Вы хотите просмотреть ваши личные сообщения, то", "Index", "ClinicNoticesPage", "нажмите сюда", true, "p")
+@Html.WriteTextAndUrl("Если Вы хотите просмотреть ваши личные сообщения, то", "Index", "ClinicNoticesPage", "нажмите сюда")
  
 @{
     if (Model.CountNewNotices > 0)

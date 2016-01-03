@@ -45,21 +45,9 @@ namespace HtmlHelpers.GeneralHtmlHelper
             string textBefore,
             string action,
             string controller,
-            string linkText,
-            bool token,
-            string tagName)
+            string linkText)
         {
-            string url;
-            if (token)
-            {
-                url =
-                    htmlHelper.ActionLink(linkText, action, controller, new {Token = htmlHelper.ViewBag.Token},
-                        new object()).ToHtmlString();
-            }
-            else
-            {
-                url = htmlHelper.ActionLink(linkText, action, controller).ToHtmlString();
-            }
+            var url = htmlHelper.ActionLink(linkText, action, controller, new {Token = htmlHelper.ViewBag.Token},new object()).ToHtmlString();
             var resultString = String.Format("{0} {1}", textBefore, url);
             return new MvcHtmlString(resultString);
         }
