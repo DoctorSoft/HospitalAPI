@@ -80,6 +80,7 @@
     <Compile Include="ServiceCommands\MainPageCommands\GetReceptionUserMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetReviewerMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetUserMainPageInformationCommand.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\Entities\MessageTableItem.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetClinicNoticesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetHospitalNoticesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetSendDistributiveMessagesPageInformationCommand.cs" />
