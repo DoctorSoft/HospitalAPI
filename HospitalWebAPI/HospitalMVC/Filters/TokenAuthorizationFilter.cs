@@ -187,6 +187,7 @@ namespace HospitalMVC.Filters
             {
                 viewBag.MainMenuTabs = new List<MainMenuTab>();
                 base.OnActionExecuted(filterContext);
+                return;
             }
 
             var result = GetMainMenuItemsCommandAnswerByAnswer(model);

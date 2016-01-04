@@ -62,6 +62,7 @@
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReviewerMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicNoticesPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalNoticesMessageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalNoticesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetSendDistributiveMessagesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserMarkClientsPageInformationCommandAnswer.cs" />

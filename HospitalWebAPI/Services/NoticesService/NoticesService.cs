@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
+using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
+using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.Entities;
 using ServiceModels.ServiceCommands.NoticesCommands;
 using Services.Interfaces.AuthorizationServices;
 using Services.Interfaces.NoticesService;
 using Services.Interfaces.ServiceTools;
+using StorageModels.Models.MailboxModels;
+using StorageModels.Models.UserModels;
 
 namespace Services.NoticesService
 {
@@ -18,11 +23,14 @@ namespace Services.NoticesService
 
         private readonly IAuthorizationService _authorizationService;
 
-        public NoticesService(IMessageRepository messageRepository, IAuthorizationService authorizationService, ITokenManager tokenManager)
+        private readonly IUserRepository _userRepository;
+
+        public NoticesService(IMessageRepository messageRepository, IAuthorizationService authorizationService, ITokenManager tokenManager, IUserRepository userRepository)
         {
             this._messageRepository = messageRepository;
             _authorizationService = authorizationService;
             _tokenManager = tokenManager;
+            _userRepository = userRepository;
         }
 
         public GetClinicNoticesPageInformationCommandAnswer GetClinicNoticesPageInformation(
@@ -61,9 +69,33 @@ namespace Services.NoticesService
         public GetSendDistributiveMessagesPageInformationCommandAnswer GetSendDistributiveMessagesPageInformation(
             GetSendDistributiveMessagesPageInformationCommand command)
         {
+            var user = _tokenManager.GetUserByToken(command.Token);
+
+            var messages = ((IDbSet<UserStorageModel>) _userRepository.GetModels())
+                .Include(model => model.UserType)
+                .Where(model => model.UserType.UserType == UserType.ClinicUser)
+                .ToList()
+                .Select(model => new MessageStorageModel
+                {
+                    Date = DateTime.Now,
+                    IsRead = false,
+                    MessageType = MessageType.UserMessage,
+                    ShowStatus = TwoSideShowStatus.Showed,
+                    Text = command.Text,
+                    Title = command.Title,
+                    UserFromId = user.Id,
+                    UserToId = model.Id
+                });
+
+            foreach (var message in messages)
+            {
+                _messageRepository.Add(message);
+            }
+            _messageRepository.SaveChanges();
+
             return new GetSendDistributiveMessagesPageInformationCommandAnswer
             {
-                Token = (Guid)command.Token
+                Token = command.Token.Value
             };
         }
     }

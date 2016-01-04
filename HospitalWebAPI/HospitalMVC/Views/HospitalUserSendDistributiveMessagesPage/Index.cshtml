@@ -4,5 +4,37 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetHospitalNoticesMessageInformationCommandAnswer
+
+<h2>Send Message</h2>
+
+@using (Html.BeginForm("SendMessages", "HospitalUserSendDistributiveMessagesPage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(command => command.Token);
+    <div>
+        <div class="input-group center-block container form-signin">
+
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <div class="input-group">
+                <div class="h4 col-lg-4">@Html.DisplayNameFor(o => o.Title)</div>
+                <div class="col-lg-6">@Html.TextBoxFor(o => o.Title)</div>
+            </div>
+            <div class="input-group">
+                <div class="h4 col-lg-4">@Html.DisplayNameFor(o => o.Text)</div>
+                <div class="col-lg-6">@Html.TextAreaFor(o => o.Text)</div>
+            </div>
+            <div class="input-group col-lg-12">
+                <div class="col-lg-8">
+
+                </div>
+                <div class="col-lg-1">
+                    <input class="btn btn-sm btn-primary" type="submit" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
 
