@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Разослать сообщения.
+        /// </summary>
+        public static string MenuItemSendDistributiveMessagesPage {
+            get {
+                return ResourceManager.GetString("MenuItemSendDistributiveMessagesPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отменить отметку.
         /// </summary>
         public static string MenuItemsUnmarkClients {
