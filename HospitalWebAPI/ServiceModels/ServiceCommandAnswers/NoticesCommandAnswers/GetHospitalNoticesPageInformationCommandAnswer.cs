@@ -6,6 +6,6 @@ namespace ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers
 {
     public class GetHospitalNoticesPageInformationCommandAnswer : AbstractTokenCommandAnswer
     {
-        public List<MessageTableItem> Messages { get; set; } 
+        public List<MessageTableItem> Messages { get; set; }
     }
 }

@@ -36,9 +36,24 @@ namespace Services.NoticesService
         public GetClinicNoticesPageInformationCommandAnswer GetClinicNoticesPageInformation(
             GetClinicNoticesPageInformationCommand command)
         {
+            var user = _tokenManager.GetUserByToken(command.Token);
+
+            var results = ((IDbSet<MessageStorageModel>) _messageRepository.GetModels())
+                .Include(model => model.UserFrom)
+                .Where(model => model.UserToId == user.Id)
+                .Select(model => new MessageTableItem
+                {
+                    SendDate = model.Date,
+                    AuthorName = model.UserFrom.Name,
+                    Title = model.Title,
+                    IsRead = model.IsRead,
+                    MessageId = model.Id
+                });
+
             return new GetClinicNoticesPageInformationCommandAnswer
             {
-                Token = (Guid)command.Token
+                Token = (Guid)command.Token,
+                Messages = results.ToList()
             };
         }
 
@@ -47,13 +62,13 @@ namespace Services.NoticesService
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
-            var results = _messageRepository
-                .GetModels()
+            var results = ((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
+                .Include(model => model.UserFrom)
                 .Where(model => model.UserToId == user.Id)
                 .Select(model => new MessageTableItem
                 {
                     SendDate = model.Date,
-                    AuthorName = user.Name,
+                    AuthorName = model.UserFrom.Name,
                     Title = model.Title,
                     IsRead = model.IsRead,
                     MessageId = model.Id

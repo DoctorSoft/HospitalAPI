@@ -20,6 +20,7 @@ namespace HospitalMVC.Controllers
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserSendDistributionMessages)]
         public ActionResult Index(GetSendDistributiveMessagesPageInformationCommand command)
         {
+            //todo: move this to service
             //var answer = _noticesService.GetSendDistributiveMessagesPageInformation(command);
             return View(new GetHospitalNoticesMessageInformationCommandAnswer
             {
@@ -33,6 +34,7 @@ namespace HospitalMVC.Controllers
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserSendDistributionMessages)]
         public ActionResult SendMessages(GetSendDistributiveMessagesPageInformationCommand command)
         {
+            // todo: implement new service command 
             var answer = _noticesService.GetSendDistributiveMessagesPageInformation(command);
             return RedirectToAction("Index", new GetHospitalNoticesMessageInformationCommandAnswer
             {
