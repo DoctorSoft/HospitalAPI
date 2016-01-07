@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Model.Title <br/>
-@Model.Text
-
+<div class="panel panel-default">
+    <div class="panel-heading">@Model.Title</div>
+    <div class="panel-body">
+        <p>@Model.Text</p>
+    </div>
+</div>
+<input type="button" title="Back" class="btn btn-default" value="Назад" onclick="location.href='@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })'" />
+<input type="button" title="Delete" class="btn btn-default" value="Удалить" onclick="location.href='@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })'" />
