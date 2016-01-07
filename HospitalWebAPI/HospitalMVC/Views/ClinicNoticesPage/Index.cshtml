@@ -29,9 +29,9 @@
         <tbody>
             @foreach (var item in Model.Messages)
             {
-                <tr>
+                <tr style="@(item.IsRead != true ? "background-color: #f5f5f5" : "")">
                     <td>
-                        @Html.ActionLink(item.Title, "ReadMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new {})
+                        @Html.ActionLink(item.Title, "ReadMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
                     </td>
                     <td>
                         @if (@item.SendDate.Date == DateTime.Today)
