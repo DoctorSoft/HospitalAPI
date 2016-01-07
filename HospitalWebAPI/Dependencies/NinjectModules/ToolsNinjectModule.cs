@@ -17,7 +17,6 @@ namespace Dependencies.NinjectModules
             Bind<IPasswordHashManager>().To<PasswordHashManager>().InThreadScope();
             Bind<IExtendedRandom>().To<ExtendedRandom>().InThreadScope();
             Bind<IAccountNameCalculator>().To<AccountNameCalculator>().InThreadScope();
-            Bind<IBlockAbleHandler>().To<BlockAbleHandler>().InThreadScope();
             Bind<IUserToAccountTypeConverter>().To<UserToAccountTypeConverter>().InThreadScope();
             Bind<IFunctionsNameToMainMenuItemConverter>().To<FunctionsNameToMainMenuItemConverter>().InThreadScope();
             Bind<ITwoSideShowingHandler<MessageStorageModel>>().To<TwoSideShowingHandler<MessageStorageModel>>().InThreadScope();

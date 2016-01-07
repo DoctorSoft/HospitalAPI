@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using HandleToolsInterfaces.RepositoryHandlers;
-using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
-using ServiceModels.ServiceCommands.SessionCommands;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.UserModels;
 
@@ -15,18 +12,16 @@ namespace Services.ServiceTools
         private readonly ISessionRepository _sessionRepository;
         private readonly IAccountRepository _accountRepository;
 
-        private readonly IBlockAbleHandler _blockAbleHandler;
 
-        public TokenManager(ISessionRepository sessionRepository, IAccountRepository accountRepository, IBlockAbleHandler blockAbleHandler)
+        public TokenManager(ISessionRepository sessionRepository, IAccountRepository accountRepository)
         {
             _sessionRepository = sessionRepository;
             _accountRepository = accountRepository;
-            _blockAbleHandler = blockAbleHandler;
         }
 
         protected virtual SessionStorageModel GetSession(Guid? token)
         {
-            var unblockedSessions = _blockAbleHandler.GetAccessAbleModels(_sessionRepository.GetModels());
+            var unblockedSessions = _sessionRepository.GetModels().Where(model => !model.IsBlocked);
             var currentSession = unblockedSessions.FirstOrDefault(model => model.Token == token);
 
             return currentSession;
@@ -34,9 +29,10 @@ namespace Services.ServiceTools
 
         protected virtual UserStorageModel GetUserBySession(SessionStorageModel session)
         {
-            var currentAccount = _blockAbleHandler.GetAccessAbleModels(((IDbSet<AccountStorageModel>)
+            var currentAccount = ((IDbSet<AccountStorageModel>)
             _accountRepository.GetModels())
-            .Include(model => model.User))
+            .Include(model => model.User)
+            .Where(model => !model.IsBlocked)
             .FirstOrDefault(model => model.Id == session.AccountId);
 
             return currentAccount == null ? null : currentAccount.User;

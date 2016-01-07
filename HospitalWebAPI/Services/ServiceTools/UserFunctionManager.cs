@@ -17,31 +17,24 @@ namespace Services.ServiceTools
         private readonly IUserFunctionRepository _userFunctionRepository;
         private readonly IFunctionRepository _functionRepository;
 
-        private readonly IBlockAbleHandler _blockAbleHandler;
         private readonly ITokenManager _tokenManager;
-        private readonly ISettingsManager _settingsManager;
-        private readonly IClinicManager _clinicManager;
-        private readonly IClinicReservationsManager _clinicReservationsManager;
 
         private readonly Dictionary<FunctionIdentityName, Func<Guid, bool>> _functions; 
 
-        public UserFunctionManager(IUserFunctionRepository userFunctionRepository, IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager, ISettingsManager settingsManager, IClinicManager clinicManager, IClinicReservationsManager clinicReservationsManager)
+        public UserFunctionManager(IUserFunctionRepository userFunctionRepository, IFunctionRepository functionRepository, ITokenManager tokenManager)
         {
             _userFunctionRepository = userFunctionRepository;
             _functionRepository = functionRepository;
-            _blockAbleHandler = blockAbleHandler;
             _tokenManager = tokenManager;
-            _settingsManager = settingsManager;
-            _clinicManager = clinicManager;
-            _clinicReservationsManager = clinicReservationsManager;
 
             _functions = new Dictionary<FunctionIdentityName, Func<Guid, bool>>();  // No items now
         }
 
         protected virtual IEnumerable<UserFunctionStorageModel> GetUserFunctionsByUser(UserStorageModel user)
         {
-            var result = _blockAbleHandler.GetAccessAbleModels(_userFunctionRepository.GetModels())
+            var result = _userFunctionRepository.GetModels()
                 .Where(model => model.UserId == user.Id)
+                .Where(model => !model.IsBlocked)
                 .ToList();
 
             return result;
@@ -52,8 +45,9 @@ namespace Services.ServiceTools
         {
             var functionIds = models.Select(model => model.FunctionId).ToList();
             var result =
-                _blockAbleHandler.GetAccessAbleModels(_functionRepository.GetModels())
+                _functionRepository.GetModels()
                     .Where(model => functionIds.Contains(model.Id))
+                    .Where(model => !model.IsBlocked)
                     .ToList();
 
             return result;

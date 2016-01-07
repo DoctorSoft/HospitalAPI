@@ -17,18 +17,13 @@ namespace Services.SessionServices
 {
     public class SessionService : ISessionService
     {
-        private readonly IUserFunctionRepository _userFunctionRepository;
         private readonly IFunctionRepository _functionRepository;
 
-        private readonly IBlockAbleHandler _blockAbleHandler;
         private readonly IUserFunctionManager _userFunctionManager;
 
-        public SessionService(IUserFunctionRepository userFunctionRepository,
-            IFunctionRepository functionRepository, IBlockAbleHandler blockAbleHandler, ITokenManager tokenManager, IUserFunctionManager userFunctionManager)
+        public SessionService(IFunctionRepository functionRepository, IUserFunctionManager userFunctionManager)
         {
-            _userFunctionRepository = userFunctionRepository;
             _functionRepository = functionRepository;
-            _blockAbleHandler = blockAbleHandler;
             _userFunctionManager = userFunctionManager;
         }
 
@@ -47,8 +42,9 @@ namespace Services.SessionServices
         protected virtual IEnumerable<FunctionStorageModel> GetFunctionsByCommand(IsTokenHasAccessToFunctionCommand command)
         {
             var result =
-                _blockAbleHandler.GetAccessAbleModels(_functionRepository.GetModels())
+                _functionRepository.GetModels()
                     .Where(model => command.Functions.Contains(model.FunctionIdentityName))
+                    .Where(model => !model.IsBlocked)
                     .ToList();
 
             return result;
