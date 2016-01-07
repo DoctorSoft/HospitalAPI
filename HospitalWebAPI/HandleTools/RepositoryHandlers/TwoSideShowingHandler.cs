@@ -9,24 +9,6 @@ namespace HandleTools.RepositoryHandlers
     public class TwoSideShowingHandler<T> : ITwoSideShowingHandler<T>
         where T: IIdModel, IShowStatusModel
     {
-        public IEnumerable<T> GetFromSideModels(IEnumerable<T> list)
-        {
-            var result =  list.Where(arg => arg.ShowStatus == TwoSideShowStatus.FromSideOnly || arg.ShowStatus == TwoSideShowStatus.Showed);
-            return result;
-        }
-
-        public IEnumerable<T> GetToSideModels(IEnumerable<T> list)
-        {
-            var result = list.Where(arg => arg.ShowStatus == TwoSideShowStatus.ToSideOnly || arg.ShowStatus == TwoSideShowStatus.Showed);
-            return result;
-        }
-
-        public IEnumerable<T> GetHiddenModels(IEnumerable<T> list)
-        {
-            var result = list.Where(arg => arg.ShowStatus == TwoSideShowStatus.Hidden);
-            return result;
-        }
-
         public T HideModeFromFromSide(T model)
         {
             if (model.ShowStatus == TwoSideShowStatus.Showed)

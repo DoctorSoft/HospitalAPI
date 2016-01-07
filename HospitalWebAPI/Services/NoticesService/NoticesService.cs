@@ -43,9 +43,10 @@ namespace Services.NoticesService
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
-            var results = _messageShowingHandler.GetToSideModels(((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
+            var results = ((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
                 .Include(model => model.UserFrom)
-                .Where(model => model.UserToId == user.Id))
+                .Where(model => model.UserToId == user.Id)
+                .Where(model => model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed)
                 .Select(model => new MessageTableItem
                 {
                     SendDate = model.Date,
@@ -53,7 +54,7 @@ namespace Services.NoticesService
                     Title = model.Title,
                     IsRead = model.IsRead,
                     MessageId = model.Id
-                });
+                }).ToList();
 
             return new GetClinicNoticesPageInformationCommandAnswer
             {
@@ -67,9 +68,10 @@ namespace Services.NoticesService
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
-            var results = _messageShowingHandler.GetToSideModels(((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
+            var results = ((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
                 .Include(model => model.UserFrom)
-                .Where(model => model.UserToId == user.Id))
+                .Where(model => model.UserToId == user.Id)
+                .Where(model => model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed)
                 .Select(model => new MessageTableItem
                 {
                     SendDate = model.Date,
