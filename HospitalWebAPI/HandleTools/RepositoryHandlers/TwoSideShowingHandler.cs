@@ -9,29 +9,32 @@ namespace HandleTools.RepositoryHandlers
     public class TwoSideShowingHandler<T> : ITwoSideShowingHandler<T>
         where T: IIdModel, IShowStatusModel
     {
-        public IEnumerable<T> GetFirstSideModels(IEnumerable<T> list)
+        public IEnumerable<T> GetFromSideModels(IEnumerable<T> list)
         {
-            return list.Where(arg => arg.ShowStatus == TwoSideShowStatus.FirstSideOnly || arg.ShowStatus == TwoSideShowStatus.Showed);
+            var result =  list.Where(arg => arg.ShowStatus == TwoSideShowStatus.FromSideOnly || arg.ShowStatus == TwoSideShowStatus.Showed);
+            return result;
         }
 
-        public IEnumerable<T> GetSecondSideModels(IEnumerable<T> list)
+        public IEnumerable<T> GetToSideModels(IEnumerable<T> list)
         {
-            return list.Where(arg => arg.ShowStatus == TwoSideShowStatus.SecondSideOnly || arg.ShowStatus == TwoSideShowStatus.Showed);
+            var result = list.Where(arg => arg.ShowStatus == TwoSideShowStatus.ToSideOnly || arg.ShowStatus == TwoSideShowStatus.Showed);
+            return result;
         }
 
         public IEnumerable<T> GetHiddenModels(IEnumerable<T> list)
         {
-            return list.Where(arg => arg.ShowStatus == TwoSideShowStatus.Hidden);
+            var result = list.Where(arg => arg.ShowStatus == TwoSideShowStatus.Hidden);
+            return result;
         }
 
-        public T HideModeFromFirstSide(T model)
+        public T HideModeFromFromSide(T model)
         {
             if (model.ShowStatus == TwoSideShowStatus.Showed)
             {
-                model.ShowStatus = TwoSideShowStatus.SecondSideOnly;
+                model.ShowStatus = TwoSideShowStatus.ToSideOnly;
             }
 
-            if (model.ShowStatus == TwoSideShowStatus.FirstSideOnly)
+            if (model.ShowStatus == TwoSideShowStatus.FromSideOnly)
             {
                 model.ShowStatus = TwoSideShowStatus.Hidden;
             }
@@ -39,14 +42,14 @@ namespace HandleTools.RepositoryHandlers
             return model;
         }
 
-        public T HideModelFromSecondSide(T model)
+        public T HideModelFromToSide(T model)
         {
             if (model.ShowStatus == TwoSideShowStatus.Showed)
             {
-                model.ShowStatus = TwoSideShowStatus.FirstSideOnly;
+                model.ShowStatus = TwoSideShowStatus.FromSideOnly;
             }
 
-            if (model.ShowStatus == TwoSideShowStatus.SecondSideOnly)
+            if (model.ShowStatus == TwoSideShowStatus.ToSideOnly)
             {
                 model.ShowStatus = TwoSideShowStatus.Hidden;
             }
@@ -61,14 +64,14 @@ namespace HandleTools.RepositoryHandlers
             return model;
         }
 
-        public T ShowModelForFirstSide(T model)
+        public T ShowModelForFromSide(T model)
         {
             if (model.ShowStatus == TwoSideShowStatus.Hidden)
             {
-                model.ShowStatus = TwoSideShowStatus.FirstSideOnly;
+                model.ShowStatus = TwoSideShowStatus.FromSideOnly;
             }
 
-            if (model.ShowStatus == TwoSideShowStatus.SecondSideOnly)
+            if (model.ShowStatus == TwoSideShowStatus.ToSideOnly)
             {
                 model.ShowStatus = TwoSideShowStatus.Showed;
             }
@@ -76,14 +79,14 @@ namespace HandleTools.RepositoryHandlers
             return model;
         }
 
-        public T ShowModelForSecondSide(T model)
+        public T ShowModelForToSide(T model)
         {
             if (model.ShowStatus == TwoSideShowStatus.Hidden)
             {
-                model.ShowStatus = TwoSideShowStatus.SecondSideOnly;
+                model.ShowStatus = TwoSideShowStatus.ToSideOnly;
             }
 
-            if (model.ShowStatus == TwoSideShowStatus.FirstSideOnly)
+            if (model.ShowStatus == TwoSideShowStatus.FromSideOnly)
             {
                 model.ShowStatus = TwoSideShowStatus.Showed;
             }

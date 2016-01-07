@@ -273,6 +273,7 @@
     <Content Include="Views\ReceptionUserMarkClientsPage\Index.cshtml" />
     <Content Include="Views\ReceptionUserUnmarkClientsPage\Index.cshtml" />
     <Content Include="Views\HospitalUserSendDistributiveMessagesPage\Index.cshtml" />
+    <Content Include="Views\ClinicNoticesPage\ReadMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

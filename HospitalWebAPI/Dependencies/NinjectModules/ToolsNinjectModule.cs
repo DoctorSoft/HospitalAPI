@@ -6,6 +6,7 @@ using HelpingTools.CalculationTools;
 using HelpingTools.ExtentionTools;
 using HelpingTools.Interfaces;
 using Ninject.Modules;
+using StorageModels.Models.MailboxModels;
 
 namespace Dependencies.NinjectModules
 {
@@ -19,6 +20,7 @@ namespace Dependencies.NinjectModules
             Bind<IBlockAbleHandler>().To<BlockAbleHandler>().InThreadScope();
             Bind<IUserToAccountTypeConverter>().To<UserToAccountTypeConverter>().InThreadScope();
             Bind<IFunctionsNameToMainMenuItemConverter>().To<FunctionsNameToMainMenuItemConverter>().InThreadScope();
+            Bind<ITwoSideShowingHandler<MessageStorageModel>>().To<TwoSideShowingHandler<MessageStorageModel>>().InThreadScope();
         }
     }
 }

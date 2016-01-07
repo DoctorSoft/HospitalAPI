@@ -22,5 +22,19 @@ namespace HospitalMVC.Controllers
             var answer = _noticesService.GetClinicNoticesPageInformation(command);
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserShowMessages)]
+        public ActionResult ReadMessage(GetClinicMessageByIdCommand command)
+        {
+            var answer = _noticesService.GetClinicMessageById(command);
+            return View(answer);
+        }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserShowMessages)]
+        public ActionResult RemoveMessage(RemoveClinicMessageByIdCommand command)
+        {
+            var answer = _noticesService.RemoveClinicMessageById(command);
+            return RedirectToAction("Index", new GetClinicNoticesPageInformationCommand { Token = answer.Token });
+        }
     }
 }
