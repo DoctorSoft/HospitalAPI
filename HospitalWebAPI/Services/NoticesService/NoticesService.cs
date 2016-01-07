@@ -136,6 +136,7 @@ namespace Services.NoticesService
 
             var result = new GetClinicMessageByIdCommandAnswer
             {
+                MessageId = message.Id,
                 AuthorId = message.UserFromId,
                 AuthorName = message.UserFrom.Name,
                 Text = message.Text,
