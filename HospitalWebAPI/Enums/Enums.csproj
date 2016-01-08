@@ -47,6 +47,7 @@
     <Compile Include="Enums\MainMenuItem.cs" />
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Enums\ReservationStatus.cs" />
+    <Compile Include="Enums\ScheduleItem.cs" />
     <Compile Include="Enums\Sex.cs" />
     <Compile Include="Enums\TwoSideShowStatus.cs" />
     <Compile Include="Enums\UserAccountType.cs" />

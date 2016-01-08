@@ -11,18 +11,19 @@
 
 @Html.WriteTextAndVariable("Здравствуйте, ", @Model.UserName, "!", "p")
 
-@{
-    {
-        @Html.WriteTextAndUrl("Если Вы хотите зарегистрировать место, то", "Index", "MakeClinicRegistrationPage", "нажмите сюда")
-        @Html.WriteTextAndUrl("Если Вы хотите отменить регистрацию, то", "Index", "BreakClinicRegistrationPage", "нажмите сюда")
-    }
-}
+<div>
+    @Html.WriteTextAndUrl("Если Вы хотите зарегистрировать место, то", "Index", "MakeClinicRegistrationPage", "нажмите сюда.")
+    <br/>
+    @Html.WriteTextAndUrl("Если Вы хотите отменить регистрацию, то", "Index", "BreakClinicRegistrationPage", "нажмите сюда.")
+</div>
 
-@Html.WriteTextAndUrl("Если Вы хотите просмотреть ваши личные сообщения, то", "Index", "ClinicNoticesPage", "нажмите сюда")
- 
-@{
-    if (Model.CountNewNotices > 0)
-    {
-        @Html.WriteTextAndVariable("У Вас", @Model.CountNewNotices.ToString(), "непрочитанное сообщение", "p") 
+<div>
+    @Html.WriteTextAndUrl("Если Вы хотите просмотреть ваши личные сообщения, то", "Index", "ClinicNoticesPage", "нажмите сюда.")
+
+        @{
+            if (Model.CountNewNotices > 0)
+            {
+                <a href="@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })"><span class="badge">@Model.CountNewNotices.ToString()</span></a><br>
+        }
     }
-}
+</div>

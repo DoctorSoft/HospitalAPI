@@ -52,6 +52,8 @@
     <Compile Include="ServiceCommandAnswers\AuthorizationCommandAnswers\LogOutUserByTokenCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetBreakClinicRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetMakeClinicRegistrationsPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\ScheduleTableCell.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\ScheduleTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetChangeHospitalRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetOpenHospitalRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainMenuCommandAnswers\GetMainMenuItemsCommandAnswer.cs" />
@@ -61,9 +63,12 @@
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReceptionUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReviewerMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetUserMainPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicNoticesPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalNoticesMessageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalNoticesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetSendDistributiveMessagesPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\RemoveClinicMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserMarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserUnmarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\SessionCommandAnswers\IsTokenHasAccessToFunctionCommandAnswer.cs" />
@@ -80,9 +85,12 @@
     <Compile Include="ServiceCommands\MainPageCommands\GetReceptionUserMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetReviewerMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetUserMainPageInformationCommand.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\Entities\MessageTableItem.cs" />
+    <Compile Include="ServiceCommands\NoticesCommands\GetClinicMessageByIdCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetClinicNoticesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetHospitalNoticesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetSendDistributiveMessagesPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\NoticesCommands\RemoveClinicMessageByIdCommand.cs" />
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserMarkClientsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserUnmarkClientsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\SessionCommands\IsTokenHasAccessToFunctionCommand.cs" />

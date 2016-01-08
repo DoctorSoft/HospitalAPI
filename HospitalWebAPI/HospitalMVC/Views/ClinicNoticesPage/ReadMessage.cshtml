@@ -1,0 +1,16 @@
+﻿@model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetClinicMessageByIdCommandAnswer
+
+@{
+    ViewBag.Title = "ReadMessage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">@Model.Title</div>
+    <div class="panel-body">
+        <p>@Model.Text</p>
+    </div>
+</div>
+<input type="button" title="Back" class="btn btn-default" value="Назад" onclick="location.href='@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })'" />
+<input type="button" title="Delete" class="btn btn-default" value="Удалить" onclick="location.href='@Url.Action("RemoveMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = Model.MessageId })'" />
+

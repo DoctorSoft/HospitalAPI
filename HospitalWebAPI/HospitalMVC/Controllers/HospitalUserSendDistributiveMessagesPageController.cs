@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
+using ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers;
 using ServiceModels.ServiceCommands.NoticesCommands;
 using Services.Interfaces.NoticesService;
 
@@ -17,10 +18,30 @@ namespace HospitalMVC.Controllers
 
         // GET: HospitalUserSendDistributiveMessagesPage
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserSendDistributionMessages)]
-        public ActionResult Index(GetHospitalNoticesPageInformationCommand command)
+        public ActionResult Index(GetSendDistributiveMessagesPageInformationCommand command)
         {
-            var answer = _noticesService.GetHospitalNoticesPageInformation(command);
-            return View(answer);
+            //todo: move this to service
+            //var answer = _noticesService.GetSendDistributiveMessagesPageInformation(command);
+            return View(new GetHospitalNoticesMessageInformationCommandAnswer
+            {
+                Token = command.Token.Value,
+                Text = command.Text,
+                Title = command.Title
+            });
+        }
+
+        [HttpPost]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserSendDistributionMessages)]
+        public ActionResult SendMessages(GetSendDistributiveMessagesPageInformationCommand command)
+        {
+            // todo: implement new service command 
+            var answer = _noticesService.GetSendDistributiveMessagesPageInformation(command);
+            return RedirectToAction("Index", new GetHospitalNoticesMessageInformationCommandAnswer
+            {
+                Token = command.Token.Value,
+                Text = command.Text,
+                Title = command.Title
+            });
         }
     }
 }

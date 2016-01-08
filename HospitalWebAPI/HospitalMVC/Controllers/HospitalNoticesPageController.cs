@@ -17,9 +17,9 @@ namespace HospitalMVC.Controllers
 
         // GET: HospitalNoticesPage
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserShowMessages)]
-        public ActionResult Index(GetSendDistributiveMessagesPageInformationCommand command)
+        public ActionResult Index(GetHospitalNoticesPageInformationCommand command)
         {
-            var answer = _noticesService.GetSendDistributiveMessagesPageInformation(command);
+            var answer = _noticesService.GetHospitalNoticesPageInformation(command);
             return View(answer);
         }
     }

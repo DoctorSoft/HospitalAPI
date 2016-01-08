@@ -3,8 +3,8 @@
     public enum TwoSideShowStatus
     {
         Showed = 1,
-        FirstSideOnly = 2,
-        SecondSideOnly = 3,
+        FromSideOnly = 2,
+        ToSideOnly = 3,
         Hidden = 4
     }
 }

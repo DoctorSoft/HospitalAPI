@@ -3,6 +3,45 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.GetChangeHospitalRegistrationsPageInformationCommandAnswer
 
-<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            Monday 
+        </th>
+        <th>
+            Tuesday
+        </th>
+        <th>
+            Wednesday
+        </th>
+        <th>
+            Thursday
+        </th>
+        <th>
+            Friday
+        </th>
+        <th>
+            Saturday
+        </th>
+        <th>
+            Sunday
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Schedule)
+    {
+        <tr>
+            @foreach (var cell in item.Cells.Values)
+            {
+                <td>
+                    @cell.Day
+                </td>
+            }
+        </tr>
+    }
+
+</table>
 

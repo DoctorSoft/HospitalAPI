@@ -13,5 +13,9 @@ namespace Services.Interfaces.NoticesService
 
         GetSendDistributiveMessagesPageInformationCommandAnswer GetSendDistributiveMessagesPageInformation(
             GetSendDistributiveMessagesPageInformationCommand command);
+
+        GetClinicMessageByIdCommandAnswer GetClinicMessageById(GetClinicMessageByIdCommand command);
+
+        RemoveClinicMessageByIdCommandAnswer RemoveClinicMessageById(RemoveClinicMessageByIdCommand command);
     }
 }

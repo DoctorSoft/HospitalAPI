@@ -1,26 +1,19 @@
-﻿using System.Collections.Generic;
-using StorageModels.Interfaces;
+﻿using StorageModels.Interfaces;
 
 namespace HandleToolsInterfaces.RepositoryHandlers
 {
     public interface ITwoSideShowingHandler<T>
         where T: IIdModel, IShowStatusModel
     {
-        IEnumerable<T> GetFirstSideModels(IEnumerable<T> list);
+        T HideModeFromFromSide(T model);
 
-        IEnumerable<T> GetSecondSideModels(IEnumerable<T> list);
-
-        IEnumerable<T> GetHiddenModels(IEnumerable<T> list);
-
-        T HideModeFromFirstSide(T model);
-
-        T HideModelFromSecondSide(T model);
+        T HideModelFromToSide(T model);
 
         T HideModel(T model);
 
-        T ShowModelForFirstSide(T model);
+        T ShowModelForFromSide(T model);
 
-        T ShowModelForSecondSide(T model);
+        T ShowModelForToSide(T model);
 
         T ShowModel(T model);
     }
