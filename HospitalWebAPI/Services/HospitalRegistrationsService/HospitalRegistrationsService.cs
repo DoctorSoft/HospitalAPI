@@ -1,14 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
+using StorageModels.Models.HospitalModels;
 
 namespace Services.HospitalRegistrationsService
 {
     public class HospitalRegistrationsService : IHospitalRegistrationsService
     {
+        private readonly IEmptyPlaceByTypeStatisticRepository _emptyPlaceByTypeStatisticRepository;
+
+        public HospitalRegistrationsService(IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository)
+        {
+            this._emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
+        }
+
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
             GetChangeHospitalRegistrationsPageInformationCommand command)
         {
@@ -41,6 +51,12 @@ namespace Services.HospitalRegistrationsService
                 Token = (Guid)command.Token,
                 Schedule = startSchedule
             };
+        }
+
+        protected virtual List<EmptyPlaceByTypeStatisticStorageModel> GetStatisticList(DateTime startDate,
+            DateTime endDate, int hospitalId)
+        {
+            return null;
         }
 
         protected virtual DateTime GetPreviousMonday(DateTime date)

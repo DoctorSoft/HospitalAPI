@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Linq;
 using StorageModels.Interfaces;
 
 namespace RepositoryTools.Interfaces.CommonInterfaces
@@ -7,7 +6,7 @@ namespace RepositoryTools.Interfaces.CommonInterfaces
     public interface IReadOnlyRepository<T>
         where T: class, IIdModel
     {
-        IEnumerable<T> GetModels();
+        IQueryable<T> GetModels();
 
         T GetModelById(int id);
     }
