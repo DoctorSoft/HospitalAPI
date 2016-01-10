@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Xml;
+﻿using System.Linq;
 using DataBaseTools.Interfaces;
-using RepositoryTools.Interfaces;
 using RepositoryTools.Interfaces.CommonInterfaces;
 using StorageModels.Interfaces;
 
@@ -19,7 +15,7 @@ namespace DataBaseRepositoryTools.AbstractTools
             _context = context;
         }
 
-        public virtual IEnumerable<T> GetModels()
+        public virtual IQueryable<T> GetModels()
         {
             return _context.Set<T>();
         }

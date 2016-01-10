@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using RemoteServicesTools.Interfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.AnotherRepositories.RemoteAPIRepositories;
 using StorageModels.Models.AnotherModels.RemoteAPIModels;
@@ -11,7 +9,7 @@ namespace Repositories.AnotherRepositories.RemoteAPIRepositories
     public class PersonDataAPIRepository : IPersonDataAPIRepository
     {
         private readonly IAPIDataBrowser _apiDataBrowser;
-        private IEnumerable<PersonDataAPIStorageModel> _models;
+        private IQueryable<PersonDataAPIStorageModel> _models;
         private const int Count = 100;
         private const string Url = "http://randus.ru/api.php";
         private const string FirstNameKey = "fname";
@@ -41,10 +39,10 @@ namespace Repositories.AnotherRepositories.RemoteAPIRepositories
                     model.Id = i + 1;
                     return model;
                 });
-            _models = results.ToList();
+            _models = results.ToList().AsQueryable();
         }
 
-        public IEnumerable<PersonDataAPIStorageModel> GetModels()
+        public IQueryable<PersonDataAPIStorageModel> GetModels()
         {
             if (_models == null)
             {

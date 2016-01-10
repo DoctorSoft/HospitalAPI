@@ -20,7 +20,8 @@ namespace DataBaseModelConfigurations.Contexts
         private const string ArturWorkOriginalKey = "OriginalHospitalDataBase_ArturWork";
         private const string VaniaWorkOriginalKey = "OriginalHospitalDataBase_VaniaWork";
 
-        public TestDataBaseContext() : base(ArturWorkKey, new OriginalConfigurationFactory())
+        public TestDataBaseContext()
+            : base(ArturTomashHomeKey, new OriginalConfigurationFactory())
         {
         }
     }
