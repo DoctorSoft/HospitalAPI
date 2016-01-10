@@ -163,5 +163,46 @@ namespace Services.NoticesService
                 Token = command.Token.Value
             };
         }
+        public GetHospitalMessageByIdCommandAnswer GetHospitalMessageById(GetHospitalMessageByIdCommand command)
+        {
+            var user = _tokenManager.GetUserByToken(command.Token);
+
+            var message = ((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
+                .Include(model => model.UserFrom)
+                .Include(model => model.UserTo)
+                .FirstOrDefault(model => model.UserToId == user.Id && model.Id == command.MessageId);
+
+            message.IsRead = true;
+            _messageRepository.Update(message.Id, message);
+            _messageRepository.SaveChanges();
+
+            var result = new GetHospitalMessageByIdCommandAnswer
+            {
+                MessageId = message.Id,
+                AuthorId = message.UserFromId,
+                AuthorName = message.UserFrom.Name,
+                Text = message.Text,
+                Title = message.Title,
+                Token = command.Token.Value
+            };
+
+            return result;
+        }
+        public RemoveHospitalMessageByIdCommandAnswer RemoveHospitalMessageById(RemoveHospitalMessageByIdCommand command)
+        {
+            var user = _tokenManager.GetUserByToken(command.Token);
+
+            var message = _messageRepository.GetModels()
+                .FirstOrDefault(model => model.UserToId == user.Id && model.Id == command.MessageId);
+
+            _messageShowingHandler.HideModelFromToSide(message);
+            _messageRepository.Update(message.Id, message);
+            _messageRepository.SaveChanges();
+
+            return new RemoveHospitalMessageByIdCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
     }
 }

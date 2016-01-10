@@ -65,10 +65,12 @@
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicNoticesPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalNoticesMessageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalNoticesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetSendDistributiveMessagesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\RemoveClinicMessageByIdCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\RemoveHospitalMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserMarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserUnmarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\SessionCommandAnswers\IsTokenHasAccessToFunctionCommandAnswer.cs" />
@@ -88,9 +90,11 @@
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\Entities\MessageTableItem.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetClinicMessageByIdCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetClinicNoticesPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\NoticesCommands\GetHospitalMessageByIdCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetHospitalNoticesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetSendDistributiveMessagesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\RemoveClinicMessageByIdCommand.cs" />
+    <Compile Include="ServiceCommands\NoticesCommands\RemoveHospitalMessageByIdCommand.cs" />
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserMarkClientsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserUnmarkClientsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\SessionCommands\IsTokenHasAccessToFunctionCommand.cs" />

@@ -7,45 +7,53 @@
 @using Resources
 @model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetHospitalNoticesPageInformationCommandAnswer
 
-<table>
-    <tr>
-        <th>
-            @MainResources.NoticeTableTitle
-        </th>
-        <th>
-            @MainResources.NoticeTableDate
-        </th>
-        <th>
-            @MainResources.NoticeTableSender
-        </th>
-        <th>
-            
-        </th>
-    </tr>
+<div class="panel panel-default">
+    <div class="panel-heading">@MainResources.NoticeTableHeading</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @MainResources.NoticeTableTitle
+                </th>
+                <th>
+                    @MainResources.NoticeTableDate
+                </th>
+                <th>
+                    @MainResources.NoticeTableSender
+                </th>
+                <th>
 
-    @foreach (var item in Model.Messages)
-    {
-        <tr>
-            <td>
-                @item.Title
-            </td>
-            <td>@if (@item.SendDate.Date == DateTime.Today)
-                {
-                    @item.SendDate.ToString("t")
-                }
-                else
-                {
-                    @item.SendDate.ToString("d")
-                }
-            </td>
-            <td>
-                @item.AuthorName
-            </td>
-            <td>
-                <a>Remove</a>
-            </td>
-        </tr>
-    }
+                </th>
+            </tr>
+        </thead>
 
-</table>
+        <tbody>
+            @foreach (var item in Model.Messages)
+            {
+                <tr style="@(item.IsRead != true ? "background-color: #f5f5f5" : "")">
+                    <td>
+                        @Html.ActionLink(item.Title, "ReadMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
+                    </td>
+                    <td>
+                        @if (@item.SendDate.Date == DateTime.Today)
+                        {
+                            @item.SendDate.ToString("t")
+                        }
+                        else
+                        {
+                            @item.SendDate.ToString("d")
+                        }
+                    </td>
+                    <td>
+                        @item.AuthorName
+                    </td>
+                    <td>
+                        @Html.ActionLink(MainResources.ButtonDeleteMessage, "RemoveMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
 

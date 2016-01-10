@@ -1,0 +1,17 @@
+﻿@using Resources
+@model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetHospitalMessageByIdCommandAnswer
+
+@{
+    ViewBag.Title = "ReadMessage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">@Model.Title</div>
+    <div class="panel-body">
+        <p>@Model.Text</p>
+    </div>
+</div>
+<input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "HospitalNoticesPage", new { Token = Model.Token })'" />
+<input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" onclick="location.href='@Url.Action("RemoveMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = Model.MessageId })'" />
+

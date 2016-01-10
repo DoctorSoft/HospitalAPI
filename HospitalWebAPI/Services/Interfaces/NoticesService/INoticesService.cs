@@ -17,5 +17,9 @@ namespace Services.Interfaces.NoticesService
         GetClinicMessageByIdCommandAnswer GetClinicMessageById(GetClinicMessageByIdCommand command);
 
         RemoveClinicMessageByIdCommandAnswer RemoveClinicMessageById(RemoveClinicMessageByIdCommand command);
+
+        GetHospitalMessageByIdCommandAnswer GetHospitalMessageById(GetHospitalMessageByIdCommand command);
+
+        RemoveHospitalMessageByIdCommandAnswer RemoveHospitalMessageById(RemoveHospitalMessageByIdCommand command);
     }
 }

@@ -18,12 +18,12 @@
 </div>
 
 <div>
-    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageViewNoticesAfter, "Index", "ClinicNoticesPage", @MainResources.ClinicUserPageViewNoticesBefore)
+    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageViewNoticesBefore, "Index", "ClinicNoticesPage", @MainResources.ClinicUserPageViewNoticesAfter)
 
-        @{
-            if (Model.CountNewNotices > 0)
-            {
-                <a href="@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })"><span class="badge">@Model.CountNewNotices.ToString()</span></a><br>
+    @{
+        if (Model.CountNewNotices > 0)
+        {
+            <a href="@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })"><span class="badge">@Model.CountNewNotices.ToString()</span></a><br>
         }
     }
 </div>
