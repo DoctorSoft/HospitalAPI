@@ -5,43 +5,62 @@
 }
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.GetChangeHospitalRegistrationsPageInformationCommandAnswer
 
-
-<table>
-    <tr>
-        <th>
-            Monday 
-        </th>
-        <th>
-            Tuesday
-        </th>
-        <th>
-            Wednesday
-        </th>
-        <th>
-            Thursday
-        </th>
-        <th>
-            Friday
-        </th>
-        <th>
-            Saturday
-        </th>
-        <th>
-            Sunday
-        </th>
-    </tr>
-
-    @foreach (var item in Model.Schedule)
-    {
+<div class="panel panel-default">
+    <table class="table">
         <tr>
-            @foreach (var cell in item.Cells.Values)
-            {
-                <td>
-                    @cell.Day
-                </td>
-            }
+            <th>
+                Monday
+            </th>
+            <th>
+                Tuesday
+            </th>
+            <th>
+                Wednesday
+            </th>
+            <th>
+                Thursday
+            </th>
+            <th>
+                Friday
+            </th>
+            <th>
+                Saturday
+            </th>
+            <th>
+                Sunday
+            </th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model.Schedule)
+        {
+            <tr>
+                @foreach (var cell in item.Cells.Values)
+                {
+                    if (cell.IsBlocked)
+                    {
+                        <td style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center bg-primary">
+                            <h2>@cell.Day</h2>
+                        </td>
+                    }
+                    else
+                    {
+                        if (cell.IsThisDate)
+                        {
+                            <td style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center bg-warning">
+                                <h2>@cell.Day</h2>
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center bg-info">
+                                <h2>@cell.Day</h2>
+                            </td>
+                        }
+                    }
+                }
+            </tr>
+        }
+
+    </table>
+</div>
 

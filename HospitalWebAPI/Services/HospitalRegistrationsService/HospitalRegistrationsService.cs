@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities;
@@ -27,12 +26,12 @@ namespace Services.HospitalRegistrationsService
                     Cells = Enumerable.Range(0, 7)
                         .ToDictionary(day => (DayOfWeek) day, day => new ScheduleTableCell
                         {
-                            IsBlocked = false,
-                            Day = (startMonday + new TimeSpan(7 * week + day, 0, 0, 0)).Day,
+                            IsBlocked = startMonday.AddDays(7 * week + day).Date < now.Date || startMonday.AddDays(7 * week + day).Date > deadLine.Date,
+                            Day = startMonday.AddDays(7 * week + day).Day,
                             IsCompleted = false,
                             IsStarted = false,
-                            IsThisMonth = (startMonday + new TimeSpan(7*week + day, 0, 0, 0)).Month == now.Month,
-                            IsThisDate = (startMonday + new TimeSpan(7*week + day, 0, 0, 0)).Date == now.Date
+                            IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
+                            IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date
                         })
                 })
                 .ToList();
