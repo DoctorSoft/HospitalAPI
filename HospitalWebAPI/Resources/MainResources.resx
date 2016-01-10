@@ -201,4 +201,13 @@
   <data name="NoticeTableTitle" xml:space="preserve">
     <value>Тема</value>
   </data>
+  <data name="PageSendNoticesPageTitle" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="PageSendNoticesText" xml:space="preserve">
+    <value>Содержание:</value>
+  </data>
+  <data name="PageSendNoticesTheme" xml:space="preserve">
+    <value>Тема:</value>
+  </data>
 </root>
