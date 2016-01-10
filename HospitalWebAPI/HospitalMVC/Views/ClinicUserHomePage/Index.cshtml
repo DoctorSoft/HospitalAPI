@@ -1,4 +1,4 @@
-﻿@using System.Security.Principal
+﻿@using Resources
 
 @model ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers.GetClinicUserMainPageInformationCommandAnswer
 
@@ -7,18 +7,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.WriteTitlePage("Clinic User Home Page", "h2")
+@Html.WriteTitlePage(@MainResources.ClinicUserPageTitle, "h2")
 
-@Html.WriteTextAndVariable("Здравствуйте, ", @Model.UserName, "!", "p")
+@Html.WriteTextAndVariable(@MainResources.ClinicUserPageHello + ", ", @Model.UserName, "!", "p")
 
 <div>
-    @Html.WriteTextAndUrl("Если Вы хотите зарегистрировать место, то", "Index", "MakeClinicRegistrationPage", "нажмите сюда.")
+    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageRegistrationBefore, "Index", "MakeClinicRegistrationPage", @MainResources.ClinicUserPageRegistrationAfter)
     <br/>
-    @Html.WriteTextAndUrl("Если Вы хотите отменить регистрацию, то", "Index", "BreakClinicRegistrationPage", "нажмите сюда.")
+    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageCancelRegistrationBefore, "Index", "BreakClinicRegistrationPage", @MainResources.ClinicUserPageCancelRegistrationAfter)
 </div>
 
 <div>
-    @Html.WriteTextAndUrl("Если Вы хотите просмотреть ваши личные сообщения, то", "Index", "ClinicNoticesPage", "нажмите сюда.")
+    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageViewNoticesAfter, "Index", "ClinicNoticesPage", @MainResources.ClinicUserPageViewNoticesBefore)
 
         @{
             if (Model.CountNewNotices > 0)

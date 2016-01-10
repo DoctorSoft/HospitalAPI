@@ -4,21 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Resources
 @model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetClinicNoticesPageInformationCommandAnswer
 
 <div class="panel panel-default">
-    <div class="panel-heading">Личные сообщения</div>
+    <div class="panel-heading">@MainResources.NoticeTableHeading</div>
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    Title
+                    @MainResources.NoticeTableTitle
                 </th>
                 <th>
-                    Date
+                    @MainResources.NoticeTableDate
                 </th>
                 <th>
-                    Sender
+                    @MainResources.NoticeTableSender
                 </th>
                 <th>
 
@@ -36,7 +37,7 @@
                     <td>
                         @if (@item.SendDate.Date == DateTime.Today)
                         {
-                            @("сегодня, " + item.SendDate.ToString("t"))
+                            @item.SendDate.ToString("t")
                         }
                         else
                         {
@@ -47,7 +48,7 @@
                         @item.AuthorName
                     </td>
                     <td>
-                        @Html.ActionLink("Удалить", "RemoveMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
+                        @Html.ActionLink(MainResources.ButtonDeleteMessage, "RemoveMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
                     </td>
                 </tr>
             }

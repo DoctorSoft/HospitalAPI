@@ -4,18 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Resources
 @model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetHospitalNoticesPageInformationCommandAnswer
 
 <table>
     <tr>
         <th>
-            Title
+            @MainResources.NoticeTableTitle
         </th>
         <th>
-            Date
+            @MainResources.NoticeTableDate
         </th>
         <th>
-            Sender
+            @MainResources.NoticeTableSender
         </th>
         <th>
             

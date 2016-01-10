@@ -61,6 +61,96 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Назад.
+        /// </summary>
+        public static string ButtonBack {
+            get {
+                return ResourceManager.GetString("ButtonBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить.
+        /// </summary>
+        public static string ButtonDeleteMessage {
+            get {
+                return ResourceManager.GetString("ButtonDeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string ClinicUserPageCancelRegistrationAfter {
+            get {
+                return ResourceManager.GetString("ClinicUserPageCancelRegistrationAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите отменить регистрацию, то.
+        /// </summary>
+        public static string ClinicUserPageCancelRegistrationBefore {
+            get {
+                return ResourceManager.GetString("ClinicUserPageCancelRegistrationBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Здравствуйте.
+        /// </summary>
+        public static string ClinicUserPageHello {
+            get {
+                return ResourceManager.GetString("ClinicUserPageHello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string ClinicUserPageRegistrationAfter {
+            get {
+                return ResourceManager.GetString("ClinicUserPageRegistrationAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите зарегистрировать место, то.
+        /// </summary>
+        public static string ClinicUserPageRegistrationBefore {
+            get {
+                return ResourceManager.GetString("ClinicUserPageRegistrationBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clinic User Home Page.
+        /// </summary>
+        public static string ClinicUserPageTitle {
+            get {
+                return ResourceManager.GetString("ClinicUserPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string ClinicUserPageViewNoticesAfter {
+            get {
+                return ResourceManager.GetString("ClinicUserPageViewNoticesAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите просмотреть ваши личные сообщения, то.
+        /// </summary>
+        public static string ClinicUserPageViewNoticesBefore {
+            get {
+                return ResourceManager.GetString("ClinicUserPageViewNoticesBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authorization Error.
         /// </summary>
         public static string ErrorAuthorization_401 {
@@ -84,6 +174,15 @@ namespace Resources {
         public static string FillerLoadingMessage {
             get {
                 return ResourceManager.GetString("FillerLoadingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hospital User Home Page.
+        /// </summary>
+        public static string HospitalUserPageTitle {
+            get {
+                return ResourceManager.GetString("HospitalUserPageTitle", resourceCulture);
             }
         }
         
@@ -174,6 +273,42 @@ namespace Resources {
         public static string MenuItemViewNotices {
             get {
                 return ResourceManager.GetString("MenuItemViewNotices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дата.
+        /// </summary>
+        public static string NoticeTableDate {
+            get {
+                return ResourceManager.GetString("NoticeTableDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Личные сообщения.
+        /// </summary>
+        public static string NoticeTableHeading {
+            get {
+                return ResourceManager.GetString("NoticeTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автор.
+        /// </summary>
+        public static string NoticeTableSender {
+            get {
+                return ResourceManager.GetString("NoticeTableSender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тема.
+        /// </summary>
+        public static string NoticeTableTitle {
+            get {
+                return ResourceManager.GetString("NoticeTableTitle", resourceCulture);
             }
         }
     }

@@ -156,4 +156,49 @@
   <data name="MenuItemSendDistributiveMessagesPage" xml:space="preserve">
     <value>Разослать сообщения</value>
   </data>
+  <data name="ButtonBack" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="ButtonDeleteMessage" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="ClinicUserPageCancelRegistrationAfter" xml:space="preserve">
+    <value>нажмите сюда.</value>
+  </data>
+  <data name="ClinicUserPageCancelRegistrationBefore" xml:space="preserve">
+    <value>Если Вы хотите отменить регистрацию, то</value>
+  </data>
+  <data name="ClinicUserPageHello" xml:space="preserve">
+    <value>Здравствуйте</value>
+  </data>
+  <data name="ClinicUserPageRegistrationAfter" xml:space="preserve">
+    <value>нажмите сюда.</value>
+  </data>
+  <data name="ClinicUserPageRegistrationBefore" xml:space="preserve">
+    <value>Если Вы хотите зарегистрировать место, то</value>
+  </data>
+  <data name="ClinicUserPageTitle" xml:space="preserve">
+    <value>Clinic User Home Page</value>
+  </data>
+  <data name="ClinicUserPageViewNoticesAfter" xml:space="preserve">
+    <value>нажмите сюда.</value>
+  </data>
+  <data name="ClinicUserPageViewNoticesBefore" xml:space="preserve">
+    <value>Если Вы хотите просмотреть ваши личные сообщения, то</value>
+  </data>
+  <data name="HospitalUserPageTitle" xml:space="preserve">
+    <value>Hospital User Home Page</value>
+  </data>
+  <data name="NoticeTableDate" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="NoticeTableHeading" xml:space="preserve">
+    <value>Личные сообщения</value>
+  </data>
+  <data name="NoticeTableSender" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="NoticeTableTitle" xml:space="preserve">
+    <value>Тема</value>
+  </data>
 </root>

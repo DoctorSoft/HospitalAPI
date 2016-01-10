@@ -1,4 +1,5 @@
-﻿@model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetClinicMessageByIdCommandAnswer
+﻿@using Resources
+@model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetClinicMessageByIdCommandAnswer
 
 @{
     ViewBag.Title = "ReadMessage";
@@ -11,6 +12,6 @@
         <p>@Model.Text</p>
     </div>
 </div>
-<input type="button" title="Back" class="btn btn-default" value="Назад" onclick="location.href='@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })'" />
-<input type="button" title="Delete" class="btn btn-default" value="Удалить" onclick="location.href='@Url.Action("RemoveMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = Model.MessageId })'" />
+<input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })'" />
+<input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" onclick="location.href='@Url.Action("RemoveMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = Model.MessageId })'" />
 
