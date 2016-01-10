@@ -11,20 +11,37 @@
 
 @Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
 
-@Html.WriteTextAndUrl(@MainResources.HospitalUserPageChangeRegistrationBefore, "Index", "ChangeHospitalRegistrationPage", @MainResources.HospitalUserPageChangeRegistrationAfter)
-<br />
-@Html.WriteTextAndUrl(@MainResources.HospitalUserPageSendMessageBefore, "Index", "HospitalUserSendDistributiveMessagesPage", @MainResources.HospitalUserPageSendMessageAfter)
-<br />
+<div class="panel-home">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    @Html.WriteTextAndUrl(@MainResources.HospitalUserPageSendMessageBefore, "Index", "HospitalUserSendDistributiveMessagesPage", @MainResources.HospitalUserPageSendMessageAfter)
+                </p>
+            </div>
+        </div>
 
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    @Html.WriteTextAndUrl(@MainResources.HospitalUserPageSendMessageBefore, "Index", "HospitalUserSendDistributiveMessagesPage", @MainResources.HospitalUserPageSendMessageAfter)
+                </p>
+            </div>
+        </div>
 
-<div>
-    @Html.WriteTextAndUrl(@MainResources.HospitalUserPageViewNoticesBefore, "Index", "HospitalNoticesPage", @MainResources.HospitalUserPageViewNoticesAfter)
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    @Html.WriteTextAndUrl(@MainResources.HospitalUserPageViewNoticesBefore, "Index", "HospitalNoticesPage", @MainResources.HospitalUserPageViewNoticesAfter)
 
-    @{
-        if (Model.CountNewNotices > 0)
-        {
-            <a href="@Url.Action("Index", "HospitalNoticesPage", new { Token = Model.Token })"><span class="badge">@Model.CountNewNotices.ToString()</span></a><br>
-        }
-    }
+                    @{
+                        if (Model.CountNewNotices > 0)
+                        {
+                            <a href="@Url.Action("Index", "HospitalNoticesPage", new { Token = Model.Token })"><span class="badge">@Model.CountNewNotices.ToString()</span></a>
+                        }
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
-
