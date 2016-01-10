@@ -320,23 +320,5 @@ namespace Resources {
                 return ResourceManager.GetString("PageSendNoticesPageTitle", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Содержание:.
-        /// </summary>
-        public static string PageSendNoticesText {
-            get {
-                return ResourceManager.GetString("PageSendNoticesText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Тема:.
-        /// </summary>
-        public static string PageSendNoticesTheme {
-            get {
-                return ResourceManager.GetString("PageSendNoticesTheme", resourceCulture);
-            }
-        }
     }
 }

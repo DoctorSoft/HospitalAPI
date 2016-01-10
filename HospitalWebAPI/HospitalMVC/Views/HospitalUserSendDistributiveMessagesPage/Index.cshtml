@@ -15,10 +15,10 @@
     @Html.HiddenFor(command => command.Token);
 
     <div class="form-group">
-        <label for="Title">@MainResources.PageSendNoticesTheme</label>
-        <textarea class="form-control" rows="1" id="Title" name="Title"></textarea>
-        <label for="Text">@MainResources.PageSendNoticesText</label>
-        <textarea class="form-control" rows="10" id="Text" name="Text"></textarea>
+        @Html.LabelFor(o => o.Title):
+        @Html.TextAreaFor(o => o.Title, new {@class = "form-control", @rows = "1"})
+        @Html.LabelFor(o => o.Text):
+        @Html.TextAreaFor(o => o.Text, new { @class = "form-control", @rows = "10" })
         <input class="btn btn-sm btn-primary" type="submit" />
     </div>
 }
