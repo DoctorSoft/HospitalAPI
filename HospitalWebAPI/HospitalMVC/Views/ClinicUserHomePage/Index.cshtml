@@ -9,13 +9,11 @@
 
 @Html.WriteTitlePage(@MainResources.ClinicUserPageTitle, "h2")
 
-@Html.WriteTextAndVariable(@MainResources.ClinicUserPageHello + ", ", @Model.UserName, "!", "p")
+@Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
 
-<div>
-    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageRegistrationBefore, "Index", "MakeClinicRegistrationPage", @MainResources.ClinicUserPageRegistrationAfter)
-    <br/>
-    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageCancelRegistrationBefore, "Index", "BreakClinicRegistrationPage", @MainResources.ClinicUserPageCancelRegistrationAfter)
-</div>
+@Html.WriteTextAndUrl(@MainResources.ClinicUserPageRegistrationBefore, "Index", "MakeClinicRegistrationPage", @MainResources.ClinicUserPageRegistrationAfter)
+<br/>
+@Html.WriteTextAndUrl(@MainResources.ClinicUserPageCancelRegistrationBefore, "Index", "BreakClinicRegistrationPage", @MainResources.ClinicUserPageCancelRegistrationAfter)
 
 <div>
     @Html.WriteTextAndUrl(@MainResources.ClinicUserPageViewNoticesBefore, "Index", "ClinicNoticesPage", @MainResources.ClinicUserPageViewNoticesAfter)

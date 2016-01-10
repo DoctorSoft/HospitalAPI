@@ -168,7 +168,7 @@
   <data name="ClinicUserPageCancelRegistrationBefore" xml:space="preserve">
     <value>Если Вы хотите отменить регистрацию, то</value>
   </data>
-  <data name="ClinicUserPageHello" xml:space="preserve">
+  <data name="UserPageHello" xml:space="preserve">
     <value>Здравствуйте</value>
   </data>
   <data name="ClinicUserPageRegistrationAfter" xml:space="preserve">
@@ -203,5 +203,23 @@
   </data>
   <data name="PageSendNoticesPageTitle" xml:space="preserve">
     <value>Send Message</value>
+  </data>
+  <data name="HospitalUserPageChangeRegistrationAfter" xml:space="preserve">
+    <value>нажмите сюда</value>
+  </data>
+  <data name="HospitalUserPageChangeRegistrationBefore" xml:space="preserve">
+    <value>Если Вы хотите отредактировать список свободных мест, то </value>
+  </data>
+  <data name="HospitalUserPageSendMessageAfter" xml:space="preserve">
+    <value>нажмите сюда.</value>
+  </data>
+  <data name="HospitalUserPageSendMessageBefore" xml:space="preserve">
+    <value>Если вы хотите разослать сообщения поликлиникам, то </value>
+  </data>
+  <data name="HospitalUserPageViewNoticesAfter" xml:space="preserve">
+    <value>нажмите сюда.</value>
+  </data>
+  <data name="HospitalUserPageViewNoticesBefore" xml:space="preserve">
+    <value>Если Вы хотите просмотреть ваши личные сообщения, то</value>
   </data>
 </root>

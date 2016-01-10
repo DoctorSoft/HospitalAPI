@@ -1,9 +1,30 @@
 ﻿@using Resources
 
+@model ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers.GetHospitalUserMainPageInformationCommandAnswer
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @Html.WriteTitlePage(@MainResources.HospitalUserPageTitle, "h2")
+
+@Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
+
+@Html.WriteTextAndUrl(@MainResources.HospitalUserPageChangeRegistrationBefore, "Index", "ChangeHospitalRegistrationPage", @MainResources.HospitalUserPageChangeRegistrationAfter)
+<br />
+@Html.WriteTextAndUrl(@MainResources.HospitalUserPageSendMessageBefore, "Index", "HospitalUserSendDistributiveMessagesPage", @MainResources.HospitalUserPageSendMessageAfter)
+<br />
+
+
+<div>
+    @Html.WriteTextAndUrl(@MainResources.HospitalUserPageViewNoticesBefore, "Index", "HospitalNoticesPage", @MainResources.HospitalUserPageViewNoticesAfter)
+
+    @{
+        if (Model.CountNewNotices > 0)
+        {
+            <a href="@Url.Action("Index", "HospitalNoticesPage", new { Token = Model.Token })"><span class="badge">@Model.CountNewNotices.ToString()</span></a><br>
+        }
+    }
+</div>
 

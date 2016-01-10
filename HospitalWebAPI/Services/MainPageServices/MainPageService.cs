@@ -95,9 +95,15 @@ namespace Services.MainPageServices
         public GetHospitalUserMainPageInformationCommandAnswer GetHospitalUserMainPageInformation(
             GetHospitalUserMainPageInformationCommand command)
         {
+            var currentUser = _tokenManager.GetUserByToken(command.Token);
+
+            var countNewNotices = GetCountNewNotices(currentUser);
+
             var answer = new GetHospitalUserMainPageInformationCommandAnswer
             {
-                Token = (Guid)command.Token
+                Token = (Guid)command.Token,
+                UserName = currentUser.Name,
+                CountNewNotices = countNewNotices
             };
             return answer;
         }
