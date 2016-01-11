@@ -79,5 +79,10 @@ namespace CreateRandomDataTools.CreationSettings
         {
             return bool.Parse(WebConfigurationManager.AppSettings["CreateHospitalSectionProfiles"]);
         }
+
+        public bool CreateMessages()
+        {
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateMessages"]);
+        }
     }
 }

@@ -32,5 +32,7 @@
 
         bool CreateHospitalSectionProfiles();
 
+        bool CreateMessages();
+
     }
 }

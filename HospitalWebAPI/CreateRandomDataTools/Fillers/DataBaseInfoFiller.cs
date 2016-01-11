@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CreateRandomDataTools.Interfaces;
 using CreateRandomDataTools.Interfaces.CommonInterfaces;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using DataBaseTools.Interfaces;
@@ -25,6 +26,7 @@ namespace CreateRandomDataTools.Fillers
         private readonly IReceptionUserModelCreator _receptionUserModelCreator;
         private readonly IClinicHospitalPrioritiesCreator _clinicHospitalPrioritiesCreator;
         private readonly IHospitalSectionProfileCreator _hospitalSectionProfileCreator;
+        private readonly IMessageCreator _messageCreator;
 
         private readonly IDataBaseContext _dataBaseContext;
         private readonly ICreationSettingsModule _creationSettingsModule;
@@ -41,7 +43,7 @@ namespace CreateRandomDataTools.Fillers
             IAdministratorAndReviewerModelsCreator administratorAndReviewerModelsCreator,
             IUserFunctionModelCreator userFunctionModelCreator,
             ISettingsItemCreator settingsItemCreator,
-            IReceptionUserModelCreator receptionUserModelCreator, IClinicHospitalPrioritiesCreator clinicHospitalPrioritiesCreator, IHospitalSectionProfileCreator hospitalSectionProfileCreator)
+            IReceptionUserModelCreator receptionUserModelCreator, IClinicHospitalPrioritiesCreator clinicHospitalPrioritiesCreator, IHospitalSectionProfileCreator hospitalSectionProfileCreator, IMessageCreator messageCreator)
         {
             _dataBaseContext = dataBaseContext;
             _creationSettingsModule = creationSettingsModule;
@@ -63,13 +65,14 @@ namespace CreateRandomDataTools.Fillers
             _receptionUserModelCreator = receptionUserModelCreator;
             _clinicHospitalPrioritiesCreator = clinicHospitalPrioritiesCreator;
             _hospitalSectionProfileCreator = hospitalSectionProfileCreator;
+            _messageCreator = messageCreator;
         }
 
         public void FillDataBase(Func<string, bool> showStatusFunction = null)
         {
             var percents = 0.0;
 
-            const double percentIncrementation = 100 / 15.0;
+            const double percentIncrementation = 100 / 16.0;
 
             FillSectionModels(showStatusFunction, percents += percentIncrementation);
             FillHospitalModels(showStatusFunction, percents += percentIncrementation);
@@ -84,8 +87,9 @@ namespace CreateRandomDataTools.Fillers
             FillBotModels(showStatusFunction, percents += percentIncrementation);
             FillAdministratorAndReviewerModels(showStatusFunction, percents += percentIncrementation);
             FillClinicHospitalPriorityModels(showStatusFunction, percents += percentIncrementation);
-            FillUserFunctionModels(showStatusFunction, percents + percentIncrementation);
-            FillHospitalSectionProfileModels(showStatusFunction, 100.0);
+            FillUserFunctionModels(showStatusFunction, percents += percentIncrementation);
+            FillHospitalSectionProfileModels(showStatusFunction, percents + percentIncrementation);
+            FillMessageModels(showStatusFunction, 100.0);
         }
 
         protected virtual void FillList<T>(IEnumerable<T> models, Func<string, bool> showStatusFunction = null, double percentCount = 0, bool fillApprove = true)
@@ -228,6 +232,14 @@ namespace CreateRandomDataTools.Fillers
         {
             var models = _hospitalSectionProfileCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateHospitalSectionProfiles();
+
+            FillList(models, showStatusFunction, percentCount, fillApprove);
+        }
+
+        protected virtual void FillMessageModels(Func<string, bool> showStatusFunction = null, double percentCount = 0)
+        {
+            var models = _messageCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateMessages();
 
             FillList(models, showStatusFunction, percentCount, fillApprove);
         }

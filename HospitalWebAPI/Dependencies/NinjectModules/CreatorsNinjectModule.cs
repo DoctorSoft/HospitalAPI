@@ -1,6 +1,7 @@
 ﻿using CreateRandomDataTools.CreationSettings;
 using CreateRandomDataTools.DataCreators;
 using CreateRandomDataTools.Fillers;
+using CreateRandomDataTools.Interfaces;
 using CreateRandomDataTools.Interfaces.CommonInterfaces;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using Ninject.Modules;
@@ -32,6 +33,7 @@ namespace Dependencies.NinjectModules
             Bind<IUserFunctionModelCreator>().To<UserFunctionModelCreator>().InThreadScope();
             Bind<IClinicHospitalPrioritiesCreator>().To<ClinicHospitalPrioritiesCreator>().InThreadScope();
             Bind<IHospitalSectionProfileCreator>().To<HospitalSectionProfileCreator>().InThreadScope();
+            Bind<IMessageCreator>().To<MessageCreator>().InThreadScope();
 
             // Fillers
 
