@@ -120,9 +120,12 @@ namespace Services.MainPageServices
         public GetReceptionUserMainPageInformationCommandAnswer GetReceptionUserMainPageInformation(
             GetReceptionUserMainPageInformationCommand command)
         {
+            var currentUser = _tokenManager.GetUserByToken(command.Token);
+
             var answer = new GetReceptionUserMainPageInformationCommandAnswer
             {
-                Token = (Guid)command.Token
+                Token = (Guid)command.Token,
+                UserName = currentUser.Name
             };
             return answer;
         }

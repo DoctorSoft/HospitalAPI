@@ -367,6 +367,51 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string ReceptionUserPageMarkPatientAfter {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageMarkPatientAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите отметить прибывшего пациента, то .
+        /// </summary>
+        public static string ReceptionUserPageMarkPatientBefore {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageMarkPatientBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reception User Home Page.
+        /// </summary>
+        public static string ReceptionUserPageTitle {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string ReceptionUserPageUnmarkPatientAfter {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageUnmarkPatientAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите отменить отметку, то.
+        /// </summary>
+        public static string ReceptionUserPageUnmarkPatientBefore {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageUnmarkPatientBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Здравствуйте.
         /// </summary>
         public static string UserPageHello {

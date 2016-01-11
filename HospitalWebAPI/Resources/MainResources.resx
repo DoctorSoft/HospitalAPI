@@ -222,4 +222,19 @@
   <data name="HospitalUserPageViewNoticesBefore" xml:space="preserve">
     <value>Если Вы хотите просмотреть ваши личные сообщения, то</value>
   </data>
+  <data name="ReceptionUserPageMarkPatientAfter" xml:space="preserve">
+    <value>нажмите сюда.</value>
+  </data>
+  <data name="ReceptionUserPageMarkPatientBefore" xml:space="preserve">
+    <value>Если Вы хотите отметить прибывшего пациента, то </value>
+  </data>
+  <data name="ReceptionUserPageTitle" xml:space="preserve">
+    <value>Reception User Home Page</value>
+  </data>
+  <data name="ReceptionUserPageUnmarkPatientAfter" xml:space="preserve">
+    <value>нажмите сюда.</value>
+  </data>
+  <data name="ReceptionUserPageUnmarkPatientBefore" xml:space="preserve">
+    <value>Если Вы хотите отменить отметку, то</value>
+  </data>
 </root>
