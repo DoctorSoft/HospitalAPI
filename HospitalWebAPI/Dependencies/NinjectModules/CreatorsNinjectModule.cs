@@ -31,6 +31,7 @@ namespace Dependencies.NinjectModules
             Bind<IAdministratorAndReviewerModelsCreator>().To<AdministratorAndReviewerModelsCreator>().InThreadScope();
             Bind<IUserFunctionModelCreator>().To<UserFunctionModelCreator>().InThreadScope();
             Bind<IClinicHospitalPrioritiesCreator>().To<ClinicHospitalPrioritiesCreator>().InThreadScope();
+            Bind<IHospitalSectionProfileCreator>().To<HospitalSectionProfileCreator>().InThreadScope();
 
             // Fillers
 

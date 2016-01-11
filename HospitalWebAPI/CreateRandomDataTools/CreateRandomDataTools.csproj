@@ -56,6 +56,7 @@
     <Compile Include="DataCreators\BotModelCreator.cs" />
     <Compile Include="DataCreators\ClinicHospitalPrioritiesCreator.cs" />
     <Compile Include="DataCreators\ClinicModelCreator.cs" />
+    <Compile Include="DataCreators\HospitalSectionProfileCreator.cs" />
     <Compile Include="DataCreators\SettingsItemCreator.cs" />
     <Compile Include="DataCreators\ClinicUserModelCreator.cs" />
     <Compile Include="DataCreators\FunctionalGroupModelCreator.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Interfaces\CommonInterfaces\IDataBaseInfoFiller.cs" />
     <Compile Include="Interfaces\CommonInterfaces\ICreationSettingsModule.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IRandomModelListCreator.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\IHospitalSectionProfileCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IAdministratorAndReviewerModelsCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IBotModelCreator.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\IClinicModelCreator.cs" />

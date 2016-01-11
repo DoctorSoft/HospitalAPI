@@ -30,5 +30,7 @@
 
         bool CreateClinicHospitalPriorities();
 
+        bool CreateHospitalSectionProfiles();
+
     }
 }

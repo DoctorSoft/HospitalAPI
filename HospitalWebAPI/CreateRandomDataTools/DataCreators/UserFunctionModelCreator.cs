@@ -38,6 +38,7 @@ namespace CreateRandomDataTools.DataCreators
 
             var results = _userRepository
                 .GetModels()
+                .ToList()
                 .SelectMany(model => functionSelectors
                     .Where(selectorModel => selectorModel.UserTypeId == model.UserTypeId)
                     .SelectMany(selectorModel => selectorModel.GroupFunctions)
