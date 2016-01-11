@@ -9,21 +9,39 @@
 
 @Html.WriteTitlePage(@MainResources.ClinicUserPageTitle, "h2")
 
-@Html.WriteTextAndVariable(@MainResources.ClinicUserPageHello + ", ", @Model.UserName, "!", "p")
+@Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
 
-<div>
-    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageRegistrationBefore, "Index", "MakeClinicRegistrationPage", @MainResources.ClinicUserPageRegistrationAfter)
-    <br/>
-    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageCancelRegistrationBefore, "Index", "BreakClinicRegistrationPage", @MainResources.ClinicUserPageCancelRegistrationAfter)
-</div>
+<div class="panel-home">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageRegistrationBefore, "Index", "MakeClinicRegistrationPage", @MainResources.ClinicUserPageRegistrationAfter)
+                </p>
+            </div>
+        </div>
 
-<div>
-    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageViewNoticesBefore, "Index", "ClinicNoticesPage", @MainResources.ClinicUserPageViewNoticesAfter)
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageCancelRegistrationBefore, "Index", "BreakClinicRegistrationPage", @MainResources.ClinicUserPageCancelRegistrationAfter)
+                </p>
+            </div>
+        </div>
 
-    @{
-        if (Model.CountNewNotices > 0)
-        {
-            <a href="@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })"><span class="badge">@Model.CountNewNotices.ToString()</span></a><br>
-        }
-    }
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    @Html.WriteTextAndUrl(@MainResources.ClinicUserPageViewNoticesBefore, "Index", "ClinicNoticesPage", @MainResources.ClinicUserPageViewNoticesAfter)
+
+                    @{
+                        if (Model.CountNewNotices > 0)
+                        {
+                            <a href="@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })"><span class="badge">@Model.CountNewNotices.ToString()</span></a>
+                        }
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
 </div>

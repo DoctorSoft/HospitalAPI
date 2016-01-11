@@ -97,15 +97,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Здравствуйте.
-        /// </summary>
-        public static string ClinicUserPageHello {
-            get {
-                return ResourceManager.GetString("ClinicUserPageHello", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to нажмите сюда..
         /// </summary>
         public static string ClinicUserPageRegistrationAfter {
@@ -178,11 +169,65 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда.
+        /// </summary>
+        public static string HospitalUserPageChangeRegistrationAfter {
+            get {
+                return ResourceManager.GetString("HospitalUserPageChangeRegistrationAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите отредактировать список свободных мест, то .
+        /// </summary>
+        public static string HospitalUserPageChangeRegistrationBefore {
+            get {
+                return ResourceManager.GetString("HospitalUserPageChangeRegistrationBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string HospitalUserPageSendMessageAfter {
+            get {
+                return ResourceManager.GetString("HospitalUserPageSendMessageAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если вы хотите разослать сообщения поликлиникам, то .
+        /// </summary>
+        public static string HospitalUserPageSendMessageBefore {
+            get {
+                return ResourceManager.GetString("HospitalUserPageSendMessageBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hospital User Home Page.
         /// </summary>
         public static string HospitalUserPageTitle {
             get {
                 return ResourceManager.GetString("HospitalUserPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string HospitalUserPageViewNoticesAfter {
+            get {
+                return ResourceManager.GetString("HospitalUserPageViewNoticesAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите просмотреть ваши личные сообщения, то.
+        /// </summary>
+        public static string HospitalUserPageViewNoticesBefore {
+            get {
+                return ResourceManager.GetString("HospitalUserPageViewNoticesBefore", resourceCulture);
             }
         }
         
@@ -318,6 +363,60 @@ namespace Resources {
         public static string PageSendNoticesPageTitle {
             get {
                 return ResourceManager.GetString("PageSendNoticesPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string ReceptionUserPageMarkPatientAfter {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageMarkPatientAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите отметить прибывшего пациента, то .
+        /// </summary>
+        public static string ReceptionUserPageMarkPatientBefore {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageMarkPatientBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reception User Home Page.
+        /// </summary>
+        public static string ReceptionUserPageTitle {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string ReceptionUserPageUnmarkPatientAfter {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageUnmarkPatientAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите отменить отметку, то.
+        /// </summary>
+        public static string ReceptionUserPageUnmarkPatientBefore {
+            get {
+                return ResourceManager.GetString("ReceptionUserPageUnmarkPatientBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Здравствуйте.
+        /// </summary>
+        public static string UserPageHello {
+            get {
+                return ResourceManager.GetString("UserPageHello", resourceCulture);
             }
         }
     }

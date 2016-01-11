@@ -1,8 +1,30 @@
-﻿
+﻿@using Resources
+@model ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers.GetReceptionUserMainPageInformationCommandAnswer
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Reception User Home Page</h2>
+@Html.WriteTitlePage(@MainResources.ReceptionUserPageTitle, "h2")
 
+@Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
+
+<div class="panel-home">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    @Html.WriteTextAndUrl(@MainResources.ReceptionUserPageMarkPatientBefore, "Index", "ReceptionUserMarkClientsPage", @MainResources.ReceptionUserPageMarkPatientAfter)
+                </p>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p>
+                    @Html.WriteTextAndUrl(@MainResources.ReceptionUserPageUnmarkPatientBefore, "Index", "ReceptionUserUnmarkClientsPage", @MainResources.ReceptionUserPageUnmarkPatientAfter)                </p>
+            </div>
+        </div>
+    </div>
+</div>
