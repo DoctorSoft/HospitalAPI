@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Enums.Enums;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
@@ -21,14 +20,16 @@ namespace Services.HospitalRegistrationsService
         private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHospitalUserRepository _hospitalUserRepository;
+        private readonly IEmptyPlaceByTypeStatisticRepository _emptyPlaceByTypeStatisticRepository;
 
         public HospitalRegistrationsService(IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository,
-            IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager, IHospitalUserRepository hospitalUserRepository)
+            IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager, IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository)
         {
             _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
             _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
             _tokenManager = tokenManager;
             _hospitalUserRepository = hospitalUserRepository;
+            _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
         }
 
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
@@ -123,54 +124,35 @@ namespace Services.HospitalRegistrationsService
         public ShowHospitalRegistrationPlacesByDateCommandAnswer ShowHospitalRegistrationPlacesByDate(
             ShowHospitalRegistrationPlacesByDateCommand command)
         {
+            var user = _tokenManager.GetUserByToken(command.Token);
+            var hospitalId = GetHospitalIdByUserId(user.Id);
+
+            var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels();
+
+            var table = ((IDbSet<HospitalSectionProfileStorageModel>)hospitalSectionProfiles)
+                             .Where(model => model.HospitalId == hospitalId)
+                             .Where(model => model.EmptyPlaceStatistics.Any(storageModel => storageModel.Date == command.Date))
+                             .Select(model => new HospitalRegistrationTableItem
+                             {
+                                 HospitalProfileId = model.Id,
+                                 HospitalProfileName = model.Name,
+                                 StatisticItems = model.EmptyPlaceStatistics
+                                                       .Where(storageModel => storageModel.Date == command.Date)
+                                                       .SelectMany(storageModel => storageModel.EmptyPlaceByTypeStatistics)
+                                                       .Select(storageModel => new HospitalRegistrationCountStatisticItem
+                                                       {
+                                                           Sex = storageModel.Sex,
+                                                           AgeSection = storageModel.AgeSection,
+                                                           OpenCount = storageModel.Count
+                                                       })
+                                                       .ToList()
+                             }).ToList();
+
             return new ShowHospitalRegistrationPlacesByDateCommandAnswer
             {
                 Token = (Guid)command.Token,
-                IsCompleted = false,
                 Date = command.Date,
-                Table = new List<HospitalRegistrationTableItem>
-                {
-                    new HospitalRegistrationTableItem
-                    {
-                        StatisticItems = new List<HospitalRegistrationCountStatisticItem>
-                        {
-                            new HospitalRegistrationCountStatisticItem
-                            {
-                                Sex = Sex.Female,
-                                AgeSection = AgeSection.Between3And18,
-                                OpenCount = 10
-                            },
-                            new HospitalRegistrationCountStatisticItem
-                            {
-                                Sex = Sex.Male,
-                                AgeSection = AgeSection.Between3And18,
-                                OpenCount = 5
-                            }
-                        },
-                        HospitalProfileId = 1,
-                        HospitalProfileName = "SomeFirstSectionName"
-                    },
-                    new HospitalRegistrationTableItem
-                    {
-                        StatisticItems = new List<HospitalRegistrationCountStatisticItem>
-                        {
-                            new HospitalRegistrationCountStatisticItem
-                            {
-                                Sex = Sex.Female,
-                                AgeSection = AgeSection.Between3And18,
-                                OpenCount = 0
-                            },
-                            new HospitalRegistrationCountStatisticItem
-                            {
-                                Sex = Sex.Male,
-                                AgeSection = AgeSection.Between3And18,
-                                OpenCount = 4
-                            }
-                        },
-                        HospitalProfileId = 1,
-                        HospitalProfileName = "SomeSecondSectionName"
-                    },
-                },
+                Table = table
             };
         }
     }
