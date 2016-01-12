@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
@@ -57,7 +58,8 @@ namespace Services.HospitalRegistrationsService
                             IsCompleted = statisticList.Count(model => model.Date.Date == startMonday.AddDays(7 * week + day).Date) == completeCount,
                             IsStarted = statisticList.Any(model => model.Date.Date == startMonday.AddDays(7 * week + day).Date),
                             IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
-                            IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date
+                            IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date,
+                            Date = startMonday.AddDays(7 * week + day).Date
                         })
                 })
                 .ToList();
@@ -118,12 +120,57 @@ namespace Services.HospitalRegistrationsService
             return nextSunday;
         }
 
-        public GetOpenHospitalRegistrationsPageInformationCommandAnswer GetOpenHospitalRegistrationsPageInformation(
-            GetOpenHospitalRegistrationsPageInformationCommand command)
+        public ShowHospitalRegistrationPlacesByDateCommandAnswer ShowHospitalRegistrationPlacesByDate(
+            ShowHospitalRegistrationPlacesByDateCommand command)
         {
-            return new GetOpenHospitalRegistrationsPageInformationCommandAnswer
+            return new ShowHospitalRegistrationPlacesByDateCommandAnswer
             {
-                Token = (Guid)command.Token
+                Token = (Guid)command.Token,
+                IsCompleted = false,
+                Date = command.Date,
+                Table = new List<HospitalRegistrationTableItem>
+                {
+                    new HospitalRegistrationTableItem
+                    {
+                        StatisticItems = new List<HospitalRegistrationCountStatisticItem>
+                        {
+                            new HospitalRegistrationCountStatisticItem
+                            {
+                                Sex = Sex.Female,
+                                AgeSection = AgeSection.Between3And18,
+                                OpenCount = 10
+                            },
+                            new HospitalRegistrationCountStatisticItem
+                            {
+                                Sex = Sex.Male,
+                                AgeSection = AgeSection.Between3And18,
+                                OpenCount = 5
+                            }
+                        },
+                        HospitalProfileId = 1,
+                        HospitalProfileName = "SomeFirstSectionName"
+                    },
+                    new HospitalRegistrationTableItem
+                    {
+                        StatisticItems = new List<HospitalRegistrationCountStatisticItem>
+                        {
+                            new HospitalRegistrationCountStatisticItem
+                            {
+                                Sex = Sex.Female,
+                                AgeSection = AgeSection.Between3And18,
+                                OpenCount = 0
+                            },
+                            new HospitalRegistrationCountStatisticItem
+                            {
+                                Sex = Sex.Male,
+                                AgeSection = AgeSection.Between3And18,
+                                OpenCount = 4
+                            }
+                        },
+                        HospitalProfileId = 1,
+                        HospitalProfileName = "SomeSecondSectionName"
+                    },
+                },
             };
         }
     }

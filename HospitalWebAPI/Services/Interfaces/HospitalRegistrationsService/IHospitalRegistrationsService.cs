@@ -8,7 +8,7 @@ namespace Services.Interfaces.HospitalRegistrationsService
         GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
             GetChangeHospitalRegistrationsPageInformationCommand command);
 
-        GetOpenHospitalRegistrationsPageInformationCommandAnswer GetOpenHospitalRegistrationsPageInformation(
-            GetOpenHospitalRegistrationsPageInformationCommand command);
+        ShowHospitalRegistrationPlacesByDateCommandAnswer ShowHospitalRegistrationPlacesByDate(
+            ShowHospitalRegistrationPlacesByDateCommand command);
     }
 }

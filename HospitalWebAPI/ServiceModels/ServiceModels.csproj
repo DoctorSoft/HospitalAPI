@@ -52,10 +52,12 @@
     <Compile Include="ServiceCommandAnswers\AuthorizationCommandAnswers\LogOutUserByTokenCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetBreakClinicRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetMakeClinicRegistrationsPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationCountStatisticItem.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\ScheduleTableCell.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\ScheduleTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetChangeHospitalRegistrationsPageInformationCommandAnswer.cs" />
-    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetOpenHospitalRegistrationsPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ShowHospitalRegistrationPlacesByDateCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainMenuCommandAnswers\GetMainMenuItemsCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetAdministratorMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetClinicUserMainPageInformationCommandAnswer.cs" />
@@ -79,7 +81,7 @@
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetBreakClinicRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetMakeClinicRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationsPageInformationCommand.cs" />
-    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetOpenHospitalRegistrationsPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ShowHospitalRegistrationPlacesByDateCommand.cs" />
     <Compile Include="ServiceCommands\MainMenuCommands\GetMainMenuItemsCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetAdministratorMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetClinicUserMainPageInformationCommand.cs" />

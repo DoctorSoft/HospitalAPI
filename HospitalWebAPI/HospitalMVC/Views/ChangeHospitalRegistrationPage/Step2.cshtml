@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Step2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowHospitalRegistrationPlacesByDateCommandAnswer
+
+<div class="panel panel-default">
+    <div class="panel-heading">Date: @Model.Date.ToString("d")</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Info
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var item in Model.Table)
+        {
+            <tr>
+                <td><a>@item.HospitalProfileName</a></td>
+
+                <td>
+                    @foreach (var info in item.StatisticItems)
+                    {
+                        <div>
+                            <br/>
+                            Sex: @info.Sex.ToString("G") <br/>
+                            Diapason: @info.AgeSection.ToString("G") <br/>
+                            Count: @info.OpenCount <br/>
+                            <br/>
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+</div>
+

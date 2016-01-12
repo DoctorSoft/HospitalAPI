@@ -277,6 +277,7 @@
     <Content Include="Views\HospitalUserSendDistributiveMessagesPage\Index.cshtml" />
     <Content Include="Views\ClinicNoticesPage\ReadMessage.cshtml" />
     <Content Include="Views\HospitalNoticesPage\ReadMessage.cshtml" />
+    <Content Include="Views\ChangeHospitalRegistrationPage\Step2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

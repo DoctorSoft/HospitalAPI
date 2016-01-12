@@ -22,5 +22,12 @@ namespace HospitalMVC.Controllers
             var answer = _hospitalRegistrationsService.GetChangeHospitalRegistrationsPageInformation(command);
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult Step2(ShowHospitalRegistrationPlacesByDateCommand command)
+        {
+            var answer = _hospitalRegistrationsService.ShowHospitalRegistrationPlacesByDate(command);
+            return View(answer);
+        }
     }
 }

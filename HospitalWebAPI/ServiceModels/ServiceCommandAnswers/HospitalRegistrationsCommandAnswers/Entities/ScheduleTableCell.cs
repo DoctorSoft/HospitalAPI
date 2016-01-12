@@ -1,4 +1,6 @@
-﻿namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities
+﻿using System;
+
+namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities
 {
     public class ScheduleTableCell
     {
@@ -13,5 +15,7 @@
         public int Day { get; set; }
 
         public bool IsThisDate { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }

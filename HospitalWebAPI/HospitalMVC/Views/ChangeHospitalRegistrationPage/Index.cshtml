@@ -7,6 +7,7 @@
 
 <div class="panel panel-default">
     <table class="table">
+        <thead>
         <tr>
             <th>
                 Monday
@@ -30,7 +31,8 @@
                 Sunday
             </th>
         </tr>
-
+        </thead>
+        <tbody>
         @foreach (var item in Model.Schedule)
         {
             <tr>
@@ -62,34 +64,42 @@
                                 {
 
                                     <td>
-                                        <div style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center btn btn-success">
-                                            <span class="glyphicon glyphicon-check" aria-hidden="true"></span> <h2>@cell.Day</h2>
-                                        </div>
+                                        <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" alt="">
+                                            <div style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center btn btn-success">
+                                                <span class="glyphicon glyphicon-check" aria-hidden="true"></span> <h2>@cell.Day</h2>
+                                            </div>
+                                        </a>
                                     </td>
                                 }
                                 else
                                 {
                                     <td>
-                                        <div style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center btn btn-info">
-                                            <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> <h2>@cell.Day</h2>
-                                        </div>
+                                        <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" alt="">
+                                            <div style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center btn btn-info">
+                                                <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> <h2>@cell.Day</h2>
+                                            </div>
+                                        </a>
                                     </td>
                                 }
                             }
                             else
                             {
+
                                 <td>
-                                    <div style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center btn btn-info">
-                                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> <h2>@cell.Day</h2>
-                                    </div>
+                                    <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = cell.Date })" alt="">
+                                        <div style="height: 200px; width: 200px; max-width: 200px; max-height: 200px; vertical-align: middle" class="text-center btn btn-info">
+                                            <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> <h2>@cell.Day</h2>
+                                        </div>
+                                    </a>
                                 </td>
+                                
                             }
                         }
                     }
                 }
             </tr>
         }
-
+        </tbody>
     </table>
 </div>
 
