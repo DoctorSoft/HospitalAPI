@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CreateRandomDataTools.Interfaces;
+using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using Enums.Enums;
 using HelpingTools.Interfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
@@ -9,13 +9,13 @@ using StorageModels.Models.MailboxModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
-    public class MessageCreator : IMessageCreator
+    public class MessageModelCreator : IMessageModelCreator
     {
         private readonly IExtendedRandom _extendedRandom;
 
         private readonly IUserRepository _userRepository;
 
-        public MessageCreator(IExtendedRandom extendedRandom, IUserRepository userRepository)
+        public MessageModelCreator(IExtendedRandom extendedRandom, IUserRepository userRepository)
         {
             this._extendedRandom = extendedRandom;
             _userRepository = userRepository;
