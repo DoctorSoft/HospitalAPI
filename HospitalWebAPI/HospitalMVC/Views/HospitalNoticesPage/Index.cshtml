@@ -29,7 +29,7 @@
         <tbody>
             @foreach (var item in Model.Messages)
             {
-                <tr style="@(item.IsRead != true ? "background-color: #f5f5f5" : "")">
+                <tr @(item.IsRead != true ? "class= newMessageRow" : "")>
                     <td>
                         @Html.ActionLink(item.Title, "ReadMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
                     </td>
@@ -46,7 +46,7 @@
                     <td>
                         @item.AuthorName
                     </td>
-                    <td>
+                    <td class="controlColumn">
                         @Html.ActionLink(MainResources.ButtonDeleteMessage, "RemoveMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
                     </td>
                 </tr>
