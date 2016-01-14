@@ -35,12 +35,21 @@
                         </div>
                     </div>
                 </div>
-                {
-                    iteration++;
-                }
+                            {
+                                iteration++;
+                            }
             }
 
-        }
+            if (!Model.IsCompleted)
+            {
+                <div>
+                    <br/>
+                    @Html.ActionLink("Добавить", "Index", "ChangeHospitalRegistrationPage", new {}, new {@class = "btn-info btn"})
+                    <br />
+                </div>
+            }
+
+}
     </div>
 </div>
 

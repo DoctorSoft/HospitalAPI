@@ -129,6 +129,10 @@ namespace Services.HospitalRegistrationsService
 
             var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels();
 
+            var date = command.Date.Date;
+            var statisticList = this.GetStatisticList(date, date, hospitalId);
+            var completeCount = this.GetHospitalProfileCount(hospitalId);
+
             var table = ((IDbSet<HospitalSectionProfileStorageModel>)hospitalSectionProfiles)
                              .Where(model => model.HospitalId == hospitalId)
                              .Where(model => model.EmptyPlaceStatistics.Any(storageModel => storageModel.Date == command.Date))
@@ -148,11 +152,14 @@ namespace Services.HospitalRegistrationsService
                                                        .ToList()
                              }).ToList();
 
+            var statistics = statisticList.Count(model => model.Date.Date == date);
+
             return new ShowHospitalRegistrationPlacesByDateCommandAnswer
             {
                 Token = (Guid)command.Token,
                 Date = command.Date,
-                Table = table
+                Table = table,
+                IsCompleted = statistics == completeCount,
             };
         }
     }

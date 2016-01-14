@@ -29,6 +29,8 @@ namespace CreateRandomDataTools.DataCreators
                 .Select(model => model.Id)
                 .ToList();
 
+            var pairs = GetStatisticPairs();
+
             var result = Enumerable.Range(0, dayCount)
                 .SelectMany(dayNumber => hospitalSectionProfiles
                     .Select(hospitalSectionProfileId => new EmptyPlaceStatisticStorageModel
@@ -36,7 +38,7 @@ namespace CreateRandomDataTools.DataCreators
                         Date = startDate.AddDays(dayNumber).Date,
                         CreateTime = DateTime.Now,
                         HospitalSectionProfileId = hospitalSectionProfileId,
-                        EmptyPlaceByTypeStatistics = GetStatisticPairs()
+                        EmptyPlaceByTypeStatistics = pairs
                             .Select(pair => new EmptyPlaceByTypeStatisticStorageModel
                             {
                                 AgeSection = pair.AgeSection,
@@ -50,7 +52,7 @@ namespace CreateRandomDataTools.DataCreators
             return result;
         }
 
-        private List<StatisticTypePair> GetStatisticPairs()
+        private static List<StatisticTypePair> GetStatisticPairs()
         {
             var sexValues = Enum.GetValues(typeof (Sex)).Cast<Sex>().ToList();
             var ageSections = Enum.GetValues(typeof (AgeSection)).Cast<AgeSection>().ToList();

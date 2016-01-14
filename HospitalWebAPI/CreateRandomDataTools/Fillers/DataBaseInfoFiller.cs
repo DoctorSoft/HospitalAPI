@@ -115,7 +115,7 @@ namespace CreateRandomDataTools.Fillers
 
             if (showStatusFunction != null)
             {
-                showStatusFunction(string.Format("{0} : {1}%", _startMessageText, Math.Round(percentCount, 2)));
+                showStatusFunction($"{_startMessageText} : {Math.Round(percentCount, 2)}%");
             }
         }
 
