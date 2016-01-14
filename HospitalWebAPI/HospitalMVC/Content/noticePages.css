@@ -5,3 +5,12 @@
 .panel {
     margin-top: 20px;
 }
+
+.controlColumn {
+    font-weight: normal;
+}
+
+.newMessageRow {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
