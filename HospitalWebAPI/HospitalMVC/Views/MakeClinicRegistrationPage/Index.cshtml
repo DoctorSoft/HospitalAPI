@@ -4,5 +4,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetMakeClinicRegistrationsPageInformationCommandAnswer
 
+@Html.DropDownListFor(answer => answer.AgeSection, Model.AgeSections.Select(pair => new SelectListItem
+{
+    Selected = pair.Value == @Model.AgeSection,
+    Value = pair.Key.ToString(),
+    Text = pair.Value,
+    Disabled = false
+}))
+
+@Html.DropDownListFor(answer => answer.Sex, Model.Sexes.Select(pair => new SelectListItem
+{
+    Selected = pair.Value == @Model.AgeSection,
+    Value = pair.Key.ToString(),
+    Text = pair.Value,
+    Disabled = false
+}))
+
+@Html.DropDownListFor(answer => answer.SectionProfile, Model.SectionProfiles.Select(pair => new SelectListItem
+{
+    Selected = pair.Value == @Model.AgeSection,
+    Value = pair.Key.ToString(),
+    Text = pair.Value,
+    Disabled = false
+}))
