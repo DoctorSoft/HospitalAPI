@@ -59,5 +59,14 @@ namespace Services.ClinicRegistrationsServices
                 Sex = sexes.FirstOrDefault().Value
             };
         }
+
+        public GetClinicRegistrationScheduleCommandAnswer GetClinicRegistrationSchedule(
+            GetClinicRegistrationScheduleCommand command)
+        {
+            return new GetClinicRegistrationScheduleCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
     }
 }

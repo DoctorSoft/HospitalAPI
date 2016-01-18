@@ -10,5 +10,8 @@ namespace Services.Interfaces.ClinicRegistrationsServices
 
         GetMakeClinicRegistrationsPageInformationCommandAnswer GetMakeClinicRegistrationsPageInformation(
             GetMakeClinicRegistrationsPageInformationCommand command);
+
+        GetClinicRegistrationScheduleCommandAnswer GetClinicRegistrationSchedule(
+            GetClinicRegistrationScheduleCommand command);
     }
 }

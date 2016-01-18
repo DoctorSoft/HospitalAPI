@@ -3,6 +3,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts {
+    <script type="text/javascript">
+        var LinkClick = function (e) {
+            var url = '@Url.Action("Step2", "MakeClinicRegistrationPage", new { Token = @Model.Token })'
+                + '?AgeSection=' + $('#AgeSection').val()
+                + '&Sex=' + $('#Sex').val()
+                + '&SectionProfileId=' + $('#SectionProfile').val();
+            window.location.replace(url);
+        };
+    </script>
+}
+
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetMakeClinicRegistrationsPageInformationCommandAnswer
 
 <br>
@@ -21,7 +33,7 @@
                 Value = pair.Key.ToString(),
                 Text = pair.Value,
                 Disabled = false
-            }), new { @class = "form-control" })
+            }), new {@class = "form-control"})
         </div>
 
     </div>
@@ -36,7 +48,7 @@
                 Value = pair.Key.ToString(),
                 Text = pair.Value,
                 Disabled = false
-            }), new { @class = "form-control" })
+            }), new {@class = "form-control"})
         </div>
     </div>
     <div class="col-lg-10 panel-body ">
@@ -54,17 +66,12 @@
         </div>
     </div>
     <div class="col-lg-10 panel-body">
-        <div><a id="NextLink" class="btn-info btn btn-lg">Next</a></div>
+        <div><a id="NextLink" class="btn-info btn btn-lg" onclick="LinkClick()">Next</a>
+        </div>
     </div>
 </div>
 
 
-<script type="text/javascript">
-    $('#NextLink').click(function (e) {
-        e.preventDefault();
-        window.location.replace =
-            '<%=Url.Action("Add","AddAction", "AddController")%>' + '?accessID=' + $('#dropBox').val();
-    });
-</script>
+
 
 
