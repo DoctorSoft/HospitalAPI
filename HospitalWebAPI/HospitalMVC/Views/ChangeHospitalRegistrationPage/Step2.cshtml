@@ -16,7 +16,7 @@
                     <div class="panel-heading">
                         <div class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
-                                @(iteration). @item.HospitalProfileName <div class="pull-right">@Html.ActionLink("Изменить", "Index", "ChangeHospitalRegistrationPage", new { }, new { @class = "btn-info btn" })</div>
+                                @(iteration). @item.HospitalProfileName <div class="pull-right">@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date}, new { @class = "btn-info btn" })</div>
                             </a>
                         </div>
                     </div>

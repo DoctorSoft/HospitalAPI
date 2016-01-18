@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "ChangeHospitalRegistration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ChangeHospitalRegistrationForSelectedHospitalCommandAnswer
+
+<h2>ChangeHospitalRegistration</h2>
+
+<div class="panel panel-default">
+        <div class="panel-body">
+            @foreach (var info in Model.StatisticItems)
+            {
+                <div>
+                    <br />
+                    Sex: @info.Sex.ToString("G") <br />
+                    Diapason: @info.AgeSection.ToString("G") <br />
+                    Count: @info.OpenCount <br />
+                    <br />
+                </div>
+            }
+        </div>
+    </div>

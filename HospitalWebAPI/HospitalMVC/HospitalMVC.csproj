@@ -278,6 +278,7 @@
     <Content Include="Views\ClinicNoticesPage\ReadMessage.cshtml" />
     <Content Include="Views\HospitalNoticesPage\ReadMessage.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\Step2.cshtml" />
+    <Content Include="Views\ChangeHospitalRegistrationPage\ChangeHospitalRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
