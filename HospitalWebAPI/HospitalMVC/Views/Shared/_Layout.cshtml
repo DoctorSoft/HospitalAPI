@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -25,10 +26,10 @@
     
     @*TODO: Create way to resolve it*@ 
     
-    <div class="navbar-left">
-        <ul class="nav nav-pills nav-stacked btn-toolbar ">
+    <div class="navbar-left" style="margin-bottom: 50px">
+        <ul class="nav nav-pills nav-justified btn-toolbar ">
             @*Links to add to main menu*@
-            
+
             @foreach (var nextTab in ViewBag.MainMenuTabs)
             {
                 if (!nextTab.IsEnabled)
@@ -49,8 +50,9 @@
             }
         </ul>
     </div>
-    
-    <div class="container body-content">
+
+
+<div class="container body-content" >
         @RenderBody()
         <hr />
         <footer>

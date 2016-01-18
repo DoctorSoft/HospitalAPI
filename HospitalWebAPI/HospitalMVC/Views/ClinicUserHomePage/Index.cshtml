@@ -7,8 +7,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.WriteTitlePage(@MainResources.ClinicUserPageTitle, "h2")
-
 @Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
 
 <div class="panel-home">
