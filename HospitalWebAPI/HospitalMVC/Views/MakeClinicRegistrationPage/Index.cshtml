@@ -1,31 +1,77 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts {
+    <script type="text/javascript">
+        var LinkClick = function (e) {
+            var url = '@Url.Action("Step2", "MakeClinicRegistrationPage", new { Token = @Model.Token })'
+                + '?AgeSection=' + $('#AgeSection').val()
+                + '&Sex=' + $('#Sex').val()
+                + '&SectionProfileId=' + $('#SectionProfile').val();
+            window.location.replace(url);
+        };
+    </script>
+}
+
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetMakeClinicRegistrationsPageInformationCommandAnswer
 
-@Html.DropDownListFor(answer => answer.AgeSection, Model.AgeSections.Select(pair => new SelectListItem
-{
-    Selected = pair.Value == @Model.AgeSection,
-    Value = pair.Key.ToString(),
-    Text = pair.Value,
-    Disabled = false
-}))
+<br>
+<h2>Please register data:</h2>
+<br>
 
-@Html.DropDownListFor(answer => answer.Sex, Model.Sexes.Select(pair => new SelectListItem
-{
-    Selected = pair.Value == @Model.AgeSection,
-    Value = pair.Key.ToString(),
-    Text = pair.Value,
-    Disabled = false
-}))
+<div class="panel-body form-group">
+    <div class="col-lg-10 panel-body ">
+        <div class="col-lg-3">
+            <label>AgeSection:</label>
+        </div>
+        <div class="col-lg-7">
+            @Html.DropDownListFor(answer => answer.AgeSection, Model.AgeSections.Select(pair => new SelectListItem
+            {
+                Selected = pair.Value == @Model.AgeSection,
+                Value = pair.Key.ToString(),
+                Text = pair.Value,
+                Disabled = false
+            }), new {@class = "form-control"})
+        </div>
 
-@Html.DropDownListFor(answer => answer.SectionProfile, Model.SectionProfiles.Select(pair => new SelectListItem
-{
-    Selected = pair.Value == @Model.AgeSection,
-    Value = pair.Key.ToString(),
-    Text = pair.Value,
-    Disabled = false
-}))
+    </div>
+    <div class="col-lg-10 panel-body ">
+        <div class="col-lg-3">
+            <label>Sex:</label>
+        </div>
+        <div class="col-lg-7">
+            @Html.DropDownListFor(answer => answer.Sex, Model.Sexes.Select(pair => new SelectListItem
+            {
+                Selected = pair.Value == @Model.Sex,
+                Value = pair.Key.ToString(),
+                Text = pair.Value,
+                Disabled = false
+            }), new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="col-lg-10 panel-body ">
+        <div class="col-lg-3">
+            <label>SectionProfile:</label>
+        </div>
+        <div class="col-lg-7">
+            @Html.DropDownListFor(answer => answer.SectionProfile, Model.SectionProfiles.Select(pair => new SelectListItem
+            {
+                Selected = pair.Value == @Model.SectionProfile,
+                Value = pair.Key.ToString(),
+                Text = pair.Value,
+                Disabled = false
+            }), new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="col-lg-10 panel-body">
+        <div><a id="NextLink" class="btn-info btn btn-lg" onclick="LinkClick()">Next</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
