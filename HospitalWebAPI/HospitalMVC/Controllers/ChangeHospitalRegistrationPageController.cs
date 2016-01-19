@@ -31,10 +31,11 @@ namespace HospitalMVC.Controllers
         }
 
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
-        public ActionResult ChangeHospitalRegistration(ChangeHospitalRegistrationForSelectedHospitalCommand command)
+        public ActionResult ChangeHospitalRegistration(ChangeHospitalRegistrationForSelectedSectionCommand command)
         {
-            var answer = _hospitalRegistrationsService.ChangeHospitalRegistrationForSelectedHospital(command);
+            var answer = _hospitalRegistrationsService.ChangeHospitalRegistrationForSelectedSection(command);
             return View(answer);
         }
+
     }
 }

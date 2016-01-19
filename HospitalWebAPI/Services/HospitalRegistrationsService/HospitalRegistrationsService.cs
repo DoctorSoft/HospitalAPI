@@ -170,8 +170,8 @@ namespace Services.HospitalRegistrationsService
             };
         }
 
-        public ChangeHospitalRegistrationForSelectedHospitalCommandAnswer ChangeHospitalRegistrationForSelectedHospital(
-            ChangeHospitalRegistrationForSelectedHospitalCommand command)
+        public ChangeHospitalRegistrationForSelectedSectionCommandAnswer ChangeHospitalRegistrationForSelectedSection(
+            ChangeHospitalRegistrationForSelectedSectionCommand command)
         {
             var emptyPlaceId =
                 _emptyPlaceStatisticRepository.GetModels()
@@ -193,7 +193,7 @@ namespace Services.HospitalRegistrationsService
                     OpenCount = model.Count
                 }).ToList();
 
-            return new ChangeHospitalRegistrationForSelectedHospitalCommandAnswer
+            return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
             {
                 Token = (Guid) command.Token,
                 StatisticItems = table

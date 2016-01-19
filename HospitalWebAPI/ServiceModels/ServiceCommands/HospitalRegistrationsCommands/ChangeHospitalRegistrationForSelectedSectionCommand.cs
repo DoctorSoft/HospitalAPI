@@ -3,7 +3,7 @@ using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
 {
-    public class ChangeHospitalRegistrationForSelectedHospitalCommand : AbstractTokenCommand
+    public class ChangeHospitalRegistrationForSelectedSectionCommand : AbstractTokenCommand
     {
         public int HospitalProfileId { get; set; }
         public DateTime Date { get; set; }
