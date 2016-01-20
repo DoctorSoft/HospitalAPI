@@ -14,6 +14,8 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public List<ClinicScheduleTableItem> Schedule { get; set; }
 
-        // todo: add list box of hospitals
+        public int CurrentHospitalId { get; set; }
+
+        public List<KeyValuePair<int, string>> Hospitals { get; set; }
     }
 }
