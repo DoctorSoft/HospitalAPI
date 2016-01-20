@@ -26,13 +26,16 @@ namespace Services.ClinicRegistrationsServices
 
         private readonly IClinicHospitalPriorityRepository _clinicHospitalPriorityRepository;
 
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository)
+        private readonly IHospitalRepository _hospitalRepository;
+        
+        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository)
         {
             _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
             _tokenManager = tokenManager;
             _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
             _clinicHospitalPriorityRepository = clinicHospitalPriorityRepository;
+            _hospitalRepository = hospitalRepository;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -114,13 +117,24 @@ namespace Services.ClinicRegistrationsServices
                })
                .ToList();
 
+            var hospitals =
+                _hospitalRepository.GetModels()
+                    .ToList()
+                    .Select(profile => new KeyValuePair<int, string>(profile.Id, profile.Name))
+                    .ToList();
+
             return new GetClinicRegistrationScheduleCommandAnswer
             {
                 Token = command.Token.Value,
-                Sex = command.Sex,
-                AgeSection = command.AgeSection,
-                SectionProfileId = command.SectionProfileId,
-                Schedule = startSchedule
+                Sex = ((Sex)command.Sex).ToString("G"),
+                AgeSection = ((AgeSection)command.AgeSection).ToString("G"),
+                SectionProfileId = _sectionProfileRepository
+                                    .GetModels()
+                                    .FirstOrDefault(model => model.Id == command.SectionProfileId)
+                                    .Name,
+                Schedule = startSchedule,
+                CurrentHospitalId = command.CurrentHospitalId.Value,
+                Hospitals = hospitals
             };
         }
 
