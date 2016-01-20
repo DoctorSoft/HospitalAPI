@@ -237,4 +237,19 @@
   <data name="ReceptionUserPageUnmarkPatientBefore" xml:space="preserve">
     <value>Если Вы хотите отменить отметку, то</value>
   </data>
+  <data name="ButtonChange" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="EmptyPlacePageAge" xml:space="preserve">
+    <value>Возраст:</value>
+  </data>
+  <data name="EmptyPlacePageCount" xml:space="preserve">
+    <value>Количество:</value>
+  </data>
+  <data name="EmptyPlacePageSex" xml:space="preserve">
+    <value>Пол:</value>
+  </data>
+  <data name="EmptyPlacePageTableTitle" xml:space="preserve">
+    <value>Изменить количество свободных мест для:</value>
+  </data>
 </root>

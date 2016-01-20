@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Изменить.
+        /// </summary>
+        public static string ButtonChange {
+            get {
+                return ResourceManager.GetString("ButtonChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Удалить.
         /// </summary>
         public static string ButtonDeleteMessage {
@@ -138,6 +147,42 @@ namespace Resources {
         public static string ClinicUserPageViewNoticesBefore {
             get {
                 return ResourceManager.GetString("ClinicUserPageViewNoticesBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Возраст:.
+        /// </summary>
+        public static string EmptyPlacePageAge {
+            get {
+                return ResourceManager.GetString("EmptyPlacePageAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Количество:.
+        /// </summary>
+        public static string EmptyPlacePageCount {
+            get {
+                return ResourceManager.GetString("EmptyPlacePageCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пол:.
+        /// </summary>
+        public static string EmptyPlacePageSex {
+            get {
+                return ResourceManager.GetString("EmptyPlacePageSex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменить количество свободных мест для:.
+        /// </summary>
+        public static string EmptyPlacePageTableTitle {
+            get {
+                return ResourceManager.GetString("EmptyPlacePageTableTitle", resourceCulture);
             }
         }
         

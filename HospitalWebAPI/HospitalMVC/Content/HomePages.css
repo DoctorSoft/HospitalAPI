@@ -3,7 +3,9 @@
 .panel-home .panel-group .panel .panel-body {
     display: table;
 }
-
+.panel-home .panel{
+	margin-top: 20px;
+}
 /* calendarpage style */
 
 .calendar .panel-default{
@@ -12,4 +14,14 @@
 
 .table thead tr th{
 	text-align: center;
+}
+
+/* change hospital registration */
+.change-hospital-registration-panel{
+}
+.change-hospital-registration-panel .input-group-addon {
+	width: 130px;
+}
+.change-hospital-registration-panel .form-control{
+	width: 300px;
 }

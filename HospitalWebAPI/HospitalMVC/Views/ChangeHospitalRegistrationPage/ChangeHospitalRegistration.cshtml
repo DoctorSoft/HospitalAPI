@@ -4,21 +4,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Resources
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ChangeHospitalRegistrationForSelectedSectionCommandAnswer
 
 <h2>ChangeHospitalRegistration</h2>
 
 <div class="panel panel-default">
-        <div class="panel-body">
-            @foreach (var info in Model.StatisticItems)
-            {
-                <div>
-                    <br />
-                    Sex: @info.Sex.ToString("G") <br />
-                    Diapason: @info.AgeSection.ToString("G") <br />
-                    Count: @info.OpenCount <br />
-                    <br />
-                </div>
-            }
+    <div class="panel-heading">
+        <div class="panel-title">
+            @MainResources.EmptyPlacePageTableTitle @Model.SectionProfileName
         </div>
     </div>
+    <div class="panel-body">
+        <div class="change-hospital-registration-panel">
+            @foreach (var info in Model.StatisticItems)
+            {
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1"> @MainResources.EmptyPlacePageAge</span>
+                    <label class="form-control" aria-describedby="basic-addon1">@info.AgeSection.ToString("G")</label>
+                    <br />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
+                    <label class="form-control" aria-describedby="basic-addon1">@info.Sex.ToString("G")</label>
+                    <br />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
+                    <input type="text" class="form-control" placeholder="@info.OpenCount" aria-describedby="basic-addon1">
+                    <br />
+                </div>
+                <br />
+            }
+        </div>
+        <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Step2", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date })'" />
+        <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonChange" />
+    </div>
+</div>

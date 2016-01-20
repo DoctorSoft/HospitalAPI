@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
@@ -16,21 +17,18 @@ namespace Services.HospitalRegistrationsService
     public class HospitalRegistrationsService : IHospitalRegistrationsService
     {
         private readonly IEmptyPlaceStatisticRepository _emptyPlaceStatisticRepository;
-        private readonly IEmptyPlaceByTypeStatisticRepository _emptyPlaceByTypeStatisticRepository;
         private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHospitalUserRepository _hospitalUserRepository;
 
         public HospitalRegistrationsService(IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository,
             IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager,
-            IHospitalUserRepository hospitalUserRepository,
-            IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository)
+            IHospitalUserRepository hospitalUserRepository)
         {
             _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
             _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
             _tokenManager = tokenManager;
             _hospitalUserRepository = hospitalUserRepository;
-            _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
         }
 
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
@@ -173,6 +171,10 @@ namespace Services.HospitalRegistrationsService
         public ChangeHospitalRegistrationForSelectedSectionCommandAnswer ChangeHospitalRegistrationForSelectedSection(
             ChangeHospitalRegistrationForSelectedSectionCommand command)
         {
+            var sectionProfileName =
+                _hospitalSectionProfileRepository.GetModels()
+                    .FirstOrDefault(model => model.Id == command.HospitalProfileId);
+
             var emptyPlaceId =
                 _emptyPlaceStatisticRepository.GetModels()
                     .FirstOrDefault(model => model.HospitalSectionProfileId == command.HospitalProfileId && model.Date == command.Date)
@@ -196,7 +198,9 @@ namespace Services.HospitalRegistrationsService
             return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
             {
                 Token = (Guid) command.Token,
-                StatisticItems = table
+                StatisticItems = table,
+                SectionProfileName = sectionProfileName.Name,
+                Date = command.Date
             };
         }
     }
