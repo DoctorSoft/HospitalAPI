@@ -9,5 +9,7 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
         public int AgeSection { get; set; }
 
         public int SectionProfileId { get; set; }
+
+        public int? CurrentHospitalId { get; set; }
     }
 }

@@ -25,12 +25,14 @@ namespace CreateRandomDataTools.DataCreators
             var hospitals = _hospitalRepository.GetModels().ToList();
 
             var result = new List<ClinicHospitalPriorityStorageModel>();
+
             var priority = 0;
             foreach (var hospital in hospitals)
             {
+                priority++;
                 result.AddRange(clinics.Select(clinic => new ClinicHospitalPriorityStorageModel
                 {
-                    Priority = ++priority, ClinicId = clinic.Id, HospitalId = hospital.Id, IsBlocked = false
+                    Priority = priority, ClinicId = clinic.Id, HospitalId = hospital.Id, IsBlocked = false
                 }));
             }
 
