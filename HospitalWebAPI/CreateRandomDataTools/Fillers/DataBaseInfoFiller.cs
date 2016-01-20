@@ -26,7 +26,8 @@ namespace CreateRandomDataTools.Fillers
         private readonly IReceptionUserModelCreator _receptionUserModelCreator;
         private readonly IClinicHospitalPrioritiesCreator _clinicHospitalPrioritiesCreator;
         private readonly IHospitalSectionProfileCreator _hospitalSectionProfileCreator;
-        private readonly IMessageCreator _messageCreator;
+        private readonly IMessageModelCreator _messageModelCreator;
+        private readonly IEmptyPlaceStatisticModelCreator _emptyPlaceStatisticModelCreator;
 
         private readonly IDataBaseContext _dataBaseContext;
         private readonly ICreationSettingsModule _creationSettingsModule;
@@ -43,7 +44,7 @@ namespace CreateRandomDataTools.Fillers
             IAdministratorAndReviewerModelsCreator administratorAndReviewerModelsCreator,
             IUserFunctionModelCreator userFunctionModelCreator,
             ISettingsItemCreator settingsItemCreator,
-            IReceptionUserModelCreator receptionUserModelCreator, IClinicHospitalPrioritiesCreator clinicHospitalPrioritiesCreator, IHospitalSectionProfileCreator hospitalSectionProfileCreator, IMessageCreator messageCreator)
+            IReceptionUserModelCreator receptionUserModelCreator, IClinicHospitalPrioritiesCreator clinicHospitalPrioritiesCreator, IHospitalSectionProfileCreator hospitalSectionProfileCreator, IMessageModelCreator messageModelCreator, IEmptyPlaceStatisticModelCreator emptyPlaceStatisticModelCreator)
         {
             _dataBaseContext = dataBaseContext;
             _creationSettingsModule = creationSettingsModule;
@@ -65,14 +66,15 @@ namespace CreateRandomDataTools.Fillers
             _receptionUserModelCreator = receptionUserModelCreator;
             _clinicHospitalPrioritiesCreator = clinicHospitalPrioritiesCreator;
             _hospitalSectionProfileCreator = hospitalSectionProfileCreator;
-            _messageCreator = messageCreator;
+            _messageModelCreator = messageModelCreator;
+            _emptyPlaceStatisticModelCreator = emptyPlaceStatisticModelCreator;
         }
 
         public void FillDataBase(Func<string, bool> showStatusFunction = null)
         {
             var percents = 0.0;
 
-            const double percentIncrementation = 100 / 16.0;
+            const double percentIncrementation = 100 / 17.0;
 
             FillSectionModels(showStatusFunction, percents += percentIncrementation);
             FillHospitalModels(showStatusFunction, percents += percentIncrementation);
@@ -88,8 +90,9 @@ namespace CreateRandomDataTools.Fillers
             FillAdministratorAndReviewerModels(showStatusFunction, percents += percentIncrementation);
             FillClinicHospitalPriorityModels(showStatusFunction, percents += percentIncrementation);
             FillUserFunctionModels(showStatusFunction, percents += percentIncrementation);
-            FillHospitalSectionProfileModels(showStatusFunction, percents + percentIncrementation);
-            FillMessageModels(showStatusFunction, 100.0);
+            FillHospitalSectionProfileModels(showStatusFunction, percents += percentIncrementation);
+            FillMessageModels(showStatusFunction, percents + percentIncrementation);
+            FillEmptyPlaceStatisticModels(showStatusFunction, 100.0);
         }
 
         protected virtual void FillList<T>(IEnumerable<T> models, Func<string, bool> showStatusFunction = null, double percentCount = 0, bool fillApprove = true)
@@ -112,7 +115,7 @@ namespace CreateRandomDataTools.Fillers
 
             if (showStatusFunction != null)
             {
-                showStatusFunction(string.Format("{0} : {1}%", _startMessageText, Math.Round(percentCount, 2)));
+                showStatusFunction($"{_startMessageText} : {Math.Round(percentCount, 2)}%");
             }
         }
 
@@ -238,8 +241,16 @@ namespace CreateRandomDataTools.Fillers
 
         protected virtual void FillMessageModels(Func<string, bool> showStatusFunction = null, double percentCount = 0)
         {
-            var models = _messageCreator.GetList();
+            var models = _messageModelCreator.GetList();
             var fillApprove = _creationSettingsModule.CreateMessages();
+
+            FillList(models, showStatusFunction, percentCount, fillApprove);
+        }
+
+        protected virtual void FillEmptyPlaceStatisticModels(Func<string, bool> showStatusFunction = null, double percentCount = 0)
+        {
+            var models = _emptyPlaceStatisticModelCreator.GetList();
+            var fillApprove = _creationSettingsModule.CreateEmptyPlaceStatistics();
 
             FillList(models, showStatusFunction, percentCount, fillApprove);
         }

@@ -10,5 +10,8 @@ namespace Services.Interfaces.HospitalRegistrationsService
 
         ShowHospitalRegistrationPlacesByDateCommandAnswer ShowHospitalRegistrationPlacesByDate(
             ShowHospitalRegistrationPlacesByDateCommand command);
+
+        ChangeHospitalRegistrationForSelectedSectionCommandAnswer ChangeHospitalRegistrationForSelectedSection(
+            ChangeHospitalRegistrationForSelectedSectionCommand command);
     }
 }

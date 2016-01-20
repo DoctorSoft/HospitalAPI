@@ -1,5 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using DataBaseTools.Interfaces;
+using EntityFramework.BulkInsert.Extensions;
 
 namespace DataBaseTools.AbstractClasses
 {

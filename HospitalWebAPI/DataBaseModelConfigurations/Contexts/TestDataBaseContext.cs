@@ -1,6 +1,8 @@
-﻿using DataBaseModelConfigurations.ConfigurationFactories;
+﻿using System.Collections.Generic;
+using DataBaseModelConfigurations.ConfigurationFactories;
 using DataBaseTools.AbstractClasses;
 using DataBaseTools.Interfaces;
+using EntityFramework.BulkInsert.Extensions;
 
 namespace DataBaseModelConfigurations.Contexts
 {

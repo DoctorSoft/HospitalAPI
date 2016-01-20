@@ -34,5 +34,7 @@
 
         bool CreateMessages();
 
+        bool CreateEmptyPlaceStatistics();
+
     }
 }

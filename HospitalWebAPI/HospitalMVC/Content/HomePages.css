@@ -1,3 +1,15 @@
-﻿.panel-home .panel-group .panel .panel-body {
+﻿/* home page style */
+
+.panel-home .panel-group .panel .panel-body {
     display: table;
+}
+
+/* calendarpage style */
+
+.calendar .panel-default{
+    display: table;
+}
+
+.table thead tr th{
+	text-align: center;
 }

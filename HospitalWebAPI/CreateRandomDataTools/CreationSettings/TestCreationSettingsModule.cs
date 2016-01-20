@@ -84,5 +84,10 @@ namespace CreateRandomDataTools.CreationSettings
         {
             return bool.Parse(WebConfigurationManager.AppSettings["CreateMessages"]);
         }
+
+        public bool CreateEmptyPlaceStatistics()
+        {
+            return bool.Parse(WebConfigurationManager.AppSettings["CreateEmptyPlaceStatistics"]);
+        }
     }
 }
