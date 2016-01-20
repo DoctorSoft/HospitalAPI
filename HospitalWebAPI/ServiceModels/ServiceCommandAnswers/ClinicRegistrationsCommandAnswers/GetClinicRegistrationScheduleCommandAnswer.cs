@@ -8,9 +8,15 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
     {
         public string Sex { get; set; }
 
+        public int SexId { get; set; }
+
         public string AgeSection { get; set; }
 
-        public string SectionProfileId { get; set; }
+        public int AgeSectionId { get; set; }
+
+        public string SectionProfile { get; set; }
+
+        public int SectionProfileId { get; set; }
 
         public List<ClinicScheduleTableItem> Schedule { get; set; }
 

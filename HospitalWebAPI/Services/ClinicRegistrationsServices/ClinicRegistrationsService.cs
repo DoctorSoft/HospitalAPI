@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
@@ -10,7 +9,6 @@ using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Enti
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
 using Services.Interfaces.ServiceTools;
-using StorageModels.Models.HospitalModels;
 
 namespace Services.ClinicRegistrationsServices
 {
@@ -127,8 +125,11 @@ namespace Services.ClinicRegistrationsServices
             {
                 Token = command.Token.Value,
                 Sex = ((Sex)command.Sex).ToString("G"),
+                SexId = command.Sex,
                 AgeSection = ((AgeSection)command.AgeSection).ToString("G"),
-                SectionProfileId = _sectionProfileRepository
+                AgeSectionId = command.AgeSection,
+                SectionProfileId = command.SectionProfileId,
+                SectionProfile = _sectionProfileRepository
                                     .GetModels()
                                     .FirstOrDefault(model => model.Id == command.SectionProfileId)
                                     .Name,
@@ -144,6 +145,7 @@ namespace Services.ClinicRegistrationsServices
                .Where(model => (int)model.Sex == command.Sex 
                    && (int)model.AgeSection == command.AgeSection 
                    && model.EmptyPlaceStatistic.Date == date
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId)
                    .Select(model => model.Count)
                    .FirstOrDefault();
@@ -152,6 +154,7 @@ namespace Services.ClinicRegistrationsServices
                 .Where(model => (int)model.Sex == command.Sex 
                    && (int)model.AgeSection == command.AgeSection 
                    && model.EmptyPlaceStatistic.Date == date
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId)
                 .SelectMany(model => model.Reservations)
                 .Count(model => model.Status == ReservationStatus.Opened);

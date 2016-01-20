@@ -3,6 +3,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts {
+    <script type="text/javascript">
+        
+        var setStartValue = function() {
+            $('#Hospitals').val('@Model.CurrentHospitalId');
+        }
+
+        setStartValue();
+
+        var HospitalChange = function (e) {
+            var url = '@Url.Action("Step2", "MakeClinicRegistrationPage", new { Token = @Model.Token })'
+                + '?AgeSection=' + $('#AgeSectionId').val()
+                + '&Sex=' + $('#SexId').val()
+                + '&SectionProfileId=' + $('#SectionProfileId').val()
+                + '&CurrentHospitalId=' + $('#Hospitals').val();
+            window.location.replace(url);
+        };
+    </script>
+}
+
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetClinicRegistrationScheduleCommandAnswer
 
 <div class="panel-body form-group">
@@ -11,7 +31,8 @@
             <label>Section profile:</label>
         </div>
         <div class="col-lg-7">
-            @Model.SectionProfileId
+            @Model.SectionProfile
+            @Html.HiddenFor(answer => answer.SectionProfileId)
         </div>
 
     </div>
@@ -21,6 +42,7 @@
         </div>
         <div class="col-lg-7">
             @Model.Sex
+            @Html.HiddenFor(answer => answer.SexId)
         </div>
 
     </div>
@@ -30,6 +52,7 @@
         </div>
         <div class="col-lg-7">
             @Model.AgeSection
+            @Html.HiddenFor(answer => answer.AgeSectionId)
         </div>
 
     </div>
@@ -38,13 +61,19 @@
             <label>Hospital:</label>
         </div>
         <div class="col-lg-7">
-            @Html.DropDownListFor(answer => answer.AgeSection, Model.Hospitals.Select(pair => new SelectListItem
+            @Html.DropDownListFor(answer => answer.Hospitals, Model.Hospitals.Select(pair => new SelectListItem
             {
                 Selected = pair.Key == Model.CurrentHospitalId,
                 Value = pair.Key.ToString(),
                 Text = pair.Value,
                 Disabled = false
-            }), new { @class = "form-control" })
+            }), new
+            {
+                @class = "form-control",
+                @onchange = "HospitalChange()",
+                @value = Model.Hospitals.FirstOrDefault(pair => pair.Key == Model.CurrentHospitalId).Key.ToString(),
+                @text = Model.Hospitals.FirstOrDefault(pair => pair.Key == Model.CurrentHospitalId).Value
+            })
         </div>
 
     </div>
