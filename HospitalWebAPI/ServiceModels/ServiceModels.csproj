@@ -82,6 +82,7 @@
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\Entities\ClinicScheduleTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetBreakClinicRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetClinicRegistrationScheduleCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetClinicRegistrationUserFormCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetMakeClinicRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForSelectedSectionCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationCountStatisticItem.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="ServiceCommands\AuthorizationCommands\LogOutUserByTokenCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetBreakClinicRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetClinicRegistrationScheduleCommand.cs" />
+    <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetClinicRegistrationUserFormCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetMakeClinicRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForSelectedSectionCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationsPageInformationCommand.cs" />

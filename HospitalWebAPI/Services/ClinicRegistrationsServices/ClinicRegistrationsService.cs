@@ -139,6 +139,18 @@ namespace Services.ClinicRegistrationsServices
             };
         }
 
+        public GetClinicRegistrationUserFormCommandAnswer GetClinicRegistrationUserForm(GetClinicRegistrationUserFormCommand command)
+        {
+            return new GetClinicRegistrationUserFormCommandAnswer
+            {
+                AgeSectionId = command.AgeSectionId,
+                CurrentHospitalId = command.AgeSectionId,
+                Date = command.Date,
+                SectionProfileId = command.SectionProfileId,
+                SexId = command.SexId
+            };
+        }
+
         private int GetHospitalEmptyPlacesCount(GetClinicRegistrationScheduleCommand command, DateTime date)
         {
            var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()

@@ -13,5 +13,8 @@ namespace Services.Interfaces.ClinicRegistrationsServices
 
         GetClinicRegistrationScheduleCommandAnswer GetClinicRegistrationSchedule(
             GetClinicRegistrationScheduleCommand command);
+
+        GetClinicRegistrationUserFormCommandAnswer GetClinicRegistrationUserForm(
+            GetClinicRegistrationUserFormCommand command);
     }
 }
