@@ -280,6 +280,7 @@
     <Content Include="Views\ChangeHospitalRegistrationPage\Step2.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\ChangeHospitalRegistration.cshtml" />
     <Content Include="Views\MakeClinicRegistrationPage\Step2.cshtml" />
+    <Content Include="Views\ChangeHospitalRegistrationPage\ChangeHospitalRegistrationForNewSection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

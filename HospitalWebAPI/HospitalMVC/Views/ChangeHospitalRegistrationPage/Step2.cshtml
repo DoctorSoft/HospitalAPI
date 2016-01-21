@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Ninject
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowHospitalRegistrationPlacesByDateCommandAnswer
 
 <div class="bs-example">
@@ -44,7 +45,7 @@
             {
                 <div>
                     <br/>
-                    @Html.ActionLink("Добавить", "Index", "ChangeHospitalRegistrationPage", new {}, new {@class = "btn-info btn"})
+                    @Html.ActionLink("Добавить", "ChangeHospitalRegistrationForNewSection", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date}, new { @class = "btn-info btn" })
                     <br />
                 </div>
             }

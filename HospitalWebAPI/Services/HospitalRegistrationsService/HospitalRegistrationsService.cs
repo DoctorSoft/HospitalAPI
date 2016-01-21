@@ -203,5 +203,43 @@ namespace Services.HospitalRegistrationsService
                 Date = command.Date
             };
         }
+        
+        public ChangeHospitalRegistrationForSelectedSectionCommandAnswer ApplyChangesHospitalRegistration(
+            ChangeHospitalRegistrationForSelectedSectionCommand command)
+        {
+            return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
+            {
+
+            };
+        }
+
+        public ChangeHospitalRegistrationForNewSectionCommandAnswer ChangeHospitalRegistrationForNewSection(
+            ChangeHospitalRegistrationForNewSectionCommand command)
+        {
+
+            var user = _tokenManager.GetUserByToken(command.Token);
+            var hospitalId = GetHospitalIdByUserId(user.Id);
+
+            var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels();
+
+            var hospitalSectionProfilesList = _hospitalSectionProfileRepository.GetModels().Where(model => model.HospitalId == hospitalId).ToList();
+
+            var table = ((IDbSet<HospitalSectionProfileStorageModel>)hospitalSectionProfiles)
+                .Where(model => model.HospitalId == hospitalId)
+                .Where(model => model.EmptyPlaceStatistics.Any(storageModel => storageModel.Date == command.Date))
+                .Select(model => new HospitalRegistrationTableItem
+                {
+                    HospitalProfileId = model.Id,
+                    HospitalProfileName = model.Name
+                }).ToList();
+            
+            var result = hospitalSectionProfilesList.Where(model => !table.Any(t => t.HospitalProfileId == model.Id)).ToList();
+            
+            return new ChangeHospitalRegistrationForNewSectionCommandAnswer
+            {
+                Token = (Guid)command.Token,
+                FreeHospitalSectionsForRegistration = result
+            };
+        }
     }
 }

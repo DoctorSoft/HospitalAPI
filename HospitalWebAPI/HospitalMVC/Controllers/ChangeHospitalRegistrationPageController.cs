@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
+using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 
@@ -34,6 +35,24 @@ namespace HospitalMVC.Controllers
         public ActionResult ChangeHospitalRegistration(ChangeHospitalRegistrationForSelectedSectionCommand command)
         {
             var answer = _hospitalRegistrationsService.ChangeHospitalRegistrationForSelectedSection(command);
+            return View(answer);
+        }
+
+        [HttpPost]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult ApplyChangesHospitalRegistration(ChangeHospitalRegistrationForSelectedSectionCommand command)
+        {
+            var answer = _hospitalRegistrationsService.ApplyChangesHospitalRegistration(command);
+            return RedirectToAction("Step2", new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
+            {
+                
+            });
+        }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult ChangeHospitalRegistrationForNewSection(ChangeHospitalRegistrationForNewSectionCommand command)
+        {
+            var answer = _hospitalRegistrationsService.ChangeHospitalRegistrationForNewSection(command);
             return View(answer);
         }
 
