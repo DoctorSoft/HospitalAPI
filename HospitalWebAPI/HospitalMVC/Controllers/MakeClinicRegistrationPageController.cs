@@ -29,5 +29,12 @@ namespace HospitalMVC.Controllers
             var answer = _clinicRegistrationsService.GetClinicRegistrationSchedule(command);
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserMakeRegistrations)]
+        public ActionResult Step3(GetClinicRegistrationUserFormCommand command)
+        {
+            var answer = _clinicRegistrationsService.GetClinicRegistrationUserForm(command);
+            return View(answer);
+        }
     }
 }
