@@ -116,6 +116,7 @@
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetClinicRegistrationScheduleCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetClinicRegistrationUserFormCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetMakeClinicRegistrationsPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SaveClinicRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForNewSectionCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForSelectedSectionCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationsPageInformationCommand.cs" />

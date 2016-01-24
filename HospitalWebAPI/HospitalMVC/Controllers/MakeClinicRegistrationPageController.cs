@@ -34,7 +34,31 @@ namespace HospitalMVC.Controllers
         public ActionResult Step3(GetClinicRegistrationUserFormCommand command)
         {
             var answer = _clinicRegistrationsService.GetClinicRegistrationUserForm(command);
-            return View(answer);
+            var model = new SaveClinicRegistrationCommand
+            {
+                AgeSection = answer.AgeSection,
+                Sex = answer.Sex,
+                Date = answer.Date,
+                CurrentHospitalId = answer.CurrentHospitalId,
+                Token = answer.Token,
+                SectionProfileId = answer.SectionProfileId,
+                AgeSectionId = answer.AgeSectionId,
+                Name = answer.Name,
+                SexId = answer.SexId,
+                SectionProfile = answer.SectionProfile,
+                Age = answer.Age,
+                Code = answer.Code,
+                CurrentHospital = answer.CurrentHospital,
+                PhoneNumber = answer.PhoneNumber
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserMakeRegistrations)]
+        public ActionResult SaveRegistration()
+        {
+            return null;
         }
     }
 }

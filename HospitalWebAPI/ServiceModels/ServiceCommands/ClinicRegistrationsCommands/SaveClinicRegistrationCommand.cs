@@ -1,9 +1,9 @@
 ﻿using System;
 using ServiceModels.ModelTools;
 
-namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
+namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
 {
-    public class GetClinicRegistrationUserFormCommandAnswer : AbstractTokenCommandAnswer
+    public class SaveClinicRegistrationCommand : AbstractTokenCommand
     {
         public int SexId { get; set; }
 

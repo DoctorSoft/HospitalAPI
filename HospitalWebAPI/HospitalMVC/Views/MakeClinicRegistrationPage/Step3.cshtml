@@ -1,8 +1,105 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Step3";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Step3</h2>
+@using Enums.Enums
+@model ServiceModels.ServiceCommands.ClinicRegistrationsCommands.SaveClinicRegistrationCommand
+
+@using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(command => command.Token);
+
+    <h2>Регистрация: </h2>
+    <div class="form-group ">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Код пациента: 
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    <b>@Model.Code</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>ФИО:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.Name, new {@class = "form-control", @rows = "10"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Возраст:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.Age, new {@class = "form-control", @rows = "10"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Пол: 
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    <b>@Model.Sex</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Телефон:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.PhoneNumber, new {@class = "form-control", @rows = "10"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Дата: 
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    <b>@Model.Date.ToString("d")</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Больница: 
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    <b>@Model.CurrentHospital</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Отделение:
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    <b>@Model.SectionProfile</b>
+                </h4>
+            </div>
+        </div>
+
+        <input class="btn btn-sm btn-primary" type="submit"/>
+    </div>
+}
 

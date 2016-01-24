@@ -141,13 +141,28 @@ namespace Services.ClinicRegistrationsServices
 
         public GetClinicRegistrationUserFormCommandAnswer GetClinicRegistrationUserForm(GetClinicRegistrationUserFormCommand command)
         {
+            var hospital =
+                this._hospitalRepository.GetModels().FirstOrDefault(model => model.Id == command.CurrentHospitalId);
+
+            var sectionProfile =
+                this._sectionProfileRepository.GetModels().FirstOrDefault(model => model.Id == command.SectionProfileId);
+
             return new GetClinicRegistrationUserFormCommandAnswer
             {
                 AgeSectionId = command.AgeSectionId,
-                CurrentHospitalId = command.AgeSectionId,
+                CurrentHospitalId = command.CurrentHospitalId,
                 Date = command.Date,
                 SectionProfileId = command.SectionProfileId,
-                SexId = command.SexId
+                SexId = command.SexId,
+                Code = Guid.NewGuid().ToString(),
+                CurrentHospital = hospital.Name,
+                AgeSection = ((AgeSection)command.AgeSectionId).ToString("G"),
+                Sex = ((Sex)command.SexId).ToString("G"),
+                Token = command.Token.Value,
+                Name = "",
+                PhoneNumber = "",
+                SectionProfile = sectionProfile.Name,
+                Age = 0
             };
         }
 
