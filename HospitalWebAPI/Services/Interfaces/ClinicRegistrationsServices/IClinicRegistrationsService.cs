@@ -16,5 +16,7 @@ namespace Services.Interfaces.ClinicRegistrationsServices
 
         GetClinicRegistrationUserFormCommandAnswer GetClinicRegistrationUserForm(
             GetClinicRegistrationUserFormCommand command);
+
+        SaveClinicRegistrationCommandAnswer SaveClinicRegistration(SaveClinicRegistrationCommand command);
     }
 }
