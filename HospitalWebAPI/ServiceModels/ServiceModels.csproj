@@ -36,6 +36,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -84,6 +85,7 @@
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetClinicRegistrationScheduleCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetClinicRegistrationUserFormCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetMakeClinicRegistrationsPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\SaveClinicRegistrationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForNewSectionCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForSelectedSectionCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationCountStatisticItem.cs" />

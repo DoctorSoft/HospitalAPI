@@ -38,12 +38,14 @@ namespace HospitalMVC.Controllers
             {
                 AgeSection = answer.AgeSection,
                 Sex = answer.Sex,
-                Date = answer.Date,
+                DateValue = answer.Date,
+                Date = answer.Date.ToString("d"),
                 CurrentHospitalId = answer.CurrentHospitalId,
                 Token = answer.Token,
                 SectionProfileId = answer.SectionProfileId,
                 AgeSectionId = answer.AgeSectionId,
-                Name = answer.Name,
+                FirstName = answer.FirstName,
+                LastName = answer.LastName,
                 SexId = answer.SexId,
                 SectionProfile = answer.SectionProfile,
                 Age = answer.Age,
@@ -56,9 +58,10 @@ namespace HospitalMVC.Controllers
 
         [HttpPost]
         [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserMakeRegistrations)]
-        public ActionResult SaveRegistration()
+        public ActionResult SaveRegistration(SaveClinicRegistrationCommand command)
         {
-            return null;
+            var answer = _clinicRegistrationsService.SaveClinicRegistration(command);
+            return RedirectToAction("Index", "ClinicUserHomePage", new { Token = command.Token });
         }
     }
 }

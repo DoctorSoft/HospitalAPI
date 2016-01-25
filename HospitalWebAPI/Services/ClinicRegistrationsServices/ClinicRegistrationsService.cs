@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
@@ -9,6 +10,7 @@ using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Enti
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
 using Services.Interfaces.ServiceTools;
+using StorageModels.Models.ClinicModels;
 
 namespace Services.ClinicRegistrationsServices
 {
@@ -25,8 +27,10 @@ namespace Services.ClinicRegistrationsServices
         private readonly IClinicHospitalPriorityRepository _clinicHospitalPriorityRepository;
 
         private readonly IHospitalRepository _hospitalRepository;
+
+        private readonly IReservationRepository _reservationRepository;
         
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository)
+        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository)
         {
             _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
@@ -34,6 +38,7 @@ namespace Services.ClinicRegistrationsServices
             _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
             _clinicHospitalPriorityRepository = clinicHospitalPriorityRepository;
             _hospitalRepository = hospitalRepository;
+            _reservationRepository = reservationRepository;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -159,10 +164,54 @@ namespace Services.ClinicRegistrationsServices
                 AgeSection = ((AgeSection)command.AgeSectionId).ToString("G"),
                 Sex = ((Sex)command.SexId).ToString("G"),
                 Token = command.Token.Value,
-                Name = "",
+                FirstName = "",
+                LastName = "",
                 PhoneNumber = "",
                 SectionProfile = sectionProfile.Name,
                 Age = 0
+            };
+        }
+
+        public SaveClinicRegistrationCommandAnswer SaveClinicRegistration(SaveClinicRegistrationCommand command)
+        {
+            var user = this._tokenManager.GetUserByToken(command.Token);
+            var clinicId = this._clinicManager.GetClinicByUser(user).Id;
+
+            var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+            var emptyPlaceByTypeStatistics = _emptyPlaceByTypeStatisticRepository
+                .GetModels()
+                .Where(model => model.Sex == (Sex)command.SexId 
+                    && model.AgeSection == (AgeSection)command.AgeSectionId
+                    && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId
+                    && model.EmptyPlaceStatistic.Date == date
+                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId);
+
+            var emptyPlaceByTypeStatisticId = emptyPlaceByTypeStatistics.FirstOrDefault().Id;
+
+            var reservation = new ReservationStorageModel
+            {
+                Patient = new PatientStorageModel
+                {
+                    Age = command.Age.Value,
+                    Code = command.Code,
+                    FirstName = command.FirstName,
+                    LastName = command.LastName,
+                    PhoneNumber = command.PhoneNumber,
+                    Sex = (Sex) command.SexId
+                },
+                ApproveTime = DateTime.Now,
+                ClinicId = clinicId,
+                EmptyPlaceByTypeStatisticId = emptyPlaceByTypeStatisticId,
+                Status = ReservationStatus.Opened
+            };
+
+            _reservationRepository.Add(reservation);
+            _reservationRepository.SaveChanges();
+
+            return new SaveClinicRegistrationCommandAnswer
+            {
+                Token = command.Token.Value
             };
         }
 

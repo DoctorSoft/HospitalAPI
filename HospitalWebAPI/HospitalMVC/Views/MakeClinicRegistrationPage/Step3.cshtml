@@ -22,16 +22,25 @@
             </div>
             <div class="col-md-5">
                 <h4>
+                    @Html.HiddenFor(command => command.Code)
                     <b>@Model.Code</b>
                 </h4>
             </div>
         </div>
         <div class="col-md-12">
             <div class="col-md-2">
-                <h4>ФИО:</h4>
+                <h4>Имя:</h4>
             </div>
             <div class="col-md-5">
-                @Html.TextBoxFor(o => o.Name, new {@class = "form-control", @rows = "10"})
+                @Html.TextBoxFor(o => o.FirstName, new {@class = "form-control", @rows = "10"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Фамилия:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.LastName, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
         <div class="col-md-12">
@@ -45,11 +54,27 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <h4>
+                    Возврастной диапазон:
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    @Html.HiddenFor(command => command.AgeSection)
+                    @Html.HiddenFor(command => command.AgeSectionId)
+                    <b>@Model.AgeSection</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
                     Пол: 
                 </h4>
             </div>
             <div class="col-md-5">
                 <h4>
+                    @Html.HiddenFor(command => command.Sex)
+                    @Html.HiddenFor(command => command.SexId)
                     <b>@Model.Sex</b>
                 </h4>
             </div>
@@ -69,8 +94,11 @@
                 </h4>
             </div>
             <div class="col-md-5">
+                <div class="hidden">
+                    @Html.EditorFor(command => command.Date)
+                </div>
                 <h4>
-                    <b>@Model.Date.ToString("d")</b>
+                    <b>@Model.DateValue</b>
                 </h4>
             </div>
         </div>
@@ -82,6 +110,8 @@
             </div>
             <div class="col-md-5">
                 <h4>
+                    @Html.HiddenFor(command => command.CurrentHospital)
+                    @Html.HiddenFor(command => command.CurrentHospitalId)
                     <b>@Model.CurrentHospital</b>
                 </h4>
             </div>
@@ -94,6 +124,8 @@
             </div>
             <div class="col-md-5">
                 <h4>
+                    @Html.HiddenFor(command => command.SectionProfile)
+                    @Html.HiddenFor(command => command.SectionProfileId)
                     <b>@Model.SectionProfile</b>
                 </h4>
             </div>

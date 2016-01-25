@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
@@ -21,9 +23,13 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
 
         public string CurrentHospital { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime DateValue { get; set; }
 
-        public string Name { get; set; }
+        public string Date { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
 
         public int? Age { get; set; }
 
