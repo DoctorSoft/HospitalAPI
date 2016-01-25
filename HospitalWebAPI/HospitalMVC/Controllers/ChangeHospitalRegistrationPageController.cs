@@ -45,7 +45,8 @@ namespace HospitalMVC.Controllers
             var answer = _hospitalRegistrationsService.ApplyChangesHospitalRegistration(command);
             return RedirectToAction("Step2", new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
             {
-                
+                Date = command.Date,
+                Token = command.Token.Value           
             });
         }
 
@@ -55,6 +56,5 @@ namespace HospitalMVC.Controllers
             var answer = _hospitalRegistrationsService.ChangeHospitalRegistrationForNewSection(command);
             return View(answer);
         }
-
     }
 }

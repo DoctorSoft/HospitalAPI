@@ -36,13 +36,13 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
-                        <input type="text" class="form-control" placeholder="@info.OpenCount" aria-describedby="basic-addon1">
+                        @Html.TextAreaFor(o => o.StatisticItems.Count, new { @class = "form-control", @rows = "1", @placeholder = "@info.OpenCount" })
                         <br />
                     </div>
                     <br />
                 }
             </div>
-            <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick=" location.href = '@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})' " />
+            <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})'" />
             <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonChange" />
         </div>
     }

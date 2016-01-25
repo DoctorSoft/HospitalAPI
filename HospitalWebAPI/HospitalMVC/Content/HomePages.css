@@ -25,3 +25,13 @@
 .change-hospital-registration-panel .form-control{
 	width: 300px;
 }
+
+/* new hospital registration */
+.dropdown section{
+	color: #000000;
+}
+
+.dropdown option{
+	background-color: #ffffff;
+	color: #000000;
+}
