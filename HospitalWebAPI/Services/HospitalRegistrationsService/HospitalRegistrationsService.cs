@@ -204,11 +204,11 @@ namespace Services.HospitalRegistrationsService
                 Date = command.Date
             };
         }
-        
-        public ChangeHospitalRegistrationForSelectedSectionCommandAnswer ApplyChangesHospitalRegistration(
-            ChangeHospitalRegistrationForSelectedSectionCommand command)
+
+        public GetNewHospitalRegistrationCommandAnswer ApplyChangesHospitalRegistration(
+            GetNewHospitalRegistrationCommand command)
         {
-            return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
+            return new GetNewHospitalRegistrationCommandAnswer
             {
 
             };

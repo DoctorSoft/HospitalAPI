@@ -22,7 +22,19 @@
         @Html.HiddenFor(command => command.Token);
         <div class="panel-body">
             <div class="change-hospital-registration-panel">
-                @foreach (var info in Model.StatisticItems)
+                @for (var i = 0; i <= Model.StatisticItems.Count; i++)
+                {
+                    <input type="text" name="FreeHospitalSectionsForRegistration[@i].AgeSection" id="FreeHospitalSectionsForRegistration[@i].AgeSection" />
+                    <br/>
+                    <input type="text" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" />
+                    <br/>
+                    <input type="text" name="FreeHospitalSectionsForRegistration[@i].OpenCount" id="FreeHospitalSectionsForRegistration[@i].OpenCount" />
+                    <br/>
+
+                    <br />
+                }
+
+                @*foreach (var info in Model.StatisticItems)
                 {
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1"> @MainResources.EmptyPlacePageAge</span>
@@ -36,11 +48,11 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
-                        @Html.TextAreaFor(o => o.StatisticItems.Count, new { @class = "form-control", @rows = "1", @placeholder = "@info.OpenCount" })
+                        <textarea class="form-control" placeholder="@info.OpenCount" rows="1"></textarea>
                         <br />
                     </div>
                     <br />
-                }
+                }*@
             </div>
             <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})'" />
             <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonChange" />

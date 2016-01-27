@@ -40,12 +40,11 @@ namespace HospitalMVC.Controllers
 
         [HttpPost]
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
-        public ActionResult ApplyChangesHospitalRegistration(ChangeHospitalRegistrationForSelectedSectionCommand command)
+        public ActionResult ApplyChangesHospitalRegistration(GetNewHospitalRegistrationCommand command)
         {
             var answer = _hospitalRegistrationsService.ApplyChangesHospitalRegistration(command);
-            return RedirectToAction("Step2", new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
+            return RedirectToAction("Step2", new GetNewHospitalRegistrationCommandAnswer
             {
-                Date = command.Date,
                 Token = command.Token.Value           
             });
         }
