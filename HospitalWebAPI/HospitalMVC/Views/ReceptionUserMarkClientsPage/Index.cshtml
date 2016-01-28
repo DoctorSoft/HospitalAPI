@@ -1,8 +1,54 @@
-﻿
+﻿@using Resources
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Mark Clients Page</h2>
+@model ServiceModels.ServiceCommandAnswers.ReceptionMarkingCommandAnswers.GetReceptionUserMarkClientsPageInformationCommandAnswer
+
+<h3>Сегодня: @Model.Date.ToString("d")</h3>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Поциенты, которые должны прибыть сегодня</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Код
+                </th>
+                <th>
+                    Имя
+                </th>
+                <th>
+                    Фамилия
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.TableItems)
+            {
+                <tr >
+                    <td>
+                        @item.ClientCode
+                    </td>
+                    <td>
+                        @item.FirstName
+                    </td>
+                    <td>
+                        @item.LastName
+                    </td>
+                    <td class="controlColumn">
+                        <a>Подтвердить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
 

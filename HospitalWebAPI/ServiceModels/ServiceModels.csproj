@@ -109,6 +109,7 @@
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetSendDistributiveMessagesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\RemoveClinicMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\RemoveHospitalMessageByIdCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\Entities\ReceptionClientTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserMarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserUnmarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\SessionCommandAnswers\IsTokenHasAccessToFunctionCommandAnswer.cs" />
