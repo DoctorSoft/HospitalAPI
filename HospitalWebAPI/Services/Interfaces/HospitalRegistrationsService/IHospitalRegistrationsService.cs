@@ -14,8 +14,8 @@ namespace Services.Interfaces.HospitalRegistrationsService
         ChangeHospitalRegistrationForSelectedSectionCommandAnswer ChangeHospitalRegistrationForSelectedSection(
             ChangeHospitalRegistrationForSelectedSectionCommand command);
 
-        ChangeHospitalRegistrationForSelectedSectionCommandAnswer ApplyChangesHospitalRegistration(
-            ChangeHospitalRegistrationForSelectedSectionCommand command);
+        GetNewHospitalRegistrationCommandAnswer ApplyChangesHospitalRegistration(
+            GetNewHospitalRegistrationCommand command);
 
         ChangeHospitalRegistrationForNewSectionCommandAnswer ChangeHospitalRegistrationForNewSection(
             ChangeHospitalRegistrationForNewSectionCommand command);

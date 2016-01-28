@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
@@ -40,12 +43,13 @@ namespace HospitalMVC.Controllers
 
         [HttpPost]
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
-        public ActionResult ApplyChangesHospitalRegistration(ChangeHospitalRegistrationForSelectedSectionCommand command)
+        public ActionResult ApplyChangesHospitalRegistration(GetNewHospitalRegistrationCommand command)
         {
             var answer = _hospitalRegistrationsService.ApplyChangesHospitalRegistration(command);
-            return RedirectToAction("Step2", new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
+            return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
             {
-                
+                Token = command.Token.Value,
+                Date =  DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture)
             });
         }
 
@@ -55,6 +59,5 @@ namespace HospitalMVC.Controllers
             var answer = _hospitalRegistrationsService.ChangeHospitalRegistrationForNewSection(command);
             return View(answer);
         }
-
     }
 }

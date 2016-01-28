@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
+using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
@@ -203,11 +204,11 @@ namespace Services.HospitalRegistrationsService
                 Date = command.Date
             };
         }
-        
-        public ChangeHospitalRegistrationForSelectedSectionCommandAnswer ApplyChangesHospitalRegistration(
-            ChangeHospitalRegistrationForSelectedSectionCommand command)
+
+        public GetNewHospitalRegistrationCommandAnswer ApplyChangesHospitalRegistration(
+            GetNewHospitalRegistrationCommand command)
         {
-            return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
+            return new GetNewHospitalRegistrationCommandAnswer
             {
 
             };
@@ -233,12 +234,14 @@ namespace Services.HospitalRegistrationsService
                     HospitalProfileName = model.Name
                 }).ToList();
             
+
             var result = hospitalSectionProfilesList.Where(model => !table.Any(t => t.HospitalProfileId == model.Id)).ToList();
             
             return new ChangeHospitalRegistrationForNewSectionCommandAnswer
             {
                 Token = (Guid)command.Token,
-                FreeHospitalSectionsForRegistration = result
+                FreeHospitalSectionsForRegistration = result,
+                Date = command.Date
             };
         }
     }

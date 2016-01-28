@@ -93,6 +93,7 @@
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\ScheduleTableCell.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\ScheduleTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetChangeHospitalRegistrationsPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetNewHospitalRegistrationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ShowHospitalRegistrationPlacesByDateCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainMenuCommandAnswers\GetMainMenuItemsCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetAdministratorMainPageInformationCommandAnswer.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForNewSectionCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForSelectedSectionCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationsPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetNewHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ShowHospitalRegistrationPlacesByDateCommand.cs" />
     <Compile Include="ServiceCommands\MainMenuCommands\GetMainMenuItemsCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetAdministratorMainPageInformationCommand.cs" />
