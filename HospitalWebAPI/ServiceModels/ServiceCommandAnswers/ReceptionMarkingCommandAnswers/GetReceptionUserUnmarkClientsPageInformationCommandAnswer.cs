@@ -7,5 +7,8 @@ namespace ServiceModels.ServiceCommandAnswers.ReceptionMarkingCommandAnswers
 {
     public class GetReceptionUserUnmarkClientsPageInformationCommandAnswer : AbstractTokenCommandAnswer
     {
+        public DateTime Date { get; set; }
+
+        public List<ReceptionClientTableItem> TableItems { get; set; }
     }
 }

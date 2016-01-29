@@ -24,6 +24,12 @@
                     Фамилия
                 </th>
                 <th>
+                    От клиники
+                </th>
+                <th>
+                    Отделение
+                </th>
+                <th>
 
                 </th>
             </tr>
@@ -42,8 +48,14 @@
                     <td>
                         @item.LastName
                     </td>
+                    <td>
+                        @item.ClinicName
+                    </td>
+                    <td>
+                        @item.SectionName
+                    </td>
                     <td class="controlColumn">
-                        <a>Подтвердить</a>
+                        @Html.ActionLink("Подтведить", "MarkClientAsArrived", new { Token = @Model.Token, ReservationId = item.ReservationId })
                     </td>
                 </tr>
             }

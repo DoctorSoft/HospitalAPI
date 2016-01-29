@@ -11,5 +11,7 @@
         public string ClinicName { get; set; }
 
         public string SectionName { get; set; }
+
+        public int ReservationId { get; set; }
     }
 }
