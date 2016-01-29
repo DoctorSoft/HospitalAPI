@@ -35,7 +35,7 @@ namespace Services.ReceptionMarkingServices
 
             var table = reservations
                 .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospital.Id)
-                //.Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date == DateTime.Now)
+                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date == DateTime.Now)
                 .Where(model => model.CancelTime == null)
                 .Select(model => new ReceptionClientTableItem
                 {
@@ -70,7 +70,7 @@ namespace Services.ReceptionMarkingServices
             var table = reservations
                 .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospital.Id)
                 .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date == DateTime.Now)
-                //.Where(model => model.CancelTime != null)
+                .Where(model => model.CancelTime != null)
                 .Select(model => new ReceptionClientTableItem
                 {
                     FirstName = model.Patient.FirstName,
@@ -102,6 +102,23 @@ namespace Services.ReceptionMarkingServices
             reservationRepository.SaveChanges();
 
             var result = new MarkClientAsArrivedCommandAnswer
+            {
+                Token = (Guid)command.Token
+            };
+
+            return result;
+        }
+
+        public MarkClientAsArrivingCommandAnswer MarkClientAsArriving(MarkClientAsArrivingCommand command)
+        {
+            var reservations = reservationRepository.GetModels();
+            var reservation = reservations.FirstOrDefault(model => model.Id == command.ReservationId);
+
+            reservation.CancelTime = null;
+            reservationRepository.Update(reservation.Id, reservation);
+            reservationRepository.SaveChanges();
+
+            var result = new MarkClientAsArrivingCommandAnswer
             {
                 Token = (Guid)command.Token
             };

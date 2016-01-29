@@ -14,5 +14,7 @@ namespace Services.Interfaces.ReceptionMarkingServices
             GetReceptionUserUnmarkClientsPageInformationCommand command);
 
         MarkClientAsArrivedCommandAnswer MarkClientAsArrived(MarkClientAsArrivedCommand command);
+
+        MarkClientAsArrivingCommandAnswer MarkClientAsArriving(MarkClientAsArrivingCommand command);
     }
 }

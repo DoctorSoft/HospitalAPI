@@ -114,6 +114,7 @@
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserMarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\GetReceptionUserUnmarkClientsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\MarkClientAsArrivedCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\MarkClientAsArrivingCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\SessionCommandAnswers\IsTokenHasAccessToFunctionCommandAnswer.cs" />
     <Compile Include="ServiceCommands\AuthorizationCommands\GetTokenByUserCredentialsCommand.cs" />
     <Compile Include="ServiceCommands\AuthorizationCommands\LogOutUserByTokenCommand.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserMarkClientsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserUnmarkClientsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\MarkClientAsArrivedCommand.cs" />
+    <Compile Include="ServiceCommands\ReceptionMarkingCommands\MarkClientAsArrivingCommand.cs" />
     <Compile Include="ServiceCommands\SessionCommands\IsTokenHasAccessToFunctionCommand.cs" />
   </ItemGroup>
   <ItemGroup>
