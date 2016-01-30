@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
-using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 
@@ -43,12 +42,12 @@ namespace HospitalMVC.Controllers
 
         [HttpPost]
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
-        public ActionResult ApplyChangesHospitalRegistration(GetNewHospitalRegistrationCommand command)
+        public ActionResult ApplyChangesHospitalRegistration(GetChangeHospitalRegistrationCommand command)
         {
             var answer = _hospitalRegistrationsService.ApplyChangesHospitalRegistration(command);
             return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
             {
-                Token = command.Token.Value,
+                Token = answer.Token,
                 Date =  DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture)
             });
         }
@@ -59,5 +58,17 @@ namespace HospitalMVC.Controllers
             var answer = _hospitalRegistrationsService.ChangeHospitalRegistrationForNewSection(command);
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult ApplyChangesNewHospitalRegistration(GetChangeNewHospitalRegistrationCommand command)
+        {
+            var answer = _hospitalRegistrationsService.ApplyChangesNewHospitalRegistration(command);
+            return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
+            {
+                Token = answer.Token,
+                Date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture)
+            });
+        }
+
     }
 }

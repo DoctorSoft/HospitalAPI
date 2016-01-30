@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
-using Enums.Enums;
+using HandleToolsInterfaces.Converters;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
@@ -18,18 +18,20 @@ namespace Services.HospitalRegistrationsService
     public class HospitalRegistrationsService : IHospitalRegistrationsService
     {
         private readonly IEmptyPlaceStatisticRepository _emptyPlaceStatisticRepository;
+        private readonly IEmptyPlaceByTypeStatisticRepository _emptyPlaceByTypeStatisticRepository;
         private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHospitalUserRepository _hospitalUserRepository;
 
         public HospitalRegistrationsService(IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository,
             IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager,
-            IHospitalUserRepository hospitalUserRepository)
+            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository)
         {
             _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
             _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
             _tokenManager = tokenManager;
             _hospitalUserRepository = hospitalUserRepository;
+            _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
         }
 
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
@@ -205,12 +207,74 @@ namespace Services.HospitalRegistrationsService
             };
         }
 
-        public GetNewHospitalRegistrationCommandAnswer ApplyChangesHospitalRegistration(
-            GetNewHospitalRegistrationCommand command)
+        public GetChangeHospitalRegistrationCommandAnswer ApplyChangesHospitalRegistration(
+            GetChangeHospitalRegistrationCommand command)
         {
-            return new GetNewHospitalRegistrationCommandAnswer
-            {
+            DateTime date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
+            var emptyPlaceStatisticsId =
+            _emptyPlaceStatisticRepository.GetModels()
+                .FirstOrDefault(model => model.HospitalSectionProfileId == command.HospitalProfileId && model.Date == date)
+                .Id;
+
+            var freeHospitalSectionsForRegistrationList = command.FreeHospitalSectionsForRegistration;
+
+            var freeHospitalSectionsForRegistrationInTable =
+                ((IDbSet<EmptyPlaceByTypeStatisticStorageModel>) _emptyPlaceByTypeStatisticRepository.GetModels())
+                    .Where(model => model.EmptyPlaceStatisticId == emptyPlaceStatisticsId).ToList();
+
+            var result = freeHospitalSectionsForRegistrationList
+                .Select(element => freeHospitalSectionsForRegistrationInTable
+                    .Where(model => element != null 
+                        && model.AgeSection.ToString() == element.AgeSection.ToString() 
+                        && model.Sex.ToString() == element.Sex.ToString())
+                        .Select(model => new EmptyPlaceByTypeStatisticStorageModel
+                        {
+                            Id = model.Id, 
+                            AgeSection = element.AgeSection, 
+                            Count = element.OpenCount, 
+                            Sex = element.Sex, 
+                            EmptyPlaceStatisticId = emptyPlaceStatisticsId
+                        }).FirstOrDefault()).ToList();
+
+            foreach (var emptyPlace in result)
+            {
+                _emptyPlaceByTypeStatisticRepository.Update(emptyPlace.Id, emptyPlace);
+            }
+            _emptyPlaceByTypeStatisticRepository.SaveChanges();
+     
+            return new GetChangeHospitalRegistrationCommandAnswer
+            {
+                Token = (Guid)command.Token
+            };
+        }
+
+        public GetChangeNewHospitalRegistrationCommandAnswer ApplyChangesNewHospitalRegistration(
+            GetChangeNewHospitalRegistrationCommand command)
+        {
+            DateTime date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+            var newHospitalSectionProfileId = new EmptyPlaceStatisticStorageModel
+            {
+                Date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
+                CreateTime = DateTime.Now,
+                HospitalSectionProfileId = command.HospitalProfileId,
+                EmptyPlaceByTypeStatistics = command.FreeHospitalSectionsForRegistration
+                    .Select(pair => new EmptyPlaceByTypeStatisticStorageModel
+                    {
+                        AgeSection = pair.AgeSection,
+                        Sex = pair.Sex,
+                        Count = pair.OpenCount
+                    }
+                    ).ToList()
+            };
+
+            _emptyPlaceStatisticRepository.Add(newHospitalSectionProfileId);
+            _emptyPlaceStatisticRepository.SaveChanges();
+
+            return new GetChangeNewHospitalRegistrationCommandAnswer
+            {
+                Token = (Guid)command.Token
             };
         }
 

@@ -7,6 +7,7 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
 {
     public class ChangeHospitalRegistrationForSelectedSectionCommandAnswer : AbstractTokenCommandAnswer
     {
+        public int HospitalProfileId { get; set; }
         public List<HospitalRegistrationCountStatisticItem> StatisticItems { get; set; }
         public string SectionProfileName { get; set; }
         public DateTime Date { get; set; }

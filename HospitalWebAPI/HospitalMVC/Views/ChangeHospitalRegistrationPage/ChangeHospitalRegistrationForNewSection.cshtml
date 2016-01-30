@@ -10,42 +10,62 @@
 
 <h2>ChangeHospitalRegistrationForNewSection</h2>
 
+@{
+    int i = 0;
+}
+@using (Html.BeginForm("ApplyChangesNewHospitalRegistration", "ChangeHospitalRegistrationPage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
+    @Html.HiddenFor(command => command.Token);
     <div class="panel-body">
         <div class="change-hospital-registration-panel">
-            <div class="dropdown">
+           
+             <div class="dropdown">
                 @Html.DropDownList(
-                    "Foo",
+                    "HospitalProfileId",
                     new SelectList(
-                        Model.FreeHospitalSectionsForRegistration.Select(x => new { Value = x.Id, Text = x.Name }),
+                        Model.FreeHospitalSectionsForRegistration.Select(x => new {Value = x.Id, Text = x.Name}),
                         "Value",
-                        "Text"), new { @class = "btn btn-primary dropdown-toggle" })
+                        "Text"), new {@class = "btn btn-primary dropdown-toggle"})
             </div>
 
             <br />
-            @foreach (var ageSection in Enum.GetNames(typeof(AgeSection)))
-            {
-                foreach (var sex in Enum.GetNames(typeof (Sex)))
-                 {
-                     <div class="input-group">
-                         <span class="input-group-addon" id="basic-addon1"> @MainResources.EmptyPlacePageAge</span>
-                         <label class="form-control" aria-describedby="basic-addon1">@ageSection</label>
-                         <br />
-                     </div>
-                     <div class="input-group">
-                         <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
-                         <label class="form-control" aria-describedby="basic-addon1">@sex</label>
-                         <br />
-                     </div>
-                     <div class="input-group">
-                         <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
-                         <input type="text" class="form-control" aria-describedby="basic-addon1">
-                         <br />
-                     </div>
-                     <br />
-                 }
+
+            @{
+                foreach (var ageSection in Enum.GetNames(typeof (AgeSection)))
+                {
+
+                    foreach (var sex in Enum.GetNames(typeof (Sex)))
+                    {
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1"> @MainResources.EmptyPlacePageAge</span>
+                            <label class="form-control" aria-describedby="basic-addon1" name="FreeHospitalSectionsForRegistration[@i].AgeSection" id="FreeHospitalSectionsForRegistration[@i].AgeSection">@ageSection</label>
+                            <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].AgeSection" id="FreeHospitalSectionsForRegistration[@i].AgeSection" class="form-control" value="@ageSection" />
+                            <br />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
+                            <label class="form-control" aria-describedby="basic-addon1" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex">@sex</label>
+                            <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" value="@sex" />
+                             <br />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
+                            <input type="text" class="form-control" aria-describedby="basic-addon1" name="FreeHospitalSectionsForRegistration[@i].OpenCount" id="FreeHospitalSectionsForRegistration[@i].OpenCount" />
+                            <br />
+                        </div>
+                        <br />
+                        i++;
+                    }
+                }
+
             }
         </div>
-        <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})'"/>
+        <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})' "/>
         <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonAdd" />
-    </div>
+       
+        @Html.HiddenFor(model => model.Date)
+
+     </div>
+}

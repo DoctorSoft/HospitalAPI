@@ -3,7 +3,7 @@ using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class GetNewHospitalRegistrationCommandAnswer : AbstractTokenCommandAnswer
+    public class GetChangeNewHospitalRegistrationCommandAnswer : AbstractTokenCommandAnswer
     {
         public DateTime Date { get; set; }
     }

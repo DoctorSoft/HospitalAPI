@@ -5,8 +5,9 @@ using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.En
 
 namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
 {
-    public class GetNewHospitalRegistrationCommand : AbstractTokenCommand
+    public class GetChangeHospitalRegistrationCommand : AbstractTokenCommand
     {
+        public int HospitalProfileId { get; set; }
         public List<HospitalRegistrationCountStatisticItem> FreeHospitalSectionsForRegistration { get; set; }
         public string Date { get; set; }
     }

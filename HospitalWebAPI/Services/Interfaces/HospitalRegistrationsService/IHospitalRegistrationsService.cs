@@ -14,10 +14,13 @@ namespace Services.Interfaces.HospitalRegistrationsService
         ChangeHospitalRegistrationForSelectedSectionCommandAnswer ChangeHospitalRegistrationForSelectedSection(
             ChangeHospitalRegistrationForSelectedSectionCommand command);
 
-        GetNewHospitalRegistrationCommandAnswer ApplyChangesHospitalRegistration(
-            GetNewHospitalRegistrationCommand command);
+        GetChangeHospitalRegistrationCommandAnswer ApplyChangesHospitalRegistration(
+            GetChangeHospitalRegistrationCommand command);
 
         ChangeHospitalRegistrationForNewSectionCommandAnswer ChangeHospitalRegistrationForNewSection(
             ChangeHospitalRegistrationForNewSectionCommand command);
+
+        GetChangeNewHospitalRegistrationCommandAnswer ApplyChangesNewHospitalRegistration(
+            GetChangeNewHospitalRegistrationCommand command);
     }
 }
