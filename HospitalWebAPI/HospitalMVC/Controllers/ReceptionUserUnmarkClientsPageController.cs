@@ -21,5 +21,12 @@ namespace HospitalMVC.Controllers
             var answer = _receptionMarkingService.GetReceptionUserUnmarkClientsPageInformation(command);
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.ReceptionUserPrimaryAccess, FunctionIdentityName.ReceptionUserMarkClients)]
+        public ActionResult MarkClientAsArriving(MarkClientAsArrivingCommand command)
+        {
+            var answer = _receptionMarkingService.MarkClientAsArriving(command);
+            return RedirectToAction("Index", new { Token = answer.Token });
+        }
     }
 }

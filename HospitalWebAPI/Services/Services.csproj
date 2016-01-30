@@ -55,6 +55,7 @@
     <Compile Include="Interfaces\ReceptionMarkingServices\IReceptionMarkingService.cs" />
     <Compile Include="Interfaces\ServiceTools\IClinicReservationsManager.cs" />
     <Compile Include="Interfaces\ServiceTools\IClinicManager.cs" />
+    <Compile Include="Interfaces\ServiceTools\IHospitalManager.cs" />
     <Compile Include="Interfaces\ServiceTools\ISettingsManager.cs" />
     <Compile Include="Interfaces\ServiceTools\ITokenManager.cs" />
     <Compile Include="Interfaces\ServiceTools\IUserFunctionManager.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="ReceptionMarkingServices\ReceptionMarkingService.cs" />
     <Compile Include="ServiceTools\ClinicManager.cs" />
     <Compile Include="ServiceTools\ClinicReservationsManager.cs" />
+    <Compile Include="ServiceTools\HospitalManager.cs" />
     <Compile Include="ServiceTools\SettingsManager.cs" />
     <Compile Include="ServiceTools\TokenManager.cs" />
     <Compile Include="ServiceTools\UserFunctionManager.cs" />

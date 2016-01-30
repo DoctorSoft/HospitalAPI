@@ -32,6 +32,7 @@ namespace Dependencies.NinjectModules
             Bind<IUserFunctionManager>().To<UserFunctionManager>().InThreadScope();
             Bind<IClinicManager>().To<ClinicManager>().InThreadScope();
             Bind<IClinicReservationsManager>().To<ClinicReservationsManager>().InThreadScope();
+            Bind<IHospitalManager>().To<HospitalManager>().InThreadScope();
 
             // Services
             Bind<IAuthorizationService>().To<AuthorizationService>().InThreadScope();
