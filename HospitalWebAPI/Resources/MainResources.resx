@@ -255,4 +255,19 @@
   <data name="ButtonAdd" xml:space="preserve">
     <value>Добавить</value>
   </data>
+  <data name="AutorizationPageTitle" xml:space="preserve">
+    <value>Авторизация</value>
+  </data>
+  <data name="ButtonSign" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>Сохранить пароль</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
 </root>

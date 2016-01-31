@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Enums.EnumExtensions
 @using Resources
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ChangeHospitalRegistrationForSelectedSectionCommandAnswer
 
@@ -33,7 +34,7 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
-                    <label name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" title="@Model.StatisticItems[i].Sex.ToString("G")" > @Model.StatisticItems[i].Sex.ToString("G") </label>
+                    <label name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" title="@Model.StatisticItems[i].Sex.ToString("G")" > @Model.StatisticItems[i].Sex.ToCorrectString() </label>
                     <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" value="@Model.StatisticItems[i].Sex.ToString("D")" />
                     <br />
                 </div>

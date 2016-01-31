@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Авторизация.
+        /// </summary>
+        public static string AutorizationPageTitle {
+            get {
+                return ResourceManager.GetString("AutorizationPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Добавить.
         /// </summary>
         public static string ButtonAdd {
@@ -93,6 +102,15 @@ namespace Resources {
         public static string ButtonDeleteMessage {
             get {
                 return ResourceManager.GetString("ButtonDeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Войти.
+        /// </summary>
+        public static string ButtonSign {
+            get {
+                return ResourceManager.GetString("ButtonSign", resourceCulture);
             }
         }
         
@@ -421,6 +439,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пароль.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to нажмите сюда..
         /// </summary>
         public static string ReceptionUserPageMarkPatientAfter {
@@ -462,6 +489,24 @@ namespace Resources {
         public static string ReceptionUserPageUnmarkPatientBefore {
             get {
                 return ResourceManager.GetString("ReceptionUserPageUnmarkPatientBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить пароль.
+        /// </summary>
+        public static string SavePassword {
+            get {
+                return ResourceManager.GetString("SavePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Имя пользователя.
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
         

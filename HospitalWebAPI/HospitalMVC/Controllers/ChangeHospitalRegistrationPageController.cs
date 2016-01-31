@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
+using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 
@@ -63,12 +64,13 @@ namespace HospitalMVC.Controllers
         public ActionResult ApplyChangesNewHospitalRegistration(GetChangeNewHospitalRegistrationCommand command)
         {
             var answer = _hospitalRegistrationsService.ApplyChangesNewHospitalRegistration(command);
+
             return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
             {
                 Token = answer.Token,
-                Date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture)
+                Date =
+                    DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture)
             });
         }
-
     }
 }

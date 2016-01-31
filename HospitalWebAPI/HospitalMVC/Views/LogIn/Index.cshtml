@@ -10,6 +10,7 @@
     </head>
     <body>
 
+        @using Resources        
         @using ServiceModels.ServiceCommands.AuthorizationCommands
 
         @model GetTokenByUserCredentialsCommand
@@ -22,26 +23,15 @@
         {
             @Html.AntiForgeryToken()
 
-            <div>
-                <div class="input-group center-block container form-signin">
-
-                    <div class="input-group">
-                        <div class="h4 col-lg-4">@Html.DisplayNameFor(o => o.Login)</div>
-                        <div class="col-lg-6">@Html.TextBoxFor(o => o.Login)</div>
-                    </div>
-                    <div class="input-group">
-                        <div class="h4 col-lg-4">@Html.DisplayNameFor(o => o.Password)</div>
-                        <div class="col-lg-3">@Html.TextBoxFor(o => o.Password)</div>
-                    </div>
-                    <div class="input-group col-lg-12">
-                        <div class="col-lg-8">
-                            
-                        </div>
-                        <div class="col-lg-1">
-                            <input class="btn btn-sm btn-primary" type="submit" />
-                        </div>
-                    </div>
-
+            <div class="wrapper">
+                <div class="form-signin">
+                    <h1 class="form-signin-heading">@MainResources.AutorizationPageTitle</h1>
+                    @Html.TextBoxFor(o => o.Login, new { @class = "form-control", @placeholder = MainResources.UserName, @name = "username", @required = "true" })
+                    @Html.TextBoxFor(o => o.Password, new { @class = "form-control", @placeholder = "Пароль", MainResources.Password, @required = "true" })
+                    <label class="checkbox">
+                        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> @MainResources.SavePassword 
+                    </label>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">@MainResources.ButtonSign</button>
                 </div>
             </div>
 
