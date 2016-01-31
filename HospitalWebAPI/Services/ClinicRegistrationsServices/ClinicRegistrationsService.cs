@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Enums.EnumExtensions;
 using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
@@ -56,13 +57,13 @@ namespace Services.ClinicRegistrationsServices
             var sexes =
                 Enum.GetValues(typeof (Sex))
                     .Cast<Sex>()
-                    .Select(sex => new KeyValuePair<int, string>((int) sex, sex.ToString("G")))
+                    .Select(sex => new KeyValuePair<int, string>((int) sex, sex.ToCorrectString()))
                     .ToList();
 
             var ageSections =
                 Enum.GetValues(typeof (AgeSection))
                     .Cast<AgeSection>()
-                    .Select(section => new KeyValuePair<int, string>((int) section, section.ToString("G")))
+                    .Select(section => new KeyValuePair<int, string>((int) section, section.ToCorrectString()))
                     .ToList();
 
             var sectionProfiles =
@@ -129,9 +130,9 @@ namespace Services.ClinicRegistrationsServices
             return new GetClinicRegistrationScheduleCommandAnswer
             {
                 Token = command.Token.Value,
-                Sex = ((Sex)command.Sex).ToString("G"),
+                Sex = ((Sex)command.Sex).ToCorrectString(),
                 SexId = command.Sex,
-                AgeSection = ((AgeSection)command.AgeSection).ToString("G"),
+                AgeSection = ((AgeSection)command.AgeSection).ToCorrectString(),
                 AgeSectionId = command.AgeSection,
                 SectionProfileId = command.SectionProfileId,
                 SectionProfile = _sectionProfileRepository
@@ -161,8 +162,8 @@ namespace Services.ClinicRegistrationsServices
                 SexId = command.SexId,
                 Code = Guid.NewGuid().ToString(),
                 CurrentHospital = hospital.Name,
-                AgeSection = ((AgeSection)command.AgeSectionId).ToString("G"),
-                Sex = ((Sex)command.SexId).ToString("G"),
+                AgeSection = ((AgeSection)command.AgeSectionId).ToCorrectString(),
+                Sex = ((Sex)command.SexId).ToCorrectString(),
                 Token = command.Token.Value,
                 FirstName = "",
                 LastName = "",

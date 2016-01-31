@@ -28,7 +28,7 @@
 <div class="panel-body form-group">
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
-            <label>Section profile:</label>
+            <label>Отделение (профиль):</label>
         </div>
         <div class="col-lg-7">
             @Model.SectionProfile
@@ -38,7 +38,7 @@
     </div>
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
-            <label>Sex:</label>
+            <label>Пол:</label>
         </div>
         <div class="col-lg-7">
             @Model.Sex
@@ -48,7 +48,7 @@
     </div>
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
-            <label>Age section:</label>
+            <label>Возраст:</label>
         </div>
         <div class="col-lg-7">
             @Model.AgeSection
@@ -58,7 +58,7 @@
     </div>
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
-            <label>Hospital:</label>
+            <label>Больница:</label>
         </div>
         <div class="col-lg-7">
             @Html.DropDownListFor(answer => answer.Hospitals, Model.Hospitals.Select(pair => new SelectListItem

@@ -18,13 +18,13 @@
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetMakeClinicRegistrationsPageInformationCommandAnswer
 
 <br>
-<h2>Please register data:</h2>
+<h2>Пожалуйста, выберите категории:</h2>
 <br>
 
 <div class="panel-body form-group">
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
-            <label>AgeSection:</label>
+            <label>Возраст:</label>
         </div>
         <div class="col-lg-7">
             @Html.DropDownListFor(answer => answer.AgeSection, Model.AgeSections.Select(pair => new SelectListItem
@@ -39,7 +39,7 @@
     </div>
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
-            <label>Sex:</label>
+            <label>Пол:</label>
         </div>
         <div class="col-lg-7">
             @Html.DropDownListFor(answer => answer.Sex, Model.Sexes.Select(pair => new SelectListItem
@@ -53,7 +53,7 @@
     </div>
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
-            <label>SectionProfile:</label>
+            <label>Отделение (профиль):</label>
         </div>
         <div class="col-lg-7">
             @Html.DropDownListFor(answer => answer.SectionProfile, Model.SectionProfiles.Select(pair => new SelectListItem
@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="col-lg-10 panel-body">
-        <div><a id="NextLink" class="btn-info btn btn-lg" onclick="LinkClick()">Next</a>
+        <div><a id="NextLink" class="btn-info btn btn-lg" onclick="LinkClick()">Далее</a>
         </div>
     </div>
 </div>

@@ -2,8 +2,6 @@
     ViewBag.Title = "Step3";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@using Enums.Enums
 @model ServiceModels.ServiceCommands.ClinicRegistrationsCommands.SaveClinicRegistrationCommand
 
 @using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", FormMethod.Post))
