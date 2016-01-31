@@ -24,7 +24,7 @@ namespace CreateRandomDataTools.DataCreators
                     Name = "Городская поликлиника №1",
                     Address = "г. Гродно, ул. Лермонтова, 13"
                 },
-                new ClinicStorageModel
+                /*new ClinicStorageModel
                 {
                     IsBlocked = false,
                     Id = 2,
@@ -51,7 +51,7 @@ namespace CreateRandomDataTools.DataCreators
                     Id = 5,
                     Name = "Городская поликлиника №6",
                     Address = "г. Гродно, ул. Горького, 77"
-                }
+                }*/
             };
 
             return clinicsList;

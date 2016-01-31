@@ -28,7 +28,7 @@
             {
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1"> @MainResources.EmptyPlacePageAge</span>
-                    <label name="FreeHospitalSectionsForRegistration[@i].AgeSection" id="FreeHospitalSectionsForRegistration[@i].AgeSection" class="form-control" title="@Model.StatisticItems[i].AgeSection.ToString("G")" > @Model.StatisticItems[i].AgeSection.ToString("G") </label>
+                    <label name="FreeHospitalSectionsForRegistration[@i].AgeSection" id="FreeHospitalSectionsForRegistration[@i].AgeSection" class="form-control" title="@Model.StatisticItems[i].AgeSection.ToString("G")" > @Model.StatisticItems[i].AgeSection.ToCorrectString() </label>
                     <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].AgeSection" id="FreeHospitalSectionsForRegistration[@i].AgeSection" class="form-control" value="@Model.StatisticItems[i].AgeSection.ToString("D")" />
                     <br />
                 </div>

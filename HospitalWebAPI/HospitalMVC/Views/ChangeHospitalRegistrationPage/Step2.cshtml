@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using Ninject
+@using Enums.EnumExtensions
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowHospitalRegistrationPlacesByDateCommandAnswer
 
 <div class="bs-example">
@@ -27,9 +27,9 @@
                             {
                                 <div>
                                     <br/>
-                                    Sex: @info.Sex.ToString("G") <br/>
-                                    Diapason: @info.AgeSection.ToString("G") <br/>
-                                    Count: @info.OpenCount <br/>
+                                    Пол: @info.Sex.ToCorrectString() <br/>
+                                    Возраст: @info.AgeSection.ToCorrectString() <br/>
+                                    Количество: @info.OpenCount <br/>
                                     <br/>
                                 </div>
                             }

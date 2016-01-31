@@ -24,7 +24,7 @@ namespace CreateRandomDataTools.DataCreators
                     Name = "Гродненская городская клиническая больница №1",
                     Address = "г. Гродно, ул. Коммунальная, 2"
                 },
-                new HospitalStorageModel
+                /*new HospitalStorageModel
                 {
                     IsBlocked = false,
                     Id = 2,
@@ -79,7 +79,7 @@ namespace CreateRandomDataTools.DataCreators
                     Id = 9,
                     Name = "Военный госпиталь",
                     Address = "г. Гродно, ул. Дзержинского, 17"
-                }
+                }*/
             };
 
             return hospitalsList;

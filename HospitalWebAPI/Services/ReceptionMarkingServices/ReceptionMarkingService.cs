@@ -33,9 +33,11 @@ namespace Services.ReceptionMarkingServices
             var user = tokenManager.GetUserByToken(command.Token.Value);
             var hospital = hospitalManager.GetClinicByUser(user);
 
+            var now = DateTime.Now.Date;
+
             var table = reservations
                 .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospital.Id)
-                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date == DateTime.Now)
+                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date == now)
                 .Where(model => model.CancelTime == null)
                 .Select(model => new ReceptionClientTableItem
                 {
@@ -67,9 +69,11 @@ namespace Services.ReceptionMarkingServices
             var user = tokenManager.GetUserByToken(command.Token.Value);
             var hospital = hospitalManager.GetClinicByUser(user);
 
+            var now = DateTime.Now.Date;
+
             var table = reservations
                 .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospital.Id)
-                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date == DateTime.Now)
+                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date == now)
                 .Where(model => model.CancelTime != null)
                 .Select(model => new ReceptionClientTableItem
                 {
