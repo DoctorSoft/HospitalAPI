@@ -15,7 +15,6 @@ namespace HospitalMVC.Controllers
             _mainPageService = mainPageServices;
         }
 
-        // TODO: Move logic functions to service
         [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess)]
         public ActionResult Index(GetClinicUserMainPageInformationCommand command)
         {

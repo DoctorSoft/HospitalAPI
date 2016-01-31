@@ -24,7 +24,7 @@ namespace CreateRandomDataTools.DataCreators
                             IsBlocked = false,
                             Name = "Кардиологическое"
                         },
-                        new SectionProfileStorageModel
+                        /*new SectionProfileStorageModel
                         {
                             IsBlocked = false,
                             Name = "Пульмонологическое"
@@ -33,7 +33,7 @@ namespace CreateRandomDataTools.DataCreators
                         {
                             IsBlocked = false,
                             Name = "Неврологическое"
-                        }
+                        }*/
                     }
                 },
                 new SectionStorageModel()
@@ -53,7 +53,7 @@ namespace CreateRandomDataTools.DataCreators
                             IsBlocked = false,
                             Name = "Гнойной хирургии"
                         },
-                        new SectionProfileStorageModel
+                        /*new SectionProfileStorageModel
                         {
                             IsBlocked = false,
                             Name = "Нейрохирургическое"
@@ -72,10 +72,10 @@ namespace CreateRandomDataTools.DataCreators
                         {
                             IsBlocked = false,
                             Name = "Урологическое"
-                        }
+                        }*/
                     }
                 },
-                new SectionStorageModel()
+                /*new SectionStorageModel()
                 {
                     IsBlocked = false,
                     Id = 2,
@@ -122,7 +122,7 @@ namespace CreateRandomDataTools.DataCreators
                             Name = "Гипербарической оксигенации"
                         }
                     }
-                }
+                }*/
             };
 
             return sectionProfilesList;
