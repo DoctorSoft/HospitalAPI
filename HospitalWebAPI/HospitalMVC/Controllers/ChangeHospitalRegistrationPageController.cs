@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
-using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 

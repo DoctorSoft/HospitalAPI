@@ -26,8 +26,8 @@
             <div class="wrapper">
                 <div class="form-signin">
                     <h1 class="form-signin-heading">@MainResources.AutorizationPageTitle</h1>
-                    @Html.TextBoxFor(o => o.Login, new { @class = "form-control", @placeholder = MainResources.UserName, @name = "username", @required = "true" })
-                    @Html.TextBoxFor(o => o.Password, new { @class = "form-control", @placeholder = "Пароль", MainResources.Password, @required = "true" })
+                    @Html.TextBoxFor(o => o.Login, new { @class = "form-control", @placeholder = MainResources.UserName, @name = "username", @required = "" })
+                    @Html.TextBoxFor(o => o.Password, new { @class = "form-control", @placeholder = "Пароль", MainResources.Password, @required = "" })
                     <label class="checkbox">
                         <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> @MainResources.SavePassword 
                     </label>
