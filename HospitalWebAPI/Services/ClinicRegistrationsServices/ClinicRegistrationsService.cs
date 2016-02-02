@@ -6,6 +6,7 @@ using Enums.EnumExtensions;
 using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
+using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
@@ -173,8 +174,61 @@ namespace Services.ClinicRegistrationsServices
             };
         }
 
+        private List<CommandAnswerError> ValidateSaveClinicRegistrationCommand(SaveClinicRegistrationCommand command)
+        {
+            var result = new List<CommandAnswerError>();
+
+            if (string.IsNullOrWhiteSpace(command.FirstName) || command.FirstName.Length < 2)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Имя",
+                    Title = "Имя не может иметь меньше 2 букв"
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(command.LastName) || command.LastName.Length < 2)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Фамилия",
+                    Title = "Фамилия не может иметь меньше 2 букв"
+                });
+            }
+
+            if (!((AgeSection)command.AgeSectionId).IsCorrectAge(command.Age.Value))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Возраст должен входить в заданный диапазон"
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(command.PhoneNumber) || command.PhoneNumber.Length < 3 || !command.PhoneNumber.Any(char.IsDigit))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Телефон",
+                    Title = "Телефон имеет некорректный формат"
+                });
+            }
+
+            return result;
+        }
+        
         public SaveClinicRegistrationCommandAnswer SaveClinicRegistration(SaveClinicRegistrationCommand command)
         {
+            var errors = this.ValidateSaveClinicRegistrationCommand(command);
+            if (errors.Any())
+            {
+                return new SaveClinicRegistrationCommandAnswer
+                {
+                    Errors = errors, 
+                    Token = command.Token.Value
+                };
+            }
+
             var user = this._tokenManager.GetUserByToken(command.Token);
             var clinicId = this._clinicManager.GetClinicByUser(user).Id;
 

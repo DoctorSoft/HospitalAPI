@@ -39,7 +39,9 @@ namespace Services.MainPageServices
         {
             int? countNewNotices =
                 _messageRepository.GetModels()
-                    .Where(model => model.UserToId == user.Id).Count(model => !model.IsRead);
+                    .Where(model => model.UserToId == user.Id 
+                        && (model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed))
+                        .Count(model => !model.IsRead);
             return countNewNotices;
         }
 

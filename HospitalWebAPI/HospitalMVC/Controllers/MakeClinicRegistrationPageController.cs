@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
@@ -61,6 +62,33 @@ namespace HospitalMVC.Controllers
         public ActionResult SaveRegistration(SaveClinicRegistrationCommand command)
         {
             var answer = _clinicRegistrationsService.SaveClinicRegistration(command);
+
+            if (answer.Errors.Any())
+            {
+                var model = new SaveClinicRegistrationCommand
+                {
+                    AgeSection = command.AgeSection,
+                    Sex = command.Sex,
+                    DateValue = command.DateValue,
+                    Date = command.Date,
+                    CurrentHospitalId = command.CurrentHospitalId,
+                    Token = answer.Token,
+                    SectionProfileId = command.SectionProfileId,
+                    AgeSectionId = command.AgeSectionId,
+                    FirstName = command.FirstName,
+                    LastName = command.LastName,
+                    SexId = command.SexId,
+                    SectionProfile = command.SectionProfile,
+                    Age = command.Age,
+                    Code = command.Code,
+                    CurrentHospital = command.CurrentHospital,
+                    PhoneNumber = command.PhoneNumber
+                };
+                ViewBag.Errors = answer.Errors;
+
+                return View("Step3", model);
+            }
+
             return RedirectToAction("Index", "ClinicUserHomePage", new { Token = command.Token });
         }
     }
