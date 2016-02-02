@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
-using HandleToolsInterfaces.Converters;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
@@ -210,6 +209,7 @@ namespace Services.HospitalRegistrationsService
         public GetChangeHospitalRegistrationCommandAnswer ApplyChangesHospitalRegistration(
             GetChangeHospitalRegistrationCommand command)
         {
+
             DateTime date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
             var emptyPlaceStatisticsId =
