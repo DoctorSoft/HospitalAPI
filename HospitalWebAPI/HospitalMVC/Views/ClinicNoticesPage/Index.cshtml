@@ -7,53 +7,21 @@
 @using Resources
 @model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetClinicNoticesPageInformationCommandAnswer
 
-<div class="panel panel-default">
-    <div class="panel-heading">@MainResources.NoticeTableHeading</div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @MainResources.NoticeTableTitle
-                </th>
-                <th>
-                    @MainResources.NoticeTableDate
-                </th>
-                <th>
-                    @MainResources.NoticeTableSender
-                </th>
-                <th>
+<div class="w3-padding w3-white notranslate">
+    <h2 class="panel-heading">@MainResources.NoticeTableHeading</h2>
 
-                </th>
-            </tr>
-        </thead>
-
-        <tbody>
+        <div>
             @foreach (var item in Model.Messages)
             {
-                <tr @(item.IsRead != true ? "class= newMessageRow" : "")>
-                    <td>
-                        @Html.ActionLink(item.Title, "ReadMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
-                    </td>
-                    <td>
-                        @if (@item.SendDate.Date == DateTime.Today)
-                        {
-                            @item.SendDate.ToString("t")
-                        }
-                        else
-                        {
-                            @item.SendDate.ToString("d")
-                        }
-                    </td>
-                    <td>
-                        @item.AuthorName
-                    </td>
-                    <td class="controlColumn">
-                        @Html.ActionLink(MainResources.ButtonDeleteMessage, "RemoveMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
-                    </td>
-                </tr>
+                <div>
+                    <a class="btn btn-block btn-info" style="background-color:  @(!item.IsRead ? "#4682b4" : "#0082b4")" href=@Url.Action("ReadMessage", new { Token = Model.Token, MessageId = item.MessageId })>
+                        <h4>@MainResources.NoticeTableTitle : @item.Title</h4>
+                        <p>@MainResources.NoticeTableDate : @item.SendDate.ToString("d")</p>
+                        <p>@MainResources.NoticeTableSender : @item.AuthorName</p>
+                        @*<p>@Html.ActionLink(MainResources.ButtonDeleteMessage, "RemoveMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { @class = "btn btn-info" })</p>*@
+                    </a>
+                </div>
             }
-        </tbody>
-
-    </table>
+        </div>
 </div>
 

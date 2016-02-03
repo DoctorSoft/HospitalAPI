@@ -11,44 +11,32 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <span>@Html.ActionLink("Главная страница", "Index", "Home", new { Token = ViewBag.Token }, new { @class = "navbar-brand" })</span>
+                <span>@Html.ActionLink("Главная страница", "Index", "Home", new {Token = ViewBag.Token}, new {@class = "navbar-brand"})</span>
             </div>
-        </div>
-    </div>
-    
-    @*TODO: Create way to resolve it*@ 
-    
-    <div class="navbar-left" style="margin-bottom: 50px">
-        <ul class="nav nav-pills nav-justified btn-toolbar ">
-            @*Links to add to main menu*@
-
-            @foreach (var nextTab in ViewBag.MainMenuTabs)
-            {
-                if (!nextTab.IsEnabled)
+            <ul class="nav navbar-nav">
+                @foreach (var nextTab in ViewBag.MainMenuTabs)
                 {
-                    <li class="disabled"><a class="nav">@nextTab.Label</a></li>
-                }
-                else
-                {
-                    if (nextTab.IsActive)
+                    if (!nextTab.IsEnabled)
                     {
-                        <li class="active">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                        <li class="disabled"><a class="nav">@nextTab.Label</a></li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                        if (nextTab.IsActive)
+                        {
+                            <li class="active">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                        }
                     }
                 }
-            }
-        </ul>
+            </ul>
+        </div>
     </div>
 
 

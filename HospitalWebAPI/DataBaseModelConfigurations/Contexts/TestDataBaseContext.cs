@@ -22,6 +22,8 @@ namespace DataBaseModelConfigurations.Contexts
         private const string ArturWorkOriginalKey = "OriginalHospitalDataBase_ArturWork";
         private const string VaniaWorkOriginalKey = "OriginalHospitalDataBase_VaniaWork";
 
+        private const string Test_Remote_Db = "Test_Remote_Db";
+
         public TestDataBaseContext()
             : base(ArturTomashHomeKey, new OriginalConfigurationFactory())
         {

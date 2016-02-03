@@ -9,6 +9,11 @@
 .newMessageRow {
     background-color: #f5f5f5;
     font-weight: bold;
+    text-align: center
+}
+
+.oldMessageRow {
+    text-align: center
 }
 
 .panel{
