@@ -4,5 +4,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Страница для отмены регистрации</h2>
+@model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetBreakClinicRegistrationsPageInformationCommandAnswer 
 
+<h2>Отмена регистрации</h2>
+
+<div class="bs-example">
+    <div class="panel-group" id="accordion">
+
+        @{
+            var iteration = 0;
+            foreach (var item in Model.Table)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
+                                <div>
+                                    <div style="display: inline-block; min-width: 90%">
+                                        @item.PatientLastName @item.PatientFirstName (@item.ReservationFormattedDate)
+                                    </div>
+                                    <div style="display: inline-block">
+                                        <a class="btn-info btn">Отменить</a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div id=@("collapse" + iteration) class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Код Пациента: @item.PatientCode <br/>
+                            Больница: @item.Haspital <br />
+                            Отделение: @item.SectionProfile <br />
+                        </div>
+                    </div>
+                </div>
+                {
+                    iteration++;
+                }
+            }
+        }
+    </div>
+</div>

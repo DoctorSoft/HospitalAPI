@@ -79,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCommandAnswers\AuthorizationCommandAnswers\GetTokenByUserCredentialsCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\AuthorizationCommandAnswers\LogOutUserByTokenCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\Entities\ClinicBreakRegistrationTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\Entities\ClinicScheduleTableCell.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\Entities\ClinicScheduleTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetBreakClinicRegistrationsPageInformationCommandAnswer.cs" />

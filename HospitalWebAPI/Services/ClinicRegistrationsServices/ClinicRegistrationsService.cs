@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Enums.EnumExtensions;
 using Enums.Enums;
+using HelpingTools.ExtentionTools;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using ServiceModels.ModelTools;
@@ -46,8 +47,29 @@ namespace Services.ClinicRegistrationsServices
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
             GetBreakClinicRegistrationsPageInformationCommand command)
         {
+            var resrvations = this._reservationRepository.GetModels();
+            var now = DateTime.Now.Date;
+
+            var table = resrvations
+                .Where(model => model.CancelTime == null)
+                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date > now)
+                .Select(model => new ClinicBreakRegistrationTableItem
+                {
+                    SectionProfile = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Name,
+                    ReservationId = model.Id,
+                    Haspital = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Hospital.Name,
+                    PatientCode = model.Patient.Code,
+                    PatientFirstName = model.Patient.FirstName,
+                    PatientLastName = model.Patient.LastName,
+                    ReservationDate = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date
+                })
+                .ToList();
+
+            table.ForEach(item => item.ReservationFormattedDate = item.ReservationDate.ToCorrectDateString());
+
             return new GetBreakClinicRegistrationsPageInformationCommandAnswer
             {
+                Table= table,
                 Token = (Guid)command.Token
             };
         }
