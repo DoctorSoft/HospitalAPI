@@ -62,6 +62,7 @@ namespace HospitalMVC.Filters
                 {MainMenuItem.AdministratorMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "AdministratorHomePage", Label = MainResources.MenuItemHomePage }},
 
                 {MainMenuItem.ReviewerMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReviewerHomePage", Label = MainResources.MenuItemHomePage }},
+                {MainMenuItem.ReviewerShowStatisticPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReviewerShowStatisticPage", Label = "Показать статистику" }},
 
                 {MainMenuItem.LogOut, new MainMenuTab { ActionName = "Index", ControllerName = "LogOut", Label = MainResources.MenuItemExit }},
             };

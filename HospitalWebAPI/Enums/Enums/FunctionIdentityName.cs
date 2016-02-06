@@ -27,6 +27,7 @@
 
         //ReviewerFunctions 500 <= x < 600
         ReviewerPrimaryAccess = 500,             // If this function is blocked then all reviewer functions are blocked (Equal function is ShowHomePage for reviewers)
+        ReviewerWatchStatistic = 501,
 
         //ReceptionUserFunctions 600 <= x < 700
         ReceptionUserPrimaryAccess = 600,        // If this function is blocked then all reviewer functions are blocked (Equal function is ShowHomePage for reception users)

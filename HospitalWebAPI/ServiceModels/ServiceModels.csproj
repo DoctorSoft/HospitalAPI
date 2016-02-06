@@ -119,6 +119,7 @@
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\MarkClientAsArrivedCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\MarkClientAsArrivingCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\SessionCommandAnswers\IsTokenHasAccessToFunctionCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\StatisticCommandAnswers\GetReviewerStatisticPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommands\AuthorizationCommands\GetTokenByUserCredentialsCommand.cs" />
     <Compile Include="ServiceCommands\AuthorizationCommands\LogOutUserByTokenCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\BreakClinicRegistrationCommand.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\MarkClientAsArrivedCommand.cs" />
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\MarkClientAsArrivingCommand.cs" />
     <Compile Include="ServiceCommands\SessionCommands\IsTokenHasAccessToFunctionCommand.cs" />
+    <Compile Include="ServiceCommands\StatisticCommands\GetReviewerStatisticPageInformationCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Enums\Enums.csproj">
@@ -167,6 +169,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

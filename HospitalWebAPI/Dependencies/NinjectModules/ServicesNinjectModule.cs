@@ -13,12 +13,14 @@ using Services.Interfaces.NoticesService;
 using Services.Interfaces.ReceptionMarkingServices;
 using Services.Interfaces.ServiceTools;
 using Services.Interfaces.SessionServices;
+using Services.Interfaces.StatisticServices;
 using Services.MainMenuServices;
 using Services.MainPageServices;
 using Services.NoticesService;
 using Services.ReceptionMarkingServices;
 using Services.ServiceTools;
 using Services.SessionServices;
+using Services.StatisticServices;
 
 namespace Dependencies.NinjectModules
 {
@@ -43,6 +45,7 @@ namespace Dependencies.NinjectModules
             Bind<IHospitalRegistrationsService>().To<HospitalRegistrationsService>().InThreadScope();
             Bind<INoticesService>().To<NoticesService>().InThreadScope();
             Bind<IReceptionMarkingService>().To<ReceptionMarkingService>().InThreadScope();
+            Bind<IStatisticService>().To<StatisticService>().InThreadScope();
 
             //Factories
             Bind<ISessionServiceFactory>().ToFactory();

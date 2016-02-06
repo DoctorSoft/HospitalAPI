@@ -221,6 +221,7 @@
     <Compile Include="Controllers\ReceptionUserMarkClientsPageController.cs" />
     <Compile Include="Controllers\ReceptionUserUnmarkClientsPageController.cs" />
     <Compile Include="Controllers\ReviewerHomePageController.cs" />
+    <Compile Include="Controllers\ReviewerShowStatisticPageController.cs" />
     <Compile Include="Filters\TokenAuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -303,6 +304,7 @@
     <Content Include="Views\MakeClinicRegistrationPage\Step2.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\ChangeHospitalRegistrationForNewSection.cshtml" />
     <Content Include="Views\MakeClinicRegistrationPage\Step3.cshtml" />
+    <Content Include="Views\ReviewerShowStatisticPage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

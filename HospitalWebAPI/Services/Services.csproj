@@ -60,6 +60,7 @@
     <Compile Include="Interfaces\ServiceTools\ITokenManager.cs" />
     <Compile Include="Interfaces\ServiceTools\IUserFunctionManager.cs" />
     <Compile Include="Interfaces\SessionServices\ISessionService.cs" />
+    <Compile Include="Interfaces\StatisticServices\IStatisticService.cs" />
     <Compile Include="MainMenuServices\MainMenuService.cs" />
     <Compile Include="MainPageServices\MainPageService.cs" />
     <Compile Include="NoticesService\NoticesService.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="ServiceTools\TokenManager.cs" />
     <Compile Include="ServiceTools\UserFunctionManager.cs" />
     <Compile Include="SessionServices\SessionService.cs" />
+    <Compile Include="StatisticServices\StatisticService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

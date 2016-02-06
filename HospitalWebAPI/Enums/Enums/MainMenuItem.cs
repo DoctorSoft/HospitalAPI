@@ -22,6 +22,7 @@
 
         //ReviewerFunctions 500 <= x < 600
         ReviewerMainPage = 500,
+        ReviewerShowStatisticPage = 501,
 
         //ReceptionUserFunctions 600 <= x < 700
         ReceptionUserMainPage = 600,       
