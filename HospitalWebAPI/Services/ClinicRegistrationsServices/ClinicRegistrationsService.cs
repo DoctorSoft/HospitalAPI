@@ -51,7 +51,7 @@ namespace Services.ClinicRegistrationsServices
             var now = DateTime.Now.Date;
 
             var table = resrvations
-                .Where(model => model.CancelTime == null)
+                .Where(model => model.Status == ReservationStatus.Opened)
                 .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date > now)
                 .Select(model => new ClinicBreakRegistrationTableItem
                 {
@@ -287,6 +287,22 @@ namespace Services.ClinicRegistrationsServices
             _reservationRepository.SaveChanges();
 
             return new SaveClinicRegistrationCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
+
+        public BreakClinicRegistrationCommandAnswer BreakClinicRegistration(BreakClinicRegistrationCommand command)
+        {
+            var reservation = this._reservationRepository.GetModels().FirstOrDefault(model => model.Id == command.ReservationId);
+            
+            reservation.CancelTime = DateTime.Now;
+            reservation.Status = ReservationStatus.ClosedByClinic;
+
+            this._reservationRepository.Update(command.ReservationId, reservation);
+            this._reservationRepository.SaveChanges();
+
+            return new BreakClinicRegistrationCommandAnswer
             {
                 Token = command.Token.Value
             };

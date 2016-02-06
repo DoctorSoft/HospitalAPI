@@ -22,5 +22,12 @@ namespace HospitalMVC.Controllers
             var answer = _clinicRegistrationsService.GetBreakClinicRegistrationsPageInformation(command);
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserBreakRegistrations)]
+        public ActionResult BreakRegistration(BreakClinicRegistrationCommand command)
+        {
+            var answer = _clinicRegistrationsService.BreakClinicRegistration(command);
+            return RedirectToAction("Index", new {Token = command.Token});
+        }
     }
 }

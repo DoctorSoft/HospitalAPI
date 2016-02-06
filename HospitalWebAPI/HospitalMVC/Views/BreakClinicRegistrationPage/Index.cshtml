@@ -24,7 +24,7 @@
                                         @item.PatientLastName @item.PatientFirstName (@item.ReservationFormattedDate)
                                     </div>
                                     <div style="display: inline-block">
-                                        <a class="btn-info btn">Отменить</a>
+                                        @Html.ActionLink("Отменить", "BreakRegistration", new { Token = @Model.Token, ReservationId = @item.ReservationId }, new { @class = "btn-info btn" })
                                     </div>
                                 </div>
                             </a>
