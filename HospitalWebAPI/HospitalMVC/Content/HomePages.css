@@ -20,10 +20,16 @@
 .change-hospital-registration-panel{
 }
 .change-hospital-registration-panel .input-group-addon {
+	min-width: 110px;
 	width: 130px;
 }
 .change-hospital-registration-panel .form-control{
 	width: 300px;
+	min-width: 100px;
+}
+
+.panel {
+	min-width: 450px;
 }
 
 /* new hospital registration */

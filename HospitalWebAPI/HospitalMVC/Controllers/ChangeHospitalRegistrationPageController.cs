@@ -71,5 +71,12 @@ namespace HospitalMVC.Controllers
                     DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture)
             });
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult ViewRegistrationDetailsForMale(ViewRegistrationDetailsMaleCommand command)
+        {
+            var answer = _hospitalRegistrationsService.ViewDetailsRegistrationForMale(command);
+            return View(answer);
+        }
     }
 }

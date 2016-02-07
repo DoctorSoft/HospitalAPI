@@ -1,0 +1,48 @@
+﻿@using Resources
+@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ViewRegistrationDetailsMaleCommandAnswer
+
+@{
+    ViewBag.Title = "ViewRegistrationDetailsForMale";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Детальная информация</h2>
+
+<div class="bs-example">
+    <div class="panel-group" id="accordion">
+
+        @{
+            var iteration = 0;
+            foreach (var item in Model.Table)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
+                                <div>
+                                    <div style="display: inline-block; min-width: 90%">
+                                        @item.PatientLastName
+                                    </div>
+                                    <div style="display: inline-block">
+                                        @Html.ActionLink("Отменить", "BreakRegistration", new { Token = @Model.Token, ReservationId = @item.ReservationId }, new { @class = "btn-info btn" })
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div id=@("collapse" + iteration) class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Код Пациента: @item.PatientCode <br />
+                            Больница: @item.Haspital <br />
+                            Отделение: @item.SectionProfile <br />
+                            Диагноз: @item.Diagnosis <br />
+                        </div>
+                    </div>
+                </div>
+                {
+                    iteration++;
+                }
+            }
+        }
+    </div>
+</div>

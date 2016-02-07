@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using Enums.Enums;
+using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
@@ -21,16 +24,18 @@ namespace Services.HospitalRegistrationsService
         private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
         private readonly ITokenManager _tokenManager;
         private readonly IHospitalUserRepository _hospitalUserRepository;
+        private readonly IReservationRepository _reservationRepository;
 
         public HospitalRegistrationsService(IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository,
             IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager,
-            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository)
+            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository)
         {
             _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
             _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
             _tokenManager = tokenManager;
             _hospitalUserRepository = hospitalUserRepository;
             _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
+            _reservationRepository = reservationRepository;
         }
 
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
@@ -195,12 +200,26 @@ namespace Services.HospitalRegistrationsService
                     OpenCount = model.Count
                 }).ToList();
 
+
+            var countMale = _reservationRepository.GetModels()
+                .Where(model => model.EmptyPlaceByTypeStatisticId == command.HospitalProfileId)
+                .Where(model => model.Status == ReservationStatus.Opened)
+                .Count(model => model.Patient.Sex == Sex.Male);
+
+            var countFemale = _reservationRepository.GetModels()
+                .Where(model => model.EmptyPlaceByTypeStatisticId == command.HospitalProfileId)
+                .Where(model => model.Status == ReservationStatus.Opened)
+                .Count(model => model.Patient.Sex == Sex.Female);
+
             return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
             {
                 Token = (Guid) command.Token,
                 StatisticItems = table,
                 SectionProfileName = sectionProfileName.Name,
-                Date = command.Date
+                Date = command.Date,
+                CountRegisteredMale = countMale,
+                CountRegisteredFemale = countFemale,
+                HospitalProfileId = command.HospitalProfileId
             };
         }
 
@@ -300,6 +319,35 @@ namespace Services.HospitalRegistrationsService
             {
                 Token = (Guid)command.Token,
                 FreeHospitalSectionsForRegistration = result,
+                Date = command.Date
+            };
+        }
+
+        public ViewRegistrationDetailsMaleCommandAnswer ViewDetailsRegistrationForMale(
+            ViewRegistrationDetailsMaleCommand command)
+        {
+            var resrvations = this._reservationRepository.GetModels();
+
+            var table = resrvations
+                .Where(model => model.Status == ReservationStatus.Opened)
+                .Where(model => model.EmptyPlaceByTypeStatisticId == command.HospitalProfileId)
+                .Select(model => new ClinicBreakRegistrationTableItem
+                {
+                    SectionProfile = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Name,
+                    ReservationId = model.Id,
+                    Haspital = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Hospital.Name,
+                    PatientCode = model.Patient.Code,
+                    PatientFirstName = model.Patient.FirstName,
+                    PatientLastName = model.Patient.LastName,
+                    ReservationDate = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date,
+                    Diagnosis = model.Diagnosis
+                })
+                .ToList();
+
+            return new ViewRegistrationDetailsMaleCommandAnswer
+            {
+                Token = (Guid)command.Token,
+                Table = table,
                 Date = command.Date
             };
         }

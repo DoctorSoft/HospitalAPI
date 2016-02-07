@@ -5,15 +5,15 @@
 }
 
 @using Enums.EnumExtensions
+@using Enums.Enums
+@using HelpingTools.ExtentionTools
 @using Resources
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ChangeHospitalRegistrationForSelectedSectionCommandAnswer
-
-<h2>ChangeHospitalRegistration</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">
-            @MainResources.EmptyPlacePageTableTitle @Model.SectionProfileName
+            @MainResources.EmptyPlacePageTableTitle @Model.SectionProfileName (@Model.Date.ToCorrectDateString())
         </div>
     </div>
     @using (Html.BeginForm("ApplyChangesHospitalRegistration", "ChangeHospitalRegistrationPage", FormMethod.Post))
@@ -30,12 +30,30 @@
                     <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
                     <label name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" title="@Model.StatisticItems[i].Sex.ToString("G")" > @Model.StatisticItems[i].Sex.ToCorrectString() </label>
                     <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" value="@Model.StatisticItems[i].Sex.ToString("D")" />
-                    <br />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Зарег.</span>
+                    @if (Model.StatisticItems[i].Sex == Sex.Male)
+                    {
+                        <label class="form-control"> @Model.CountRegisteredMale.ToString("G") </label>
+                        if (Model.CountRegisteredMale != 0)
+                        {
+                            <input type="button" title="Просмотреть" class="btn btn-sm btn-primary" value="Просмотреть" onclick=" location.href = '@Url.Action("ViewRegistrationDetailsForMale", "ChangeHospitalRegistrationPage", new {Token = Model.Token, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' " />
+                        }
+                    }
+                    else
+                    {
+                        <label class="form-control"> @Model.CountRegisteredFemale.ToString("G") </label>
+                        if (Model.CountRegisteredFemale != 0)
+                        {
+                            <input type="button" title="Просмотреть" class="btn btn-sm btn-primary" value="Просмотреть" onclick=" location.href = '@Url.Action("ViewRegistrationDetailsForMale", "ChangeHospitalRegistrationPage", new {})' " />
+                        }
+                    }
+                    
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
                     <input class="form-control" id="FreeHospitalSectionsForRegistration[@i].OpenCount" name="FreeHospitalSectionsForRegistration[@i].OpenCount" type="number" value="@Model.StatisticItems[i].OpenCount.ToString("G")" required />
-                    <br />
                 </div>
                 <br />
             }
