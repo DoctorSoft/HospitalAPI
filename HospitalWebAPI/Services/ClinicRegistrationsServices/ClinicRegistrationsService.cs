@@ -289,11 +289,11 @@ namespace Services.ClinicRegistrationsServices
                     IsRead = false,
                     MessageType = MessageType.WarningMessage,
                     ShowStatus = TwoSideShowStatus.Showed,
-                    Text = $"Пациент с номером {command.Code} был зарезервирован в Вашу больницу\0\n" +
-                           $"Дата: {command.Date}\n\0" +
-                           $"Отделение: {command.SectionProfile}\n\0" +
-                           $"Диагноз: {command.Diagnosis}\n\0",
-                    Title = "Уведомление о резервации места для пациента",
+                    Text = $"Пациент с номером {command.Code} был зарезервирован в Вашу больницу.\0\n" +
+                           $"Дата: {command.Date}.\n\0" +
+                           $"Отделение: {command.SectionProfile}.\n\0" +
+                           $"Диагноз: {command.Diagnosis}.\n\0",
+                    Title = "Уведомление о бронировании места для пациента.",
                     UserFromId = user.Id,
                     UserToId = receiverId
                 };
@@ -312,11 +312,44 @@ namespace Services.ClinicRegistrationsServices
         public BreakClinicRegistrationCommandAnswer BreakClinicRegistration(BreakClinicRegistrationCommand command)
         {
             var reservation = this._reservationRepository.GetModels().FirstOrDefault(model => model.Id == command.ReservationId);
-            
+            var patient = this._reservationRepository.GetModels().Where(model => model.Id == command.ReservationId).Select(model => model.Patient).FirstOrDefault();
+            var user = this._tokenManager.GetUserByToken(command.Token);
+
             reservation.CancelTime = DateTime.Now;
             reservation.Status = ReservationStatus.ClosedByClinic;
 
             this._reservationRepository.Update(command.ReservationId, reservation);
+
+            var hospitalId = this._reservationRepository.GetModels()
+                .Where(model => model.Id == command.ReservationId)
+                .Select(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId)
+                .FirstOrDefault();
+
+            var receiverIds = this._userRepository.GetModels()
+                .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == hospitalId)
+                .Select(model => model.Id)
+                .ToList();
+
+            foreach (var receiverId in receiverIds)
+            {
+                var message = new MessageStorageModel
+                {
+                    Date = DateTime.Now.Date,
+                    IsRead = false,
+                    MessageType = MessageType.WarningMessage,
+                    ShowStatus = TwoSideShowStatus.Showed,
+                    Text = $"Бронирование пациента с номером {patient.Code} былj отменено.\0\n" +
+                           $"Диагноз: {reservation.Diagnosis}.\n\0",
+                    Title = "Уведомление о отмене бронирования места для пациента.",
+                    UserFromId = user.Id,
+                    UserToId = receiverId
+                };
+
+                _messageRepository.Add(message);
+            }
+
+            _reservationRepository.SaveChanges();
+
             this._reservationRepository.SaveChanges();
 
             return new BreakClinicRegistrationCommandAnswer
