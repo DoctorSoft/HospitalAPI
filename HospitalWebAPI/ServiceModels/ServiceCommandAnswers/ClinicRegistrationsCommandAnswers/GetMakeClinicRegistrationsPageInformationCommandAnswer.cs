@@ -9,12 +9,8 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public List<KeyValuePair<int, string>> Sexes { get; set; }
 
-        public List<KeyValuePair<int, string>> AgeSections { get; set; }
-
         public string SectionProfile { get; set; }
 
         public string Sex { get; set; }
-
-        public string AgeSection { get; set; }
     }
 }

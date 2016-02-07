@@ -6,8 +6,6 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
     {
         public Sex Sex { get; set; }
 
-        public AgeSection AgeSection { get; set; }
-
         public int OpenCount { get; set; }
     }
 }

@@ -10,10 +10,6 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public int SexId { get; set; }
 
-        public string AgeSection { get; set; }
-
-        public int AgeSectionId { get; set; }
-
         public string SectionProfile { get; set; }
 
         public int SectionProfileId { get; set; }

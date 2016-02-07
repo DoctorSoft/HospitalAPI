@@ -14,6 +14,7 @@ namespace StorageModels.Models.ClinicModels
         public ReservationStatus Status { get; set; }
         public DateTime ApproveTime { get; set; }
         public DateTime? CancelTime { get; set; }
+        public string Diagnosis { get; set; }
 
         //
 

@@ -119,6 +119,10 @@
     <Compile Include="Migrations\201512252146525_RenamePriorityTable.Designer.cs">
       <DependentUpon>201512252146525_RenamePriorityTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602070859232_RemoveAgeSection.cs" />
+    <Compile Include="Migrations\201602070859232_RemoveAgeSection.Designer.cs">
+      <DependentUpon>201602070859232_RemoveAgeSection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -164,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512252146525_RenamePriorityTable.resx">
       <DependentUpon>201512252146525_RenamePriorityTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602070859232_RemoveAgeSection.resx">
+      <DependentUpon>201602070859232_RemoveAgeSection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

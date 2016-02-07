@@ -64,20 +64,6 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <h4>
-                    Возврастной диапазон:
-                </h4>
-            </div>
-            <div class="col-md-5">
-                <h4>
-                    @Html.HiddenFor(command => command.AgeSection)
-                    @Html.HiddenFor(command => command.AgeSectionId)
-                    <b>@Model.AgeSection</b>
-                </h4>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
                     Пол: 
                 </h4>
             </div>
@@ -138,6 +124,14 @@
                     @Html.HiddenFor(command => command.SectionProfileId)
                     <b>@Model.SectionProfile</b>
                 </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Диагноз:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.Diagnosis, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
 

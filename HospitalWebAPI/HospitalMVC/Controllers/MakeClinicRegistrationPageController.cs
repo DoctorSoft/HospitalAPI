@@ -48,14 +48,12 @@ namespace HospitalMVC.Controllers
             {
                 var model = new SaveClinicRegistrationCommand
                 {
-                    AgeSection = command.AgeSection,
                     Sex = command.Sex,
                     DateValue = command.DateValue,
                     Date = command.Date,
                     CurrentHospitalId = command.CurrentHospitalId,
                     Token = answer.Token,
                     SectionProfileId = command.SectionProfileId,
-                    AgeSectionId = command.AgeSectionId,
                     FirstName = command.FirstName,
                     LastName = command.LastName,
                     SexId = command.SexId,
@@ -63,7 +61,8 @@ namespace HospitalMVC.Controllers
                     Age = command.Age,
                     Code = command.Code,
                     CurrentHospital = command.CurrentHospital,
-                    PhoneNumber = command.PhoneNumber
+                    PhoneNumber = command.PhoneNumber,
+                    Diagnosis = command.Diagnosis
                 };
                 ViewBag.Errors = answer.Errors;
 

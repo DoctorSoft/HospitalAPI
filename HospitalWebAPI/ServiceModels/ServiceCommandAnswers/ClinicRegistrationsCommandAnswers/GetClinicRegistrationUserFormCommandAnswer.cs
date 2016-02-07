@@ -7,15 +7,11 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
     {
         public int SexId { get; set; }
 
-        public int AgeSectionId { get; set; }
-
         public int SectionProfileId { get; set; }
 
         public int CurrentHospitalId { get; set; }
 
         public string Sex { get; set; }
-
-        public string AgeSection { get; set; }
 
         public string SectionProfile { get; set; }
 
@@ -34,5 +30,7 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
         public string Code { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public string Diagnosis { get; set; }
     }
 }

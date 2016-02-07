@@ -153,7 +153,6 @@ namespace Services.HospitalRegistrationsService
                         .Select(storageModel => new HospitalRegistrationCountStatisticItem
                         {
                             Sex = storageModel.Sex,
-                            AgeSection = storageModel.AgeSection,
                             OpenCount = storageModel.Count
                         })
                         .ToList()
@@ -193,7 +192,6 @@ namespace Services.HospitalRegistrationsService
                 .Select(model => new HospitalRegistrationCountStatisticItem
                 {
                     Sex = model.Sex,
-                    AgeSection = model.AgeSection,
                     OpenCount = model.Count
                 }).ToList();
 
@@ -226,12 +224,10 @@ namespace Services.HospitalRegistrationsService
             var result = freeHospitalSectionsForRegistrationList
                 .Select(element => freeHospitalSectionsForRegistrationInTable
                     .Where(model => element != null 
-                        && model.AgeSection.ToString() == element.AgeSection.ToString() 
                         && model.Sex.ToString() == element.Sex.ToString())
                         .Select(model => new EmptyPlaceByTypeStatisticStorageModel
                         {
                             Id = model.Id, 
-                            AgeSection = element.AgeSection, 
                             Count = element.OpenCount, 
                             Sex = element.Sex, 
                             EmptyPlaceStatisticId = emptyPlaceStatisticsId
@@ -262,7 +258,6 @@ namespace Services.HospitalRegistrationsService
                 EmptyPlaceByTypeStatistics = command.FreeHospitalSectionsForRegistration
                     .Select(pair => new EmptyPlaceByTypeStatisticStorageModel
                     {
-                        AgeSection = pair.AgeSection,
                         Sex = pair.Sex,
                         Count = pair.OpenCount
                     }

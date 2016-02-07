@@ -22,6 +22,7 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
             this.Property(model => model.Status).IsRequired();
             this.Property(model => model.ApproveTime).IsRequired();
             this.Property(model => model.CancelTime).IsOptional();
+            this.Property(model => model.Diagnosis).IsRequired();
 
             // Links to tables
 

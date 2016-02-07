@@ -19,5 +19,7 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.
         public string Haspital { get; set; }
 
         public string SectionProfile { get; set; }
+
+        public string Diagnosis { get; set; }
     }
 }

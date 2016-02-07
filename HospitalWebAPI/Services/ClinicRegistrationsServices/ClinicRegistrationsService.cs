@@ -61,7 +61,8 @@ namespace Services.ClinicRegistrationsServices
                     PatientCode = model.Patient.Code,
                     PatientFirstName = model.Patient.FirstName,
                     PatientLastName = model.Patient.LastName,
-                    ReservationDate = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date
+                    ReservationDate = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date,
+                    Diagnosis = model.Diagnosis
                 })
                 .ToList();
 
@@ -83,12 +84,6 @@ namespace Services.ClinicRegistrationsServices
                     .Select(sex => new KeyValuePair<int, string>((int) sex, sex.ToCorrectString()))
                     .ToList();
 
-            var ageSections =
-                Enum.GetValues(typeof (AgeSection))
-                    .Cast<AgeSection>()
-                    .Select(section => new KeyValuePair<int, string>((int) section, section.ToCorrectString()))
-                    .ToList();
-
             var sectionProfiles =
                 _sectionProfileRepository.GetModels()
                     .ToList()
@@ -98,8 +93,6 @@ namespace Services.ClinicRegistrationsServices
             return new GetMakeClinicRegistrationsPageInformationCommandAnswer
             {
                 Token = command.Token.Value,
-                AgeSections = ageSections,
-                AgeSection = ageSections.FirstOrDefault().Value,
                 SectionProfiles = sectionProfiles,
                 SectionProfile = sectionProfiles.FirstOrDefault().Value,
                 Sexes = sexes,
@@ -155,8 +148,6 @@ namespace Services.ClinicRegistrationsServices
                 Token = command.Token.Value,
                 Sex = ((Sex)command.Sex).ToCorrectString(),
                 SexId = command.Sex,
-                AgeSection = ((AgeSection)command.AgeSection).ToCorrectString(),
-                AgeSectionId = command.AgeSection,
                 SectionProfileId = command.SectionProfileId,
                 SectionProfile = _sectionProfileRepository
                                     .GetModels()
@@ -178,7 +169,6 @@ namespace Services.ClinicRegistrationsServices
 
             return new GetClinicRegistrationUserFormCommandAnswer
             {
-                AgeSectionId = command.AgeSectionId,
                 CurrentHospitalId = command.CurrentHospitalId,
                 DateValue = command.Date,
                 Date = command.Date.ToCorrectDateString(),
@@ -186,7 +176,6 @@ namespace Services.ClinicRegistrationsServices
                 SexId = command.SexId,
                 Code = Guid.NewGuid().ToString(),
                 CurrentHospital = hospital.Name,
-                AgeSection = ((AgeSection)command.AgeSectionId).ToCorrectString(),
                 Sex = ((Sex)command.SexId).ToCorrectString(),
                 Token = command.Token.Value,
                 FirstName = "",
@@ -216,15 +205,6 @@ namespace Services.ClinicRegistrationsServices
                 {
                     FieldName = "Фамилия",
                     Title = "Фамилия не может иметь меньше 2 букв"
-                });
-            }
-
-            if (!((AgeSection)command.AgeSectionId).IsCorrectAge(command.Age.Value))
-            {
-                result.Add(new CommandAnswerError
-                {
-                    FieldName = "Возраст",
-                    Title = "Возраст должен входить в заданный диапазон"
                 });
             }
 
@@ -260,7 +240,6 @@ namespace Services.ClinicRegistrationsServices
             var emptyPlaceByTypeStatistics = _emptyPlaceByTypeStatisticRepository
                 .GetModels()
                 .Where(model => model.Sex == (Sex)command.SexId 
-                    && model.AgeSection == (AgeSection)command.AgeSectionId
                     && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId
                     && model.EmptyPlaceStatistic.Date == date
                     && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId);
@@ -281,7 +260,8 @@ namespace Services.ClinicRegistrationsServices
                 ApproveTime = DateTime.Now,
                 ClinicId = clinicId,
                 EmptyPlaceByTypeStatisticId = emptyPlaceByTypeStatisticId,
-                Status = ReservationStatus.Opened
+                Status = ReservationStatus.Opened,
+                Diagnosis = command.Diagnosis
             };
 
             _reservationRepository.Add(reservation);
@@ -313,7 +293,6 @@ namespace Services.ClinicRegistrationsServices
         {
            var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()
                .Where(model => (int)model.Sex == command.Sex 
-                   && (int)model.AgeSection == command.AgeSection 
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId)
@@ -322,7 +301,6 @@ namespace Services.ClinicRegistrationsServices
 
             var registrationCount = _emptyPlaceByTypeStatisticRepository.GetModels()
                 .Where(model => (int)model.Sex == command.Sex 
-                   && (int)model.AgeSection == command.AgeSection 
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId)

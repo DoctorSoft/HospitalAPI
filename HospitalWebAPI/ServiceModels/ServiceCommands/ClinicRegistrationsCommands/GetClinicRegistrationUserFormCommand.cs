@@ -7,8 +7,6 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
     {
         public int SexId { get; set; }
 
-        public int AgeSectionId { get; set; }
-
         public int SectionProfileId { get; set; }
 
         public int CurrentHospitalId { get; set; }

@@ -33,35 +33,27 @@
             <br />
 
             @{
-                foreach (var ageSection in Enum.GetNames(typeof (AgeSection)))
-                {
 
-                    foreach (var sex in Enum.GetNames(typeof (Sex)))
-                    {
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1"> @MainResources.EmptyPlacePageAge</span>
-                            <label class="form-control" aria-describedby="basic-addon1" name="FreeHospitalSectionsForRegistration[@i].AgeSection" id="FreeHospitalSectionsForRegistration[@i].AgeSection">@ageSection</label>
-                            <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].AgeSection" id="FreeHospitalSectionsForRegistration[@i].AgeSection" class="form-control" value="@ageSection" />
-                            <br />
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
-                            <label class="form-control" aria-describedby="basic-addon1" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex">@sex</label>
-                            <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" value="@sex" />
-                             <br />
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
-                            <input type="number" required class="form-control" aria-describedby="basic-addon1" name="FreeHospitalSectionsForRegistration[@i].OpenCount" id="FreeHospitalSectionsForRegistration[@i].OpenCount" />
-                            
-                            <br />
-                        </div>
+                foreach (var sex in Enum.GetNames(typeof (Sex)))
+                {
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
+                        <label class="form-control" aria-describedby="basic-addon1" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex">@sex</label>
+                        <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" value="@sex" />
                         <br />
-                        i++;
-                    }
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
+                        <input type="number" required class="form-control" aria-describedby="basic-addon1" name="FreeHospitalSectionsForRegistration[@i].OpenCount" id="FreeHospitalSectionsForRegistration[@i].OpenCount" />
+                            
+                        <br />
+                    </div>
+                    <br />
+                    i++;
                 }
 
-}
+
+            }
         </div>
         <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})' "/>
         <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonAdd" />

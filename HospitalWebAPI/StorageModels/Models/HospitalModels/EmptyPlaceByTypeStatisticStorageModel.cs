@@ -14,8 +14,6 @@ namespace StorageModels.Models.HospitalModels
 
         public Sex Sex { get; set; }
 
-        public AgeSection AgeSection { get; set; }
-
         public int Count { get; set; }
 
         //
