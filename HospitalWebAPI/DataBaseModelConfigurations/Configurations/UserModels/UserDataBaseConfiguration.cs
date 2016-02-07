@@ -30,6 +30,8 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
             this.HasOptional(model => model.ClinicUser).WithRequired(link => link.User);
             this.HasOptional(model => model.HospitalUser).WithRequired(link => link.User);
             this.HasRequired(model => model.UserType).WithMany(model => model.Users).HasForeignKey(model => model.UserTypeId);
+            this.HasMany(model => model.Reservations).WithRequired(model => model.Reservator).HasForeignKey(model => model.ReservatorId);
+            this.HasMany(model => model.BehalfReservations).WithOptional(model => model.BehalfReservator).HasForeignKey(model => model.BehalfReservatorId);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Enums.Enums;
 using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
+using StorageModels.Models.UserModels;
 
 namespace StorageModels.Models.ClinicModels
 {
@@ -21,11 +22,15 @@ namespace StorageModels.Models.ClinicModels
         public EmptyPlaceByTypeStatisticStorageModel EmptyPlaceByTypeStatistic { get; set; }
         public ClinicStorageModel Clinic { get; set; }
         public PatientStorageModel Patient { get; set; }
+        public UserStorageModel Reservator { get; set; }
+        public UserStorageModel BehalfReservator { get; set; }
 
         //
 
         public int ClinicId { get; set; }
         public int EmptyPlaceByTypeStatisticId { get; set; }
+        public int ReservatorId { get; set; }
+        public int? BehalfReservatorId { get; set; }
 
     }
 }

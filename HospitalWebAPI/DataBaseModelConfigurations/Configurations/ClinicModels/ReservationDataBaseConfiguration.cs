@@ -29,6 +29,8 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
             this.HasRequired(model => model.Clinic).WithMany(link => link.Reservations).HasForeignKey(model => model.ClinicId);
             this.HasOptional(model => model.Patient).WithRequired(link => link.Reservation);
             this.HasRequired(model => model.EmptyPlaceByTypeStatistic).WithMany(link => link.Reservations).HasForeignKey(model => model.EmptyPlaceByTypeStatisticId);
+            this.HasRequired(model => model.Reservator).WithMany(model => model.Reservations).HasForeignKey(model => model.ReservatorId);
+            this.HasOptional(model => model.BehalfReservator).WithMany(model => model.BehalfReservations).HasForeignKey(model => model.BehalfReservatorId);
         }
     }
 }

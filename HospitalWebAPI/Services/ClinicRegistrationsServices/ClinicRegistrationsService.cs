@@ -7,6 +7,8 @@ using Enums.Enums;
 using HelpingTools.ExtentionTools;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
+using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
+using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
@@ -14,6 +16,7 @@ using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.ClinicModels;
+using StorageModels.Models.MailboxModels;
 
 namespace Services.ClinicRegistrationsServices
 {
@@ -32,8 +35,12 @@ namespace Services.ClinicRegistrationsServices
         private readonly IHospitalRepository _hospitalRepository;
 
         private readonly IReservationRepository _reservationRepository;
+
+        private readonly IMessageRepository _messageRepository;
+
+        private readonly IUserRepository _userRepository;
         
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository)
+        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository)
         {
             _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
@@ -42,6 +49,8 @@ namespace Services.ClinicRegistrationsServices
             _clinicHospitalPriorityRepository = clinicHospitalPriorityRepository;
             _hospitalRepository = hospitalRepository;
             _reservationRepository = reservationRepository;
+            _messageRepository = messageRepository;
+            _userRepository = userRepository;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -261,10 +270,37 @@ namespace Services.ClinicRegistrationsServices
                 ClinicId = clinicId,
                 EmptyPlaceByTypeStatisticId = emptyPlaceByTypeStatisticId,
                 Status = ReservationStatus.Opened,
-                Diagnosis = command.Diagnosis
+                Diagnosis = command.Diagnosis,
+                ReservatorId = user.Id
             };
 
             _reservationRepository.Add(reservation);
+
+            var receiverIds = this._userRepository.GetModels()
+                .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == command.CurrentHospitalId)
+                .Select(model => model.Id)
+                .ToList();
+
+            foreach (var receiverId in receiverIds)
+            {
+                var message = new MessageStorageModel
+                {
+                    Date = DateTime.Now.Date,
+                    IsRead = false,
+                    MessageType = MessageType.WarningMessage,
+                    ShowStatus = TwoSideShowStatus.Showed,
+                    Text = $"Пациент с номером {command.Code} был зарезервирован в Вашу больницу\0\n" +
+                           $"Дата: {command.Date}\n\0" +
+                           $"Отделение: {command.SectionProfile}\n\0" +
+                           $"Диагноз: {command.Diagnosis}\n\0",
+                    Title = "Уведомление о резервации места для пациента",
+                    UserFromId = user.Id,
+                    UserToId = receiverId
+                };
+
+                _messageRepository.Add(message);
+            }
+
             _reservationRepository.SaveChanges();
 
             return new SaveClinicRegistrationCommandAnswer
