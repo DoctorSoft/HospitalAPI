@@ -116,21 +116,12 @@ namespace Services.HospitalRegistrationsService
             var dayOfWeek = date.DayOfWeek;
             const DayOfWeek monday = DayOfWeek.Monday;
 
-            var dayDifference = Math.Abs((int) dayOfWeek - (int) monday)%7;
+            var dayDifference = (int)dayOfWeek - (int)monday;
+            dayDifference = dayDifference < 0 ? 7 + dayDifference : dayDifference;
+
             var previousMonday = date - new TimeSpan(dayDifference, 0, 0, 0);
 
             return previousMonday;
-        }
-
-        protected virtual DateTime GetNextSunday(DateTime date)
-        {
-            var dayOfWeek = date.DayOfWeek;
-            const DayOfWeek sunday = DayOfWeek.Sunday;
-
-            var dayDifference = Math.Abs((int) dayOfWeek - (int) sunday)%7;
-            var nextSunday = date + new TimeSpan(dayDifference, 0, 0, 0);
-
-            return nextSunday;
         }
 
         public ShowHospitalRegistrationPlacesByDateCommandAnswer ShowHospitalRegistrationPlacesByDate(

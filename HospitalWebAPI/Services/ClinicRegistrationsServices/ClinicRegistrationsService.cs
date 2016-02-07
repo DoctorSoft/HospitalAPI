@@ -326,7 +326,9 @@ namespace Services.ClinicRegistrationsServices
             var dayOfWeek = date.DayOfWeek;
             const DayOfWeek monday = DayOfWeek.Monday;
 
-            var dayDifference = Math.Abs((int)dayOfWeek - (int)monday) % 7;
+            var dayDifference = (int)dayOfWeek - (int)monday;
+            dayDifference = dayDifference < 0 ? 7 + dayDifference : dayDifference; 
+
             var previousMonday = date - new TimeSpan(dayDifference, 0, 0, 0);
 
             return previousMonday;
