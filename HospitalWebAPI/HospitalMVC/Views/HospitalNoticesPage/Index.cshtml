@@ -6,53 +6,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="panel panel-default">
-    <div class="panel-heading">@MainResources.NoticeTableHeading</div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @MainResources.NoticeTableTitle
-                </th>
-                <th>
-                    @MainResources.NoticeTableDate
-                </th>
-                <th>
-                    @MainResources.NoticeTableSender
-                </th>
-                <th>
+<div class="w3-padding w3-white notranslate">
+    <h2 class="panel-heading">@MainResources.NoticeTableHeading</h2>
 
-                </th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model.Messages)
-            {
-                <tr @(item.IsRead != true ? "class= newMessageRow" : "")>
-                    <td>
-                        @Html.ActionLink(item.Title, "ReadMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
-                    </td>
-                    <td>
-                        @if (@item.SendDate.Date == DateTime.Today)
-                        {
-                            @item.SendDate.ToString("t")
-                        }
-                        else
-                        {
-                            @item.SendDate.ToString("d")
-                        }
-                    </td>
-                    <td>
-                        @item.AuthorName
-                    </td>
-                    <td class="controlColumn">
-                        @Html.ActionLink(MainResources.ButtonDeleteMessage, "RemoveMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { })
-                    </td>
-                </tr>
-            }
-        </tbody>
-
-    </table>
+    <ul class="list-group">
+        @foreach (var item in Model.Messages)
+        {
+            @Html.ActionLink(@item.Title, "ReadMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { @class = !item.IsRead ? "list-group-item list-group-item-success" : "list-group-item list-group-item-info" })
+        }
+    </ul>
 </div>
-

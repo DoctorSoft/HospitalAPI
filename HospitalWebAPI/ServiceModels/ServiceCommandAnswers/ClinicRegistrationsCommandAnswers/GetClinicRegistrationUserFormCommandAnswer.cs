@@ -21,7 +21,9 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public string CurrentHospital { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime DateValue { get; set; }
+
+        public string Date { get; set; }
 
         public string FirstName { get; set; }
 

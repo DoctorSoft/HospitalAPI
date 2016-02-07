@@ -35,26 +35,7 @@ namespace HospitalMVC.Controllers
         public ActionResult Step3(GetClinicRegistrationUserFormCommand command)
         {
             var answer = _clinicRegistrationsService.GetClinicRegistrationUserForm(command);
-            var model = new SaveClinicRegistrationCommand
-            {
-                AgeSection = answer.AgeSection,
-                Sex = answer.Sex,
-                DateValue = answer.Date,
-                Date = answer.Date.ToString("d"),
-                CurrentHospitalId = answer.CurrentHospitalId,
-                Token = answer.Token,
-                SectionProfileId = answer.SectionProfileId,
-                AgeSectionId = answer.AgeSectionId,
-                FirstName = answer.FirstName,
-                LastName = answer.LastName,
-                SexId = answer.SexId,
-                SectionProfile = answer.SectionProfile,
-                Age = answer.Age,
-                Code = answer.Code,
-                CurrentHospital = answer.CurrentHospital,
-                PhoneNumber = answer.PhoneNumber
-            };
-            return View(model);
+            return View(answer);
         }
 
         [HttpPost]

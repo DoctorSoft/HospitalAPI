@@ -180,7 +180,8 @@ namespace Services.ClinicRegistrationsServices
             {
                 AgeSectionId = command.AgeSectionId,
                 CurrentHospitalId = command.CurrentHospitalId,
-                Date = command.Date,
+                DateValue = command.Date,
+                Date = command.Date.ToCorrectDateString(),
                 SectionProfileId = command.SectionProfileId,
                 SexId = command.SexId,
                 Code = Guid.NewGuid().ToString(),
