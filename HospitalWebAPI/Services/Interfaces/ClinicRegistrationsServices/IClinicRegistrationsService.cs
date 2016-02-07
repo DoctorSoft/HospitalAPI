@@ -20,5 +20,8 @@ namespace Services.Interfaces.ClinicRegistrationsServices
         SaveClinicRegistrationCommandAnswer SaveClinicRegistration(SaveClinicRegistrationCommand command);
 
         BreakClinicRegistrationCommandAnswer BreakClinicRegistration(BreakClinicRegistrationCommand command);
+
+        GetMakeHospitalRegistrationsPageInformationCommandAnswer GetMakeHospitalRegistrationsPageInformation(
+            GetMakeHospitalRegistrationsPageInformationCommand command);
     }
 }

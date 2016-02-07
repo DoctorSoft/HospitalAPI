@@ -358,6 +358,15 @@ namespace Services.ClinicRegistrationsServices
             };
         }
 
+        public GetMakeHospitalRegistrationsPageInformationCommandAnswer GetMakeHospitalRegistrationsPageInformation(
+            GetMakeHospitalRegistrationsPageInformationCommand command)
+        {
+            return new GetMakeHospitalRegistrationsPageInformationCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
+
         private int GetHospitalEmptyPlacesCount(GetClinicRegistrationScheduleCommand command, DateTime date)
         {
            var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()

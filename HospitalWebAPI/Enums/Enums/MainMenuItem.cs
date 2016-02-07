@@ -10,6 +10,7 @@
         HospitalUserChangeEmptyPlacesPage = 101,
         HospitalUserShowMessagesPage = 102,
         HospitalUserSendDistributiveMessagesPage = 104,
+        HospitalUserMakeRegistrationsPage = 105,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserMainPage = 200,          

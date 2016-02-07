@@ -11,6 +11,7 @@
         HospitalUserShowMessages = 102,         // If this function is blocked, function 103 is blocked too
         HospitalUserGetWarningMessages = 103,
         HospitalUserSendDistributionMessages = 104,
+        HospitalUserMakeRegistrations = 105,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserPrimaryAccess = 200,          // If this function is blocked then all clinic user functions are blocked (Equal function is ShowHomePage for clinic users)
