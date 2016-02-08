@@ -6,14 +6,13 @@
 
 @using Enums.EnumExtensions
 @using Enums.Enums
-@using HelpingTools.ExtentionTools
 @using Resources
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ChangeHospitalRegistrationForSelectedSectionCommandAnswer
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">
-            @MainResources.EmptyPlacePageTableTitle @Model.SectionProfileName (@Model.Date.ToCorrectDateString())
+           @*@MainResources.EmptyPlacePageTableTitle @Model.SectionProfileName (@Model.Date)*@ 
         </div>
     </div>
     @using (Html.BeginForm("ApplyChangesHospitalRegistration", "ChangeHospitalRegistrationPage", FormMethod.Post))

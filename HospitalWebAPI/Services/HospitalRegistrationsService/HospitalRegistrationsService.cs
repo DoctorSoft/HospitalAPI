@@ -168,45 +168,59 @@ namespace Services.HospitalRegistrationsService
         public ChangeHospitalRegistrationForSelectedSectionCommandAnswer ChangeHospitalRegistrationForSelectedSection(
             ChangeHospitalRegistrationForSelectedSectionCommand command)
         {
-            var sectionProfileName =
-                _hospitalSectionProfileRepository.GetModels()
-                    .FirstOrDefault(model => model.Id == command.HospitalProfileId);
+
+            var user = _tokenManager.GetUserByToken(command.Token);
+            var hospitalId = GetHospitalIdByUserId(user.Id);
+
+            var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels();
+
+            var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+            var emptyPlaceStatisticRepository = _emptyPlaceByTypeStatisticRepository.GetModels();
+
+            var emptyPlaceByTypeStatistics = emptyPlaceStatisticRepository
+                .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.HospitalProfileId
+                && model.EmptyPlaceStatistic.Date == date
+                && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId);
 
             var emptyPlaceId =
                 _emptyPlaceStatisticRepository.GetModels()
-                    .FirstOrDefault(model => model.HospitalSectionProfileId == command.HospitalProfileId && model.Date == command.Date)
-                    .Id;
-
-            var emptyPlaceStatisticRepository = _emptyPlaceStatisticRepository.GetModels();
-
-            var table = ((IDbSet<EmptyPlaceStatisticStorageModel>)emptyPlaceStatisticRepository)
-                .Where(model => model.HospitalSectionProfileId == command.HospitalProfileId)
-                .SelectMany(
-                    storageModel =>
-                        storageModel.EmptyPlaceByTypeStatistics.Where(
-                            sd => sd.EmptyPlaceStatisticId.Equals(emptyPlaceId)))
+                .FirstOrDefault(model => model.HospitalSectionProfileId == command.HospitalProfileId && model.Date == date)
+                .Id;
+            
+            var table = emptyPlaceStatisticRepository
+                .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalProfileId)
+                .Where(
+                    storageModel => storageModel.EmptyPlaceStatisticId.Equals(emptyPlaceId))
                 .Select(model => new HospitalRegistrationCountStatisticItem
                 {
                     Sex = model.Sex,
                     OpenCount = model.Count
                 }).ToList();
 
+            var emptyPlaceStatisticId = _emptyPlaceStatisticRepository.GetModels().FirstOrDefault(
+                model => model.Date == date && model.HospitalSectionProfileId == command.HospitalProfileId).Id;
+
+            var emptyPlaceByTypeStatisticsIdMale = _emptyPlaceByTypeStatisticRepository.GetModels().FirstOrDefault(
+                model => model.EmptyPlaceStatisticId == emptyPlaceStatisticId && model.Sex == Sex.Male).Id;
+
+            var emptyPlaceByTypeStatisticsIdFemale = _emptyPlaceByTypeStatisticRepository.GetModels().FirstOrDefault(
+                model => model.EmptyPlaceStatisticId == emptyPlaceStatisticId && model.Sex == Sex.Female).Id;
 
             var countMale = _reservationRepository.GetModels()
-                .Where(model => model.EmptyPlaceByTypeStatisticId == command.HospitalProfileId)
+                .Where(model => model.EmptyPlaceByTypeStatisticId == emptyPlaceByTypeStatisticsIdMale)
                 .Where(model => model.Status == ReservationStatus.Opened)
                 .Count(model => model.Patient.Sex == Sex.Male);
 
             var countFemale = _reservationRepository.GetModels()
-                .Where(model => model.EmptyPlaceByTypeStatisticId == command.HospitalProfileId)
+                .Where(model => model.EmptyPlaceByTypeStatisticId == emptyPlaceByTypeStatisticsIdFemale)
                 .Where(model => model.Status == ReservationStatus.Opened)
                 .Count(model => model.Patient.Sex == Sex.Female);
 
             return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
             {
-                Token = (Guid) command.Token,
+                Token = (Guid)command.Token,
                 StatisticItems = table,
-                SectionProfileName = sectionProfileName.Name,
                 Date = command.Date,
                 CountRegisteredMale = countMale,
                 CountRegisteredFemale = countFemale,

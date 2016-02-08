@@ -10,7 +10,7 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
         public int HospitalProfileId { get; set; }
         public List<HospitalRegistrationCountStatisticItem> StatisticItems { get; set; }
         public string SectionProfileName { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public int CountRegisteredMale { get; set; }
         public int CountRegisteredFemale { get; set; }
     }
