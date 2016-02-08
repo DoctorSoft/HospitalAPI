@@ -15,7 +15,7 @@ namespace Services.ServiceTools
             this.hospitalRepository = hospitalRepository;
         }
 
-        public HospitalStorageModel GetClinicByUser(UserStorageModel model)
+        public HospitalStorageModel GetHospitalByUser(UserStorageModel model)
         {
             var hospitals = hospitalRepository.GetModels();
 

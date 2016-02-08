@@ -23,5 +23,10 @@ namespace Services.Interfaces.ClinicRegistrationsServices
 
         GetMakeHospitalRegistrationsPageInformationCommandAnswer GetMakeHospitalRegistrationsPageInformation(
             GetMakeHospitalRegistrationsPageInformationCommand command);
+
+        GetHospitalRegistrationUserFormCommandAnswer GetHospitalRegistrationUserForm(
+            GetHospitalRegistrationUserFormCommand command);
+
+        SaveHospitalRegistrationCommandAnswer SaveHospitalRegistration(SaveHospitalRegistrationCommand command);
     }
 }

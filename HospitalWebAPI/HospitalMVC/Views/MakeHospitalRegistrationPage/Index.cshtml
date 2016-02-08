@@ -4,5 +4,167 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Зарегестрировать пациента</h2>
+@section Scripts {
+    <script type="text/javascript">
+
+        var setStartValue = function() {
+            $('#HospitalSectionProfiles').val('@Model.HospitalSectionProfileId');
+            $('#Sexes').val('@Model.SexId');
+        }
+
+        setStartValue();
+
+        var HospitalChange = function(e) {
+            var url = '@Url.Action("Index", "MakeHospitalRegistrationPage", new {Token = @Model.Token})'
+                + '?SexId=' + $('#Sexes').val()
+                + '&HospitalSectionProfileId=' + $('#HospitalSectionProfiles').val();
+            window.location.replace(url);
+        };
+    </script>
+}
+
+@model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetMakeHospitalRegistrationsPageInformationCommandAnswer
+
+<div class="panel-body form-group">
+    <div class="col-lg-10 panel-body ">
+        <div class="col-lg-3">
+            <label>Отделение:</label>
+        </div>
+        <div class="col-lg-7">
+            @Html.DropDownListFor(answer => answer.HospitalSectionProfiles, Model.HospitalSectionProfiles.Select(pair => new SelectListItem
+            {
+                Selected = pair.Key == Model.HospitalSectionProfileId,
+                Value = pair.Key.ToString(),
+                Text = pair.Value,
+                Disabled = false
+            }), new
+            {
+                @class = "form-control",
+                @onchange = "HospitalChange()",
+                @value = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Key.ToString(),
+                @text = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Value
+            })
+        </div>
+
+    </div>
+    <div class="col-lg-10 panel-body ">
+        <div class="col-lg-3">
+            <label>Пол:</label>
+        </div>
+        <div class="col-lg-7">
+            @Html.DropDownListFor(answer => answer.Sexes, Model.Sexes.Select(pair => new SelectListItem
+            {
+                Selected = pair.Key == Model.SexId,
+                Value = pair.Key.ToString(),
+                Text = pair.Value,
+                Disabled = false
+            }), new
+            {
+                @class = "form-control",
+                @onchange = "HospitalChange()",
+                @value = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Key.ToString(),
+                @text = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Value
+            })
+        </div>
+
+    </div>
+</div>
+
+<div class="calendar">
+    <div class="panel panel-default">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Понедельник
+                    </th>
+                    <th>
+                        Вторник
+                    </th>
+                    <th>
+                        Среда
+                    </th>
+                    <th>
+                        Четверг
+                    </th>
+                    <th>
+                        Пятница
+                    </th>
+                    <th>
+                        Суббота
+                    </th>
+                    <th>
+                        Воскресенье
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Schedule)
+                {
+                    <tr>
+                        @foreach (var cell in item.Cells.Values)
+                        {
+                            if (cell.IsBlocked)
+                            {
+                                <td>
+                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-block">
+                                        <h2>@cell.Day</h2>
+                                    </div>
+                                </td>
+                            }
+                            else
+                            {
+                                if (cell.IsThisDate)
+                                {
+                                    <td>
+                                        <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-primary">
+                                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span> <h2>@cell.Day</h2>
+                                            <br />
+                                            <span class="badge">@cell.Count</span>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    if (cell.Count == 0)
+                                    {
+                                        <td>
+                                            <a alt="">
+                                                <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-default">
+                                                    <span class="glyphicon" aria-hidden="true"></span> <h2>@cell.Day</h2>
+                                                    <br />
+                                                    <span class="badge">@cell.Count</span>
+                                                </div>
+                                            </a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a href="@Url.Action("Step2", new
+                                                {
+                                                    Token = Model.Token,
+                                                    SexId = Model.SexId,
+                                                    HospitalSectionProfileId = Model.HospitalSectionProfileId,
+                                                    Date = cell.Date
+                                                })" alt="">
+                                                <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-info">
+                                                    <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> <h2>@cell.Day</h2>
+                                                    <br />
+                                                    <span class="badge">@cell.Count</span>
+                                                </div>
+                                            </a>
+                                        </td>
+
+                                    }
+                                }
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
