@@ -5,6 +5,6 @@ namespace Services.Interfaces.ServiceTools
 {
     public interface IHospitalManager
     {
-        HospitalStorageModel GetClinicByUser(UserStorageModel model);
+        HospitalStorageModel GetHospitalByUser(UserStorageModel model);
     }
 }

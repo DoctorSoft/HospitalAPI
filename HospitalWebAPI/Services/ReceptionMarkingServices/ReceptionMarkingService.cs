@@ -31,7 +31,7 @@ namespace Services.ReceptionMarkingServices
             var reservations = this.reservationRepository.GetModels();
 
             var user = tokenManager.GetUserByToken(command.Token.Value);
-            var hospital = hospitalManager.GetClinicByUser(user);
+            var hospital = hospitalManager.GetHospitalByUser(user);
 
             var now = DateTime.Now.Date;
 
@@ -67,7 +67,7 @@ namespace Services.ReceptionMarkingServices
             var reservations = this.reservationRepository.GetModels();
 
             var user = tokenManager.GetUserByToken(command.Token.Value);
-            var hospital = hospitalManager.GetClinicByUser(user);
+            var hospital = hospitalManager.GetHospitalByUser(user);
 
             var now = DateTime.Now.Date;
 

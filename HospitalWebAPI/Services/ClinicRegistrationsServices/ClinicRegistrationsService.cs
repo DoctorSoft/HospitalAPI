@@ -39,8 +39,12 @@ namespace Services.ClinicRegistrationsServices
         private readonly IMessageRepository _messageRepository;
 
         private readonly IUserRepository _userRepository;
+
+        private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
+
+        private readonly IHospitalManager _hospitalManager;
         
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository)
+        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager)
         {
             _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
@@ -51,6 +55,8 @@ namespace Services.ClinicRegistrationsServices
             _reservationRepository = reservationRepository;
             _messageRepository = messageRepository;
             _userRepository = userRepository;
+            this._hospitalSectionProfileRepository = hospitalSectionProfileRepository;
+            this._hospitalManager = hospitalManager;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -361,9 +367,64 @@ namespace Services.ClinicRegistrationsServices
         public GetMakeHospitalRegistrationsPageInformationCommandAnswer GetMakeHospitalRegistrationsPageInformation(
             GetMakeHospitalRegistrationsPageInformationCommand command)
         {
+            if (command.SexId == null || command.SexId == 0)
+            {
+                command.SexId = (int) Sex.Male;
+            }
+
+            var user = this._tokenManager.GetUserByToken(command.Token.Value);
+            var hospital = this._hospitalManager.GetHospitalByUser(user);
+            var hospitalSectionProfiles =
+                this._hospitalSectionProfileRepository.GetModels().Where(model => model.HospitalId == hospital.Id)
+                .ToList();
+
+            if (command.HospitalSectionProfileId == null || command.HospitalSectionProfileId == 0)
+            {
+                command.HospitalSectionProfileId = hospitalSectionProfiles.FirstOrDefault().Id;
+            }
+
+            const int days = 30;
+            var now = DateTime.Now;
+            var deadLine = now + new TimeSpan(days, 0, 0, 0);
+
+            var startMonday = GetPreviousMonday(now);
+            var endMonday = GetPreviousMonday(deadLine);
+            var weeks = (endMonday - startMonday).Days / 7 + 1;
+
+            var startSchedule = Enumerable.Range(0, weeks)
+               .Select(week => new ClinicScheduleTableItem
+               {
+                   Cells = Enumerable.Range(0, 7)
+                       .ToDictionary(day => (DayOfWeek)day, day => new ClinicScheduleTableCell
+                       {
+                           IsBlocked =
+                               startMonday.AddDays(7 * week + day).Date < now.Date ||
+                               startMonday.AddDays(7 * week + day).Date > deadLine.Date,
+                           Day = startMonday.AddDays(7 * week + day).Day,
+                           IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
+                           IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date,
+                           Date = startMonday.AddDays(7 * week + day).Date,
+                           Count = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date, hospital.Id)
+                       })
+               })
+               .ToList();
+
+            var sexes = Enum.GetValues(typeof (Sex))
+                .Cast<Sex>()
+                .Select(sex => new KeyValuePair<int, string>((int) sex, sex.ToCorrectString()))
+                .ToList();
+
+            var hospitalSectionProfilePairs =
+                hospitalSectionProfiles.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
+
             return new GetMakeHospitalRegistrationsPageInformationCommandAnswer
             {
-                Token = command.Token.Value
+                Token = command.Token.Value,
+                SexId = command.SexId.Value,
+                HospitalSectionProfileId = command.HospitalSectionProfileId.Value,
+                Schedule = startSchedule,
+                Sexes = sexes,
+                HospitalSectionProfiles = hospitalSectionProfilePairs
             };
         }
 
@@ -382,7 +443,28 @@ namespace Services.ClinicRegistrationsServices
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId)
-                .SelectMany(model => model.Reservations)
+                .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
+                .Count(model => model.Status == ReservationStatus.Opened);
+
+            return placeCount - registrationCount;
+        }
+
+        private int GetHospitalEmptyPlacesCount(GetMakeHospitalRegistrationsPageInformationCommand command, DateTime date, int hospitalId)
+        {
+           var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()
+               .Where(model => (int)model.Sex == command.SexId 
+                   && model.EmptyPlaceStatistic.Date == date
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
+                   && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
+                   .Select(model => model.Count)
+                   .FirstOrDefault();
+
+            var registrationCount = _emptyPlaceByTypeStatisticRepository.GetModels()
+                .Where(model => (int)model.Sex == command.SexId.Value 
+                   && model.EmptyPlaceStatistic.Date == date
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.HospitalSectionProfileId.Value)
+                .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
                 .Count(model => model.Status == ReservationStatus.Opened);
 
             return placeCount - registrationCount;
