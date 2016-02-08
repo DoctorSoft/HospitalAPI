@@ -308,6 +308,7 @@
     <Content Include="Views\ReviewerShowStatisticPage\Index.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\ViewRegistrationDetailsForMale.cshtml" />
     <Content Include="Views\MakeHospitalRegistrationPage\Index.cshtml" />
+    <Content Include="Views\MakeHospitalRegistrationPage\Step2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

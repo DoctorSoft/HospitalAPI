@@ -428,6 +428,23 @@ namespace Services.ClinicRegistrationsServices
             };
         }
 
+        public GetHospitalRegistrationUserFormCommandAnswer GetHospitalRegistrationUserForm(
+            GetHospitalRegistrationUserFormCommand command)
+        {
+            return new GetHospitalRegistrationUserFormCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
+
+        public SaveHospitalRegistrationCommandAnswer SaveHospitalRegistration(SaveHospitalRegistrationCommand command)
+        {
+            return new SaveHospitalRegistrationCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
+
         private int GetHospitalEmptyPlacesCount(GetClinicRegistrationScheduleCommand command, DateTime date)
         {
            var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()
