@@ -4,5 +4,200 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Зарегестрировать</h2>
+@model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetHospitalRegistrationUserFormCommandAnswer
+
+@section Scripts {
+    <script type="text/javascript">
+
+        var setStartValue = function() {
+            $('#Clinics').val('@Model.ClinicId');
+            $('#Users').val('@Model.UserId');
+        }
+
+        setStartValue();
+
+        var HospitalChange = function(e) {
+            var url = '@Url.Action("Step2", "MakeHospitalRegistrationPage", new {Token = @Model.Token, HospitalSectionProfileId = @Model.HospitalSectionProfileId, Date = @Model.Date})'
+                + '&ClinicId=' + $('#Clinics').val()
+                + '&UserId=' + $('#Users').val()
+                + '&Diagnosis=' + $('#Diagnosis').val()
+                + '&FirstName=' + $('#FirstName').val()
+                + '&LastName=' + $('#LastName').val()
+                + '&Age=' + $('#Age').val()
+                + '&SexId=' + $('#SexId').val()
+                + '&PhoneNumber=' + $('#PhoneNumber').val()
+                + '&Date=' + $('#Date').val()
+                + '&Code=' + $('#Code').val()
+                + '&DoesAgree=' + $('#DoesAgree').val();
+            window.location.replace(url);
+        };
+    </script>
+}
+
+@if (ViewBag.Errors != null)
+{
+    var errors = ViewBag.Errors as List<ServiceModels.ModelTools.CommandAnswerError>;
+    if (errors.Any())
+    {
+        foreach (var error in errors)
+        {
+            <div class="alert-warning alert"> @error.FieldName : @error.Title </div>
+        }
+    }
+}
+
+@using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(command => command.Token);
+
+    <h2>Регистрация: </h2>
+    <div class="form-group ">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Код пациента:
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    @Html.HiddenFor(command => command.Code)
+                    <b>@Model.Code</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Имя:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.FirstName, new { @class = "form-control", @rows = "10" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Фамилия:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.LastName, new { @class = "form-control", @rows = "10" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Возраст:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.Age, new { @class = "form-control", @rows = "10" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Пол:
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    @Html.HiddenFor(command => command.Sex)
+                    @Html.HiddenFor(command => command.SexId)
+                    <b>@Model.Sex</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Телефон:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.PhoneNumber, new { @class = "form-control", @rows = "10" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Дата:
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <div class="hidden">
+                    @Html.EditorFor(command => command.Date)
+                </div>
+                <h4>
+                    <b>@Model.Date</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Отделение:
+                </h4>
+            </div>
+            <div class="col-md-5">
+                <h4>
+                    @Html.HiddenFor(command => command.HospitalSectionProfileId)
+                    <b>@Model.HospitalSectionProfile</b>
+                </h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Диагноз:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.Diagnosis, new {@class = "form-control", @rows = "10"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Поликлиника:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.DropDownListFor(answer => answer.Clinics, Model.Clinics.Select(pair => new SelectListItem
+                {
+                    Selected = pair.Key == Model.ClinicId,
+                    Value = pair.Key.ToString(),
+                    Text = pair.Value,
+                    Disabled = false
+                }), new
+                {
+                    @class = "form-control",
+                    @onchange = "HospitalChange()",
+                    @value = Model.Clinics.FirstOrDefault(pair => pair.Key == Model.ClinicId).Key.ToString(),
+                    @text = Model.Clinics.FirstOrDefault(pair => pair.Key == Model.ClinicId).Value
+                })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Врач:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.DropDownListFor(answer => answer.Users, Model.Users.Select(pair => new SelectListItem
+                {
+                    Selected = pair.Key == Model.UserId,
+                    Value = pair.Key.ToString(),
+                    Text = pair.Value,
+                    Disabled = false
+                }), new
+                {
+                    @class = "form-control",
+                    @onchange = "HospitalChange()",
+                    @value = Model.Users.FirstOrDefault(pair => pair.Key == Model.UserId).Key.ToString(),
+                    @text = Model.Users.FirstOrDefault(pair => pair.Key == Model.UserId).Value
+                })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Согласие:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.CheckBoxFor(o => o.DoesAgree, new { @class = "form-control", @rows = "10" }) Я согласен(на) взять на себя ответсвенность за регистрацию выбранного пациента от имени выбранного врача
+            </div>
+        </div>
+        <input class="btn btn-sm btn-primary" type="submit" />
+    </div>
+}
 

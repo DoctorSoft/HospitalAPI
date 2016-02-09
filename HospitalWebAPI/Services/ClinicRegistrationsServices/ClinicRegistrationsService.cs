@@ -43,8 +43,10 @@ namespace Services.ClinicRegistrationsServices
         private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
 
         private readonly IHospitalManager _hospitalManager;
-        
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager)
+
+        private readonly IClinicRepository _clinicRepository;
+
+        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager, IClinicRepository clinicRepository)
         {
             _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
@@ -57,6 +59,7 @@ namespace Services.ClinicRegistrationsServices
             _userRepository = userRepository;
             this._hospitalSectionProfileRepository = hospitalSectionProfileRepository;
             this._hospitalManager = hospitalManager;
+            _clinicRepository = clinicRepository;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -431,9 +434,49 @@ namespace Services.ClinicRegistrationsServices
         public GetHospitalRegistrationUserFormCommandAnswer GetHospitalRegistrationUserForm(
             GetHospitalRegistrationUserFormCommand command)
         {
+            var clinics = this._clinicRepository.GetModels().ToList();
+            if (command.ClinicId == null)
+            {
+                command.ClinicId = clinics.FirstOrDefault().Id;
+            }
+            var clinicResults = clinics.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
+
+            var users = this._userRepository.GetModels().Where(model => model.ClinicUser != null && model.ClinicUser.ClinicId == command.ClinicId.Value).ToList();
+            if (command.UserId == null || users.Select(model => model.Id).All(i => command.UserId.Value != i))
+            {
+                command.UserId = users.FirstOrDefault().Id;
+            }
+            var userResults = users.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
+
+            var hospitalSectionProfile =
+                this._hospitalSectionProfileRepository.GetModels()
+                    .FirstOrDefault(model => model.Id == command.HospitalSectionProfileId)
+                    .Name;
+
+            if (command.Code == null)
+            {
+                command.Code = Guid.NewGuid().ToString();
+            }
+
             return new GetHospitalRegistrationUserFormCommandAnswer
             {
-                Token = command.Token.Value
+                Token = command.Token.Value,
+                SexId = command.SexId,
+                HospitalSectionProfileId = command.HospitalSectionProfileId,
+                Sex = ((Sex)command.SexId).ToCorrectString(),
+                ClinicId = command.ClinicId.Value,
+                LastName = command.LastName,
+                FirstName = command.FirstName,
+                Date = command.Date,
+                PhoneNumber = command.PhoneNumber,
+                Age = command.Age,
+                Code = command.Code,
+                Diagnosis = command.Diagnosis,
+                DoesAgree = command.DoesAgree ?? false,
+                UserId = command.UserId.Value,
+                Clinics = clinicResults,
+                Users = userResults,
+                HospitalSectionProfile = hospitalSectionProfile,
             };
         }
 

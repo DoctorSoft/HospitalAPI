@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
@@ -7,17 +8,11 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
     {
         public int SexId { get; set; }
 
-        public int SectionProfileId { get; set; }
+        public int HospitalSectionProfileId { get; set; }
 
-        public int CurrentHospitalId { get; set; }
+        public string HospitalSectionProfile { get; set; }
 
         public string Sex { get; set; }
-
-        public string SectionProfile { get; set; }
-
-        public string CurrentHospital { get; set; }
-
-        public DateTime DateValue { get; set; }
 
         public string Date { get; set; }
 
@@ -34,5 +29,13 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
         public string Diagnosis { get; set; }
 
         public bool DoesAgree { get; set; }
+
+        public int ClinicId { get; set; }
+
+        public int UserId { get; set; }
+
+        public List<KeyValuePair<int, string>> Clinics { get; set; }
+
+        public List<KeyValuePair<int, string>> Users { get; set; }
     }
 }

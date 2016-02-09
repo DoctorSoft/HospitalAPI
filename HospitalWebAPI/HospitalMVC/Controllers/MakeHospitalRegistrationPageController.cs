@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
+using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
 
@@ -39,24 +40,24 @@ namespace HospitalMVC.Controllers
 
             if (answer.Errors.Any())
             {
-                var model = new SaveHospitalRegistrationCommand
+                var model = new GetHospitalRegistrationUserFormCommandAnswer
                 {
-                    Sex = command.Sex,
-                    DateValue = command.DateValue,
-                    Date = command.Date,
-                    CurrentHospitalId = command.CurrentHospitalId,
+                    Date = answer.Date,
                     Token = answer.Token,
-                    SectionProfileId = command.SectionProfileId,
-                    FirstName = command.FirstName,
-                    LastName = command.LastName,
-                    SexId = command.SexId,
-                    SectionProfile = command.SectionProfile,
-                    Age = command.Age,
-                    Code = command.Code,
-                    CurrentHospital = command.CurrentHospital,
-                    PhoneNumber = command.PhoneNumber,
-                    Diagnosis = command.Diagnosis,
-                    DoesAgree = command.DoesAgree
+                    FirstName = answer.FirstName,
+                    LastName = answer.LastName,
+                    SexId = answer.SexId,
+                    Age = answer.Age,
+                    Code = answer.Code,
+                    PhoneNumber = answer.PhoneNumber,
+                    Diagnosis = answer.Diagnosis,
+                    DoesAgree = answer.DoesAgree,
+                    UserId = answer.UserId,
+                    HospitalSectionProfileId = answer.HospitalSectionProfileId,
+                    Sex = answer.Sex,
+                    ClinicId = answer.ClinicId,
+                    Clinics = answer.Clinics,
+                    Users = answer.Users
                 };
                 ViewBag.Errors = answer.Errors;
 

@@ -1,5 +1,4 @@
-﻿using System;
-using ServiceModels.ModelTools;
+﻿using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
 {
@@ -7,17 +6,7 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
     {
         public int SexId { get; set; }
 
-        public int SectionProfileId { get; set; }
-
-        public int CurrentHospitalId { get; set; }
-
-        public string Sex { get; set; }
-
-        public string SectionProfile { get; set; }
-
-        public string CurrentHospital { get; set; }
-
-        public DateTime DateValue { get; set; }
+        public int HospitalSectionProfileId { get; set; }
 
         public string Date { get; set; }
 
@@ -34,5 +23,7 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
         public string Diagnosis { get; set; }
 
         public bool DoesAgree { get; set; }
+
+        public int UserId { get; set; }
     }
 }
