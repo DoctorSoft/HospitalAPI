@@ -37,7 +37,7 @@
                         <label class="form-control"> @Model.CountRegisteredMale.ToString("G") </label>
                         if (Model.CountRegisteredMale != 0)
                         {
-                            <input type="button" title="Просмотреть" class="btn btn-sm btn-primary" value="Просмотреть" onclick=" location.href = '@Url.Action("ViewRegistrationDetailsForMale", "ChangeHospitalRegistrationPage", new {Token = Model.Token, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' " />
+                            <input type="button" title="Просмотреть" class="btn btn-sm btn-primary" value="Просмотреть" onclick=" location.href = '@Url.Action("ViewRegistrationDetailsForMale", "ChangeHospitalRegistrationPage", new {Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdMaleId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' " />
                         }
                     }
                     else

@@ -168,23 +168,14 @@ namespace Services.HospitalRegistrationsService
         public ChangeHospitalRegistrationForSelectedSectionCommandAnswer ChangeHospitalRegistrationForSelectedSection(
             ChangeHospitalRegistrationForSelectedSectionCommand command)
         {
-
-            var user = _tokenManager.GetUserByToken(command.Token);
-            var hospitalId = GetHospitalIdByUserId(user.Id);
-
-            var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels();
+            var hospitalSectionProfilesName = _hospitalSectionProfileRepository.GetModels()
+                .FirstOrDefault(model=>model.SectionProfileId == command.HospitalProfileId).Name;
 
             var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
             var emptyPlaceStatisticRepository = _emptyPlaceByTypeStatisticRepository.GetModels();
-
-            var emptyPlaceByTypeStatistics = emptyPlaceStatisticRepository
-                .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.HospitalProfileId
-                && model.EmptyPlaceStatistic.Date == date
-                && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId);
-
-            var emptyPlaceId =
-                _emptyPlaceStatisticRepository.GetModels()
+            
+            var emptyPlaceId = _emptyPlaceStatisticRepository.GetModels()
                 .FirstOrDefault(model => model.HospitalSectionProfileId == command.HospitalProfileId && model.Date == date)
                 .Id;
             
@@ -201,19 +192,19 @@ namespace Services.HospitalRegistrationsService
             var emptyPlaceStatisticId = _emptyPlaceStatisticRepository.GetModels().FirstOrDefault(
                 model => model.Date == date && model.HospitalSectionProfileId == command.HospitalProfileId).Id;
 
-            var emptyPlaceByTypeStatisticsIdMale = _emptyPlaceByTypeStatisticRepository.GetModels().FirstOrDefault(
+            var emptyPlaceByTypeStatisticsIdMaleId = _emptyPlaceByTypeStatisticRepository.GetModels().FirstOrDefault(
                 model => model.EmptyPlaceStatisticId == emptyPlaceStatisticId && model.Sex == Sex.Male).Id;
 
-            var emptyPlaceByTypeStatisticsIdFemale = _emptyPlaceByTypeStatisticRepository.GetModels().FirstOrDefault(
+            var emptyPlaceByTypeStatisticsIdFemaleId = _emptyPlaceByTypeStatisticRepository.GetModels().FirstOrDefault(
                 model => model.EmptyPlaceStatisticId == emptyPlaceStatisticId && model.Sex == Sex.Female).Id;
 
             var countMale = _reservationRepository.GetModels()
-                .Where(model => model.EmptyPlaceByTypeStatisticId == emptyPlaceByTypeStatisticsIdMale)
+                .Where(model => model.EmptyPlaceByTypeStatisticId == emptyPlaceByTypeStatisticsIdMaleId)
                 .Where(model => model.Status == ReservationStatus.Opened)
                 .Count(model => model.Patient.Sex == Sex.Male);
 
             var countFemale = _reservationRepository.GetModels()
-                .Where(model => model.EmptyPlaceByTypeStatisticId == emptyPlaceByTypeStatisticsIdFemale)
+                .Where(model => model.EmptyPlaceByTypeStatisticId == emptyPlaceByTypeStatisticsIdFemaleId)
                 .Where(model => model.Status == ReservationStatus.Opened)
                 .Count(model => model.Patient.Sex == Sex.Female);
 
@@ -222,9 +213,12 @@ namespace Services.HospitalRegistrationsService
                 Token = (Guid)command.Token,
                 StatisticItems = table,
                 Date = command.Date,
+                SectionProfileName = hospitalSectionProfilesName,
                 CountRegisteredMale = countMale,
                 CountRegisteredFemale = countFemale,
-                HospitalProfileId = command.HospitalProfileId
+                HospitalProfileId = command.HospitalProfileId,
+                EmptyPlaceByTypeStatisticIdMaleId = emptyPlaceByTypeStatisticsIdMaleId,
+                EmptyPlaceByTypeStatisticIdFeMaleId = emptyPlaceByTypeStatisticsIdFemaleId
             };
         }
 
@@ -335,7 +329,7 @@ namespace Services.HospitalRegistrationsService
 
             var table = resrvations
                 .Where(model => model.Status == ReservationStatus.Opened)
-                .Where(model => model.EmptyPlaceByTypeStatisticId == command.HospitalProfileId)
+                .Where(model => model.EmptyPlaceByTypeStatisticId == command.EmptyPlaceByTypeStatisticId)
                 .Select(model => new ClinicBreakRegistrationTableItem
                 {
                     SectionProfile = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Name,
@@ -353,6 +347,7 @@ namespace Services.HospitalRegistrationsService
             {
                 Token = (Guid)command.Token,
                 Table = table,
+                HospitalProfileId = command.HospitalProfileId,
                 Date = command.Date
             };
         }

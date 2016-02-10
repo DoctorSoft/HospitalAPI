@@ -6,6 +6,7 @@ namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
     public class ViewRegistrationDetailsMaleCommand : AbstractTokenCommand
     {
         public int HospitalProfileId { get; set; }
+        public int EmptyPlaceByTypeStatisticId { get; set; }
         public DateTime Date { get; set; }
     }
 }
