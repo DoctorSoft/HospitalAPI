@@ -94,3 +94,8 @@
 	  border-top-right-radius: 0;
 	}
 }
+
+/* buttons */
+.padding-left{
+	margin-left: 43px;
+}

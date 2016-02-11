@@ -1,8 +1,8 @@
 ﻿@using Resources
-@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ViewRegistrationDetailsMaleCommandAnswer
+@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ViewDetailedInformationOnRegisteredPatientsCommandAnswer
 
 @{
-    ViewBag.Title = "ViewRegistrationDetailsForMale";
+    ViewBag.Title = "ViewDetailedInformationOnRegisteredPatients";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -21,7 +21,7 @@
                             <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
                                 <div>
                                     <div style="display: inline-block; min-width: 90%">
-                                        @item.PatientLastName
+                                        @item.PatientLastName @item.PatientFirstName
                                     </div>
                                     <div style="display: inline-block">
                                         @Html.ActionLink("Отменить", "BreakRegistration", new { Token = @Model.Token, ReservationId = @item.ReservationId }, new { @class = "btn-info btn" })
@@ -48,3 +48,5 @@
     <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date, HospitalProfileId = Model.HospitalProfileId })'" />
 
 </div>
+
+

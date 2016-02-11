@@ -5,7 +5,7 @@ using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Enti
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class ViewRegistrationDetailsMaleCommandAnswer : AbstractTokenCommandAnswer
+    public class ViewDetailedInformationOnRegisteredPatientsCommandAnswer : AbstractTokenCommandAnswer
     {
         public int HospitalProfileId { get; set; }
         public List<ClinicBreakRegistrationTableItem> Table { get; set; }
