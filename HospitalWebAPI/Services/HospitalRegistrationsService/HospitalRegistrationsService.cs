@@ -322,19 +322,44 @@ namespace Services.HospitalRegistrationsService
             };
         }
 
-        public ViewRegistrationDetailsMaleCommandAnswer ViewDetailsRegistrationForMale(
-            ViewRegistrationDetailsMaleCommand command)
+        public ViewDetailedInformationOnRegisteredPatientsCommandAnswer GetDetailedInformationOnRegisteredPatients(
+            ViewDetailedInformationOnRegisteredPatientsCommand command)
         {
             var resrvations = this._reservationRepository.GetModels();
 
-            var table = resrvations
+            List<ClinicBreakRegistrationTableItem> table = null;
+
+            if (command.FullInformation == null)
+            {
+                table = resrvations
+                    .Where(model => model.Status == ReservationStatus.Opened)
+                    .Where(model => model.EmptyPlaceByTypeStatisticId == command.EmptyPlaceByTypeStatisticId)
+                    .Select(model => new ClinicBreakRegistrationTableItem
+                    {
+                        SectionProfile = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Name,
+                        ReservationId = model.Id,
+                        Haspital =
+                            model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Hospital.Name,
+                        PatientCode = model.Patient.Code,
+                        PatientFirstName = model.Patient.FirstName,
+                        PatientLastName = model.Patient.LastName,
+                        ReservationDate = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date,
+                        Diagnosis = model.Diagnosis
+                    })
+                    .ToList();
+            }
+            else
+            {
+                table = resrvations
                 .Where(model => model.Status == ReservationStatus.Opened)
-                .Where(model => model.EmptyPlaceByTypeStatisticId == command.EmptyPlaceByTypeStatisticId)
+                .Where(model => model.EmptyPlaceByTypeStatisticId == command.EmptyPlaceByTypeStatisticId 
+                    || model.EmptyPlaceByTypeStatisticId == command.FullInformation)
                 .Select(model => new ClinicBreakRegistrationTableItem
                 {
                     SectionProfile = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Name,
                     ReservationId = model.Id,
-                    Haspital = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Hospital.Name,
+                    Haspital =
+                        model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Hospital.Name,
                     PatientCode = model.Patient.Code,
                     PatientFirstName = model.Patient.FirstName,
                     PatientLastName = model.Patient.LastName,
@@ -342,8 +367,8 @@ namespace Services.HospitalRegistrationsService
                     Diagnosis = model.Diagnosis
                 })
                 .ToList();
-
-            return new ViewRegistrationDetailsMaleCommandAnswer
+            }
+            return new ViewDetailedInformationOnRegisteredPatientsCommandAnswer
             {
                 Token = (Guid)command.Token,
                 Table = table,

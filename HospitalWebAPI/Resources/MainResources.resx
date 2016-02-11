@@ -270,4 +270,10 @@
   <data name="UserName" xml:space="preserve">
     <value>Имя пользователя</value>
   </data>
+  <data name="ButtonView" xml:space="preserve">
+    <value>Просмотреть</value>
+  </data>
+  <data name="ButtonViewAll" xml:space="preserve">
+    <value>Просмотреть все регистрации</value>
+  </data>
 </root>

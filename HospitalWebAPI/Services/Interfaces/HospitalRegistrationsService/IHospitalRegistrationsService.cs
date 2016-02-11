@@ -23,7 +23,7 @@ namespace Services.Interfaces.HospitalRegistrationsService
         GetChangeNewHospitalRegistrationCommandAnswer ApplyChangesNewHospitalRegistration(
             GetChangeNewHospitalRegistrationCommand command);
 
-        ViewRegistrationDetailsMaleCommandAnswer ViewDetailsRegistrationForMale(
-            ViewRegistrationDetailsMaleCommand command);
+        ViewDetailedInformationOnRegisteredPatientsCommandAnswer GetDetailedInformationOnRegisteredPatients(
+            ViewDetailedInformationOnRegisteredPatientsCommand command);
     }
 }

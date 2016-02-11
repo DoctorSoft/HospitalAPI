@@ -73,9 +73,9 @@ namespace HospitalMVC.Controllers
         }
 
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
-        public ActionResult ViewRegistrationDetailsForMale(ViewRegistrationDetailsMaleCommand command)
+        public ActionResult ViewDetailedInformationOnRegisteredPatients(ViewDetailedInformationOnRegisteredPatientsCommand command)
         {
-            var answer = _hospitalRegistrationsService.ViewDetailsRegistrationForMale(command);
+            var answer = _hospitalRegistrationsService.GetDetailedInformationOnRegisteredPatients(command);
             return View(answer);
         }
     }

@@ -115,6 +115,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Просмотреть.
+        /// </summary>
+        public static string ButtonView {
+            get {
+                return ResourceManager.GetString("ButtonView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Просмотреть все регистрации.
+        /// </summary>
+        public static string ButtonViewAll {
+            get {
+                return ResourceManager.GetString("ButtonViewAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to нажмите сюда..
         /// </summary>
         public static string ClinicUserPageCancelRegistrationAfter {

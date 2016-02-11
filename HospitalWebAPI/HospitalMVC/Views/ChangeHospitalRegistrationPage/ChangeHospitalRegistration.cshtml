@@ -12,7 +12,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">
-           @*@MainResources.EmptyPlacePageTableTitle @Model.SectionProfileName (@Model.Date)*@ 
+           @MainResources.EmptyPlacePageTableTitle @Model.SectionProfileName (@Model.Date)
         </div>
     </div>
     @using (Html.BeginForm("ApplyChangesHospitalRegistration", "ChangeHospitalRegistrationPage", FormMethod.Post))
@@ -37,7 +37,7 @@
                         <label class="form-control"> @Model.CountRegisteredMale.ToString("G") </label>
                         if (Model.CountRegisteredMale != 0)
                         {
-                            <input type="button" title="Просмотреть" class="btn btn-sm btn-primary" value="Просмотреть" onclick=" location.href = '@Url.Action("ViewRegistrationDetailsForMale", "ChangeHospitalRegistrationPage", new {Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdMaleId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' " />
+                            <input type="button" title="@MainResources.ButtonView" class="btn btn-sm btn-primary" value="@MainResources.ButtonView" onclick="location.href = '@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdMaleId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
                         }
                     }
                     else
@@ -45,7 +45,7 @@
                         <label class="form-control"> @Model.CountRegisteredFemale.ToString("G") </label>
                         if (Model.CountRegisteredFemale != 0)
                         {
-                            <input type="button" title="Просмотреть" class="btn btn-sm btn-primary" value="Просмотреть" onclick=" location.href = '@Url.Action("ViewRegistrationDetailsForMale", "ChangeHospitalRegistrationPage", new {})' " />
+                            <input type="button" title="@MainResources.ButtonView" class="btn btn-sm btn-primary" value="@MainResources.ButtonView" onclick="location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdFeMaleId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
                         }
                     }
                     
@@ -58,9 +58,11 @@
             }
 
             </div>
-            <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})'" />
+            <input type="button" title="@MainResources.ButtonBack" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})'" />
             <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonChange" />
-            
+            <span></span>
+            <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick="location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdFeMaleId, FullInformation =Model.EmptyPlaceByTypeStatisticIdMaleId,  HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
+
             @Html.HiddenFor(model => model.Date)
             @Html.HiddenFor(model => model.HospitalProfileId)
 
