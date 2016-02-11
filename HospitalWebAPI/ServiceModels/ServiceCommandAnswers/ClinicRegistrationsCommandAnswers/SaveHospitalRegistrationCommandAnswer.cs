@@ -9,6 +9,8 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public int HospitalSectionProfileId { get; set; }
 
+        public string HospitalSectionProfile { get; set; }
+
         public string Sex { get; set; }
 
         public string Date { get; set; }

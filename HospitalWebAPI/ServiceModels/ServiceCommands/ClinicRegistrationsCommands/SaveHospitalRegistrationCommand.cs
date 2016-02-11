@@ -25,5 +25,7 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
         public bool DoesAgree { get; set; }
 
         public int UserId { get; set; }
+
+        public int ClinicId { get; set; }
     }
 }

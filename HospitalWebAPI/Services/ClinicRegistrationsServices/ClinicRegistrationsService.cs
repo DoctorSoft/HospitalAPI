@@ -235,6 +235,24 @@ namespace Services.ClinicRegistrationsServices
                 });
             }
 
+            if (command.Age < 0)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Возраст не может быть отрицательным"
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(command.Diagnosis) || command.Diagnosis.Length < 2)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Диагноз",
+                    Title = "Диагноз не может иметь меньше 2 букв"
+                });
+            }
+
             return result;
         }
         
@@ -472,7 +490,7 @@ namespace Services.ClinicRegistrationsServices
                 Age = command.Age,
                 Code = command.Code,
                 Diagnosis = command.Diagnosis,
-                DoesAgree = command.DoesAgree ?? false,
+                DoesAgree = command.DoesAgree ?? true,
                 UserId = command.UserId.Value,
                 Clinics = clinicResults,
                 Users = userResults,
@@ -480,12 +498,195 @@ namespace Services.ClinicRegistrationsServices
             };
         }
 
+        private List<CommandAnswerError> ValidateSaveHospitalRegistrationCommand(SaveHospitalRegistrationCommand command)
+        {
+            var result = new List<CommandAnswerError>();
+
+            if (string.IsNullOrWhiteSpace(command.FirstName) || command.FirstName.Length < 2)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Имя",
+                    Title = "Имя не может иметь меньше 2 букв"
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(command.LastName) || command.LastName.Length < 2)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Фамилия",
+                    Title = "Фамилия не может иметь меньше 2 букв"
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(command.PhoneNumber) || command.PhoneNumber.Length < 3 || !command.PhoneNumber.Any(char.IsDigit))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Телефон",
+                    Title = "Телефон имеет некорректный формат"
+                });
+            }
+
+            if (!command.DoesAgree)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Соглашение",
+                    Title = "Вы должны подтвердить, что согласны взять на себя ответственность за регистраию"
+                });
+            }
+
+            if (command.Age < 0)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Возраст не может быть отрицательным"
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(command.Diagnosis) || command.Diagnosis.Length < 2)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Диагноз",
+                    Title = "Диагноз не может иметь меньше 2 букв"
+                });
+            }
+
+            return result;
+        }
+
         public SaveHospitalRegistrationCommandAnswer SaveHospitalRegistration(SaveHospitalRegistrationCommand command)
         {
-            return new SaveHospitalRegistrationCommandAnswer
+            var errors = this.ValidateSaveHospitalRegistrationCommand(command);
+
+            var users = this._userRepository.GetModels().Where(model => model.ClinicUser != null && model.ClinicUser.ClinicId == command.ClinicId).ToList();
+            var userResults = users.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
+            
+            var clinics = this._clinicRepository.GetModels().ToList();
+            var clinicResults = clinics.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
+
+            var hospitalSectionProfileName =
+                this._hospitalSectionProfileRepository.GetModels()
+                    .FirstOrDefault(model => model.Id == command.HospitalSectionProfileId)
+                    .Name;
+
+            if (errors.Any())
             {
-                Token = command.Token.Value
+                return new SaveHospitalRegistrationCommandAnswer
+                {
+                    SexId = command.SexId,
+                    HospitalSectionProfileId = command.HospitalSectionProfileId,
+                    Sex = ((Sex) command.SexId).ToCorrectString(),
+                    ClinicId = command.ClinicId,
+                    LastName = command.LastName,
+                    FirstName = command.FirstName,
+                    Date = command.Date,
+                    PhoneNumber = command.PhoneNumber,
+                    Age = command.Age,
+                    Code = command.Code,
+                    Diagnosis = command.Diagnosis,
+                    DoesAgree = command.DoesAgree,
+                    UserId = command.UserId,
+                    Clinics = clinicResults,
+                    Users = userResults,
+                    HospitalSectionProfile = hospitalSectionProfileName,
+                    Errors = errors,
+                    Token = command.Token.Value
+                };
+            }
+
+            var user = this._tokenManager.GetUserByToken(command.Token);
+
+
+            var clinicId = command.ClinicId;
+            var hospital = this._hospitalManager.GetHospitalByUser(user);
+
+            var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+            var emptyPlaceByTypeStatistics = _emptyPlaceByTypeStatisticRepository
+                .GetModels()
+                .Where(model => model.Sex == (Sex)command.SexId 
+                    && model.EmptyPlaceStatistic.HospitalSectionProfile.Id == command.HospitalSectionProfileId
+                    && model.EmptyPlaceStatistic.Date == date
+                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospital.Id);
+
+            var emptyPlaceByTypeStatisticId = emptyPlaceByTypeStatistics.FirstOrDefault().Id;
+            
+            var reservation = new ReservationStorageModel
+            {
+                Patient = new PatientStorageModel
+                {
+                    Age = command.Age.Value,
+                    Code = command.Code,
+                    FirstName = command.FirstName,
+                    LastName = command.LastName,
+                    PhoneNumber = command.PhoneNumber,
+                    Sex = (Sex) command.SexId
+                },
+                ApproveTime = DateTime.Now,
+                ClinicId = clinicId,
+                EmptyPlaceByTypeStatisticId = emptyPlaceByTypeStatisticId,
+                Status = ReservationStatus.Opened,
+                Diagnosis = command.Diagnosis,
+                ReservatorId = command.UserId,
+                BehalfReservatorId = user.Id
             };
+
+            _reservationRepository.Add(reservation);
+
+            var receiverIds = this._userRepository.GetModels()
+                .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == hospital.Id)
+                .Select(model => model.Id)
+                .ToList();
+
+            foreach (var receiverId in receiverIds)
+            {
+                var message = new MessageStorageModel
+                {
+                    Date = DateTime.Now.Date,
+                    IsRead = false,
+                    MessageType = MessageType.WarningMessage,
+                    ShowStatus = TwoSideShowStatus.Showed,
+                    Text = $"Пациент с номером {command.Code} был зарезервирован в Вашу больницу.\0\n" +
+                           $"Дата: {command.Date}.\n\0" +
+                           $"Отделение: {hospitalSectionProfileName}.\n\0" +
+                           $"Диагноз: {command.Diagnosis}.\n\0",
+                    Title = "Уведомление о бронировании места для пациента.",
+                    UserFromId = command.UserId,
+                    UserToId = receiverId
+                };
+
+                _messageRepository.Add(message);
+            }
+
+            _reservationRepository.SaveChanges();
+            
+            var answer = new SaveHospitalRegistrationCommandAnswer
+            {
+                Token = command.Token.Value,
+                SexId = command.SexId,
+                HospitalSectionProfileId = command.HospitalSectionProfileId,
+                Sex = ((Sex)command.SexId).ToCorrectString(),
+                ClinicId = command.ClinicId,
+                LastName = command.LastName,
+                FirstName = command.FirstName,
+                Date = command.Date,
+                PhoneNumber = command.PhoneNumber,
+                Age = command.Age,
+                Code = command.Code,
+                Diagnosis = command.Diagnosis,
+                DoesAgree = command.DoesAgree,
+                UserId = command.UserId,
+                Clinics = clinicResults,
+                Users = userResults,
+                HospitalSectionProfile = hospitalSectionProfileName,
+            };
+
+            return answer;
         }
 
         private int GetHospitalEmptyPlacesCount(GetClinicRegistrationScheduleCommand command, DateTime date)

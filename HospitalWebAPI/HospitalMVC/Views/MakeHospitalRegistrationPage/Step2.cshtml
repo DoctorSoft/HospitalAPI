@@ -12,12 +12,27 @@
         var setStartValue = function() {
             $('#Clinics').val('@Model.ClinicId');
             $('#Users').val('@Model.UserId');
-        }
-
+        };
         setStartValue();
 
         var HospitalChange = function(e) {
             var url = '@Url.Action("Step2", "MakeHospitalRegistrationPage", new {Token = @Model.Token, HospitalSectionProfileId = @Model.HospitalSectionProfileId, Date = @Model.Date})'
+                + '&ClinicId=' + $('#Clinics').val()
+                + '&UserId=' + $('#Users').val()
+                + '&Diagnosis=' + $('#Diagnosis').val()
+                + '&FirstName=' + $('#FirstName').val()
+                + '&LastName=' + $('#LastName').val()
+                + '&Age=' + $('#Age').val()
+                + '&SexId=' + $('#SexId').val()
+                + '&PhoneNumber=' + $('#PhoneNumber').val()
+                + '&Date=' + $('#Date').val()
+                + '&Code=' + $('#Code').val()
+                +  ($('#DoesAgree').val() ? '&DoesAgree=1' : '');
+            window.location.replace(url);
+        };
+
+        var SubmitData = function(e) {
+            var url = '@Url.Action("SaveRegistration", "MakeHospitalRegistrationPage", new {Token = @Model.Token, HospitalSectionProfileId = @Model.HospitalSectionProfileId, Date = @Model.Date})'
                 + '&ClinicId=' + $('#Clinics').val()
                 + '&UserId=' + $('#Users').val()
                 + '&Diagnosis=' + $('#Diagnosis').val()
@@ -46,7 +61,7 @@
     }
 }
 
-@using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", FormMethod.Post))
+@using (Html.BeginForm("SaveRegistration", "MakeHospitalRegistrationPage", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -194,10 +209,11 @@
                 <h4>Согласие:</h4>
             </div>
             <div class="col-md-5">
-                @Html.CheckBoxFor(o => o.DoesAgree, new { @class = "form-control", @rows = "10" }) Я согласен(на) взять на себя ответсвенность за регистрацию выбранного пациента от имени выбранного врача
+                <input class="form-control active" value='TRUE' type="checkbox" rows="10" id="DoesAgree" checked disabled />
+                Я согласен(на) взять на себя ответственность за регистрацию выбранного пациента от имени выбранного врача
             </div>
         </div>
-        <input class="btn btn-sm btn-primary" type="submit" />
+        <input class="btn btn-sm btn-primary" type="button" onclick="SubmitData();" value="Зарегестрировать"/>
     </div>
 }
 

@@ -32,7 +32,6 @@ namespace HospitalMVC.Controllers
             return View(answer);
         }
 
-        [HttpPost]
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserMakeRegistrations)]
         public ActionResult SaveRegistration(SaveHospitalRegistrationCommand command)
         {
@@ -57,7 +56,8 @@ namespace HospitalMVC.Controllers
                     Sex = answer.Sex,
                     ClinicId = answer.ClinicId,
                     Clinics = answer.Clinics,
-                    Users = answer.Users
+                    Users = answer.Users,
+                    HospitalSectionProfile = answer.HospitalSectionProfile
                 };
                 ViewBag.Errors = answer.Errors;
 
