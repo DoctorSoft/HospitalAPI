@@ -25,5 +25,8 @@ namespace Services.Interfaces.HospitalRegistrationsService
 
         ViewDetailedInformationOnRegisteredPatientsCommandAnswer GetDetailedInformationOnRegisteredPatients(
             ViewDetailedInformationOnRegisteredPatientsCommand command);
+
+        BreakHospitalRegistrationCommandAnswer BreakHospitalRegistration(
+            BreakHospitalRegistrationCommand command);
     }
 }

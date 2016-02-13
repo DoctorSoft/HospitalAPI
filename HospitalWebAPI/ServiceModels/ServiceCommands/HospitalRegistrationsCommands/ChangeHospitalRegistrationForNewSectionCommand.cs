@@ -5,6 +5,6 @@ namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
 {
     public class ChangeHospitalRegistrationForNewSectionCommand : AbstractTokenCommand
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }

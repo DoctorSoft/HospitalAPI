@@ -78,5 +78,17 @@ namespace HospitalMVC.Controllers
             var answer = _hospitalRegistrationsService.GetDetailedInformationOnRegisteredPatients(command);
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult BreakRegistration(BreakHospitalRegistrationCommand command)
+        {
+            var answer = _hospitalRegistrationsService.BreakHospitalRegistration(command);
+            return RedirectToAction("ViewDetailedInformationOnRegisteredPatients", 
+                new { Token = command.Token, 
+                      HospitalProfileId = command.HospitalProfileId,
+                      Date = command.Date,
+                      EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId
+                    });
+        }
     }
 }

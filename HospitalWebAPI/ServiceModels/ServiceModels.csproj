@@ -93,6 +93,7 @@
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetMakeHospitalRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\SaveClinicRegistrationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\SaveHospitalRegistrationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\BreakHospitalRegistrationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForNewSectionCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForSelectedSectionCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationCountStatisticItem.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetMakeHospitalRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SaveClinicRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SaveHospitalRegistrationCommand.cs" />
+    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\BreakHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForNewSectionCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForSelectedSectionCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeNewHospitalRegistrationCommand.cs" />

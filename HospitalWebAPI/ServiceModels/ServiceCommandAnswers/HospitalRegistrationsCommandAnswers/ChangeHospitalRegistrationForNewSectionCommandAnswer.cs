@@ -8,6 +8,6 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
     public class ChangeHospitalRegistrationForNewSectionCommandAnswer : AbstractTokenCommandAnswer
     {
         public List<HospitalSectionProfileStorageModel> FreeHospitalSectionsForRegistration { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }

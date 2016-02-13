@@ -6,6 +6,7 @@
 
 @using Enums.EnumExtensions
 @using Enums.Enums
+@using Microsoft.Ajax.Utilities
 @using Resources
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ChangeHospitalRegistrationForSelectedSectionCommandAnswer
 
@@ -61,8 +62,10 @@
             <input type="button" title="@MainResources.ButtonBack" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})'" />
             <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonChange" />
             <span></span>
-            <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick="location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdFeMaleId, FullInformation =Model.EmptyPlaceByTypeStatisticIdMaleId,  HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
-
+            @if (Model.CountRegisteredFemale != 0 || Model.CountRegisteredMale != 0)
+            {
+                <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick="location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdFeMaleId, FullInformation =Model.EmptyPlaceByTypeStatisticIdMaleId,  HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
+            }
             @Html.HiddenFor(model => model.Date)
             @Html.HiddenFor(model => model.HospitalProfileId)
 

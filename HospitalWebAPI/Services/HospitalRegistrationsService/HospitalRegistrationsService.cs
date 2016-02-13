@@ -6,6 +6,7 @@ using System.Linq;
 using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
+using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
@@ -14,6 +15,7 @@ using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.HospitalModels;
+using StorageModels.Models.MailboxModels;
 
 namespace Services.HospitalRegistrationsService
 {
@@ -25,10 +27,12 @@ namespace Services.HospitalRegistrationsService
         private readonly ITokenManager _tokenManager;
         private readonly IHospitalUserRepository _hospitalUserRepository;
         private readonly IReservationRepository _reservationRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IMessageRepository _messageRepository;
 
         public HospitalRegistrationsService(IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository,
             IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager,
-            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository)
+            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository, IUserRepository userRepository, IMessageRepository messageRepository)
         {
             _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
             _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
@@ -36,6 +40,8 @@ namespace Services.HospitalRegistrationsService
             _hospitalUserRepository = hospitalUserRepository;
             _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
             _reservationRepository = reservationRepository;
+            _userRepository = userRepository;
+            _messageRepository = messageRepository;
         }
 
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
@@ -294,6 +300,8 @@ namespace Services.HospitalRegistrationsService
         public ChangeHospitalRegistrationForNewSectionCommandAnswer ChangeHospitalRegistrationForNewSection(
             ChangeHospitalRegistrationForNewSectionCommand command)
         {
+            
+            DateTime date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
             var user = _tokenManager.GetUserByToken(command.Token);
             var hospitalId = GetHospitalIdByUserId(user.Id);
@@ -304,7 +312,7 @@ namespace Services.HospitalRegistrationsService
 
             var table = ((IDbSet<HospitalSectionProfileStorageModel>)hospitalSectionProfiles)
                 .Where(model => model.HospitalId == hospitalId)
-                .Where(model => model.EmptyPlaceStatistics.Any(storageModel => storageModel.Date == command.Date))
+                .Where(model => model.EmptyPlaceStatistics.Any(storageModel => storageModel.Date == date))
                 .Select(model => new HospitalRegistrationTableItem
                 {
                     HospitalProfileId = model.Id,
@@ -373,7 +381,56 @@ namespace Services.HospitalRegistrationsService
                 Token = (Guid)command.Token,
                 Table = table,
                 HospitalProfileId = command.HospitalProfileId,
+                EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
                 Date = command.Date
+            };
+        }
+
+        public BreakHospitalRegistrationCommandAnswer BreakHospitalRegistration(BreakHospitalRegistrationCommand command)
+        {
+            var reservation = this._reservationRepository.GetModels().FirstOrDefault(model => model.Id == command.ReservationId);
+            var patient = this._reservationRepository.GetModels().Where(model => model.Id == command.ReservationId).Select(model => model.Patient).FirstOrDefault();
+            var user = this._tokenManager.GetUserByToken(command.Token);
+
+            reservation.CancelTime = DateTime.Now;
+            reservation.Status = ReservationStatus.ClosedByHospital;
+
+            this._reservationRepository.Update(command.ReservationId, reservation);
+
+            var hospitalId = this._reservationRepository.GetModels()
+                .Where(model => model.Id == command.ReservationId)
+                .Select(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId)
+                .FirstOrDefault();
+
+            var receiverIds = this._userRepository.GetModels()
+                .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == hospitalId)
+                .Select(model => model.Id)
+                .ToList();
+
+            foreach (var receiverId in receiverIds)
+            {
+                var message = new MessageStorageModel
+                {
+                    Date = DateTime.Now.Date,
+                    IsRead = false,
+                    MessageType = MessageType.WarningMessage,
+                    ShowStatus = TwoSideShowStatus.Showed,
+                    Text = $"Бронирование пациента с номером {patient.Code} был отменено.\0\n" +
+                           $"Диагноз: {reservation.Diagnosis}.\n\0",
+                    Title = "Уведомление о отмене бронирования места для пациента.",
+                    UserFromId = user.Id,
+                    UserToId = receiverId
+                };
+
+                _messageRepository.Add(message);
+            }
+
+            _reservationRepository.SaveChanges();
+
+            this._reservationRepository.SaveChanges();
+
+            return new BreakHospitalRegistrationCommandAnswer
+            {
             };
         }
     }

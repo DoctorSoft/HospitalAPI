@@ -12,40 +12,48 @@
     <div class="panel-group" id="accordion">
 
         @{
-            var iteration = 0;
-            foreach (var item in Model.Table)
+            if (Model.Table.Count != 0)
             {
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
-                                <div>
-                                    <div style="display: inline-block; min-width: 90%">
-                                        @item.PatientLastName @item.PatientFirstName
-                                    </div>
-                                    <div style="display: inline-block">
-                                        @Html.ActionLink("Отменить", "BreakRegistration", new { Token = @Model.Token, ReservationId = @item.ReservationId }, new { @class = "btn-info btn" })
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div id=@("collapse" + iteration) class="panel-collapse collapse">
-                        <div class="panel-body">
-                            Код Пациента: @item.PatientCode <br />
-                            Больница: @item.Haspital <br />
-                            Отделение: @item.SectionProfile <br />
-                            Диагноз: @item.Diagnosis <br />
-                        </div>
-                    </div>
-                </div>
+                var iteration = 0;
+                foreach (var item in Model.Table)
                 {
-                    iteration++;
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
+                                    <div>
+                                        <div style="display: inline-block; min-width: 90%">
+                                            @item.PatientLastName @item.PatientFirstName
+                                        </div>
+                                        <div style="display: inline-block">
+                                            @Html.ActionLink("Отменить", "BreakRegistration", new {Token = @Model.Token, ReservationId = @item.ReservationId, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"})
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div id=@("collapse" + iteration) class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Код Пациента: @item.PatientCode <br />
+                                Больница: @item.Haspital <br />
+                                Отделение: @item.SectionProfile <br />
+                                Диагноз: @item.Diagnosis <br />
+                            </div>
+                        </div>
+                    </div>
+                    {
+                        iteration++;
+                    }
                 }
             }
+
+            else
+            {
+                @: <h2>Внимание! Нет забронированных мест.</h2>
+            }
         }
-    </div>
-    <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date, HospitalProfileId = Model.HospitalProfileId })'" />
+</div>
+    <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, HospitalProfileId = Model.HospitalProfileId })'" />
 
 </div>
 
