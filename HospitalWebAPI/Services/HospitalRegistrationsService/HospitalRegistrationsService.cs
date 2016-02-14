@@ -382,6 +382,7 @@ namespace Services.HospitalRegistrationsService
                 Table = table,
                 HospitalProfileId = command.HospitalProfileId,
                 EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
+                FullInformation = command.FullInformation,
                 Date = command.Date
             };
         }

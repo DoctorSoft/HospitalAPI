@@ -26,7 +26,9 @@
                                             @item.PatientLastName @item.PatientFirstName
                                         </div>
                                         <div style="display: inline-block">
-                                            @Html.ActionLink("Отменить", "BreakRegistration", new {Token = @Model.Token, ReservationId = @item.ReservationId, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"})
+                                            @(Model.FullInformation == null 
+                                            ? Html.ActionLink("Отменить", "BreakRegistration", new {Token = @Model.Token, ReservationId = @item.ReservationId, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"}) 
+                                            : Html.ActionLink("Отменить", "BreakRegistration", new {Token = @Model.Token, ReservationId = @item.ReservationId, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, FullInformation = Model.FullInformation, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"}))
                                         </div>
                                     </div>
                                 </a>

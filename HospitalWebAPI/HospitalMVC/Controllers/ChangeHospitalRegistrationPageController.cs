@@ -83,12 +83,29 @@ namespace HospitalMVC.Controllers
         public ActionResult BreakRegistration(BreakHospitalRegistrationCommand command)
         {
             var answer = _hospitalRegistrationsService.BreakHospitalRegistration(command);
-            return RedirectToAction("ViewDetailedInformationOnRegisteredPatients", 
-                new { Token = command.Token, 
-                      HospitalProfileId = command.HospitalProfileId,
-                      Date = command.Date,
-                      EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId
+            if (command.FullInformation != null)
+            {
+                return RedirectToAction("ViewDetailedInformationOnRegisteredPatients",
+                new
+                {
+                    Token = command.Token,
+                    FullInformation = command.FullInformation,
+                    HospitalProfileId = command.HospitalProfileId,
+                    Date = command.Date,
+                    EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId
+                });
+            }
+            else
+            {
+                return RedirectToAction("ViewDetailedInformationOnRegisteredPatients",
+                    new
+                    {
+                        Token = command.Token,
+                        HospitalProfileId = command.HospitalProfileId,
+                        Date = command.Date,
+                        EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId
                     });
+            }
         }
     }
 }

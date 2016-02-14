@@ -64,7 +64,7 @@
             <span></span>
             @if (Model.CountRegisteredFemale != 0 || Model.CountRegisteredMale != 0)
             {
-                <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick="location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdFeMaleId, FullInformation =Model.EmptyPlaceByTypeStatisticIdMaleId,  HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
+                <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick="location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdFeMaleId, FullInformation = Model.EmptyPlaceByTypeStatisticIdMaleId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
             }
             @Html.HiddenFor(model => model.Date)
             @Html.HiddenFor(model => model.HospitalProfileId)
