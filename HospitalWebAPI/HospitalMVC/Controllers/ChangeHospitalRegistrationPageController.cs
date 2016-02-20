@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
+using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 
@@ -45,6 +46,23 @@ namespace HospitalMVC.Controllers
         public ActionResult ApplyChangesHospitalRegistration(GetChangeHospitalRegistrationCommand command)
         {
             var answer = _hospitalRegistrationsService.ApplyChangesHospitalRegistration(command);
+            if (answer.Errors.Any())
+            {
+                ViewBag.Errors = answer.Errors;
+                return View("ChangeHospitalRegistration", new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
+                {
+                    Date = command.Date,
+                    HospitalProfileId = command.HospitalProfileId,
+                    Token = command.Token.Value,
+                    CountRegisteredFemale = command.CountRegisteredFemale,
+                    CountRegisteredMale = command.CountRegisteredMale,
+                    EmptyPlaceByTypeStatisticIdFeMaleId = command.EmptyPlaceByTypeStatisticIdFeMaleId,
+                    EmptyPlaceByTypeStatisticIdMaleId = command.EmptyPlaceByTypeStatisticIdMaleId,
+                    SectionProfileName = command.SectionProfileName,
+                    StatisticItems = command.FreeHospitalSectionsForRegistration
+                });
+            }
+
             return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
             {
                 Token = answer.Token,
@@ -82,7 +100,7 @@ namespace HospitalMVC.Controllers
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
         public ActionResult BreakRegistration(BreakHospitalRegistrationCommand command)
         {
-            var answer = _hospitalRegistrationsService.BreakHospitalRegistration(command);
+            _hospitalRegistrationsService.BreakHospitalRegistration(command);
             if (command.FullInformation != null)
             {
                 return RedirectToAction("ViewDetailedInformationOnRegisteredPatients",
