@@ -169,7 +169,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clinic User Home Page.
+        ///   Looks up a localized string similar to Главная страница.
         /// </summary>
         public static string ClinicUserPageTitle {
             get {
@@ -232,7 +232,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authorization Error.
+        ///   Looks up a localized string similar to Ошибка авторизации.
         /// </summary>
         public static string ErrorAuthorization_401 {
             get {
@@ -241,7 +241,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Page is not found.
+        ///   Looks up a localized string similar to Страница не найдена.
         /// </summary>
         public static string ErrorPageIsNotFound_404 {
             get {
@@ -250,7 +250,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filling completed on.
+        ///   Looks up a localized string similar to Заполнение завершено.
         /// </summary>
         public static string FillerLoadingMessage {
             get {
@@ -295,7 +295,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hospital User Home Page.
+        ///   Looks up a localized string similar to Главная страница.
         /// </summary>
         public static string HospitalUserPageTitle {
             get {
@@ -448,7 +448,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Send Message.
+        ///   Looks up a localized string similar to Отправить сообщения.
         /// </summary>
         public static string PageSendNoticesPageTitle {
             get {
@@ -484,7 +484,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reception User Home Page.
+        ///   Looks up a localized string similar to Главная страница.
         /// </summary>
         public static string ReceptionUserPageTitle {
             get {

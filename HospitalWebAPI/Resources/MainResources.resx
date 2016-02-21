@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorAuthorization_401" xml:space="preserve">
-    <value>Authorization Error</value>
+    <value>Ошибка авторизации</value>
   </data>
   <data name="ErrorPageIsNotFound_404" xml:space="preserve">
-    <value>Page is not found</value>
+    <value>Страница не найдена</value>
   </data>
   <data name="FillerLoadingMessage" xml:space="preserve">
-    <value>Filling completed on</value>
+    <value>Заполнение завершено</value>
   </data>
   <data name="MenuItemBreakClinicRegistration" xml:space="preserve">
     <value>Отменить регистрацию</value>
@@ -178,7 +178,7 @@
     <value>Если Вы хотите зарегистрировать место, то</value>
   </data>
   <data name="ClinicUserPageTitle" xml:space="preserve">
-    <value>Clinic User Home Page</value>
+    <value>Главная страница</value>
   </data>
   <data name="ClinicUserPageViewNoticesAfter" xml:space="preserve">
     <value>нажмите сюда.</value>
@@ -187,7 +187,7 @@
     <value>Если Вы хотите просмотреть ваши личные сообщения, то</value>
   </data>
   <data name="HospitalUserPageTitle" xml:space="preserve">
-    <value>Hospital User Home Page</value>
+    <value>Главная страница</value>
   </data>
   <data name="NoticeTableDate" xml:space="preserve">
     <value>Дата</value>
@@ -202,7 +202,7 @@
     <value>Тема</value>
   </data>
   <data name="PageSendNoticesPageTitle" xml:space="preserve">
-    <value>Send Message</value>
+    <value>Отправить сообщения</value>
   </data>
   <data name="HospitalUserPageChangeRegistrationAfter" xml:space="preserve">
     <value>нажмите сюда</value>
@@ -229,7 +229,7 @@
     <value>Если Вы хотите отметить прибывшего пациента, то </value>
   </data>
   <data name="ReceptionUserPageTitle" xml:space="preserve">
-    <value>Reception User Home Page</value>
+    <value>Главная страница</value>
   </data>
   <data name="ReceptionUserPageUnmarkPatientAfter" xml:space="preserve">
     <value>нажмите сюда.</value>
