@@ -2,6 +2,7 @@
     ViewBag.Title = "Step3";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using HelpingTools.ExtentionTools
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetClinicRegistrationUserFormCommandAnswer
 
 @if (ViewBag.Errors != null)
@@ -94,7 +95,7 @@
                     @Html.EditorFor(command => command.Date)
                 </div>
                 <h4>
-                    <b>@Model.DateValue</b>
+                    <b>@Model.DateValue.ToCorrectDateString()</b>
                 </h4>
             </div>
         </div>

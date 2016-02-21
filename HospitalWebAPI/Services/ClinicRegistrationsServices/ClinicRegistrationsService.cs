@@ -485,7 +485,7 @@ namespace Services.ClinicRegistrationsServices
                 ClinicId = command.ClinicId.Value,
                 LastName = command.LastName,
                 FirstName = command.FirstName,
-                Date = command.Date,
+                Date = DateTime.Parse(command.Date).ToCorrectDateString(),
                 PhoneNumber = command.PhoneNumber,
                 Age = command.Age,
                 Code = command.Code,
