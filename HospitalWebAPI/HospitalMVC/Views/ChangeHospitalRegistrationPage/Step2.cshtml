@@ -16,7 +16,8 @@
                     <div class="panel-heading">
                         <div class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
-                                @(iteration). @item.HospitalProfileName <div class="pull-right">@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date}, new { @class = "btn-info btn" })</div>
+                                @(iteration). @item.HospitalProfileName
+                                <div class="pull-right">@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new {Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"})</div>
                             </a>
                         </div>
                     </div>
@@ -34,13 +35,17 @@
                         </div>
                     </div>
                 </div>
-                {
-                    iteration++;
-                }
+                            {
+                                iteration++;
+                            }
             }
 
             if (!Model.IsCompleted)
             {
+                if (!Model.Table.Any())
+                {
+                    <div class="alert-info alert">Количество мест на текущую дату ещё не было заполнено, для того, чтобы это сделать, нажмите кнопку "Добавить"</div>
+                }
                 <div>
                     <br/>
                     @Html.ActionLink("Добавить", "ChangeHospitalRegistrationForNewSection", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date}, new { @class = "btn-info btn" })
