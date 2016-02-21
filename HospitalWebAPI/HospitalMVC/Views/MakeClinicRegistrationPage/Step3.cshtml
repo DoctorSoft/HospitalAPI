@@ -58,7 +58,7 @@
                 <h4>Возраст:</h4>
             </div>
             <div class="col-md-5">
-                @Html.TextBoxFor(o => o.Age, new {@class = "form-control", @rows = "10"})
+                @Html.TextBoxFor(o => o.Age, new { @class = "form-control", @rows = "10", @type = "number" })
             </div>
         </div>
         <div class="col-md-12">
