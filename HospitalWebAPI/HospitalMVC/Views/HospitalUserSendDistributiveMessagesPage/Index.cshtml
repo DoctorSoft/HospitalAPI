@@ -8,6 +8,19 @@
 @model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetHospitalNoticesMessageInformationCommandAnswer
 
 @Html.WriteTitlePage(@MainResources.PageSendNoticesPageTitle, "h2")
+
+@if (ViewBag.Errors != null)
+{
+    var errors = ViewBag.Errors as List<ServiceModels.ModelTools.CommandAnswerError>;
+    if (errors.Any())
+    {
+        foreach (var error in errors)
+        {
+            <div class="alert-warning alert"> @error.FieldName : @error.Title </div>
+        }
+    }
+}
+
 @using (Html.BeginForm("SendMessages", "HospitalUserSendDistributiveMessagesPage", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -15,9 +28,9 @@
     @Html.HiddenFor(command => command.Token);
 
     <div class="form-group">
-        @Html.LabelFor(o => o.Title):
+        Заголовок:
         @Html.TextAreaFor(o => o.Title, new {@class = "form-control", @rows = "1"})
-        @Html.LabelFor(o => o.Text):
+        Сообщение:
         @Html.TextAreaFor(o => o.Text, new { @class = "form-control", @rows = "10" })
         <input class="btn btn-sm btn-primary" type="submit" />
     </div>

@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Enums.Enums;
 using HandleToolsInterfaces.RepositoryHandlers;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.Entities;
+using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using ServiceModels.ServiceCommands.NoticesCommands;
 using Services.Interfaces.AuthorizationServices;
 using Services.Interfaces.NoticesService;
@@ -88,9 +91,48 @@ namespace Services.NoticesService
             };
         }
 
+        private List<CommandAnswerError> ValidateGetSendDistributiveMessagesPageInformationCommand(
+            GetSendDistributiveMessagesPageInformationCommand command)
+        {
+            var errors = new List<CommandAnswerError>(); 
+
+            if (string.IsNullOrWhiteSpace(command.Text))
+            {
+                errors.Add(new CommandAnswerError
+                {
+                    FieldName = "Текст",
+                    Title = "Текст не может пустым"
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(command.Title))
+            {
+                errors.Add(new CommandAnswerError
+                {
+                    FieldName = "Заголовок",
+                    Title = "Заголовок не может быть пустым"
+                });
+            }
+
+            return errors;
+        }
+
         public GetSendDistributiveMessagesPageInformationCommandAnswer GetSendDistributiveMessagesPageInformation(
             GetSendDistributiveMessagesPageInformationCommand command)
         {
+            var errors = ValidateGetSendDistributiveMessagesPageInformationCommand(command);
+
+            if (errors.Any())
+            {
+                return new GetSendDistributiveMessagesPageInformationCommandAnswer
+                {
+                    Token = command.Token.Value,
+                    Title = command.Title,
+                    Text = command.Text,
+                    Errors = errors
+                };
+            }
+
             var user = _tokenManager.GetUserByToken(command.Token);
 
             var messages = ((IDbSet<UserStorageModel>) _userRepository.GetModels())
@@ -117,7 +159,10 @@ namespace Services.NoticesService
 
             return new GetSendDistributiveMessagesPageInformationCommandAnswer
             {
-                Token = command.Token.Value
+                Token = command.Token.Value,
+                Title = command.Title,
+                Text = command.Text,
+                Errors = errors
             };
         }
 

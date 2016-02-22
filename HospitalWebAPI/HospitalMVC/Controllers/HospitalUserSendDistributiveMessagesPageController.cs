@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers;
@@ -20,8 +21,6 @@ namespace HospitalMVC.Controllers
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserSendDistributionMessages)]
         public ActionResult Index(GetSendDistributiveMessagesPageInformationCommand command)
         {
-            //todo: move this to service
-            //var answer = _noticesService.GetSendDistributiveMessagesPageInformation(command);
             return View(new GetHospitalNoticesMessageInformationCommandAnswer
             {
                 Token = command.Token.Value,
@@ -35,6 +34,20 @@ namespace HospitalMVC.Controllers
         public ActionResult SendMessages(GetSendDistributiveMessagesPageInformationCommand command)
         {
             var answer = _noticesService.GetSendDistributiveMessagesPageInformation(command);
+
+            if (answer.Errors.Any())
+            {
+                var model = new GetHospitalNoticesMessageInformationCommandAnswer
+                {
+                    Token = answer.Token,
+                    Title = answer.Title,
+                    Text = answer.Text,
+                    Errors = answer.Errors
+                };
+                ViewBag.Errors = answer.Errors;
+                return View("Index", model);
+            }
+
             return RedirectToAction("Index", "Home", new GetHospitalNoticesMessageInformationCommandAnswer
             {
                 Token = command.Token.Value,
