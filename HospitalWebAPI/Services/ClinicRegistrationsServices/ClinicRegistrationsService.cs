@@ -605,7 +605,7 @@ namespace Services.ClinicRegistrationsServices
             var clinicId = command.ClinicId;
             var hospital = this._hospitalManager.GetHospitalByUser(user);
 
-            var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            var date = DateTime.ParseExact(command.Date.Split(' ').First(), "dd.MM.yyyy", CultureInfo.InvariantCulture);
 
             var emptyPlaceByTypeStatistics = _emptyPlaceByTypeStatisticRepository
                 .GetModels()
