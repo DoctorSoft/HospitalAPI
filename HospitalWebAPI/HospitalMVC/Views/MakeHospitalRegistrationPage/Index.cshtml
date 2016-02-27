@@ -87,17 +87,28 @@
                                     if (index == 0)
                                     {
                                         <p>Текущая неделя </p>
+                                    }
+                                    else
+                                    {
+                                        <p>@(index + 1)-я неделя</p>
+                                    }
+                                }
+                                @{
+                                    var firstMonth = item.Cells.First().Value.Date.Month;
+                                    var lastMonth = item.Cells.Last().Value.Date.Month;
+                                    if (firstMonth != lastMonth)
+                                    {
                                         <p>(@item.Cells.First().Value.Date.GetMonthString() - @item.Cells.Last().Value.Date.GetMonthString())</p>
                                     }
                                     else
                                     {
-                                        <p>@(index + 1)-ая неделя</p>
-                                        <p>(@item.Cells.First().Value.Date.GetMonthString() - @item.Cells.Last().Value.Date.GetMonthString())</p>
+                                        <p>(@item.Cells.First().Value.Date.GetMonthString())</p>
                                     }
 
-                {
-                    index++;
-                }
+                                }
+
+                                @{
+                                    index++;
                                 }
                         </span>
                     </div>
@@ -107,12 +118,14 @@
                     if (cell.IsBlocked)
                     {
                         <div class="col-md-1" role="alert">
-                            <a class="nav" style="height: 100px; text-align: center; min-width: 100%;">
-                                <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
-                                    <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Блокиров.</span> <h4>@cell.Day</h4>
-                                    <span class="badge">@cell.Count</span>
-                                </div>
-                            </a>
+                            <div style="min-width: 100px;">
+                                <a class="nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                    <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                        <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Блокиров.</span> <h4>@cell.Day</h4>
+                                        <span class="badge">@cell.Count</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     }
                     else
@@ -122,29 +135,33 @@
                             if (cell.Count <= 0)
                             {
                                 <div class="col-md-1" role="alert">
-                                    <a class="button6 nav" style="height: 100px; text-align: center; min-width: 100%;">
-                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
-                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Сегодня</span> <h4>@cell.Day</h4>
-                                            <span class="badge">@cell.Count</span>
-                                        </div>
-                                    </a>
+                                    <div style="min-width: 100px;">
+                                        <a class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                            <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Сегодня.</span> <h4>@cell.Day</h4>
+                                                <span class="badge">@cell.Count</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             }
                             else
                             {
                                 <div class="col-md-1" role="alert">
-                                    <a href="@Url.Action("Step2", new
+                                    <div style="min-width: 100px;">
+                                        <a href="@Url.Action("Step2", new
                                                  {
                                                      Token = Model.Token,
                                                      SexId = Model.SexId,
                                                      HospitalSectionProfileId = Model.HospitalSectionProfileId,
                                                      Date = cell.Date.ToCorrectDateString()
-                                                 })" class="button6 nav" style="height: 100px; text-align: center; min-width: 100%;">
-                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
-                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Сегодня</span> <h4>@cell.Day</h4>
-                                            <span class="badge">@cell.Count</span>
-                                        </div>
-                                    </a>
+                                                 })" class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                            <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Сегодня.</span> <h4>@cell.Day</h4>
+                                                <span class="badge">@cell.Count</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             }
 
@@ -154,63 +171,52 @@
                             if (cell.Count <= 0)
                             {
                                 <div class="col-md-1" role="alert">
-                                    <a class="button8 nav" style="height: 100px; text-align: center; min-width: 100%;">
-                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
-                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Нет мест</span> <h4>@cell.Day</h4>
-                                            <span class="badge">@cell.Count</span>
-                                        </div>
-                                    </a>
+                                    <div style="min-width: 100px;">
+                                        <a class="button8 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                            <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Нет мест</span> <h4>@cell.Day</h4>
+                                                <span class="badge">@cell.Count</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             }
                             else if (cell.Count < 3)
                             {
                                 <div class="col-md-1" role="alert">
-                                    <a href="@Url.Action("Step2", new
+                                    <div style="min-width: 100px;">
+                                        <a href="@Url.Action("Step2", new
                                                  {
                                                      Token = Model.Token,
                                                      SexId = Model.SexId,
                                                      HospitalSectionProfileId = Model.HospitalSectionProfileId,
                                                      Date = cell.Date.ToCorrectDateString()
                                                  })" class="button10 nav" style="height: 100px; text-align: center; min-width: 100%;">
-                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
-                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Зарегес.</span> <h4>@cell.Day</h4>
-                                            <span class="badge">@cell.Count</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-                            else if (cell.Count < 6)
-                            {
-                                <div class="col-md-1" role="alert">
-                                    <a href="@Url.Action("Step2", new
-                                                 {
-                                                     Token = Model.Token,
-                                                     SexId = Model.SexId,
-                                                     HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                     Date = cell.Date.ToCorrectDateString()
-                                                 })" class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
-                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
-                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Зарегес.</span> <h4>@cell.Day</h4>
-                                            <span class="badge">@cell.Count</span>
-                                        </div>
-                                    </a>
+                                            <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Зарегес.</span> <h4>@cell.Day</h4>
+                                                <span class="badge">@cell.Count</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             }
                             else
                             {
                                 <div class="col-md-1" role="alert">
-                                    <a href="@Url.Action("Step2", new
+                                    <div style="min-width: 100px;">
+                                        <a href="@Url.Action("Step2", new
                                                  {
                                                      Token = Model.Token,
                                                      SexId = Model.SexId,
                                                      HospitalSectionProfileId = Model.HospitalSectionProfileId,
                                                      Date = cell.Date.ToCorrectDateString()
                                                  })" class="button7 nav" style="height: 100px; text-align: center; min-width: 100%;">
-                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
-                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Зарегес.</span> <h4>@cell.Day</h4>
-                                            <span class="badge">@cell.Count</span>
-                                        </div>
-                                    </a>
+                                            <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Зарегес.</span> <h4>@cell.Day</h4>
+                                                <span class="badge">@cell.Count</span>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             }
                         }
