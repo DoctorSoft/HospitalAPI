@@ -49,7 +49,7 @@ namespace HospitalMVC.Filters
                 {MainMenuItem.HospitalUserChangeEmptyPlacesPage, new MainMenuTab { ActionName = "Index", ControllerName = "ChangeHospitalRegistrationPage", Label = MainResources.MenuItemChangeHospitalRegistrations }},
                 {MainMenuItem.HospitalUserShowMessagesPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalNoticesPage", Label = MainResources.MenuItemViewNotices }},
                 {MainMenuItem.HospitalUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalUserHomePage", Label = MainResources.MenuItemHomePage }},
-                {MainMenuItem.HospitalUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeHospitalRegistrationPage", Label = "Зарегестрировать" }},
+                {MainMenuItem.HospitalUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeHospitalRegistrationPage", Label = "Зарегистрировать" }},
 
                 {MainMenuItem.ClinicUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeClinicRegistrationPage", Label = MainResources.MenuItemMakeClinicRegistration }},
                 {MainMenuItem.ClinicUserBreakRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "BreakClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},

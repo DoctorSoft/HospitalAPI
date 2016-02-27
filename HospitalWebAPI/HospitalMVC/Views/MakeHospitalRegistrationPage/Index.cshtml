@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,14 +6,14 @@
 @section Scripts {
     <script type="text/javascript">
 
-        var setStartValue = function() {
+        var setStartValue = function () {
             $('#HospitalSectionProfiles').val('@Model.HospitalSectionProfileId');
             $('#Sexes').val('@Model.SexId');
         }
 
         setStartValue();
 
-        var HospitalChange = function(e) {
+        var HospitalChange = function (e) {
             var url = '@Url.Action("Index", "MakeHospitalRegistrationPage", new {Token = @Model.Token})'
                 + '?SexId=' + $('#Sexes').val()
                 + '&HospitalSectionProfileId=' + $('#HospitalSectionProfiles').val();
@@ -23,251 +22,209 @@
     </script>
 }
 
+@using Enums.EnumExtensions
 @using HelpingTools.ExtentionTools
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetMakeHospitalRegistrationsPageInformationCommandAnswer
 
-<div class="panel-body form-group">
-    <div class="col-lg-10 panel-body ">
-        <div class="col-lg-3">
-            <label>Отделение:</label>
-        </div>
-        <div class="col-lg-7">
-            @Html.DropDownListFor(answer => answer.HospitalSectionProfiles, Model.HospitalSectionProfiles.Select(pair => new SelectListItem
-            {
-                Selected = pair.Key == Model.HospitalSectionProfileId,
-                Value = pair.Key.ToString(),
-                Text = pair.Value,
-                Disabled = false
-            }), new
-            {
-                @class = "form-control",
-                @onchange = "HospitalChange()",
-                @value = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Key.ToString(),
-                @text = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Value
-            })
-        </div>
 
-    </div>
-    <div class="col-lg-10 panel-body ">
-        <div class="col-lg-3">
-            <label>Пол:</label>
-        </div>
-        <div class="col-lg-7">
-            @Html.DropDownListFor(answer => answer.Sexes, Model.Sexes.Select(pair => new SelectListItem
-            {
-                Selected = pair.Key == Model.SexId,
-                Value = pair.Key.ToString(),
-                Text = pair.Value,
-                Disabled = false
-            }), new
-            {
-                @class = "form-control",
-                @onchange = "HospitalChange()",
-                @value = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Key.ToString(),
-                @text = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Value
-            })
-        </div>
-
-    </div>
-</div>
-
-<div class="calendar">
-    <div class="panel panel-default">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Понедельник
-                    </th>
-                    <th>
-                        Вторник
-                    </th>
-                    <th>
-                        Среда
-                    </th>
-                    <th>
-                        Четверг
-                    </th>
-                    <th>
-                        Пятница
-                    </th>
-                    <th>
-                        Суббота
-                    </th>
-                    <th>
-                        Воскресенье
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Schedule)
+<div class="schedule-label" style="align-items: center">
+    <div class="panel-body form-group schedule-label">
+        <div class="col-lg-10 panel-body ">
+            <div class="col-lg-3">
+                <label>Отделение:</label>
+            </div>
+            <div class="col-lg-7">
+                @Html.DropDownListFor(answer => answer.HospitalSectionProfiles, Model.HospitalSectionProfiles.Select(pair => new SelectListItem
                 {
-                    <tr>
-                        @foreach (var cell in item.Cells.Values)
+                    Selected = pair.Key == Model.HospitalSectionProfileId,
+                    Value = pair.Key.ToString(),
+                    Text = pair.Value,
+                    Disabled = false
+                }), new
+                {
+                    @class = "form-control",
+                    @onchange = "HospitalChange()",
+                    @value = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Key.ToString(),
+                    @text = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Value
+                })
+            </div>
+
+        </div>
+        <div class="col-lg-10 panel-body ">
+            <div class="col-lg-3">
+                <label>Пол:</label>
+            </div>
+            <div class="col-lg-7">
+                @Html.DropDownListFor(answer => answer.Sexes, Model.Sexes.Select(pair => new SelectListItem
+                {
+                    Selected = pair.Key == Model.SexId,
+                    Value = pair.Key.ToString(),
+                    Text = pair.Value,
+                    Disabled = false
+                }), new
+                {
+                    @class = "form-control",
+                    @onchange = "HospitalChange()",
+                    @value = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Key.ToString(),
+                    @text = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Value
+                })
+            </div>
+
+        </div>
+    </div>
+
+
+    <div>
+        @{
+            var index = 0;
+            foreach (var item in Model.Schedule)
+            {
+                <div class="list-group">
+                    <div class="col-md-3" role="alert">
+                        <div style="height: 100px; vertical-align: middle; min-width: 100%; vertical-align: middle" class="text-center btn">
+                            <span aria-hidden="true" style="vertical-align: middle">
+                                @{
+                                    if (index == 0)
+                                    {
+                                        <p>Текущая неделя </p>
+                                        <p>(@item.Cells.First().Value.Date.GetMonthString() - @item.Cells.Last().Value.Date.GetMonthString())</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@(index + 1)-ая неделя</p>
+                                        <p>(@item.Cells.First().Value.Date.GetMonthString() - @item.Cells.Last().Value.Date.GetMonthString())</p>
+                                    }
+
+                {
+                    index++;
+                }
+                                }
+                        </span>
+                    </div>
+                </div>
+                @foreach (var cell in item.Cells.Values)
+                {
+                    if (cell.IsBlocked)
+                    {
+                        <div class="col-md-1" role="alert">
+                            <a class="nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                    <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Блокиров.</span> <h4>@cell.Day</h4>
+                                    <span class="badge">@cell.Count</span>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        if (cell.IsThisDate)
                         {
-                            if (cell.IsBlocked)
+                            if (cell.Count <= 0)
                             {
-                                <td>
-                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-block">
-                                        <h2>@cell.Day</h2>
-                                    </div>
-                                </td>
+                                <div class="col-md-1" role="alert">
+                                    <a class="button6 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Сегодня</span> <h4>@cell.Day</h4>
+                                            <span class="badge">@cell.Count</span>
+                                        </div>
+                                    </a>
+                                </div>
                             }
                             else
                             {
-                                if (cell.IsThisDate)
-                                {
-                                    if (cell.Count == 0)
-                                    {
-                                        <td>
-                                            <a alt="">
-                                                <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-primary">
-                                                    <span class="glyphicon glyphicon-flag" aria-hidden="true">-Сегодня-</span> <h2>@cell.Day</h2>
-                                                    <br />
-                                                    <span class="badge">@cell.Count</span>
-                                                </div>
-                                            </a>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        if (cell.Count < 2)
-                                        {
-                                            <td>
-                                                <a href="@Url.Action("Step2", new
-                                                {
-                                                    Token = Model.Token,
-                                                    SexId = Model.SexId,
-                                                    HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                    Date = cell.Date.ToCorrectDateString()
-                                                })" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-primary">
-                                                        <span class="glyphicon glyphicon-flag" aria-hidden="true">-Сегодня-</span> <h2>@cell.Day</h2>
-                                                        <br />
-                                                        <span class="badge">@cell.Count</span>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
-                                        else if (cell.Count < 5)
-                                        {
-                                            <td>
-                                                <a href="@Url.Action("Step2", new
-                                                {
-                                                    Token = Model.Token,
-                                                    SexId = Model.SexId,
-                                                    HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                    Date = cell.Date.ToCorrectDateString()
-                                                })" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-primary">
-                                                        <span class="glyphicon glyphicon-flag" aria-hidden="true">-Сегодня-</span> <h2>@cell.Day</h2>
-                                                        <br />
-                                                        <span class="badge">@cell.Count</span>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>
-                                                <a href="@Url.Action("Step2", new
-                                                {
-                                                    Token = Model.Token,
-                                                    SexId = Model.SexId,
-                                                    HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                    Date = cell.Date.ToCorrectDateString()
-                                                })" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-primary">
-                                                        <span class="glyphicon glyphicon-flag" aria-hidden="true">-Сегодня-</span> <h2>@cell.Day</h2>
-                                                        <br />
-                                                        <span class="badge">@cell.Count</span>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
+                                <div class="col-md-1" role="alert">
+                                    <a href="@Url.Action("Step2", new
+                                                 {
+                                                     Token = Model.Token,
+                                                     SexId = Model.SexId,
+                                                     HospitalSectionProfileId = Model.HospitalSectionProfileId,
+                                                     Date = cell.Date.ToCorrectDateString()
+                                                 })" class="button6 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Сегодня</span> <h4>@cell.Day</h4>
+                                            <span class="badge">@cell.Count</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
 
-                                    }
-                                }
-                                else
-                                {
-                                    if (cell.Count == 0)
-                                    {
-                                        <td>
-                                            <a alt="">
-                                                <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-default">
-                                                    <span class="glyphicon" aria-hidden="true"></span> <h2>@cell.Day</h2>
-                                                    <br />
-                                                    <span class="badge">@cell.Count</span>
-                                                </div>
-                                            </a>
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        if (cell.Count < 2)
-                                        {
-                                            <td>
-                                                <a href="@Url.Action("Step2", new
-                                                {
-                                                    Token = Model.Token,
-                                                    SexId = Model.SexId,
-                                                    HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                    Date = cell.Date.ToCorrectDateString()
-                                                })" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-danger">
-                                                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">-Зарегистрировать-</span> <h2>@cell.Day</h2>
-                                                        <br />
-                                                        <span class="badge">@cell.Count</span>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
-                                        else if (cell.Count < 5)
-                                        {
-                                            <td>
-                                                <a href="@Url.Action("Step2", new
-                                                {
-                                                    Token = Model.Token,
-                                                    SexId = Model.SexId,
-                                                    HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                    Date = cell.Date.ToCorrectDateString()
-                                                })" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-warning">
-                                                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">-Зарегистрировать-</span> <h2>@cell.Day</h2>
-                                                        <br />
-                                                        <span class="badge">@cell.Count</span>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>
-                                                <a href="@Url.Action("Step2", new
-                                                {
-                                                    Token = Model.Token,
-                                                    SexId = Model.SexId,
-                                                    HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                    Date = cell.Date.ToCorrectDateString()
-                                                })" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-success">
-                                                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true">-Зарегистрировать-</span> <h2>@cell.Day</h2>
-                                                        <br />
-                                                        <span class="badge">@cell.Count</span>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
-
-                                    }
-                                }
+                        }
+                        else
+                        {
+                            if (cell.Count <= 0)
+                            {
+                                <div class="col-md-1" role="alert">
+                                    <a class="button8 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Нет мест</span> <h4>@cell.Day</h4>
+                                            <span class="badge">@cell.Count</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                            else if (cell.Count < 3)
+                            {
+                                <div class="col-md-1" role="alert">
+                                    <a href="@Url.Action("Step2", new
+                                                 {
+                                                     Token = Model.Token,
+                                                     SexId = Model.SexId,
+                                                     HospitalSectionProfileId = Model.HospitalSectionProfileId,
+                                                     Date = cell.Date.ToCorrectDateString()
+                                                 })" class="button10 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Зарегес.</span> <h4>@cell.Day</h4>
+                                            <span class="badge">@cell.Count</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                            else if (cell.Count < 6)
+                            {
+                                <div class="col-md-1" role="alert">
+                                    <a href="@Url.Action("Step2", new
+                                                 {
+                                                     Token = Model.Token,
+                                                     SexId = Model.SexId,
+                                                     HospitalSectionProfileId = Model.HospitalSectionProfileId,
+                                                     Date = cell.Date.ToCorrectDateString()
+                                                 })" class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Зарегес.</span> <h4>@cell.Day</h4>
+                                            <span class="badge">@cell.Count</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-1" role="alert">
+                                    <a href="@Url.Action("Step2", new
+                                                 {
+                                                     Token = Model.Token,
+                                                     SexId = Model.SexId,
+                                                     HospitalSectionProfileId = Model.HospitalSectionProfileId,
+                                                     Date = cell.Date.ToCorrectDateString()
+                                                 })" class="button7 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                            <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Зарегес.</span> <h4>@cell.Day</h4>
+                                            <span class="badge">@cell.Count</span>
+                                        </div>
+                                    </a>
+                                </div>
                             }
                         }
-                    </tr>
+                    }
+
                 }
-            </tbody>
-        </table>
+                <div class="col-md-2" role="alert">
+                    <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center">
+                        <span aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+            }
+        }
     </div>
 </div>
-
 

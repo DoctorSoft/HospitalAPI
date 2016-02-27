@@ -1,12 +1,150 @@
-﻿body {
+﻿a.button10 {
+  display: inline-block;
+  color: black;
+  font-size: 125%;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  padding: .25em .5em;
+  outline: none;
+  border: 1px solid rgb(250,172,17);
+  border-radius: 7px;
+  background: rgb(255,212,3) linear-gradient(rgb(255,212,3), rgb(248,157,23));
+  box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+  transition: box-shadow .2s, border-color .2s;
+} 
+a.button10:hover {
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,.5);
+}
+a.button10:active {
+  padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+  border-color: rgba(177,159,0,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,255,0,.45);
+}
+
+
+a.button9 {
+  display: inline-block;
+  color: black;
+  font-size: 125%;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  padding: .25em .5em;
+  outline: none;
+  border: 1px solid rgb(17,172,250);
+  border-radius: 7px;
+  background: rgb(3,212,255) linear-gradient(rgb(3,212,255), rgb(23,157,248));
+  box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+  transition: box-shadow .2s, border-color .2s;
+} 
+a.button9:hover {
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(0,255,255,.5);
+}
+a.button9:active {
+  padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+  border-color: rgba(0,159,177,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(0,255,255,.45);
+}
+
+
+a.button8 {
+  display: inline-block;
+  color: black;
+  font-size: 125%;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  padding: .25em .5em;
+  outline: none;
+  border: 1px solid rgb(250,72,17);
+  border-radius: 7px;
+  background: rgb(255,112,3) linear-gradient(rgb(255,112,3), rgb(248,57,23));
+  box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+  transition: box-shadow .2s, border-color .2s;
+} 
+a.button8:hover {
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,155,0,.5);
+}
+a.button8:active {
+  padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+  border-color: rgba(177,59,0,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(255,155,0,.45);
+}
+
+
+a.button7 {
+  display: inline-block;
+  color: black;
+  font-size: 125%;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  padding: .25em .5em;
+  outline: none;
+  border: 1px solid rgb(17,250,72);
+  border-radius: 7px;
+  background: rgb(3,255,112) linear-gradient(rgb(3,255,112), rgb(23,248,57));
+  box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(255,255,0,0);
+  transition: box-shadow .2s, border-color .2s;
+} 
+a.button7:hover {
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(0,255,155,.5);
+}
+a.button7:active {
+  padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+  border-color: rgba(0,177,59,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(0,255,155,.45);
+}
+
+
+a.button6 {
+  display: inline-block;
+  color: black;
+  font-size: 125%;
+  font-weight: 700;
+  text-decoration: none;
+  user-select: none;
+  padding: .25em .5em;
+  outline: none;
+  border: 1px solid rgb(150,172,17);
+  border-radius: 7px;
+  background: rgb(255,212,3) linear-gradient(rgb(155,212,3), rgb(148,157,23));
+  box-shadow: inset 0 -2px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(155,255,0,0);
+  transition: box-shadow .2s, border-color .2s;
+} 
+a.button6:hover {
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,0), inset 0 1px 2px rgba(0,0,0,0), inset 0 0 0 60px rgba(155,255,0,.5);
+}
+a.button6:active {
+  padding: calc(.25em + 1px) .5em calc(.25em - 1px);
+  border-color: rgba(77,159,0,1);
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(155,255,0,.45);
+}
+
+
+/**/
+
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url(../Content/Images/9.jpg); 
+    background-repeat:repeat;  
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.schedule-background {
+    background-repeat:repeat;
+}
+
+.schedule-label {
+    background-repeat:repeat;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 

@@ -1,137 +1,140 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using Enums.EnumExtensions
+@using HelpingTools.ExtentionTools
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.GetChangeHospitalRegistrationsPageInformationCommandAnswer
 
-<div class="calendar">
-    <div class="panel panel-default">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Понедельник
-                    </th>
-                    <th>
-                        Вторник
-                    </th>
-                    <th>
-                        Среда
-                    </th>
-                    <th>
-                        Четверг
-                    </th>
-                    <th>
-                        Пятница
-                    </th>
-                    <th>
-                        Суббота
-                    </th>
-                    <th>
-                        Воскресенье
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Schedule)
-                {
-                    <tr>
-                        @foreach (var cell in item.Cells.Values)
-                        {
-                            if (cell.IsBlocked)
-                            {
-                                <td>
-                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-block">
-                                        <h2>@cell.Day</h2>
-                                    </div>
-                                </td>
-                            }
-                            else
-                            {
-                                if (cell.IsThisDate)
-                                {
-                                    if (cell.IsStarted)
-                                    {
-                                        if (cell.IsCompleted)
-                                        {
+<div class="schedule-label">
 
-                                            <td>
-                                                <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-primary">
-                                                        <span class="glyphicon glyphicon-flag" aria-hidden="true">-Сегодня-</span> <h2>@cell.Day</h2>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>
-                                                <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-primary">
-                                                        <span class="glyphicon glyphicon-flag" aria-hidden="true">-Сегодня-</span> <h2>@cell.Day</h2>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
+
+    <div>
+        @{
+            var index = 0;
+            foreach (var item in Model.Schedule)
+            {
+                <div class="list-group">
+                    <div class="col-md-3" role="alert">
+                        <div style="height: 100px; vertical-align: middle; min-width: 100%; vertical-align: middle" class="text-center btn">
+                            <span aria-hidden="true" style="vertical-align: middle">
+                                @{
+                if (index == 0)
+                {
+                    <p>Текущая неделя </p>
+                                    <p>(@item.Cells.First().Value.Date.GetMonthString() - @item.Cells.Last().Value.Date.GetMonthString())</p>
+                }
+                else
+                {
+                    <p>@(index + 1)-ая неделя</p>
+                                    <p>(@item.Cells.First().Value.Date.GetMonthString() - @item.Cells.Last().Value.Date.GetMonthString())</p>
+                }
+
+                {
+                    index++;
+                }
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    @foreach (var cell in item.Cells.Values)
+                    {
+                        if (cell.IsBlocked)
+                        {
+                            <div class="col-md-1" role="alert">
+                                <a class="nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                    <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                        <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Блокиров.</span> <h4>@cell.Day</h4>
+                                        @*<span class="badge">@cell.Count</span>*@
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            if (cell.IsThisDate)
+                            {
+                                if (cell.IsStarted)
+                                {
+                                    if (cell.IsCompleted)
+                                    {
+                                        <div class="col-md-1" role="alert">
+                                            <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" class="button6 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                                <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                    <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Сегодня</span> <h4>@cell.Day</h4>
+                                                </div>
+                                            </a>
+                                        </div>
                                     }
                                     else
                                     {
-
-                                        <td>
-                                            <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = cell.Date })" alt="">
-                                                <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-primary">
-                                                    <span class="glyphicon glyphicon-flag" aria-hidden="true">-Сегодня-</span> <h2>@cell.Day</h2>
+                                        <div class="col-md-1" role="alert">
+                                            <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" class="button6 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                                <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                    <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Сегодня</span> <h4>@cell.Day</h4>
                                                 </div>
                                             </a>
-                                        </td>
-
+                                        </div>
                                     }
                                 }
                                 else
                                 {
-                                    if (cell.IsStarted)
-                                    {
-                                        if (cell.IsCompleted)
-                                        {
+                                    <div class="col-md-1" role="alert">
+                                        <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" class="button6 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                            <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Сегодня</span> <h4>@cell.Day</h4>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
 
-                                            <td>
-                                                <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-success">
-                                                        <span class="glyphicon glyphicon-check" aria-hidden="true">-Заполнено-</span> <h2>@cell.Day</h2>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>
-                                                <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" alt="">
-                                                    <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-warning">
-                                                        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true">-Не-заполнено-</span> <h2>@cell.Day</h2>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                        }
+                                if (cell.IsStarted)
+                                {
+                                    if (cell.IsCompleted)
+                                    {
+                                        <div class="col-md-1" role="alert">
+                                            <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" class="button7 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                                <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                    <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Изменить</span> <h4>@cell.Day</h4>
+                                                </div>
+                                            </a>
+                                        </div>
                                     }
                                     else
                                     {
-
-                                        <td>
-                                            <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = cell.Date })" alt="">
-                                                <div style="height: 150px; width: 150px; max-width: 150px; max-height: 150px; vertical-align: middle" class="text-center btn btn-info">
-                                                    <span class="glyphicon glyphicon-ban-circle" aria-hidden="true">-Не-начато-</span> <h2>@cell.Day</h2>
+                                        <div class="col-md-1" role="alert">
+                                            <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                                <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                    <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Изменить</span> <h4>@cell.Day</h4>
                                                 </div>
                                             </a>
-                                        </td>
-
+                                        </div>
                                     }
+                                }
+                                else
+                                {
+                                    <div class="col-md-1" role="alert">
+                                        <a href="@Url.Action("Step2", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = cell.Date})" class="button8 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                            <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
+                                                <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 100%;">Зарегес.</span> <h4>@cell.Day</h4>
+                                            </div>
+                                        </a>
+                                    </div>
                                 }
                             }
                         }
-                    </tr>
-                }
-            </tbody>
-        </table>
+
+                    }
+                    <div class="col-md-2" role="alert">
+                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center">
+                            <span aria-hidden="true"></span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </div>
 </div>
