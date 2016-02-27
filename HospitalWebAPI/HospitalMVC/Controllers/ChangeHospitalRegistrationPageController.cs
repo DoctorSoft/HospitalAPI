@@ -81,6 +81,17 @@ namespace HospitalMVC.Controllers
         public ActionResult ApplyChangesNewHospitalRegistration(GetChangeNewHospitalRegistrationCommand command)
         {
             var answer = _hospitalRegistrationsService.ApplyChangesNewHospitalRegistration(command);
+            
+            if (answer.Errors.Any())
+            {
+                ViewBag.Errors = answer.Errors;
+                return View("ChangeHospitalRegistrationForNewSection", new ChangeHospitalRegistrationForNewSectionCommandAnswer
+                {
+                    Date = command.Date,
+                    Token = command.Token.Value,
+                    FreeHospitalSectionsForRegistration = answer.FreeHospitalSectionsForRegistration
+                });
+            }
 
             return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
             {

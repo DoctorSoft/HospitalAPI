@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using Enums.EnumExtensions;
 using Enums.Enums;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
@@ -298,47 +299,22 @@ namespace Services.HospitalRegistrationsService
             };
         }
 
-        public GetChangeNewHospitalRegistrationCommandAnswer ApplyChangesNewHospitalRegistration(
-            GetChangeNewHospitalRegistrationCommand command)
-        {
-            DateTime date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
-            var recordExists =
-                _emptyPlaceStatisticRepository.GetModels()
-                    .Any(model => model.Date == date && model.HospitalSectionProfileId == command.HospitalProfileId);
-
-            if (!recordExists)
-            {
-                var newHospitalSectionProfileId = new EmptyPlaceStatisticStorageModel
-                {
-                    Date = date,
-                    CreateTime = DateTime.Now,
-                    HospitalSectionProfileId = command.HospitalProfileId,
-                    EmptyPlaceByTypeStatistics = command.FreeHospitalSectionsForRegistration
-                        .Select(pair => new EmptyPlaceByTypeStatisticStorageModel
-                        {
-                            Sex = pair.Sex,
-                            Count = pair.OpenCount
-                        }
-                        ).ToList()
-                };
-
-                _emptyPlaceStatisticRepository.Add(newHospitalSectionProfileId);
-                _emptyPlaceStatisticRepository.SaveChanges();
-            }
-            return new GetChangeNewHospitalRegistrationCommandAnswer
-            {
-                Token = (Guid)command.Token
-            };
-        }
-
         public ChangeHospitalRegistrationForNewSectionCommandAnswer ChangeHospitalRegistrationForNewSection(
             ChangeHospitalRegistrationForNewSectionCommand command)
         {
-            
-            DateTime date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            return new ChangeHospitalRegistrationForNewSectionCommandAnswer
+            {
+                Token = (Guid)command.Token,
+                FreeHospitalSectionsForRegistration = GetFreeSectionsList(command.Date, command.Token.Value),
+                Date = command.Date
+            };
+        }
 
-            var user = _tokenManager.GetUserByToken(command.Token);
+        private List<HospitalSectionProfileStorageModel> GetFreeSectionsList(string Date, Guid token)
+        {
+            DateTime date = DateTime.ParseExact(Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+            var user = _tokenManager.GetUserByToken(token);
             var hospitalId = GetHospitalIdByUserId(user.Id);
 
             var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels();
@@ -355,16 +331,71 @@ namespace Services.HospitalRegistrationsService
                 }).ToList();
             
 
-            var result = hospitalSectionProfilesList.Where(model => !table.Any(t => t.HospitalProfileId == model.Id)).ToList();
-            
-            return new ChangeHospitalRegistrationForNewSectionCommandAnswer
-            {
-                Token = (Guid)command.Token,
-                FreeHospitalSectionsForRegistration = result,
-                Date = command.Date
-            };
+            return hospitalSectionProfilesList.Where(model => !table.Any(t => t.HospitalProfileId == model.Id)).ToList();
         }
 
+        private List<CommandAnswerError> ValidateApplyChangesNewHospitalRegistrationCommand(
+            GetChangeNewHospitalRegistrationCommand command)
+        {
+            List<CommandAnswerError> list = new List<CommandAnswerError>();
+            foreach (HospitalRegistrationCountStatisticItem element in command.CountFreePlaces)
+            {
+                if (element.OpenCount < 0)
+                    list.Add(new CommandAnswerError
+                    {
+                        FieldName = "Число свободных мест (Пол: " + element.Sex.ToCorrectString() + ")",
+                        Title = "Число свободных мест не может быть отрицательным"
+                    });
+
+            }
+            return list;
+        }
+
+        public GetChangeNewHospitalRegistrationCommandAnswer ApplyChangesNewHospitalRegistration(
+            GetChangeNewHospitalRegistrationCommand command)
+        {
+            DateTime date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            
+            var errors = this.ValidateApplyChangesNewHospitalRegistrationCommand(command);
+           
+            if (errors.Any())
+            {
+                return new GetChangeNewHospitalRegistrationCommandAnswer
+                {
+                    Date = command.Date,
+                    Token = command.Token.Value,
+                    Errors = errors,
+                    FreeHospitalSectionsForRegistration = GetFreeSectionsList(command.Date, command.Token.Value)
+                };
+            }
+            var recordExists =
+                _emptyPlaceStatisticRepository.GetModels()
+                    .Any(model => model.Date == date && model.HospitalSectionProfileId == command.HospitalProfileId);
+
+            if (!recordExists)
+            {
+                var newHospitalSectionProfileId = new EmptyPlaceStatisticStorageModel
+                {
+                    Date = date,
+                    CreateTime = DateTime.Now,
+                    HospitalSectionProfileId = command.HospitalProfileId,
+                    EmptyPlaceByTypeStatistics = command.CountFreePlaces
+                        .Select(pair => new EmptyPlaceByTypeStatisticStorageModel
+                        {
+                            Sex = pair.Sex,
+                            Count = pair.OpenCount
+                        }
+                        ).ToList()
+                };
+
+                _emptyPlaceStatisticRepository.Add(newHospitalSectionProfileId);
+                _emptyPlaceStatisticRepository.SaveChanges();
+            }
+            return new GetChangeNewHospitalRegistrationCommandAnswer
+            {
+                Token = (Guid)command.Token
+            };
+        }
         public ViewDetailedInformationOnRegisteredPatientsCommandAnswer GetDetailedInformationOnRegisteredPatients(
             ViewDetailedInformationOnRegisteredPatientsCommand command)
         {
