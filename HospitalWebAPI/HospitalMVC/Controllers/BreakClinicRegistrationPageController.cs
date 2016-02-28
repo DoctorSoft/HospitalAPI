@@ -27,7 +27,7 @@ namespace HospitalMVC.Controllers
         public ActionResult BreakRegistration(BreakClinicRegistrationCommand command)
         {
             var answer = _clinicRegistrationsService.BreakClinicRegistration(command);
-            return RedirectToAction("Index", new {Token = command.Token});
+            return RedirectToAction("Index", new { Token = command.Token, ShowModalWindow = true});
         }
     }
 }

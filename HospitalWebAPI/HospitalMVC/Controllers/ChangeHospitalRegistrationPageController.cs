@@ -98,7 +98,8 @@ namespace HospitalMVC.Controllers
             {
                 Token = answer.Token,
                 Date =
-                    DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture)
+                    DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
+                    ShowModalWindow = true
             });
         }
 
@@ -122,7 +123,8 @@ namespace HospitalMVC.Controllers
                     FullInformation = command.FullInformation,
                     HospitalProfileId = command.HospitalProfileId,
                     Date = command.Date,
-                    EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId
+                    EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
+                    ShowModalWundow = true
                 });
             }
             else
@@ -133,7 +135,8 @@ namespace HospitalMVC.Controllers
                         Token = command.Token,
                         HospitalProfileId = command.HospitalProfileId,
                         Date = command.Date,
-                        EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId
+                        EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
+                        ShowModalWindow = true
                     });
             }
         }

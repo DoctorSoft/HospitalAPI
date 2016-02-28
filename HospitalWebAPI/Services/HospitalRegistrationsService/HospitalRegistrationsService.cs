@@ -450,7 +450,8 @@ namespace Services.HospitalRegistrationsService
                 HospitalProfileId = command.HospitalProfileId,
                 EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
                 FullInformation = command.FullInformation,
-                Date = command.Date
+                Date = command.Date,
+                ShowModalWindow = command.ShowModalWindow
             };
         }
 

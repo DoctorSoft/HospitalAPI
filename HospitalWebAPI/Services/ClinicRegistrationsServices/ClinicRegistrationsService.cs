@@ -89,7 +89,8 @@ namespace Services.ClinicRegistrationsServices
             return new GetBreakClinicRegistrationsPageInformationCommandAnswer
             {
                 Table= table,
-                Token = (Guid)command.Token
+                Token = (Guid)command.Token,
+                ShowModalWindow = command.ShowModalWindow
             };
         }
 

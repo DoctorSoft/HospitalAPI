@@ -9,5 +9,6 @@ namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
         public int EmptyPlaceByTypeStatisticId { get; set; }
         public int? FullInformation { get; set; }
         public string Date { get; set; }
+        public bool ShowModalWindow { get; set; }
     }
 }

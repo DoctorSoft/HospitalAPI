@@ -7,5 +7,6 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
     public class GetBreakClinicRegistrationsPageInformationCommandAnswer : AbstractTokenCommandAnswer
     {
         public List<ClinicBreakRegistrationTableItem> Table { get; set; }
+        public bool ShowModalWindow { get; set; }
     }
 }

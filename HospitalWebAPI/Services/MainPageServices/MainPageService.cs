@@ -89,7 +89,8 @@ namespace Services.MainPageServices
             {
                 Token = (Guid) command.Token,
                 UserName = currentUser.Name,
-                CountNewNotices = countNewNotices
+                CountNewNotices = countNewNotices,
+                ShowModalWindow = command.ShowModalWindow
             };
             return answer;
         }

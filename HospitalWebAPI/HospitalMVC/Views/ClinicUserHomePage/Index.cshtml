@@ -9,6 +9,14 @@
 
 @Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
 
+@{
+    if (Model.ShowModalWindow)
+    {
+        @ModalWindowsHelper.AddInfoModalWindow(helper: Html,
+            headText: "Оповещение:",
+            bodyText: "Операция успешно выполнена.")
+    }
+}
 <div class="panel-home">
     <div class="panel-group">
         <div class="panel panel-default">

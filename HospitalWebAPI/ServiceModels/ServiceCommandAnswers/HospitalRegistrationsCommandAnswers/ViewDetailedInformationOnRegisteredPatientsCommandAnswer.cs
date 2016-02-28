@@ -12,5 +12,6 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
         public int HospitalProfileId { get; set; }
         public List<ClinicBreakRegistrationTableItem> Table { get; set; }
         public string Date { get; set; }
+        public bool ShowModalWindow { get; set; }
     }
 }

@@ -8,6 +8,15 @@
 
 <h2>Отмена регистрации</h2>
 
+@{
+    if (Model.ShowModalWindow)
+    {
+        @ModalWindowsHelper.AddInfoModalWindow(helper: Html,
+            headText: "Оповещение:",
+            bodyText: "Бронирование успешно отменено.")
+    }
+}
+
 <div class="bs-example">
     <div class="panel-group" id="accordion">
 

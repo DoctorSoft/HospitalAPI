@@ -34,6 +34,11 @@ namespace HtmlHelpers.GeneralHtmlHelper
 
         public static HtmlString AddInfoModalWindow(HtmlHelper helper, string headText, string bodyText)
         {
+            var script = "<script type='text/javascript'>" +
+                            "$(function () { $('#modalWindow').modal('toggle');});" +
+                            "</script>";
+
+                            
             var result = "<div id='modalWindow' class='modal fade in' role='dialog' style='display: block !important'>" +
                             "<div class='modal-dialog'>" +
                             "<div class='modal-content'>" +
@@ -51,7 +56,7 @@ namespace HtmlHelpers.GeneralHtmlHelper
                             "</div>" +
                             "</div>";
 
-            return new HtmlString(result);
+            return new HtmlString(script + result);
         }
     }
 }

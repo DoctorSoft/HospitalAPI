@@ -5,21 +5,12 @@
 @using Enums.EnumExtensions
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowHospitalRegistrationPlacesByDateCommandAnswer
 
-@section scripts
-{
-    <script type="text/javascript">
-        $(function () {
-            $('#modalWindow').modal('toggle');
-        });
-
-    </script>
-}
 @{
     if (Model.ShowModalWindow)
     {
         @ModalWindowsHelper.AddInfoModalWindow(helper: Html,
-            headText: "Сообщение",
-            bodyText: "Операция успешно выполнена")
+            headText: "Оповещение:",
+            bodyText: "Операция успешно выполнена.")
     }
 }
 <div class="bs-example">
