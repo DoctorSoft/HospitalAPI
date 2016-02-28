@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GeneralHtmlHelper\GeneralHtmlHelper.cs" />
+    <Compile Include="GeneralHtmlHelper\ModalWindowsHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup>

@@ -5,6 +5,23 @@
 @using Enums.EnumExtensions
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowHospitalRegistrationPlacesByDateCommandAnswer
 
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('#modalWindow').modal('toggle');
+        });
+
+    </script>
+}
+@{
+    if (Model.ShowModalWindow)
+    {
+        @ModalWindowsHelper.AddInfoModalWindow(helper: Html,
+            headText: "Сообщение",
+            bodyText: "Операция успешно выполнена")
+    }
+}
 <div class="bs-example">
     <div class="panel-group" id="accordion">
 
@@ -17,7 +34,7 @@
                         <div class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
                                 @(iteration). @item.HospitalProfileName
-                                <div class="pull-right">@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new {Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"})</div>
+                                <div class="pull-right">@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date }, new { @class = "btn-info btn" })</div>
                             </a>
                         </div>
                     </div>
@@ -26,10 +43,10 @@
                             @foreach (var info in item.StatisticItems)
                             {
                                 <div>
-                                    <br/>
-                                    Пол: @info.Sex.ToCorrectString() <br/>
-                                    Количество: @info.OpenCount <br/>
-                                    <br/>
+                                    <br />
+                                    Пол: @info.Sex.ToCorrectString() <br />
+                                    Количество: @info.OpenCount <br />
+                                    <br />
                                 </div>
                             }
                         </div>
@@ -47,12 +64,13 @@
                     <div class="alert-info alert">Количество мест на текущую дату ещё не было заполнено, для того, чтобы это сделать, нажмите кнопку "Добавить"</div>
                 }
                 <div>
-                    <br/>
-                    @Html.ActionLink("Добавить", "ChangeHospitalRegistrationForNewSection", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date}, new { @class = "btn-info btn" })
+                    <br />
+                    @Html.ActionLink("Добавить", "ChangeHospitalRegistrationForNewSection", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date }, new { @class = "btn-info btn" })
                     <br />
                 </div>
             }
         }
     </div>
 </div>
+
 

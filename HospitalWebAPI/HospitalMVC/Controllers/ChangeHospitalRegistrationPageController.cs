@@ -66,7 +66,8 @@ namespace HospitalMVC.Controllers
             return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
             {
                 Token = answer.Token,
-                Date =  DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture)
+                Date =  DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
+                ShowModalWindow = true
             });
         }
 

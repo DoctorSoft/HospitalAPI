@@ -170,6 +170,7 @@ namespace Services.HospitalRegistrationsService
                 Date = command.Date,
                 Table = table,
                 IsCompleted = statistics == completeCount,
+                ShowModalWindow = command.ShowModalWindow
             };
         }
 

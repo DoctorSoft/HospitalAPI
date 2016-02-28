@@ -13,5 +13,12 @@
     </div>
 </div>
 <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })'" />
-<input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" onclick="location.href='@Url.Action("RemoveMessage", "ClinicNoticesPage", new { Token = Model.Token, MessageId = Model.MessageId })'" />
+<input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target="#modalWindow" />
 
+@ModalWindowsHelper.AddActionModalWindow(helper: Html,
+    headText: "Подтверждение",
+    bodyText: "Вы уверены?",
+    actionName: "RemoveMessage",
+    controlName: "ClinicNoticesPage",
+    paramsList: new { Token = Model.Token, MessageId = Model.MessageId },
+    applyButtonName: "Удалить")

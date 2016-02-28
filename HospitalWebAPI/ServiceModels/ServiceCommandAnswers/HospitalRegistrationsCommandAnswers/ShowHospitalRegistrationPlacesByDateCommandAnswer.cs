@@ -12,5 +12,7 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
         public DateTime Date { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public bool ShowModalWindow { get; set; }
     }
 }
