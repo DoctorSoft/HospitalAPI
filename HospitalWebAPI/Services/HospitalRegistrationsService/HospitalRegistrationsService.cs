@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using Enums.EnumExtensions;
 using Enums.Enums;
+using HelpingTools.ExtentionTools;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
@@ -16,6 +17,7 @@ using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.En
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 using Services.Interfaces.ServiceTools;
+using StorageModels.Models.ClinicModels;
 using StorageModels.Models.HospitalModels;
 using StorageModels.Models.MailboxModels;
 
@@ -31,10 +33,11 @@ namespace Services.HospitalRegistrationsService
         private readonly IReservationRepository _reservationRepository;
         private readonly IUserRepository _userRepository;
         private readonly IMessageRepository _messageRepository;
+        private readonly IPatientRepository _patientRepository;
 
         public HospitalRegistrationsService(IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository,
             IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager,
-            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository, IUserRepository userRepository, IMessageRepository messageRepository)
+            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository, IUserRepository userRepository, IMessageRepository messageRepository, IPatientRepository patientRepository)
         {
             _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
             _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
@@ -44,6 +47,7 @@ namespace Services.HospitalRegistrationsService
             _reservationRepository = reservationRepository;
             _userRepository = userRepository;
             _messageRepository = messageRepository;
+            _patientRepository = patientRepository;
         }
 
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
@@ -500,6 +504,42 @@ namespace Services.HospitalRegistrationsService
 
             return new BreakHospitalRegistrationCommandAnswer
             {
+            };
+        }
+
+        public GetComingRecordsCommandAnswer GetComingRecords(GetComingRecordsCommand command)
+        {   
+            var user = _tokenManager.GetUserByToken(command.Token);
+            var hospitalId = GetHospitalIdByUserId(user.Id);
+
+            var reservationRepository = _reservationRepository.GetModels();
+            var patientsRepository = _patientRepository.GetModels();
+
+            var allReservations = ((IDbSet<ReservationStorageModel>) reservationRepository);
+
+             var patients = ((IDbSet<PatientStorageModel>) patientsRepository)
+            .Include(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic)
+            .Include(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile)
+            .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId)
+            .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfileId == model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Id)
+            .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatisticId == model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Id)
+            .Where(model => model.Reservation.EmptyPlaceByTypeStatisticId == model.Reservation.EmptyPlaceByTypeStatistic.Id)
+            .Where(model => model.Id == model.Reservation.Id)
+            .Select(model => new AllHospitalRegistrations
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Age = model.Age,
+                Diagnosis = model.Reservation.Diagnosis,
+                SectionName = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfile.Name,
+                ClinicName = model.Reservation.Clinic.Name,
+                Date = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date
+            }).ToList();
+            
+            return new GetComingRecordsCommandAnswer
+            {
+                Token = command.Token.Value,
+                Table =  patients
             };
         }
     }

@@ -259,7 +259,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to нажмите сюда.
+        ///   Looks up a localized string similar to нажмите сюда..
         /// </summary>
         public static string HospitalUserPageChangeRegistrationAfter {
             get {
@@ -300,6 +300,24 @@ namespace Resources {
         public static string HospitalUserPageTitle {
             get {
                 return ResourceManager.GetString("HospitalUserPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to нажмите сюда..
+        /// </summary>
+        public static string HospitalUserPageViewComingRecordsAfter {
+            get {
+                return ResourceManager.GetString("HospitalUserPageViewComingRecordsAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Если Вы хотите просмотреть список ближайших записей, то.
+        /// </summary>
+        public static string HospitalUserPageViewComingRecordsBefore {
+            get {
+                return ResourceManager.GetString("HospitalUserPageViewComingRecordsBefore", resourceCulture);
             }
         }
         

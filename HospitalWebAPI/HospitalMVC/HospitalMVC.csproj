@@ -385,6 +385,7 @@
     <Content Include="Views\MakeHospitalRegistrationPage\Index.cshtml" />
     <Content Include="Views\MakeHospitalRegistrationPage\Step2.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\ViewDetailedInformationOnRegisteredPatients.cshtml" />
+    <Content Include="Views\ChangeHospitalRegistrationPage\ShowComingRecords.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -112,6 +112,7 @@
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\BreakHospitalRegistrationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForNewSectionCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForSelectedSectionCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\AllHospitalRegistrations.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationCountStatisticItem.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\ScheduleTableCell.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetChangeNewHospitalRegistrationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetChangeHospitalRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetChangeHospitalRegistrationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\GetComingRecordsCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ShowHospitalRegistrationPlacesByDateCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ViewDetailedInformationOnRegisteredPatientsCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainMenuCommandAnswers\GetMainMenuItemsCommandAnswer.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeNewHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationCommand.cs" />
+    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetComingRecordsCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ShowHospitalRegistrationPlacesByDateCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ViewDetailedInformationOnRegisteredPatientsCommand.cs" />
     <Compile Include="ServiceCommands\MainMenuCommands\GetMainMenuItemsCommand.cs" />

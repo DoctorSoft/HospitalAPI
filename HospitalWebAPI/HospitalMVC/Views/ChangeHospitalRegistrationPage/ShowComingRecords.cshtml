@@ -1,0 +1,89 @@
+﻿@using HelpingTools.ExtentionTools
+@using Resources
+@using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities
+@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.GetComingRecordsCommandAnswer
+
+@{
+    ViewBag.Title = "ShowComingRecords";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<AllHospitalRegistrations> filterListByDate = Model.Table
+      .GroupBy(p => p.Date)
+      .Select(g => g.First())
+      .ToList();
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Просмотр</h4>
+        </div>
+        <div class="panel-body">
+
+            <table class="table">
+                <thead style="">
+                    <tr>
+                        <td></td>
+                        <th>
+                            Имя
+                        </th>
+                        <th>
+                            Фамилия
+                        </th>
+                        <th>
+                            Возраст
+                        </th>
+                        <th>
+                            Диагноз
+                        </th>
+                        <th>
+                            Клиника
+                        </th>
+                        <th>
+                            Отделение
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var record in filterListByDate)
+                    {
+                        <tr>
+                            <td colspan="7">
+                                <b>Дата: @record.Date.ToCorrectDateString()</b>
+                            </td>
+                        </tr>
+                        foreach (var patient in @Model.Table)
+                        {
+                            if (patient.Date == record.Date)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        @patient.FirstName
+                                    </td>
+                                    <td>
+                                        @patient.LastName
+                                    </td>
+                                    <td>
+                                        @patient.Age
+                                    </td>
+                                    <td>
+                                        @patient.Diagnosis
+                                    </td>
+                                    <td>
+                                        @patient.ClinicName
+                                    </td>
+                                    <td>
+                                        @patient.SectionName
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "HospitalUserHomePage", new { Token = Model.Token })'" />
+
+        </div>
+    </div>
+}

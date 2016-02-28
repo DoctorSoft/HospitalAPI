@@ -205,7 +205,7 @@
     <value>Отправить сообщения</value>
   </data>
   <data name="HospitalUserPageChangeRegistrationAfter" xml:space="preserve">
-    <value>нажмите сюда</value>
+    <value>нажмите сюда.</value>
   </data>
   <data name="HospitalUserPageChangeRegistrationBefore" xml:space="preserve">
     <value>Если Вы хотите отредактировать список свободных мест, то </value>
@@ -275,5 +275,11 @@
   </data>
   <data name="ButtonViewAll" xml:space="preserve">
     <value>Просмотреть все регистрации</value>
+  </data>
+  <data name="HospitalUserPageViewComingRecordsAfter" xml:space="preserve">
+    <value>нажмите сюда.</value>
+  </data>
+  <data name="HospitalUserPageViewComingRecordsBefore" xml:space="preserve">
+    <value>Если Вы хотите просмотреть список ближайших записей, то</value>
   </data>
 </root>

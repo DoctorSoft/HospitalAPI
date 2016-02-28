@@ -140,5 +140,14 @@ namespace HospitalMVC.Controllers
                     });
             }
         }
+
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult ShowComingRecords(GetComingRecordsCommand command)
+        {
+            var answer = _hospitalRegistrationsService.GetComingRecords(command);
+
+            return View(answer);
+        }
     }
 }
