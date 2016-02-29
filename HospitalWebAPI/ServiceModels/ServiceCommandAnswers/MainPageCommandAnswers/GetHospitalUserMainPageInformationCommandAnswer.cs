@@ -6,5 +6,6 @@ namespace ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers
     {
         public string UserName { get; set; }
         public int? CountNewNotices { get; set; }
+        public bool ShowModalWindow { get; set; }
     }
 }
