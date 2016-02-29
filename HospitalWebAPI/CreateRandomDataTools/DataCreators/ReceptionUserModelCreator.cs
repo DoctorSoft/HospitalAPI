@@ -36,37 +36,37 @@ namespace CreateRandomDataTools.DataCreators
    
         public IEnumerable<HospitalUserStorageModel> GetList()
         {
-            var hospitals = _hospitalRepository.GetModels().ToList();
+            var hospital = _hospitalRepository.GetModels().FirstOrDefault();
             var userTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.ReceptionUser).Id;
 
-            var results = hospitals.SelectMany(model => GetUsersByHospital(model.Id, userTypeId));
+            var results = GetUsersByHospital(hospital.Id, userTypeId);
 
             return results;
         }
 
         protected virtual IEnumerable<HospitalUserStorageModel> GetUsersByHospital(int hospitalId, int userTypeId)
         {
-            for (var i = 0; i < UsersInOneHospital; i++)
+            return new List<HospitalUserStorageModel>
             {
-                var userName = _personDataApiRepository.GetModelById(0);
-                var nextUser = new HospitalUserStorageModel
+                new HospitalUserStorageModel
                 {
+                    Id = 0,
                     HospitalId = hospitalId,
                     User = new UserStorageModel
                     {
-                        Name = string.Format("{0} {1}", userName.FirstName, userName.LastName),
-                        UserTypeId = userTypeId,
                         Account = new AccountStorageModel
                         {
+                            Id = 0,
                             HashedPassword = _passwordHashManager.GetPasswordHash(StandardPassword),
                             IsBlocked = false,
-                            Login = _accountNameCalculator.GetAccountName(userName.FirstName, userName.LastName),
-                        }
+                            Login = "АдамКларк"
+                        },
+                        Id = 0,
+                        Name = "Адам Кларк",
+                        UserTypeId = userTypeId
                     }
-                };
-
-                yield return nextUser;
-            }
+                }
+            };
         }
     }
 }

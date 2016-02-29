@@ -36,37 +36,37 @@ namespace CreateRandomDataTools.DataCreators
 
         public IEnumerable<ClinicUserStorageModel> GetList()
         {
-            var clinics = _clinicRepository.GetModels().ToList();
+            var clinic = _clinicRepository.GetModels().FirstOrDefault();
             var userTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.ClinicUser).Id;
 
-            var results = clinics.SelectMany(model => GetUsersByClinic(model.Id, userTypeId));
+            var results = GetUsersByClinic(clinic.Id, userTypeId);
 
             return results;
         }
 
         protected virtual IEnumerable<ClinicUserStorageModel> GetUsersByClinic(int clinicId, int userTypeId)
         {
-            for (var i = 0; i < UsersInOneClinic; i++)
+            return new List<ClinicUserStorageModel>
             {
-                var userName = _personDataApiRepository.GetModelById(0);
-                var nextUser = new ClinicUserStorageModel
+                new ClinicUserStorageModel
                 {
+                    Id = 0,
                     ClinicId = clinicId,
                     User = new UserStorageModel
                     {
-                        Name = string.Format("{0} {1}", userName.FirstName, userName.LastName),
-                        UserTypeId = userTypeId,
                         Account = new AccountStorageModel
                         {
-                            HashedPassword = _passwordHashManager.GetPasswordHash(StandardPassword),
+                            Id = 0,
                             IsBlocked = false,
-                            Login = _accountNameCalculator.GetAccountName(userName.FirstName, userName.LastName),
-                        }
+                            Login = "ДжонСмит",
+                            HashedPassword = _passwordHashManager.GetPasswordHash(StandardPassword),
+                        },
+                        Id = 0,
+                        Name = "Джон Смит",
+                        UserTypeId = userTypeId
                     }
-                };
-
-                yield return nextUser;
-            }
+                }
+            };
         }
     }
 }
