@@ -284,9 +284,13 @@
     <Content Include="Content\Images\10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\11.jpg" />
+    <Content Include="Content\Images\12.jpg" />
+    <Content Include="Content\Images\13.jpg" />
     <Content Include="Content\Images\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\22.jpg" />
     <Content Include="Content\Images\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -11,10 +11,12 @@
 
 </head>
 <body>
+<div>
     <div class="navbar navbar-inverse">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <span>@Html.ActionLink("Главная страница", "Index", "Home", new {Token = ViewBag.Token}, new {@class = "navbar-brand"})</span>
+            <div class="navbar-header" style="background-color: black; color: white; padding-right: 10px">
+                <img src="~/Content/Images/22.jpg" alt="" style="max-width: 100px; max-height: 50px"/>
+                <span>Бюро госпитализации</span>
             </div>
             <ul class="nav navbar-nav">
                 @foreach (var nextTab in ViewBag.MainMenuTabs)
@@ -27,29 +29,30 @@
                     {
                         if (nextTab.IsActive)
                         {
-                            <li class="active">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                            <li class="active">@Html.ActionLink((string) nextTab.Label, (string) nextTab.ActionName, (string) nextTab.ControllerName, new {Token = ViewBag.Token}, new {@class = "nav"})</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                            <li>@Html.ActionLink((string) nextTab.Label, (string) nextTab.ActionName, (string) nextTab.ControllerName, new {Token = ViewBag.Token}, new {@class = "nav"})</li>
                         }
                     }
                 }
             </ul>
         </div>
     </div>
+</div>
 
 
-<div class="container body-content" >
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - System Doctor ASP.NET Application</p>
-        </footer>
-    </div>
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - System Doctor ASP.NET Application</p>
+    </footer>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>
