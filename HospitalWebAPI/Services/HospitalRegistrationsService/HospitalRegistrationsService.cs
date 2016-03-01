@@ -512,11 +512,8 @@ namespace Services.HospitalRegistrationsService
             var user = _tokenManager.GetUserByToken(command.Token);
             var hospitalId = GetHospitalIdByUserId(user.Id);
 
-            var reservationRepository = _reservationRepository.GetModels();
             var patientsRepository = _patientRepository.GetModels();
-
-            var allReservations = ((IDbSet<ReservationStorageModel>) reservationRepository);
-
+            
              var patients = ((IDbSet<PatientStorageModel>) patientsRepository)
             .Include(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic)
             .Include(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile)
@@ -525,6 +522,7 @@ namespace Services.HospitalRegistrationsService
             .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatisticId == model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Id)
             .Where(model => model.Reservation.EmptyPlaceByTypeStatisticId == model.Reservation.EmptyPlaceByTypeStatistic.Id)
             .Where(model => model.Id == model.Reservation.Id)
+            .Where(model => model.Reservation.Status == ReservationStatus.Opened)
             .Select(model => new AllHospitalRegistrations
             {
                 FirstName = model.FirstName,
@@ -535,11 +533,13 @@ namespace Services.HospitalRegistrationsService
                 ClinicName = model.Reservation.Clinic.Name,
                 Date = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date
             }).ToList();
-            
+
+            List<AllHospitalRegistrations> result = patients.OrderBy(x => x.Date).ToList();
+
             return new GetComingRecordsCommandAnswer
             {
                 Token = command.Token.Value,
-                Table =  patients
+                Table =  result
             };
         }
     }
