@@ -36,15 +36,15 @@ namespace CreateRandomDataTools.DataCreators
 
         public IEnumerable<ClinicUserStorageModel> GetList()
         {
-            var clinic = _clinicRepository.GetModels().FirstOrDefault();
+            var clinic = _clinicRepository.GetModels().ToList();
             var userTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.ClinicUser).Id;
 
-            var results = GetUsersByClinic(clinic.Id, userTypeId);
+            var results = GetUsersByFirstClinic(clinic[0].Id, userTypeId).Union(GetUsersBySecondClinic(clinic[1].Id, userTypeId));
 
             return results;
         }
 
-        protected virtual IEnumerable<ClinicUserStorageModel> GetUsersByClinic(int clinicId, int userTypeId)
+        protected virtual IEnumerable<ClinicUserStorageModel> GetUsersByFirstClinic(int clinicId, int userTypeId)
         {
             return new List<ClinicUserStorageModel>
             {
@@ -58,14 +58,111 @@ namespace CreateRandomDataTools.DataCreators
                         {
                             Id = 0,
                             IsBlocked = false,
-                            Login = "ДжонСмит",
-                            HashedPassword = _passwordHashManager.GetPasswordHash(StandardPassword),
+                            Login = "Поликлиника1Тест1",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Madrid"),
                         },
                         Id = 0,
-                        Name = "Джон Смит",
+                        Name = "Поликлиника 1 Тест 1",
                         UserTypeId = userTypeId
                     }
-                }
+                },
+                new ClinicUserStorageModel
+                {
+                    Id = 0,
+                    ClinicId = clinicId,
+                    User = new UserStorageModel
+                    {
+                        Account = new AccountStorageModel
+                        {
+                            Id = 0,
+                            IsBlocked = false,
+                            Login = "Поликлиника1Тест2",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Berlin"),
+                        },
+                        Id = 0,
+                        Name = "Поликлиника 1 Тест 2",
+                        UserTypeId = userTypeId
+                    }
+                },
+                new ClinicUserStorageModel
+                {
+                    Id = 0,
+                    ClinicId = clinicId,
+                    User = new UserStorageModel
+                    {
+                        Account = new AccountStorageModel
+                        {
+                            Id = 0,
+                            IsBlocked = false,
+                            Login = "Поликлиника1Тест3",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Paris"),
+                        },
+                        Id = 0,
+                        Name = "Поликлиника 1 Тест 3",
+                        UserTypeId = userTypeId
+                    }
+                },
+            };
+        }
+
+        protected virtual IEnumerable<ClinicUserStorageModel> GetUsersBySecondClinic(int clinicId, int userTypeId)
+        {
+            return new List<ClinicUserStorageModel>
+            {
+                new ClinicUserStorageModel
+                {
+                    Id = 0,
+                    ClinicId = clinicId,
+                    User = new UserStorageModel
+                    {
+                        Account = new AccountStorageModel
+                        {
+                            Id = 0,
+                            IsBlocked = false,
+                            Login = "Поликлиника2Тест1",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("London"),
+                        },
+                        Id = 0,
+                        Name = "Поликлиника 2 Тест 1",
+                        UserTypeId = userTypeId
+                    }
+                },
+                new ClinicUserStorageModel
+                {
+                    Id = 0,
+                    ClinicId = clinicId,
+                    User = new UserStorageModel
+                    {
+                        Account = new AccountStorageModel
+                        {
+                            Id = 0,
+                            IsBlocked = false,
+                            Login = "Поликлиника2Тест2",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Tokyo"),
+                        },
+                        Id = 0,
+                        Name = "Поликлиника 2 Тест 2",
+                        UserTypeId = userTypeId
+                    }
+                },
+                new ClinicUserStorageModel
+                {
+                    Id = 0,
+                    ClinicId = clinicId,
+                    User = new UserStorageModel
+                    {
+                        Account = new AccountStorageModel
+                        {
+                            Id = 0,
+                            IsBlocked = false,
+                            Login = "Поликлиника3Тест3",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Prague"),
+                        },
+                        Id = 0,
+                        Name = "Поликлиника 3 Тест 3",
+                        UserTypeId = userTypeId
+                    }
+                },
             };
         }
     }

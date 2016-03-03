@@ -24,8 +24,8 @@
                     <div class="panel-heading">
                         <div class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
-                                @(iteration). @item.HospitalProfileName
-                                <div class="pull-right">@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date }, new { @class = "btn-info btn" })</div>
+                                <span style="max-width: 50px">@(iteration). @item.HospitalProfileName</span>
+                                <div>@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date }, new { @class = "btn-info btn" })</div>
                             </a>
                         </div>
                     </div>
@@ -63,5 +63,3 @@
         }
     </div>
 </div>
-
-

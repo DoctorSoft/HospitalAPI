@@ -84,11 +84,11 @@
                                 @{
                                     if (index == 0)
                                     {
-                                        <p>Текущая неделя </p>
+                                        <p><b>Текущая неделя </b></p>
                                     }
                                     else
                                     {
-                                        <p>@(index + 1)-я неделя</p>
+                                        <p><b>@(index + 1)-я неделя</b></p>
                                     }
                                 }
                                 @{
@@ -96,11 +96,11 @@
                                     var lastMonth = item.Cells.Last().Value.Date.Month;
                                     if (firstMonth != lastMonth)
                                     {
-                                        <p>(@item.Cells.First().Value.Date.GetMonthString() - @item.Cells.Last().Value.Date.GetMonthString())</p>
+                                        <b>(<span style="color: red">@item.Cells.First().Value.Date.GetMonthString() - @item.Cells.Last().Value.Date.GetMonthString()</span>)</b>
                                     }
                                     else
                                     {
-                                        <p>(@item.Cells.First().Value.Date.GetMonthString())</p>
+                                        <b>(<span style="color: red">@item.Cells.First().Value.Date.GetMonthString()</span>)</b>
                                     }
 
                                 }

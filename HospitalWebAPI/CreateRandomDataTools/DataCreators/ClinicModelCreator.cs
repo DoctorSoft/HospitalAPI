@@ -17,6 +17,13 @@ namespace CreateRandomDataTools.DataCreators
                     Name = "Гродненская детская поликлиника №1",
                     Address = "г. Гродно, ул. Даватора, 23"
                 },
+                new ClinicStorageModel
+                {
+                    IsBlocked = false,
+                    Id = 0,
+                    Name = "Гродненская детская поликлиника №2",
+                    Address = "г. Гродно, ул. Гагарина 18"
+                },
             };
 
             return clinicsList;
