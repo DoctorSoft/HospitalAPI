@@ -11,5 +11,6 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
         public string SectionName { get; set; }
         public string ClinicName { get; set; }
         public DateTime Date { get; set; }
+        public string DoctorName { get; set; }
     }
 }

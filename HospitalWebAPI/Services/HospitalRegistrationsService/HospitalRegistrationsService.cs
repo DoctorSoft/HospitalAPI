@@ -531,7 +531,8 @@ namespace Services.HospitalRegistrationsService
                 Diagnosis = model.Reservation.Diagnosis,
                 SectionName = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfile.Name,
                 ClinicName = model.Reservation.Clinic.Name,
-                Date = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date
+                Date = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date,
+                DoctorName = model.Reservation.Reservator.Name
             }).ToList();
 
             List<AllHospitalRegistrations> result = patients.OrderBy(x => x.Date).ToList();

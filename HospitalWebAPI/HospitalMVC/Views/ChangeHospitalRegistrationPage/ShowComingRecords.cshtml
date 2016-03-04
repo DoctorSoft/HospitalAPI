@@ -12,21 +12,21 @@
       .GroupBy(p => p.Date)
       .Select(g => g.First())
       .ToList();
-    <div class="panel panel-default">
+    <div>
         <div class="panel-heading">
-            <h4>Просмотр</h4>
+            <h3><b>Просмотр</b></h3>
         </div>
         <div class="panel-body">
 
-            <table class="table">
-                <thead style="">
+            <table class="table" style="border: gray 2px double; color: black; background-color: lightgray; opacity: 0.9;">
+                <thead>
                     <tr>
                         <td></td>
                         <th>
-                            Имя
+                            Фамилия
                         </th>
                         <th>
-                            Фамилия
+                            Имя
                         </th>
                         <th>
                             Возраст
@@ -35,10 +35,13 @@
                             Диагноз
                         </th>
                         <th>
-                            Клиника
+                            Напрвляющее ЛПУ
                         </th>
                         <th>
                             Отделение
+                        </th>
+                        <th>
+                            Доктор
                         </th>
                     </tr>
                 </thead>
@@ -46,7 +49,7 @@
                     @foreach (var record in filterListByDate)
                     {
                         <tr>
-                            <td colspan="7">
+                            <td colspan="8" style="color: black; background-color: lightgray; opacity: 0.7;">
                                 <b>Дата: @record.Date.ToCorrectDateString()</b>
                             </td>
                         </tr>
@@ -54,13 +57,13 @@
                         {
                             if (patient.Date == record.Date)
                             {
-                                <tr>
+                                <tr style="color: black; background-color: lightblue; opacity: 0.7;">
                                     <td></td>
                                     <td>
-                                        @patient.FirstName
+                                        @patient.LastName
                                     </td>
                                     <td>
-                                        @patient.LastName
+                                        @patient.FirstName
                                     </td>
                                     <td>
                                         @patient.Age
@@ -74,6 +77,9 @@
                                     <td>
                                         @patient.SectionName
                                     </td>
+                                    <td>
+                                        @patient.DoctorName
+                                    </td>
                                 </tr>
                             }
                         }
@@ -81,8 +87,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="panel-footer">
-            <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "HospitalUserHomePage", new { Token = Model.Token })'" />
-        </div>
+    </div>
+    <div>
+        <input type="button" title="Back" class="btn btn-info" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "HospitalUserHomePage", new { Token = Model.Token })'" />
     </div>
 }
