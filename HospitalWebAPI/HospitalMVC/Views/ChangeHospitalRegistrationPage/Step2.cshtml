@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using Enums.EnumExtensions
+@using HelpingTools.ExtentionTools
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowHospitalRegistrationPlacesByDateCommandAnswer
 
 @{
@@ -13,6 +14,10 @@
             bodyText: "Операция успешно выполнена.")
     }
 }
+<div>
+    <h2>Дата: @Model.Date.ToCorrectDateString()</h2>
+</div>
+
 <div class="bs-example">
     <div class="panel-group" id="accordion">
 
@@ -25,7 +30,7 @@
                         <div class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
                                 <span style="max-width: 50px">@(iteration). @item.HospitalProfileName</span>
-                                <div>@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new { Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date }, new { @class = "btn-info btn" })</div>
+                                <div>@Html.ActionLink("Изменить", "ChangeHospitalRegistration", "ChangeHospitalRegistrationPage", new {Token = Model.Token, HospitalProfileId = item.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"})</div>
                             </a>
                         </div>
                     </div>
@@ -34,18 +39,18 @@
                             @foreach (var info in item.StatisticItems)
                             {
                                 <div>
-                                    <br />
-                                    Пол: @info.Sex.ToCorrectString() <br />
-                                    Количество: @info.OpenCount <br />
-                                    <br />
+                                    <br/>
+                                    Пол: @info.Sex.ToCorrectString() <br/>
+                                    Количество: @info.OpenCount <br/>
+                                    <br/>
                                 </div>
                             }
                         </div>
                     </div>
                 </div>
-                            {
-                                iteration++;
-                            }
+                {
+                    iteration++;
+                }
             }
 
             if (!Model.IsCompleted)
@@ -55,9 +60,9 @@
                     <div class="alert-info alert">Количество мест на текущую дату ещё не было заполнено, для того, чтобы это сделать, нажмите кнопку "Добавить"</div>
                 }
                 <div>
-                    <br />
-                    @Html.ActionLink("Добавить", "ChangeHospitalRegistrationForNewSection", "ChangeHospitalRegistrationPage", new { Token = Model.Token, Date = Model.Date }, new { @class = "btn-info btn" })
-                    <br />
+                    <br/>
+                    @Html.ActionLink("Добавить", "ChangeHospitalRegistrationForNewSection", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date}, new {@class = "btn-info btn"})
+                    <br/>
                 </div>
             }
         }
