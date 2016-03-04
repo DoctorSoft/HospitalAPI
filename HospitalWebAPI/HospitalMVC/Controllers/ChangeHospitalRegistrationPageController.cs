@@ -142,7 +142,7 @@ namespace HospitalMVC.Controllers
         }
 
 
-        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserWatchRegisteredUsers)]
         public ActionResult ShowComingRecords(GetComingRecordsCommand command)
         {
             var answer = _hospitalRegistrationsService.GetComingRecords(command);

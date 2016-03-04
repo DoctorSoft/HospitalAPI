@@ -11,6 +11,7 @@
         HospitalUserShowMessagesPage = 102,
         HospitalUserSendDistributiveMessagesPage = 104,
         HospitalUserMakeRegistrationsPage = 105,
+        HospitalUserWatchRegisteredUsers = 106,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserMainPage = 200,          
