@@ -50,6 +50,7 @@ namespace HospitalMVC.Filters
                 {MainMenuItem.HospitalUserShowMessagesPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalNoticesPage", Label = MainResources.MenuItemViewNotices }},
                 {MainMenuItem.HospitalUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalUserHomePage", Label = MainResources.MenuItemHomePage }},
                 {MainMenuItem.HospitalUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeHospitalRegistrationPage", Label = "Зарегистрировать" }},
+                {MainMenuItem.HospitalUserWatchRegisteredUsers, new MainMenuTab { ActionName = "ShowComingRecords", ControllerName = "ChangeHospitalRegistrationPage", Label = "Показать регистрации"}},
 
                 {MainMenuItem.ClinicUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeClinicRegistrationPage", Label = MainResources.MenuItemMakeClinicRegistration }},
                 {MainMenuItem.ClinicUserBreakRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "BreakClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},
@@ -65,8 +66,7 @@ namespace HospitalMVC.Filters
                 {MainMenuItem.ReviewerMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReviewerHomePage", Label = MainResources.MenuItemHomePage }},
                 {MainMenuItem.ReviewerShowStatisticPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReviewerShowStatisticPage", Label = "Показать статистику" }},
 
-                {MainMenuItem.LogOut, new MainMenuTab { ActionName = "Index", ControllerName = "LogOut", Label = MainResources.MenuItemExit }},
-                {MainMenuItem.HospitalUserWatchRegisteredUsers, new MainMenuTab { ActionName = "ShowComingRecords", ControllerName = "ChangeHospitalRegistrationPage", Label = "Показать регистрации"}}
+                {MainMenuItem.LogOut, new MainMenuTab { ActionName = "Index", ControllerName = "LogOut", Label = MainResources.MenuItemExit }}
             };
         }
 
@@ -168,7 +168,7 @@ namespace HospitalMVC.Filters
         {
             var result = new List<MainMenuTab>();
 
-            foreach (var value in values)
+            foreach (var value in values.OrderBy(value => value.MainMenuItem))
             {
                 var nextTab = _mainMenuTabs[value.MainMenuItem];
                 nextTab.IsActive = value.IsActive;

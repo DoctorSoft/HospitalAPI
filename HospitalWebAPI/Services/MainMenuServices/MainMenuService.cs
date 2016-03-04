@@ -25,9 +25,9 @@ namespace Services.MainMenuServices
         protected virtual IEnumerable<MainMenuItemValue> ChangeMainMenuItemsByCommand(
             IEnumerable<MainMenuItemValue> mainMenuItemValues, GetMainMenuItemsCommand command)
         {
-            // TODO: Implement this method
-
-            var results = mainMenuItemValues.Where(value => value.MainMenuItem == command.ActivatedMainMenu).ToList();
+            var results = mainMenuItemValues.Where(value => value.MainMenuItem == command.ActivatedMainMenu)
+                .OrderBy(value => value.MainMenuItem)
+                .ToList();
 
             results.ForEach(value => value.IsActive = true);
 
