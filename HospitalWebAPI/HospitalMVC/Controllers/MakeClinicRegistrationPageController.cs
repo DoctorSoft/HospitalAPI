@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
+using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
 
@@ -46,7 +47,7 @@ namespace HospitalMVC.Controllers
 
             if (answer.Errors.Any())
             {
-                var model = new SaveClinicRegistrationCommand
+                var model = new GetClinicRegistrationUserFormCommandAnswer
                 {
                     Sex = command.Sex,
                     DateValue = command.DateValue,
