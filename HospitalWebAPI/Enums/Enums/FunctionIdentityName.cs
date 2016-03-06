@@ -13,6 +13,7 @@
         HospitalUserSendDistributionMessages = 104,
         HospitalUserMakeRegistrations = 105,
         HospitalUserWatchRegisteredUsers = 106,
+        HospitalUserSendDischarges = 107,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserPrimaryAccess = 200,          // If this function is blocked then all clinic user functions are blocked (Equal function is ShowHomePage for clinic users)
@@ -20,6 +21,7 @@
         ClinicUserBreakRegistrations = 202,
         ClinicUserShowMessages = 203,         // If this function is block, function 204 is blocked too
         ClinicUserGetWarningMessages = 204,
+        ClinicUserDownloadDischarges = 205,
 
         //BotFunctions 300 <= x < 400
         BotSendAutoWarningNotices = 300,         //Bots have not any access to pages

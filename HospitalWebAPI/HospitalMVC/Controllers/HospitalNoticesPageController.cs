@@ -36,5 +36,12 @@ namespace HospitalMVC.Controllers
             var answer = _noticesService.RemoveHospitalMessageById(command);
             return RedirectToAction("Index", new GetHospitalNoticesPageInformationCommand { Token = answer.Token });
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserSendDischarges)]
+        public ActionResult ShowPageToSendDischange(ShowPageToSendDischangeCommand command)
+        {
+            var answer = _noticesService.ShowPageToSendDischange(command);
+            return View(answer);
+        }
     }
 }

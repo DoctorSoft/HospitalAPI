@@ -51,11 +51,13 @@ namespace HospitalMVC.Filters
                 {MainMenuItem.HospitalUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "HospitalUserHomePage", Label = MainResources.MenuItemHomePage }},
                 {MainMenuItem.HospitalUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeHospitalRegistrationPage", Label = "Зарегистрировать" }},
                 {MainMenuItem.HospitalUserWatchRegisteredUsers, new MainMenuTab { ActionName = "ShowComingRecords", ControllerName = "ChangeHospitalRegistrationPage", Label = "Показать регистрации"}},
+                {MainMenuItem.HospitalUserSendDischarges, new MainMenuTab { ActionName = "ShowPageToSendDischange", ControllerName = "HospitalNoticesPage", Label = "Отправить выписку"}},
 
                 {MainMenuItem.ClinicUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeClinicRegistrationPage", Label = MainResources.MenuItemMakeClinicRegistration }},
                 {MainMenuItem.ClinicUserBreakRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "BreakClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},
                 {MainMenuItem.ClinicUserShowMessagesPage, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicNoticesPage", Label = MainResources.MenuItemViewNotices }},
                 {MainMenuItem.ClinicUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ClinicUserHomePage", Label = MainResources.MenuItemHomePage }},
+                {MainMenuItem.ClinicUserDownloadDischarges, new MainMenuTab { ActionName = "ShowDischargesList", ControllerName = "ClinicNoticesPage", Label = "Выписки" }},
 
                 {MainMenuItem.ReceptionUserMainPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReceptionUserHomePage", Label = MainResources.MenuItemHomePage }},
                 {MainMenuItem.ReceptionUserMarkClientsPage, new MainMenuTab { ActionName = "Index", ControllerName = "ReceptionUserMarkClientsPage", Label = MainResources.MenuItemMarkClients }},

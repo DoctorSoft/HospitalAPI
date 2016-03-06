@@ -12,12 +12,14 @@
         HospitalUserSendDistributiveMessagesPage = 104,
         HospitalUserMakeRegistrationsPage = 105,
         HospitalUserWatchRegisteredUsers = 106,
+        HospitalUserSendDischarges = 107,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserMainPage = 200,          
         ClinicUserMakeRegistrationsPage = 201,
         ClinicUserBreakRegistrationsPage = 202,
-        ClinicUserShowMessagesPage = 203, 
+        ClinicUserShowMessagesPage = 203,
+        ClinicUserDownloadDischarges = 205,
 
         //AdministratorFunctions 400 <= x < 500
         AdministratorMainPage = 400,  

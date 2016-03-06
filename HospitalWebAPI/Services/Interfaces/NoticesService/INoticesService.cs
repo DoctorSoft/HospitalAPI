@@ -21,5 +21,9 @@ namespace Services.Interfaces.NoticesService
         GetHospitalMessageByIdCommandAnswer GetHospitalMessageById(GetHospitalMessageByIdCommand command);
 
         RemoveHospitalMessageByIdCommandAnswer RemoveHospitalMessageById(RemoveHospitalMessageByIdCommand command);
+
+        ShowDischargesListCommandAnswer ShowDischargesList(ShowDischargesListCommand command);
+
+        ShowPageToSendDischangeCommandAnswer ShowPageToSendDischange(ShowPageToSendDischangeCommand command);
     }
 }

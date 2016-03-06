@@ -233,6 +233,7 @@ namespace Services.NoticesService
 
             return result;
         }
+
         public RemoveHospitalMessageByIdCommandAnswer RemoveHospitalMessageById(RemoveHospitalMessageByIdCommand command)
         {
             var user = _tokenManager.GetUserByToken(command.Token);
@@ -245,6 +246,22 @@ namespace Services.NoticesService
             _messageRepository.SaveChanges();
 
             return new RemoveHospitalMessageByIdCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
+
+        public ShowDischargesListCommandAnswer ShowDischargesList(ShowDischargesListCommand command)
+        {
+            return new ShowDischargesListCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
+
+        public ShowPageToSendDischangeCommandAnswer ShowPageToSendDischange(ShowPageToSendDischangeCommand command)
+        {
+            return new ShowPageToSendDischangeCommandAnswer
             {
                 Token = command.Token.Value
             };
