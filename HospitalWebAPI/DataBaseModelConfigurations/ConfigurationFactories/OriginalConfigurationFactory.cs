@@ -22,6 +22,7 @@ namespace DataBaseModelConfigurations.ConfigurationFactories
             builder.Configurations.Add(new UserTypeDataBaseConfiguration());
 
             builder.Configurations.Add(new MessageDataBaseConfiguration());
+            builder.Configurations.Add(new DischangeDataBaseConfiguration());
 
             builder.Configurations.Add(new EmptyPlaceStatisticDataBaseConfiguration());
             builder.Configurations.Add(new HospitalSectionProfileDataBaseConfiguration());

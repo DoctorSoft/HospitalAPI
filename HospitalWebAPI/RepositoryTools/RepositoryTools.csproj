@@ -85,6 +85,7 @@
     <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IHospitalSectionProfileRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\ISectionProfileRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\ISectionRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\MailboxRepositories\IDischargeRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\MailboxRepositories\IMessageRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IAccountRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IClinicUserRepository.cs" />

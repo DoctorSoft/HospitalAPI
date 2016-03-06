@@ -148,6 +148,10 @@
     <Compile Include="Migrations\201603061211282_AddDischargeTable.Designer.cs">
       <DependentUpon>201603061211282_AddDischargeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603061300179_AddDischargeTable2.cs" />
+    <Compile Include="Migrations\201603061300179_AddDischargeTable2.Designer.cs">
+      <DependentUpon>201603061300179_AddDischargeTable2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -202,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603061211282_AddDischargeTable.resx">
       <DependentUpon>201603061211282_AddDischargeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603061300179_AddDischargeTable2.resx">
+      <DependentUpon>201603061300179_AddDischargeTable2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

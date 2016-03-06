@@ -34,6 +34,7 @@ namespace Dependencies.NinjectModules
             Bind<ISectionProfileRepository>().To<SectionProfileRepository>().InThreadScope();
             Bind<ISectionRepository>().To<SectionRepository>().InThreadScope();
             Bind<IMessageRepository>().To<MessageRepository>().InThreadScope();
+            Bind<IDischargeRepository>().To<DischargeRepository>().InThreadScope();
             Bind<IAccountRepository>().To<AccountRepository>().InThreadScope();
             Bind<IClinicUserRepository>().To<ClinicUserRepository>().InThreadScope();
             Bind<IHospitalUserRepository>().To<HospitalUserRepository>().InThreadScope();

@@ -10,7 +10,7 @@ namespace DataBaseModelConfigurations.Configurations.MailboxModels
         {
             // Table name
 
-            this.ToTable("Messages");
+            this.ToTable("Discharges");
 
             // Primary key
 
@@ -25,7 +25,7 @@ namespace DataBaseModelConfigurations.Configurations.MailboxModels
 
             // Links to tables
 
-            this.HasRequired(model => model.Message).WithMany(link => link.Discharges).HasForeignKey(model => model.MessageId).WillCascadeOnDelete(false);
+            this.HasRequired(model => model.Message).WithMany(link => link.Discharges).HasForeignKey(model => model.MessageId);
         }
     }
 }
