@@ -74,6 +74,7 @@
     <Compile Include="Models\HospitalModels\HospitalStorageModel.cs" />
     <Compile Include="Models\HospitalModels\SectionProfileStorageModel.cs" />
     <Compile Include="Models\HospitalModels\SectionStorageModel.cs" />
+    <Compile Include="Models\MailboxModels\DischargeStorageModel.cs" />
     <Compile Include="Models\MailboxModels\MessageStorageModel.cs" />
     <Compile Include="Models\UserModels\AccountStorageModel.cs" />
     <Compile Include="Models\UserModels\ClinicUserStorageModel.cs" />

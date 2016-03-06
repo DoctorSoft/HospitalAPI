@@ -94,6 +94,7 @@
     <Compile Include="Configurations\HospitalModels\HospitalSectionProfileDataBaseConfiguration.cs" />
     <Compile Include="Configurations\HospitalModels\SectionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\HospitalModels\SectionProfileDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\MailboxModels\DischangeDataBaseConfiguration.cs" />
     <Compile Include="Configurations\MailboxModels\MessageDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\AccountDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\ClinicUserDataBaseConfiguration.cs" />
@@ -142,6 +143,10 @@
     <Compile Include="Migrations\201602071920465_BindToRegistrator.cs" />
     <Compile Include="Migrations\201602071920465_BindToRegistrator.Designer.cs">
       <DependentUpon>201602071920465_BindToRegistrator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603061211282_AddDischargeTable.cs" />
+    <Compile Include="Migrations\201603061211282_AddDischargeTable.Designer.cs">
+      <DependentUpon>201603061211282_AddDischargeTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -194,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602071920465_BindToRegistrator.resx">
       <DependentUpon>201602071920465_BindToRegistrator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603061211282_AddDischargeTable.resx">
+      <DependentUpon>201603061211282_AddDischargeTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

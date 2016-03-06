@@ -31,6 +31,7 @@ namespace DataBaseModelConfigurations.Configurations.MailboxModels
 
             this.HasRequired(model => model.UserFrom).WithMany(link => link.MessagesFrom).HasForeignKey(model => model.UserFromId).WillCascadeOnDelete(false);
             this.HasRequired(model => model.UserTo).WithMany(link => link.MessagesTo).HasForeignKey(model => model.UserToId).WillCascadeOnDelete(false);
+            this.HasMany(model => model.Discharges).WithRequired(model => model.Message).HasForeignKey(model => model.MessageId);
         }
     }
 }

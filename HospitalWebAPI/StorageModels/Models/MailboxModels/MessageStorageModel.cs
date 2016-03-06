@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums.Enums;
 using StorageModels.Interfaces;
 using StorageModels.Models.UserModels;
@@ -22,6 +23,7 @@ namespace StorageModels.Models.MailboxModels
 
         public UserStorageModel UserTo { get; set; }
         public UserStorageModel UserFrom { get; set; }
+        public ICollection<DischargeStorageModel> Discharges { get; set; } 
 
         //
 
