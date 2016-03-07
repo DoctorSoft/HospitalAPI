@@ -266,5 +266,13 @@ namespace Services.NoticesService
                 Token = command.Token.Value
             };
         }
+
+        public SaveDischargeCommandAnswer SaveDischarge(SaveDischargeCommand command)
+        {
+            return new SaveDischargeCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
     }
 }

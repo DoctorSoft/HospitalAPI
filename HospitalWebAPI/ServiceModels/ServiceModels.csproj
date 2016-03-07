@@ -138,6 +138,7 @@
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetSendDistributiveMessagesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\RemoveClinicMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\RemoveHospitalMessageByIdCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\SaveDischargeCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\ShowDischargesListCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\ShowPageToSendDischangeCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ReceptionMarkingCommandAnswers\Entities\ReceptionClientTableItem.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="ServiceCommands\NoticesCommands\GetSendDistributiveMessagesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\RemoveClinicMessageByIdCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\RemoveHospitalMessageByIdCommand.cs" />
+    <Compile Include="ServiceCommands\NoticesCommands\SaveDischargeCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\ShowDischargesListCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\ShowPageToSendDischangeCommand.cs" />
     <Compile Include="ServiceCommands\ReceptionMarkingCommands\GetReceptionUserMarkClientsPageInformationCommand.cs" />

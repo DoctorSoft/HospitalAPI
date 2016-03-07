@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommands.NoticesCommands;
@@ -42,6 +43,19 @@ namespace HospitalMVC.Controllers
         {
             var answer = _noticesService.ShowPageToSendDischange(command);
             return View(answer);
+        }
+
+        [HttpPost]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserSendDischarges)]
+        public ActionResult SaveDischarge(SaveDischargeCommand command, HttpPostedFileBase discharge)
+        {
+            command.File = discharge.InputStream;
+            command.FileName = discharge.FileName;
+            command.Size = discharge.ContentLength;
+            command.ContentType = discharge.ContentType;
+
+            var answer = _noticesService.SaveDischarge(command);
+            return RedirectToAction("Index", "HospitalUserHomePage", new GetHospitalNoticesPageInformationCommand { Token = answer.Token });
         }
     }
 }
