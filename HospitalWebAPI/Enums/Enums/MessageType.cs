@@ -3,6 +3,6 @@
     public enum MessageType
     {
         UserMessage = 0,
-        WarningMessage = 1
+        WarningMessage = 1,
     }
 }

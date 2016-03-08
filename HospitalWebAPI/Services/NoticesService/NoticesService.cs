@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using Enums.Enums;
 using HandleToolsInterfaces.RepositoryHandlers;
+using HelpingTools.ExtentionTools;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
@@ -34,8 +37,14 @@ namespace Services.NoticesService
 
         private readonly IClinicRepository _clinicRepository;
 
+        private readonly IClinicUserRepository _clinicUserRepository;
+
+        private readonly IHospitalManager _hospitalManager;
+
+        private readonly IDischargeRepository _dischargeRepository;
+
         public NoticesService(IMessageRepository messageRepository, IAuthorizationService authorizationService,
-            ITokenManager tokenManager, IUserRepository userRepository, ITwoSideShowingHandler<MessageStorageModel> messageShowingHandler, IClinicRepository clinicRepository)
+            ITokenManager tokenManager, IUserRepository userRepository, ITwoSideShowingHandler<MessageStorageModel> messageShowingHandler, IClinicRepository clinicRepository, IClinicUserRepository clinicUserRepository, IHospitalManager hospitalManager, IDischargeRepository dischargeRepository)
         {
             this._messageRepository = messageRepository;
             _authorizationService = authorizationService;
@@ -43,6 +52,9 @@ namespace Services.NoticesService
             _userRepository = userRepository;
             this._messageShowingHandler = messageShowingHandler;
             _clinicRepository = clinicRepository;
+            _clinicUserRepository = clinicUserRepository;
+            _hospitalManager = hospitalManager;
+            _dischargeRepository = dischargeRepository;
         }
 
         public GetClinicNoticesPageInformationCommandAnswer GetClinicNoticesPageInformation(
@@ -281,11 +293,74 @@ namespace Services.NoticesService
             };
         }
 
+        public static byte[] ReadFully(Stream input)
+        {
+            input.Position = 0;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
         public SaveDischargeCommandAnswer SaveDischarge(SaveDischargeCommand command)
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
+            var hospital = _hospitalManager.GetHospitalByUser(user);
 
+            //// var clinic = _clinicRepository.GetModels().FirstOrDefault(model => model.Id == command.ClinicId);
+
+            var responsiblePersonId = _clinicUserRepository.GetModels()
+                .FirstOrDefault(model => model.ClinicId == command.ClinicId && model.IsDischargeResponsiblePerson).Id;
+
+            var anotherPersonsFromClinic = _clinicUserRepository.GetModels()
+                .Where(model => model.ClinicId == command.ClinicId && !model.IsDischargeResponsiblePerson).Select(model => model.Id).ToList();
+
+            var titleMessage = $"Новая выписка была отправлена из больницы '{hospital.Name}'";
+            var textMessage =
+                $"Новая выписка была отправлена из больницы '{hospital.Name}'. Отправитель '{user.Name}'. Дата: '{DateTime.Now.ToCorrectDateString()} {DateTime.Now.ToString("t")}' ";
+
+            var body = ReadFully(command.File);
+
+            var discharge = new DischargeStorageModel
+            {
+                Id = 0,
+                Name = command.FileName,
+                Message = new MessageStorageModel
+                {
+                    Id = 0,
+                    Title = titleMessage,
+                    Date = DateTime.Now,
+                    Text = textMessage,
+                    ShowStatus = TwoSideShowStatus.Showed,
+                    UserFromId = user.Id,
+                    UserToId = responsiblePersonId,
+                    IsRead = false,
+                    MessageType = MessageType.WarningMessage,
+                },
+                Body = body,
+                MimeType = command.ContentType
+            };
+            this._dischargeRepository.Add(discharge);
+
+            foreach (var personId in anotherPersonsFromClinic)
+            {
+                var message = new MessageStorageModel
+                {
+                    Id = 0,
+                    Title = titleMessage,
+                    Date = DateTime.Now,
+                    Text = textMessage,
+                    ShowStatus = TwoSideShowStatus.Showed,
+                    UserFromId = user.Id,
+                    UserToId = personId,
+                    IsRead = false,
+                    MessageType = MessageType.WarningMessage,
+                };
+                _messageRepository.Add(message);
+            }
+            _messageRepository.SaveChanges();
 
             return new SaveDischargeCommandAnswer
             {
