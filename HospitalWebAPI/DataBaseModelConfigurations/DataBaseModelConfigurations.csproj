@@ -152,6 +152,10 @@
     <Compile Include="Migrations\201603061300179_AddDischargeTable2.Designer.cs">
       <DependentUpon>201603061300179_AddDischargeTable2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603081211343_SetResponsibleClinicField.cs" />
+    <Compile Include="Migrations\201603081211343_SetResponsibleClinicField.Designer.cs">
+      <DependentUpon>201603081211343_SetResponsibleClinicField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -209,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603061300179_AddDischargeTable2.resx">
       <DependentUpon>201603061300179_AddDischargeTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603081211343_SetResponsibleClinicField.resx">
+      <DependentUpon>201603081211343_SetResponsibleClinicField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

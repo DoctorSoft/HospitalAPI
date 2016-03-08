@@ -52,6 +52,7 @@ namespace CreateRandomDataTools.DataCreators
                 {
                     Id = 0,
                     ClinicId = clinicId,
+                    IsDischargeResponsiblePerson = true,
                     User = new UserStorageModel
                     {
                         Account = new AccountStorageModel
@@ -63,13 +64,14 @@ namespace CreateRandomDataTools.DataCreators
                         },
                         Id = 0,
                         Name = "Поликлиника 1 Тест 1",
-                        UserTypeId = userTypeId
+                        UserTypeId = userTypeId,
                     }
                 },
                 new ClinicUserStorageModel
                 {
                     Id = 0,
                     ClinicId = clinicId,
+                    IsDischargeResponsiblePerson = false,
                     User = new UserStorageModel
                     {
                         Account = new AccountStorageModel
@@ -88,6 +90,7 @@ namespace CreateRandomDataTools.DataCreators
                 {
                     Id = 0,
                     ClinicId = clinicId,
+                    IsDischargeResponsiblePerson = false,
                     User = new UserStorageModel
                     {
                         Account = new AccountStorageModel
@@ -113,6 +116,7 @@ namespace CreateRandomDataTools.DataCreators
                 {
                     Id = 0,
                     ClinicId = clinicId,
+                    IsDischargeResponsiblePerson = true,
                     User = new UserStorageModel
                     {
                         Account = new AccountStorageModel
@@ -131,6 +135,7 @@ namespace CreateRandomDataTools.DataCreators
                 {
                     Id = 0,
                     ClinicId = clinicId,
+                    IsDischargeResponsiblePerson = false,
                     User = new UserStorageModel
                     {
                         Account = new AccountStorageModel
@@ -149,6 +154,7 @@ namespace CreateRandomDataTools.DataCreators
                 {
                     Id = 0,
                     ClinicId = clinicId,
+                    IsDischargeResponsiblePerson = false,
                     User = new UserStorageModel
                     {
                         Account = new AccountStorageModel

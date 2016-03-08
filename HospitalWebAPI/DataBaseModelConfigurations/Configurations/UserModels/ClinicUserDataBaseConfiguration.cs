@@ -20,6 +20,7 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
             // Properties
 
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            this.Property(model => model.IsDischargeResponsiblePerson).IsRequired();
 
             // Links to tables
 

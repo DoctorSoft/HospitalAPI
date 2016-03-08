@@ -9,6 +9,10 @@ namespace StorageModels.Models.UserModels
 
         //
 
+        public bool IsDischargeResponsiblePerson { get; set; }
+
+        //
+
         public UserStorageModel User { get; set; }
         public ClinicStorageModel Clinic { get; set; }
 

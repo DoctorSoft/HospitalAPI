@@ -286,6 +286,7 @@ namespace Services.NoticesService
             var user = _tokenManager.GetUserByToken(command.Token);
 
 
+
             return new SaveDischargeCommandAnswer
             {
                 Token = command.Token.Value
