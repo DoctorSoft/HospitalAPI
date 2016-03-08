@@ -12,5 +12,7 @@ namespace ServiceModels.ServiceCommands.NoticesCommands
         public int Size { get; set; }
 
         public string ContentType { get; set; }
+
+        public int ClinicId { get; set; }
     }
 }

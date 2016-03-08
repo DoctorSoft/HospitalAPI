@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using Enums.Enums;
 using HandleToolsInterfaces.RepositoryHandlers;
+using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ModelTools;
@@ -29,16 +30,19 @@ namespace Services.NoticesService
 
         private readonly IUserRepository _userRepository;
 
-        private readonly ITwoSideShowingHandler<MessageStorageModel> _messageShowingHandler; 
+        private readonly ITwoSideShowingHandler<MessageStorageModel> _messageShowingHandler;
+
+        private readonly IClinicRepository _clinicRepository;
 
         public NoticesService(IMessageRepository messageRepository, IAuthorizationService authorizationService,
-            ITokenManager tokenManager, IUserRepository userRepository, ITwoSideShowingHandler<MessageStorageModel> messageShowingHandler)
+            ITokenManager tokenManager, IUserRepository userRepository, ITwoSideShowingHandler<MessageStorageModel> messageShowingHandler, IClinicRepository clinicRepository)
         {
             this._messageRepository = messageRepository;
             _authorizationService = authorizationService;
             _tokenManager = tokenManager;
             _userRepository = userRepository;
             this._messageShowingHandler = messageShowingHandler;
+            _clinicRepository = clinicRepository;
         }
 
         public GetClinicNoticesPageInformationCommandAnswer GetClinicNoticesPageInformation(
@@ -261,14 +265,27 @@ namespace Services.NoticesService
 
         public ShowPageToSendDischangeCommandAnswer ShowPageToSendDischange(ShowPageToSendDischangeCommand command)
         {
+            var clinics = this._clinicRepository.GetModels().ToList();
+            if (command.ClinicId == null)
+            {
+                command.ClinicId = clinics.FirstOrDefault().Id;
+            }
+            var clinicResults = clinics.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
+
             return new ShowPageToSendDischangeCommandAnswer
             {
-                Token = command.Token.Value
+                Token = command.Token.Value,
+                ClinicId = command.ClinicId.Value,
+                Clinics = clinicResults,
+
             };
         }
 
         public SaveDischargeCommandAnswer SaveDischarge(SaveDischargeCommand command)
         {
+            var user = _tokenManager.GetUserByToken(command.Token);
+
+
             return new SaveDischargeCommandAnswer
             {
                 Token = command.Token.Value

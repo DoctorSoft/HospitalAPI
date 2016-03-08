@@ -7,38 +7,74 @@
 @section scripts
 {
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-<link href="~/Content/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
-     This must be loaded before fileinput.min.js -->
-<script src="~/js/Javascript-Canvas-to-Blob/canvas-to-blob.js" type="text/javascript"></script>
-<script src="~/js/Javascript-Canvas-to-Blob/file-input.js"></script>
-<!-- bootstrap.js below is only needed if you wish to the feature of viewing details
-     of text file preview via modal dialog -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- optionally if you need translation for your language then include
+    <link href="~/Content/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
+    This must be loaded before fileinput.min.js -->
+    <script src="~/js/Javascript-Canvas-to-Blob/canvas-to-blob.js" type="text/javascript"></script>
+    <script src="~/js/Javascript-Canvas-to-Blob/file-input.js"></script>
+    <!-- bootstrap.js below is only needed if you wish to the feature of viewing details
+    of text file preview via modal dialog -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- optionally if you need translation for your language then include
     locale file as mentioned below -->
-<script src="~/js/Javascript-Canvas-to-Blob/file_input_locale_ru.js"></script>
+    <script src="~/js/Javascript-Canvas-to-Blob/file_input_locale_ru.js"></script>
+
+
+    <script type="text/javascript">
+        var HospitalChange = function(e) {
+            $('#ClinicId').val($('#Clinics').val());
+        }
+    </script>
+
 }
 
 @model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.ShowPageToSendDischangeCommandAnswer
 
-<h2>ShowPageToSendDischange</h2>
+<h3>Отправить выписку</h3>
 
 <div>
-    @using (Html.BeginForm("SaveDischarge", "HospitalNoticesPage", null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("SaveDischarge", "HospitalNoticesPage", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.HiddenFor(answer => answer.Token)
-        <input id="discharge" name="discharge" type="file" multiple class="file-loading"/>
+        <div style="display: flex; padding-bottom: 20px; padding-top: 20px">
+            <div class="col-md-2">
+                <h4>Поликлиника:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.HiddenFor(answer => answer.ClinicId)
+                @Html.DropDownListFor(answer => answer.Clinics, Model.Clinics.Select(pair => new SelectListItem
+                {
+                    Selected = pair.Key == Model.ClinicId,
+                    Value = pair.Key.ToString(),
+                    Text = pair.Value,
+                    Disabled = false
+                }), new
+                {
+                    @class = "form-control",
+                    @onchange = "HospitalChange()",
+                    @value = Model.Clinics.FirstOrDefault(pair => pair.Key == Model.ClinicId).Key.ToString(),
+                    @text = Model.Clinics.FirstOrDefault(pair => pair.Key == Model.ClinicId).Value
+                })
+            </div>
+        </div>
+        <div style="padding-bottom: 20px">
+            @Html.HiddenFor(answer => answer.Token)
+            <input id="discharge" name="discharge" type="file" multiple class="file-loading"/>
+        </div>
         <script>
-            $(document).on('ready', function() {
+            $(document).on('ready', function () {
+                var setStartValue = function () {
+                    $('#Clinics').val('@Model.ClinicId');
+                };
+                setStartValue();
+
                 $("#discharge").fileinput({
                     //initialPreview: [
                     //    '<img src="/images/moon.jpg" class="file-preview-image" alt="The Moon" title="The Moon">',
                     //    '<img src="/images/earth.jpg" class="file-preview-image" alt="The Earth" title="The Earth">'
                     //],
                     overwriteInitial: true,
-                    initialCaption: "The Moon and the Earth"
+                    initialCaption: "Выберите файл"
                 });
             });
         </script>

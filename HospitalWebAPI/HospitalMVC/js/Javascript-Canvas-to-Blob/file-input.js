@@ -288,10 +288,10 @@
         indicatorSuccess: '<i class="glyphicon glyphicon-ok-sign text-success"></i>',
         indicatorError: '<i class="glyphicon glyphicon-exclamation-sign text-danger"></i>',
         indicatorLoading: '<i class="glyphicon glyphicon-hand-up text-muted"></i>',
-        indicatorNewTitle: 'Not uploaded yet',
-        indicatorSuccessTitle: 'Uploaded',
-        indicatorErrorTitle: 'Upload Error',
-        indicatorLoadingTitle: 'Uploading ...'
+        indicatorNewTitle: 'Ещё не загружено',
+        indicatorSuccessTitle: 'Загружено',
+        indicatorErrorTitle: 'Ошибка загрузки',
+        indicatorLoadingTitle: 'Загрузка ...'
     };
     tMain1 = '{preview}\n' +
         '<div class="kv-upload-progress hide"></div>\n' +
@@ -2711,13 +2711,13 @@
     $.fn.fileinputLocales.en = {
         fileSingle: 'file',
         filePlural: 'files',
-        browseLabel: 'Browse &hellip;',
-        removeLabel: 'Remove',
-        removeTitle: 'Clear selected files',
-        cancelLabel: 'Cancel',
+        browseLabel: 'Выбрать файл &hellip;',
+        removeLabel: 'Очистить',
+        removeTitle: 'Очистить выбранные файлы',
+        cancelLabel: 'Отмена',
         cancelTitle: 'Abort ongoing upload',
-        uploadLabel: 'Upload',
-        uploadTitle: 'Upload selected files',
+        uploadLabel: 'Загрузить',
+        uploadTitle: 'Загрузить выбранные файлы',
         msgNo: 'No',
         msgCancelled: 'Cancelled',
         msgZoomTitle: 'View details',
