@@ -130,6 +130,7 @@
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReceptionUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReviewerMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetUserMainPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\DownloadDischargeCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\Entities\DischargeFileItem.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicNoticesPageInformationCommandAnswer.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="ServiceCommands\MainPageCommands\GetReviewerMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetUserMainPageInformationCommand.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\Entities\MessageTableItem.cs" />
+    <Compile Include="ServiceCommands\NoticesCommands\DownloadDischargeCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetClinicMessageByIdCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetClinicNoticesPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\NoticesCommands\GetHospitalMessageByIdCommand.cs" />

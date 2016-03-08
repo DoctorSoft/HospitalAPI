@@ -334,8 +334,6 @@ namespace Services.NoticesService
 
             var hospital = _hospitalManager.GetHospitalByUser(user);
 
-            //// var clinic = _clinicRepository.GetModels().FirstOrDefault(model => model.Id == command.ClinicId);
-
             var responsiblePersonId = _clinicUserRepository.GetModels()
                 .FirstOrDefault(model => model.ClinicId == command.ClinicId && model.IsDischargeResponsiblePerson).Id;
 
@@ -390,6 +388,20 @@ namespace Services.NoticesService
             return new SaveDischargeCommandAnswer
             {
                 Token = command.Token.Value
+            };
+        }
+
+        public DownloadDischargeCommandAnswer DownloadDischarge(DownloadDischargeCommand command)
+        {
+            var discharge =
+                this._dischargeRepository.GetModels().FirstOrDefault(model => model.Id == command.DischargeId);
+
+            return new DownloadDischargeCommandAnswer
+            {
+                Token = command.Token.Value,
+                Body = discharge.Body,
+                FileName = discharge.Name,
+                MimeType = discharge.MimeType
             };
         }
     }

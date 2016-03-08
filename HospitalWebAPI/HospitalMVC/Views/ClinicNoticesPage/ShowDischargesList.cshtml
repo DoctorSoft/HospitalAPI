@@ -25,7 +25,8 @@
                         <b>Больница:</b> @file.Hospital
                     </div>
                     <div style="margin: 5px; padding-bottom: 10px; padding-top: 10px;">
-                        <a class="btn btn-info" style="max-width: 150px; min-width: 50%">Загрузить</a>
+                        <a class="btn btn-info" style="max-width: 150px; min-width: 50%"
+                           href="@Url.Action("DownloadDischarge", new { Token = Model.Token, DischargeId = file.DischargeId })">Загрузить</a>
                     </div>
                 </div>
             </div>

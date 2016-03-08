@@ -27,5 +27,7 @@ namespace Services.Interfaces.NoticesService
         ShowPageToSendDischangeCommandAnswer ShowPageToSendDischange(ShowPageToSendDischangeCommand command);
 
         SaveDischargeCommandAnswer SaveDischarge(SaveDischargeCommand command);
+
+        DownloadDischargeCommandAnswer DownloadDischarge(DownloadDischargeCommand command);
     }
 }

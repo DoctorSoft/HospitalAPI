@@ -43,5 +43,12 @@ namespace HospitalMVC.Controllers
             var answer = _noticesService.ShowDischargesList(command);
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserDownloadDischarges)]
+        public FileResult DownloadDischarge(DownloadDischargeCommand command)
+        {
+            var answer = _noticesService.DownloadDischarge(command);
+            return File(answer.Body, answer.MimeType, answer.FileName);
+        }
     }
 }
