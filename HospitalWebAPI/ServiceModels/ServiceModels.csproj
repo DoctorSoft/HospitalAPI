@@ -130,6 +130,7 @@
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReceptionUserMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetReviewerMainPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\MainPageCommandAnswers\GetUserMainPageInformationCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\Entities\DischargeFileItem.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicMessageByIdCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetClinicNoticesPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\NoticesCommandAnswers\GetHospitalMessageByIdCommandAnswer.cs" />

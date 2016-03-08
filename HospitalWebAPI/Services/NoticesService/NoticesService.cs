@@ -43,8 +43,10 @@ namespace Services.NoticesService
 
         private readonly IDischargeRepository _dischargeRepository;
 
+        private readonly IClinicManager _clinicManager;
+
         public NoticesService(IMessageRepository messageRepository, IAuthorizationService authorizationService,
-            ITokenManager tokenManager, IUserRepository userRepository, ITwoSideShowingHandler<MessageStorageModel> messageShowingHandler, IClinicRepository clinicRepository, IClinicUserRepository clinicUserRepository, IHospitalManager hospitalManager, IDischargeRepository dischargeRepository)
+            ITokenManager tokenManager, IUserRepository userRepository, ITwoSideShowingHandler<MessageStorageModel> messageShowingHandler, IClinicRepository clinicRepository, IClinicUserRepository clinicUserRepository, IHospitalManager hospitalManager, IDischargeRepository dischargeRepository, IClinicManager clinicManager)
         {
             this._messageRepository = messageRepository;
             _authorizationService = authorizationService;
@@ -55,6 +57,7 @@ namespace Services.NoticesService
             _clinicUserRepository = clinicUserRepository;
             _hospitalManager = hospitalManager;
             _dischargeRepository = dischargeRepository;
+            _clinicManager = clinicManager;
         }
 
         public GetClinicNoticesPageInformationCommandAnswer GetClinicNoticesPageInformation(
@@ -269,9 +272,31 @@ namespace Services.NoticesService
 
         public ShowDischargesListCommandAnswer ShowDischargesList(ShowDischargesListCommand command)
         {
+            var user = _tokenManager.GetUserByToken(command.Token);
+
+            var clinic = _clinicManager.GetClinicByUser(user);
+
+            var results = _dischargeRepository.GetModels()
+                .Where(model => model.Message.UserTo.UserType.UserType == UserType.ClinicUser)
+                .Where(model => model.Message.UserTo.ClinicUser.ClinicId == clinic.Id)
+                .Select(model => new DischargeFileItem
+                {
+                    SentDate = model.Message.Date,
+                    DischargeId = model.Id,
+                    Doctor = model.Message.UserFrom.Name,
+                    Hospital = model.Message.UserFrom.HospitalUser.Hospital.Name
+                }).ToList();
+
+            results.ForEach(item =>
+            {
+                item.Date = item.SentDate.ToCorrectDateString();
+                item.Time = item.SentDate.ToString("t");
+            });
+
             return new ShowDischargesListCommandAnswer
             {
-                Token = command.Token.Value
+                Token = command.Token.Value,
+                Files = results
             };
         }
 
