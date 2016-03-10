@@ -21,41 +21,19 @@
             <ul class="nav navbar-nav nav-pills">
                 @{
                     var dropDownMenu = true;
-                    for (var i = 0; i < 0; i++)
-                    {
-                        var nextTab = ViewBag.MainMenuTabs[i];
-                        if (!nextTab.IsEnabled)
-                        {
-                            <li class="disabled"><a class="nav">@nextTab.Label</a></li>
-                        }
-                        else
-                        {
-                            if (nextTab.IsActive)
-                            {
-                                dropDownMenu = false;
-                                <li class="active">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                            }
-                            else
-                            {
-                                <li>@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                            }
-                        }
-
-                    }
                     <li class="dropdown nav navbar-nav navbar-inverse @(dropDownMenu ? "active" : "")" role="presentation" style="margin-left: 10px">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                             Открыть главное меню <span class="caret"></span>
                         </a>
                         <ul class="nav navbar-nav dropdown-menu nav-pills" style="background-color: #333333">
-                            @for (var i = 0; i < ViewBag.MainMenuTabs.Count; i++)
+                            @foreach (var nextTab in ViewBag.MainMenuTabs)
                             {
-                                var nextTab = ViewBag.MainMenuTabs[i];
-                                if (!nextTab.IsEnabled)
+                                /*if (!nextTab.IsEnabled)
                                 {
                                     <li class="disabled" style="width: 100%; height: 50px"><a class=" nav">@nextTab.Label</a></li>
                                 }
                                 else
-                                {
+                                {*/
                                     if (nextTab.IsActive)
                                     {
                                         <li class="active" style="background-color: black; width: 100%; height: 50px">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
@@ -64,7 +42,7 @@
                                     {
                                         <li style="width: 100%; height: 50px">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                                     }
-                                }
+                                /*}*/
                             }
                         </ul>
                     </li>
