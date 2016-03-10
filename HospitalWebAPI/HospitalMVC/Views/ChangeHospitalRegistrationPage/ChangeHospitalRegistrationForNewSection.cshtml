@@ -43,14 +43,26 @@
             <br />
 
             @{
-                foreach (var sex in Enum.GetValues(typeof (Sex)).Cast<Sex>())
+                List<Sex?> sexes;
+                if (Model.FreeHospitalSectionsForRegistration.FirstOrDefault().HasGenderFactor)
                 {
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
-                        <label class="form-control" aria-describedby="basic-addon1" name="CountFreePlaces[@i].Sex" id="CountFreePlaces[@i].Sex">@sex.ToCorrectString()</label>
-                        <input type="hidden" name="CountFreePlaces[@i].Sex" id="CountFreePlaces[@i].Sex" class="form-control" value="@sex" />
-                        <br />
-                    </div>
+                    sexes = Enum.GetValues(typeof (Sex)).Cast<Sex>().Select(sex => (Sex?)sex).ToList();
+                }
+                else
+                {
+                    sexes = new List<Sex?> {null};
+                }
+                foreach (var sex in sexes)
+                {
+                    if (sex != null)
+                    {
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
+                            <label class="form-control" aria-describedby="basic-addon1" name="CountFreePlaces[@i].Sex" id="CountFreePlaces[@i].Sex">@sex.Value.ToCorrectString()</label>
+                            <input type="hidden" name="CountFreePlaces[@i].Sex" id="CountFreePlaces[@i].Sex" class="form-control" value="@sex"/>
+                            <br/>
+                        </div>
+                    }
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
                         <input type="number" required class="form-control" aria-describedby="basic-addon1" name="CountFreePlaces[@i].OpenCount" id="CountFreePlaces[@i].OpenCount" />

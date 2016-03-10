@@ -54,11 +54,6 @@ namespace HospitalMVC.Controllers
                     Date = command.Date,
                     HospitalProfileId = command.HospitalProfileId,
                     Token = command.Token.Value,
-                    CountRegisteredFemale = command.CountRegisteredFemale,
-                    CountRegisteredMale = command.CountRegisteredMale,
-                    EmptyPlaceByTypeStatisticIdFeMaleId = command.EmptyPlaceByTypeStatisticIdFeMaleId,
-                    EmptyPlaceByTypeStatisticIdMaleId = command.EmptyPlaceByTypeStatisticIdMaleId,
-                    SectionProfileName = command.SectionProfileName,
                     StatisticItems = command.FreeHospitalSectionsForRegistration
                 });
             }

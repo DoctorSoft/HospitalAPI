@@ -37,29 +37,23 @@
 
                 @for (var i = 0; i < Model.StatisticItems.Count; i++)
                 {
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
-                        <label name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" title="@Model.StatisticItems[i].Sex.ToString("G")" > @Model.StatisticItems[i].Sex.ToCorrectString() </label>
-                        <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" value="@Model.StatisticItems[i].Sex.ToString("D")" />
-                    </div>
+                    if (@Model.StatisticItems[i].Sex != null)
+                    {
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
+                            <label name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" title="@Model.StatisticItems[i].Sex.Value.ToString("G")"> @Model.StatisticItems[i].Sex.Value.ToCorrectString() </label>
+                            <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" value="@Model.StatisticItems[i].Sex.Value.ToString("D")"/>
+                        </div>
+                    }
                     <div class="input-group">
                         <span class="input-group-addon" id="basic-addon1">Зарег.</span>
-                        @if (Model.StatisticItems[i].Sex == Sex.Male)
-                        {
-                            <label class="form-control"> @Model.CountRegisteredMale.ToString("G") </label>
-                            if (Model.CountRegisteredMale != 0)
+                        
+                            <label class="form-control"> @Model.StatisticItems[i].RegisteredCount.ToString("G") </label>
+                            @if (Model.StatisticItems[i].RegisteredCount != 0)
                             {
-                                <input type="button" title="@MainResources.ButtonView" class="btn btn-sm btn-primary" value="@MainResources.ButtonView" onclick=" location.href = '@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new {Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdMaleId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' " />
+                                <input type="button" title="@MainResources.ButtonView" class="btn btn-sm btn-primary" value="@MainResources.ButtonView" onclick=" location.href = '@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new {Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.StatisticItems[i].Id, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' "/>
                             }
-                        }
-                        else
-                        {
-                            <label class="form-control"> @Model.CountRegisteredFemale.ToString("G") </label>
-                            if (Model.CountRegisteredFemale != 0)
-                            {
-                                <input type="button" title="@MainResources.ButtonView" class="btn btn-sm btn-primary" value="@MainResources.ButtonView" onclick=" location.href = '@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new {Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdFeMaleId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' " />
-                            }
-                        }
+                        
                     
                     </div>
                     <div class="input-group">
@@ -74,18 +68,19 @@
 
             <input class="btn btn-sm btn-primary" value="@MainResources.ButtonChange" type="submit"/>
             
-            <span></span>
-            @if (Model.CountRegisteredFemale != 0 || Model.CountRegisteredMale != 0)
-            {
-                <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick=" location.href = '@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new {Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticIdFeMaleId, FullInformation = Model.EmptyPlaceByTypeStatisticIdMaleId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' " />
-            }
+            <span>
+                @if (Model.StatisticItems.Any(item => item.RegisteredCount != 0))
+                {
+                    <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick=" location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.StatisticItems.FirstOrDefault().Id, FullInformation = Model.StatisticItems.FirstOrDefault().Id, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
+                }
+            </span>
             @Html.HiddenFor(model => model.Date)
             @Html.HiddenFor(model => model.HospitalProfileId)
-            @Html.HiddenFor(model => model.EmptyPlaceByTypeStatisticIdMaleId)
-            @Html.HiddenFor(model => model.EmptyPlaceByTypeStatisticIdFeMaleId)
+            @*@Html.HiddenFor(model => model.EmptyPlaceByTypeStatisticIdMaleId)
+            @Html.HiddenFor(model => model.EmptyPlaceByTypeStatisticIdFeMaleId)*@
             @Html.HiddenFor(model => model.SectionProfileName)
-            @Html.HiddenFor(model => model.CountRegisteredMale)
-            @Html.HiddenFor(model => model.CountRegisteredFemale)
+            @*@Html.HiddenFor(model => model.CountRegisteredMale)
+            @Html.HiddenFor(model => model.CountRegisteredFemale)*@
 
         </div>
     }

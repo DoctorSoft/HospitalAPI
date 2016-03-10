@@ -194,32 +194,14 @@ namespace Services.HospitalRegistrationsService
             
             var table = emptyPlaceStatisticRepository
                 .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalProfileId)
-                .Where(
-                    storageModel => storageModel.EmptyPlaceStatisticId.Equals(emptyPlaceId))
+                .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(emptyPlaceId))
                 .Select(model => new HospitalRegistrationCountStatisticItem
                 {
                     Sex = model.Sex,
-                    OpenCount = model.Count
+                    OpenCount = model.Count,
+                    Id = model.Id,
+                    RegisteredCount = model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
                 }).ToList();
-
-            var emptyPlaceStatisticId = _emptyPlaceStatisticRepository.GetModels().FirstOrDefault(
-                model => model.Date == date && model.HospitalSectionProfileId == command.HospitalProfileId).Id;
-
-            var emptyPlaceByTypeStatisticsIdMaleId = _emptyPlaceByTypeStatisticRepository.GetModels().FirstOrDefault(
-                model => model.EmptyPlaceStatisticId == emptyPlaceStatisticId && model.Sex == Sex.Male).Id;
-
-            var emptyPlaceByTypeStatisticsIdFemaleId = _emptyPlaceByTypeStatisticRepository.GetModels().FirstOrDefault(
-                model => model.EmptyPlaceStatisticId == emptyPlaceStatisticId && model.Sex == Sex.Female).Id;
-
-            var countMale = _reservationRepository.GetModels()
-                .Where(model => model.EmptyPlaceByTypeStatisticId == emptyPlaceByTypeStatisticsIdMaleId)
-                .Where(model => model.Status == ReservationStatus.Opened)
-                .Count(model => model.Patient.Sex == Sex.Male);
-
-            var countFemale = _reservationRepository.GetModels()
-                .Where(model => model.EmptyPlaceByTypeStatisticId == emptyPlaceByTypeStatisticsIdFemaleId)
-                .Where(model => model.Status == ReservationStatus.Opened)
-                .Count(model => model.Patient.Sex == Sex.Female);
 
             return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
             {
@@ -227,11 +209,7 @@ namespace Services.HospitalRegistrationsService
                 StatisticItems = table,
                 Date = command.Date,
                 SectionProfileName = hospitalSectionProfilesName,
-                CountRegisteredMale = countMale,
-                CountRegisteredFemale = countFemale,
                 HospitalProfileId = command.HospitalProfileId,
-                EmptyPlaceByTypeStatisticIdMaleId = emptyPlaceByTypeStatisticsIdMaleId,
-                EmptyPlaceByTypeStatisticIdFeMaleId = emptyPlaceByTypeStatisticsIdFemaleId
             };
         }
 
@@ -317,7 +295,7 @@ namespace Services.HospitalRegistrationsService
 
         private List<HospitalSectionProfileStorageModel> GetFreeSectionsList(string Date, Guid token)
         {
-            DateTime date = DateTime.ParseExact(Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            var date = DateTime.ParseExact(Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
             var user = _tokenManager.GetUserByToken(token);
             var hospitalId = GetHospitalIdByUserId(user.Id);
@@ -336,7 +314,7 @@ namespace Services.HospitalRegistrationsService
                 }).ToList();
             
 
-            return hospitalSectionProfilesList.Where(model => !table.Any(t => t.HospitalProfileId == model.Id)).ToList();
+            return hospitalSectionProfilesList.Where(model => table.All(t => t.HospitalProfileId != model.Id)).ToList();
         }
 
         private List<CommandAnswerError> ValidateApplyChangesNewHospitalRegistrationCommand(
@@ -359,7 +337,7 @@ namespace Services.HospitalRegistrationsService
         public GetChangeNewHospitalRegistrationCommandAnswer ApplyChangesNewHospitalRegistration(
             GetChangeNewHospitalRegistrationCommand command)
         {
-            DateTime date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
             
             var errors = this.ValidateApplyChangesNewHospitalRegistrationCommand(command);
            

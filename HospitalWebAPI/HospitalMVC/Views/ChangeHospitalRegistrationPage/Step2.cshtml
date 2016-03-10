@@ -39,10 +39,15 @@
                             @foreach (var info in item.StatisticItems)
                             {
                                 <div>
-                                    <br/>
-                                    Пол: @info.Sex.ToCorrectString() <br/>
-                                    Количество: @info.OpenCount <br/>
-                                    <br/>
+                                    <br />
+                                    @if (info.Sex != null)
+                                    {
+                                        <span>Пол:</span>
+                                        <span>@(info.Sex.Value.ToCorrectString())</span>
+                                        <br/>
+                                    }
+                                    Количество: @info.OpenCount <br />
+                                    <br />
                                 </div>
                             }
                         </div>
@@ -60,9 +65,9 @@
                     <div class="alert-info alert">Количество мест на текущую дату ещё не было заполнено, для того, чтобы это сделать, нажмите кнопку "Добавить"</div>
                 }
                 <div>
-                    <br/>
+                    <br />
                     @Html.ActionLink("Добавить", "ChangeHospitalRegistrationForNewSection", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date}, new {@class = "btn-info btn"})
-                    <br/>
+                    <br />
                 </div>
             }
         }
