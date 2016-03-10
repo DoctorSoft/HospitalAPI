@@ -389,11 +389,6 @@ namespace Services.ClinicRegistrationsServices
         public GetMakeHospitalRegistrationsPageInformationCommandAnswer GetMakeHospitalRegistrationsPageInformation(
             GetMakeHospitalRegistrationsPageInformationCommand command)
         {
-            if (command.SexId == null || command.SexId == 0)
-            {
-                command.SexId = (int) Sex.Male;
-            }
-
             var user = this._tokenManager.GetUserByToken(command.Token.Value);
             var hospital = this._hospitalManager.GetHospitalByUser(user);
             var hospitalSectionProfiles =
@@ -403,6 +398,13 @@ namespace Services.ClinicRegistrationsServices
             if (command.HospitalSectionProfileId == null || command.HospitalSectionProfileId == 0)
             {
                 command.HospitalSectionProfileId = hospitalSectionProfiles.FirstOrDefault().Id;
+            }
+
+            var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;
+            
+            if ((command.SexId == null || command.SexId == 0) && hasGenderFactor)
+            {
+                command.SexId = (int) Sex.Male;
             }
 
             const int days = 30;
@@ -442,11 +444,12 @@ namespace Services.ClinicRegistrationsServices
             return new GetMakeHospitalRegistrationsPageInformationCommandAnswer
             {
                 Token = command.Token.Value,
-                SexId = command.SexId.Value,
+                SexId = command.SexId,
                 HospitalSectionProfileId = command.HospitalSectionProfileId.Value,
                 Schedule = startSchedule,
                 Sexes = sexes,
-                HospitalSectionProfiles = hospitalSectionProfilePairs
+                HospitalSectionProfiles = hospitalSectionProfilePairs,
+                HasGenderFactor = hasGenderFactor
             };
         }
 
@@ -610,7 +613,7 @@ namespace Services.ClinicRegistrationsServices
 
             var emptyPlaceByTypeStatistics = _emptyPlaceByTypeStatisticRepository
                 .GetModels()
-                .Where(model => model.Sex == (Sex)command.SexId 
+                .Where(model => model.Sex == (command.SexId == null || command.SexId == 0 ? (Sex?)null : (Sex?)command.SexId)
                     && model.EmptyPlaceStatistic.HospitalSectionProfile.Id == command.HospitalSectionProfileId
                     && model.EmptyPlaceStatistic.Date == date
                     && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospital.Id);

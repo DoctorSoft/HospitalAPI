@@ -50,27 +50,31 @@
             </div>
 
         </div>
-        <div class="col-lg-10 panel-body ">
-            <div class="col-lg-3">
-                <label>Пол:</label>
-            </div>
-            <div class="col-lg-7">
-                @Html.DropDownListFor(answer => answer.Sexes, Model.Sexes.Select(pair => new SelectListItem
-                {
-                    Selected = pair.Key == Model.SexId,
-                    Value = pair.Key.ToString(),
-                    Text = pair.Value,
-                    Disabled = false
-                }), new
-                {
-                    @class = "form-control",
-                    @onchange = "HospitalChange()",
-                    @value = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Key.ToString(),
-                    @text = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Value
-                })
-            </div>
 
-        </div>
+        @if (Model.HasGenderFactor)
+        {
+            <div class="col-lg-10 panel-body ">
+                <div class="col-lg-3">
+                    <label>Пол:</label>
+                </div>
+                <div class="col-lg-7">
+                    @Html.DropDownListFor(answer => answer.Sexes, Model.Sexes.Select(pair => new SelectListItem
+                    {
+                        Selected = pair.Key == Model.SexId,
+                        Value = pair.Key.ToString(),
+                        Text = pair.Value,
+                        Disabled = false
+                    }), new
+                    {
+                        @class = "form-control",
+                        @onchange = "HospitalChange()",
+                        @value = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Key.ToString(),
+                        @text = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Value
+                    })
+                </div>
+
+            </div>
+        }
     </div>
 
 
@@ -110,10 +114,10 @@
                                 @{
                                     index++;
                                 }
-                        </span>
+                            </span>
+                        </div>
                     </div>
-                </div>
-                @foreach (var cell in item.Cells.Values)
+                    @foreach (var cell in item.Cells.Values)
                 {
                     if (cell.IsBlocked)
                     {
@@ -223,12 +227,12 @@
                     }
 
                 }
-                <div class="col-md-2" role="alert">
-                    <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center">
-                        <span aria-hidden="true"></span>
+                    <div class="col-md-2" role="alert">
+                        <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center">
+                            <span aria-hidden="true"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
             }
         }
     </div>

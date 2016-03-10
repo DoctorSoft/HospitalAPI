@@ -12,8 +12,10 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public List<KeyValuePair<int, string>> HospitalSectionProfiles { get; set; }
 
-        public int SexId { get; set; }
+        public int? SexId { get; set; }
 
         public List<KeyValuePair<int, string>> Sexes { get; set; }
+
+        public bool HasGenderFactor { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 {
     public class SaveHospitalRegistrationCommandAnswer : AbstractTokenCommandAnswer
     {
-        public int SexId { get; set; }
+        public int? SexId { get; set; }
 
         public int HospitalSectionProfileId { get; set; }
 
