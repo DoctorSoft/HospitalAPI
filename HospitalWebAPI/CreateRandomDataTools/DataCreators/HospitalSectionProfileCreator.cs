@@ -27,7 +27,10 @@ namespace CreateRandomDataTools.DataCreators
                 from sectionProfile in sectionProfiles
                 select new HospitalSectionProfileStorageModel
                 {
-                    HospitalId = hospital.Id, IsBlocked = false, Name = $"{hospital.Name} {sectionProfile.Name}", SectionProfileId = sectionProfile.Id
+                    HospitalId = hospital.Id, 
+                    IsBlocked = false, 
+                    Name = $"{hospital.Name} {sectionProfile.Name}", SectionProfileId = sectionProfile.Id,
+                    HasGenderFactor = !hospital.IsForChildren
                 }).ToList();
         }
     }

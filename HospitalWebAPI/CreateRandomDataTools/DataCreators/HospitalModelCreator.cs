@@ -15,7 +15,8 @@ namespace CreateRandomDataTools.DataCreators
                     IsBlocked = false,
                     Id = 0,
                     Name = "Гродненская областная детская клиническая больница",
-                    Address = "г. Гродно, ул. Островского, 22"
+                    Address = "г. Гродно, ул. Островского, 22",
+                    IsForChildren = true
                 },
             };
 

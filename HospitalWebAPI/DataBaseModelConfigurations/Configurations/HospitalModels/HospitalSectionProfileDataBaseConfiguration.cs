@@ -21,6 +21,7 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(model => model.Name).IsRequired();
             this.Property(model => model.IsBlocked).IsRequired();
+            this.Property(model => model.HasGenderFactor).IsRequired();
 
             // Links to tables
 

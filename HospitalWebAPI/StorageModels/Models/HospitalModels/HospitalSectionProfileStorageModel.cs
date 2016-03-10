@@ -13,6 +13,8 @@ namespace StorageModels.Models.HospitalModels
 
         public string Name { get; set; }
 
+        public bool HasGenderFactor { get; set; }
+
         //
 
         public HospitalStorageModel Hospital { get; set; }

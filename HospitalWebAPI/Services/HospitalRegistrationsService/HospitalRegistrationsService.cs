@@ -348,7 +348,7 @@ namespace Services.HospitalRegistrationsService
                 if (element.OpenCount < 0)
                     list.Add(new CommandAnswerError
                     {
-                        FieldName = "Число свободных мест (Пол: " + element.Sex.ToCorrectString() + ")",
+                        FieldName = "Число свободных мест (Пол: " + element.Sex?.ToCorrectString() + ")",
                         Title = "Число свободных мест не может быть отрицательным"
                     });
 

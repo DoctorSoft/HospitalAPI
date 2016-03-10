@@ -26,19 +26,21 @@ namespace CreateRandomDataTools.DataCreators
             var startDate = DateTime.Now.AddDays(1).Date;
             const int dayCount = 5;
             var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels()
-                .Select(model => model.Id)
+                .Select(model => new
+                {
+                    Id = model.Id,
+                    HasGenderFactor = model.HasGenderFactor
+                })
                 .ToList();
-
-            var sexes = GetSexes();
 
             var result = Enumerable.Range(0, dayCount)
                 .SelectMany(dayNumber => hospitalSectionProfiles
-                    .Select(hospitalSectionProfileId => new EmptyPlaceStatisticStorageModel
+                    .Select(hospitalSectionProfile => new EmptyPlaceStatisticStorageModel
                     {
                         Date = startDate.AddDays(dayNumber).Date,
                         CreateTime = DateTime.Now,
-                        HospitalSectionProfileId = hospitalSectionProfileId,
-                        EmptyPlaceByTypeStatistics = sexes
+                        HospitalSectionProfileId = hospitalSectionProfile.Id,
+                        EmptyPlaceByTypeStatistics = GetSexes(hospitalSectionProfile.HasGenderFactor)
                             .Select(pair => new EmptyPlaceByTypeStatisticStorageModel
                             {
                                 Sex = pair,
@@ -51,9 +53,17 @@ namespace CreateRandomDataTools.DataCreators
             return result;
         }
 
-        private static List<Sex> GetSexes()
+        private static List<Sex?> GetSexes(bool genderFactor)
         {
-            var sexValues = Enum.GetValues(typeof (Sex)).Cast<Sex>().ToList();
+            List<Sex?> sexValues;
+            if (genderFactor)
+            {
+                sexValues = Enum.GetValues(typeof(Sex)).Cast<Sex>().Select(sex => (Sex?)sex).ToList();
+            }
+            else
+            {
+                sexValues = new List<Sex?> {null};
+            }
 
             return sexValues;
         }

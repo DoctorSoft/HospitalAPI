@@ -22,6 +22,7 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
             this.Property(model => model.Name).IsRequired();
             this.Property(model => model.Address).IsRequired();
             this.Property(model => model.IsBlocked).IsRequired();
+            this.Property(model => model.IsForChildren).IsRequired();
 
             // Links to tables
 

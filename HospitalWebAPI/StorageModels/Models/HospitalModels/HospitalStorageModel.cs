@@ -14,6 +14,7 @@ namespace StorageModels.Models.HospitalModels
 
         public string Name { get; set; }
         public string Address { get; set; }
+        public bool IsForChildren { get; set; }
 
         //
 
