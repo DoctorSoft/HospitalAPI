@@ -21,20 +21,23 @@
 <br>
 
 <div class="panel-body form-group">
-    <div class="col-lg-10 panel-body ">
-        <div class="col-lg-3">
-            <label>Пол:</label>
+    @if (Model.HasGenderFactor)
+    {
+        <div class="col-lg-10 panel-body ">
+            <div class="col-lg-3">
+                <label>Пол:</label>
+            </div>
+            <div class="col-lg-7">
+                @Html.DropDownListFor(answer => answer.Sex, Model.Sexes.Select(pair => new SelectListItem
+                {
+                    Selected = pair.Value == @Model.Sex,
+                    Value = pair.Key.ToString(),
+                    Text = pair.Value,
+                    Disabled = false
+                }), new {@class = "form-control"})
+            </div>
         </div>
-        <div class="col-lg-7">
-            @Html.DropDownListFor(answer => answer.Sex, Model.Sexes.Select(pair => new SelectListItem
-            {
-                Selected = pair.Value == @Model.Sex,
-                Value = pair.Key.ToString(),
-                Text = pair.Value,
-                Disabled = false
-            }), new {@class = "form-control"})
-        </div>
-    </div>
+    }
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
             <label>Отделение (профиль):</label>

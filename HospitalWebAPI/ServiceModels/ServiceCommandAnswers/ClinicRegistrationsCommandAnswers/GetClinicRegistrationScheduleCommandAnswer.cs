@@ -8,7 +8,7 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
     {
         public string Sex { get; set; }
 
-        public int SexId { get; set; }
+        public int? SexId { get; set; }
 
         public string SectionProfile { get; set; }
 
@@ -19,5 +19,7 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
         public int CurrentHospitalId { get; set; }
 
         public List<KeyValuePair<int, string>> Hospitals { get; set; }
+
+        public bool HasGenderFactor { get; set; }
     }
 }

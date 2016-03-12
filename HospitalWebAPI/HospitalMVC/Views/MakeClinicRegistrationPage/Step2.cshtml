@@ -36,16 +36,18 @@
         </div>
 
     </div>
-    <div class="col-lg-10 panel-body ">
-        <div class="col-lg-3">
-            <label>Пол:</label>
+    @if (@Model.SexId != null)
+    {
+        <div class="col-lg-10 panel-body ">
+            <div class="col-lg-3">
+                <label>Пол:</label>
+            </div>
+            <div class="col-lg-7">
+                @Model.Sex
+                @Html.HiddenFor(answer => answer.SexId)
+            </div>
         </div>
-        <div class="col-lg-7">
-            @Model.Sex
-            @Html.HiddenFor(answer => answer.SexId)
-        </div>
-
-    </div>
+    }
     <div class="col-lg-10 panel-body ">
         <div class="col-lg-3">
             <label>Больница:</label>

@@ -97,6 +97,10 @@ namespace Services.ClinicRegistrationsServices
         public GetMakeClinicRegistrationsPageInformationCommandAnswer GetMakeClinicRegistrationsPageInformation(
             GetMakeClinicRegistrationsPageInformationCommand command)
         {
+            var user = this._tokenManager.GetUserByToken(command.Token);
+            var clinic = this._clinicManager.GetClinicByUser(user);
+            var hasGenderFactor = !clinic.IsForChildren;
+            
             var sexes =
                 Enum.GetValues(typeof (Sex))
                     .Cast<Sex>()
@@ -115,7 +119,8 @@ namespace Services.ClinicRegistrationsServices
                 SectionProfiles = sectionProfiles,
                 SectionProfile = sectionProfiles.FirstOrDefault().Value,
                 Sexes = sexes,
-                Sex = sexes.FirstOrDefault().Value
+                Sex = sexes.FirstOrDefault().Value,
+                HasGenderFactor = hasGenderFactor
             };
         }
 
@@ -165,7 +170,7 @@ namespace Services.ClinicRegistrationsServices
             return new GetClinicRegistrationScheduleCommandAnswer
             {
                 Token = command.Token.Value,
-                Sex = ((Sex)command.Sex).ToCorrectString(),
+                Sex = command.Sex != null ? ((Sex)command.Sex).ToCorrectString() : string.Empty,
                 SexId = command.Sex,
                 SectionProfileId = command.SectionProfileId,
                 SectionProfile = _sectionProfileRepository
@@ -195,7 +200,7 @@ namespace Services.ClinicRegistrationsServices
                 SexId = command.SexId,
                 Code = Guid.NewGuid().ToString(),
                 CurrentHospital = hospital.Name,
-                Sex = ((Sex)command.SexId).ToCorrectString(),
+                Sex = command.SexId != null ? ((Sex)command.SexId).ToCorrectString() : string.Empty,
                 Token = command.Token.Value,
                 FirstName = "",
                 LastName = "",
@@ -276,7 +281,7 @@ namespace Services.ClinicRegistrationsServices
 
             var emptyPlaceByTypeStatistics = _emptyPlaceByTypeStatisticRepository
                 .GetModels()
-                .Where(model => model.Sex == (Sex)command.SexId 
+                .Where(model => model.Sex == (Sex?)command.SexId 
                     && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId
                     && model.EmptyPlaceStatistic.Date == date
                     && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId);
@@ -292,7 +297,7 @@ namespace Services.ClinicRegistrationsServices
                     FirstName = command.FirstName,
                     LastName = command.LastName,
                     PhoneNumber = command.PhoneNumber,
-                    Sex = (Sex) command.SexId
+                    Sex = command.SexId == null ? 0 :(Sex) command.SexId
                 },
                 ApproveTime = DateTime.Now,
                 ClinicId = clinicId,
@@ -491,7 +496,7 @@ namespace Services.ClinicRegistrationsServices
                 FirstName = command.FirstName,
                 Date = DateTime.Parse(command.Date).ToCorrectDateString(),
                 PhoneNumber = command.PhoneNumber,
-                Age = command.Age,
+                Age = command.Age ?? 0,
                 Code = command.Code,
                 Diagnosis = command.Diagnosis,
                 DoesAgree = command.DoesAgree ?? true,
@@ -629,7 +634,7 @@ namespace Services.ClinicRegistrationsServices
                     FirstName = command.FirstName,
                     LastName = command.LastName,
                     PhoneNumber = command.PhoneNumber,
-                    Sex = (Sex) command.SexId
+                    Sex = command.SexId == null ? 0 : (Sex) command.SexId
                 },
                 ApproveTime = DateTime.Now,
                 ClinicId = clinicId,
@@ -674,7 +679,7 @@ namespace Services.ClinicRegistrationsServices
                 Token = command.Token.Value,
                 SexId = command.SexId,
                 HospitalSectionProfileId = command.HospitalSectionProfileId,
-                Sex = ((Sex)command.SexId).ToCorrectString(),
+                Sex = command.SexId != null ? ((Sex)command.SexId).ToCorrectString() : string.Empty,
                 ClinicId = command.ClinicId,
                 LastName = command.LastName,
                 FirstName = command.FirstName,

@@ -5,7 +5,7 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
 {
     public class GetClinicRegistrationUserFormCommand : AbstractTokenCommand
     {
-        public int SexId { get; set; }
+        public int? SexId { get; set; }
 
         public int SectionProfileId { get; set; }
 

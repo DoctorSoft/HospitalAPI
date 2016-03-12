@@ -12,5 +12,7 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
         public string SectionProfile { get; set; }
 
         public string Sex { get; set; }
+
+        public bool HasGenderFactor { get; set; }
     }
 }
