@@ -14,6 +14,7 @@
         HospitalUserMakeRegistrations = 105,
         HospitalUserWatchRegisteredUsers = 106,
         HospitalUserSendDischarges = 107,
+        HospitalUserAutocompletePlaces = 108,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserPrimaryAccess = 200,          // If this function is blocked then all clinic user functions are blocked (Equal function is ShowHomePage for clinic users)

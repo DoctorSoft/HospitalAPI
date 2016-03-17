@@ -416,6 +416,7 @@
     <Content Include="Views\ChangeHospitalRegistrationPage\ShowComingRecords.cshtml" />
     <Content Include="Views\ClinicNoticesPage\ShowDischargesList.cshtml" />
     <Content Include="Views\HospitalNoticesPage\ShowPageToSendDischange.cshtml" />
+    <Content Include="Views\ChangeHospitalRegistrationPage\ShowAutocompletePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -28,8 +28,11 @@ namespace Services.Interfaces.HospitalRegistrationsService
 
         BreakHospitalRegistrationCommandAnswer BreakHospitalRegistration(
             BreakHospitalRegistrationCommand command);
+
         GetComingRecordsCommandAnswer GetComingRecords(
             GetComingRecordsCommand command);
-        
+
+        ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command);
+
     }
 }

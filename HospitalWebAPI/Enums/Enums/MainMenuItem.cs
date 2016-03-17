@@ -13,6 +13,7 @@
         HospitalUserMakeRegistrationsPage = 105,
         HospitalUserWatchRegisteredUsers = 106,
         HospitalUserSendDischarges = 107,
+        HospitalUserAutocompletePlaces = 108,
 
         //ClinicUserFunctions 200 <= x < 300
         ClinicUserMainPage = 200,          

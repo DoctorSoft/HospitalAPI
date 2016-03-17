@@ -52,6 +52,7 @@ namespace HospitalMVC.Filters
                 {MainMenuItem.HospitalUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeHospitalRegistrationPage", Label = "Зарегистрировать" }},
                 {MainMenuItem.HospitalUserWatchRegisteredUsers, new MainMenuTab { ActionName = "ShowComingRecords", ControllerName = "ChangeHospitalRegistrationPage", Label = "Показать регистрации"}},
                 {MainMenuItem.HospitalUserSendDischarges, new MainMenuTab { ActionName = "ShowPageToSendDischange", ControllerName = "HospitalNoticesPage", Label = "Отправить выписку"}},
+                {MainMenuItem.HospitalUserAutocompletePlaces, new MainMenuTab { ActionName = "ShowAutocompletePage", ControllerName = "ChangeHospitalRegistrationPage", Label = "Автозаполнение"}},
 
                 {MainMenuItem.ClinicUserMakeRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "MakeClinicRegistrationPage", Label = MainResources.MenuItemMakeClinicRegistration }},
                 {MainMenuItem.ClinicUserBreakRegistrationsPage, new MainMenuTab { ActionName = "Index", ControllerName = "BreakClinicRegistrationPage", Label = MainResources.MenuItemBreakClinicRegistration }},

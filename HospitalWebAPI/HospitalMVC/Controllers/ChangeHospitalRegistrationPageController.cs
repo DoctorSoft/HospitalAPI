@@ -144,5 +144,13 @@ namespace HospitalMVC.Controllers
 
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserAutocompletePlaces)]
+        public ActionResult ShowAutocompletePage(ShowAutocompletePageCommand command)
+        {
+            var answer = _hospitalRegistrationsService.ShowAutocompletePage(command);
+
+            return View(answer);
+        }
     }
 }

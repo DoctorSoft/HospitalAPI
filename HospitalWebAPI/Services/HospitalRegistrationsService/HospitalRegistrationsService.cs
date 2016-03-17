@@ -524,5 +524,13 @@ namespace Services.HospitalRegistrationsService
                 Table =  result
             };
         }
+
+        public ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command)
+        {
+            return new ShowAutocompletePageCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
     }
 }
