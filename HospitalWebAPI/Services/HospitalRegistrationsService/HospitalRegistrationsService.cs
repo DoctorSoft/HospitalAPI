@@ -34,10 +34,11 @@ namespace Services.HospitalRegistrationsService
         private readonly IUserRepository _userRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IPatientRepository _patientRepository;
+        private readonly IHospitalManager _hospitalManager;
 
         public HospitalRegistrationsService(IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository,
             IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager,
-            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository, IUserRepository userRepository, IMessageRepository messageRepository, IPatientRepository patientRepository)
+            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository, IUserRepository userRepository, IMessageRepository messageRepository, IPatientRepository patientRepository, IHospitalManager hospitalManager)
         {
             _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
             _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
@@ -48,6 +49,7 @@ namespace Services.HospitalRegistrationsService
             _userRepository = userRepository;
             _messageRepository = messageRepository;
             _patientRepository = patientRepository;
+            this._hospitalManager = hospitalManager;
         }
 
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
@@ -527,10 +529,49 @@ namespace Services.HospitalRegistrationsService
 
         public ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command)
         {
+            var user = this._tokenManager.GetUserByToken(command.Token.Value);
+            var hospital = this._hospitalManager.GetHospitalByUser(user);
+            var hospitalSectionProfiles =
+                this._hospitalSectionProfileRepository.GetModels().Where(model => model.HospitalId == hospital.Id)
+                .ToList();
+
+            if (command.HospitalSectionProfileId == null || command.HospitalSectionProfileId == 0)
+            {
+                command.HospitalSectionProfileId = hospitalSectionProfiles.FirstOrDefault().Id;
+            }
+
+            var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;
+
+            if ((command.SexId == null || command.SexId == 0) && hasGenderFactor)
+            {
+                command.SexId = (int)Sex.Male;
+            }
+
+            var sexes = Enum.GetValues(typeof(Sex))
+                .Cast<Sex>()
+                .Select(sex => new KeyValuePair<int, string>((int)sex, sex.ToCorrectString()))
+                .ToList();
+
+            var hospitalSectionProfilePairs =
+                hospitalSectionProfiles.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
+
             return new ShowAutocompletePageCommandAnswer
             {
-                Token = command.Token.Value
+                Token = command.Token.Value,
+                SexId = command.SexId,
+                HospitalSectionProfileId = command.HospitalSectionProfileId.Value,
+                Sexes = sexes,
+                HospitalSectionProfiles = hospitalSectionProfilePairs,
+                HasGenderFactor = hasGenderFactor
             };
+        }
+
+        public AutocompleteEmptyPlacesCommandAnswer AutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command)
+        {
+            return new AutocompleteEmptyPlacesCommandAnswer
+                       {
+                           Token = command.Token.Value
+                       };
         }
     }
 }

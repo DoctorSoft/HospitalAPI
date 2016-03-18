@@ -4,5 +4,69 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ShowAutocompletePage</h2>
+@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowAutocompletePageCommandAnswer
+
+<h2>Заполнить все свободные даты</h2>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        var setStartValue = function () {
+            $('#HospitalSectionProfiles').val('@Model.HospitalSectionProfileId');
+            $('#Sexes').val('@Model.SexId');
+        }
+
+        setStartValue();
+
+        var SubmitData = function (e) {
+            var url = '@Url.Action("AutocompleteEmptyPlaces", "ChangeHospitalRegistrationPage", new {Token = @Model.Token})'
+                + '?SexId=' + $('#Sexes').val()
+                + '&HospitalSectionProfileId=' + $('#HospitalSectionProfiles').val()
+                + '&CountValue=' + $('#CountValue').val();
+            window.location.replace(url);
+        };
+    </script>
+}
+
+<div class="schedule-label" style="align-items: center">
+    <div class="panel-body form-group schedule-label">
+        <div class="col-lg-10 panel-body ">
+            <div class="col-lg-3">
+                <label>Отделение:</label>
+            </div>
+            <div class="col-lg-7">
+                @Html.DropDownListFor(answer => answer.HospitalSectionProfiles, Model.HospitalSectionProfiles.Select(pair => new SelectListItem { Selected = pair.Key == Model.HospitalSectionProfileId, Value = pair.Key.ToString(), Text = pair.Value, Disabled = false }), new { @class = "form-control", @value = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Key.ToString(), @text = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Value })
+            </div>
+
+        </div>
+
+        @if (Model.HasGenderFactor)
+        {
+            <div class="col-lg-10 panel-body ">
+                <div class="col-lg-3">
+                    <label>Пол:</label>
+                </div>
+                <div class="col-lg-7">
+                    @Html.DropDownListFor(answer => answer.Sexes, Model.Sexes.Select(pair => new SelectListItem { Selected = pair.Key == Model.SexId, Value = pair.Key.ToString(), Text = pair.Value, Disabled = false }), new { @class = "form-control", @value = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Key.ToString(), @text = Model.Sexes.FirstOrDefault(pair => pair.Key == Model.SexId).Value })
+                </div>
+
+            </div>
+        }
+
+        <div class="col-lg-10 panel-body ">
+            <div class="col-lg-3">
+                <label>Количество мест:</label>
+            </div>
+            <div class="col-lg-7">
+                <input class="form-control" type="number" required value="@Model.CountValue" name="CountValue" id="CountValue">
+            </div>
+        </div>
+
+        <div class="col-lg-10 panel-body ">
+            <div class="col-lg-3">
+                <input class="btn btn-sm btn-primary" type="button" onclick="SubmitData();" value="Добавить" />
+            </div>
+        </div>
+    </div>
+</div>
 

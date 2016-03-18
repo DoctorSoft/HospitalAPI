@@ -34,5 +34,7 @@ namespace Services.Interfaces.HospitalRegistrationsService
 
         ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command);
 
+        AutocompleteEmptyPlacesCommandAnswer AutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command);
+
     }
 }

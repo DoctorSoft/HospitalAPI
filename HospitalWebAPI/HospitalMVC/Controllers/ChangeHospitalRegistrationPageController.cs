@@ -152,5 +152,13 @@ namespace HospitalMVC.Controllers
 
             return View(answer);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserAutocompletePlaces)]
+        public ActionResult AutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command)
+        {
+            var answer = _hospitalRegistrationsService.AutocompleteEmptyPlaces(command);
+
+            return RedirectToAction("Index", "Home", new { Token = command.Token });
+        }
     }
 }

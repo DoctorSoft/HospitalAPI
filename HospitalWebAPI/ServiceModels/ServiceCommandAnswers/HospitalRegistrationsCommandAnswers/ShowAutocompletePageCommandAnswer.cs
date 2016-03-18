@@ -5,10 +5,16 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
 {
     public class ShowAutocompletePageCommandAnswer : AbstractTokenCommandAnswer
     {
+        public int HospitalSectionProfileId { get; set; }
+
+        public List<KeyValuePair<int, string>> HospitalSectionProfiles { get; set; }
+
         public int? SexId { get; set; }
 
-        public int? HospitalSectionProfileId { get; set; }
+        public List<KeyValuePair<int, string>> Sexes { get; set; }
 
-        public List<int> HospitalSectionProfiles { get; set; } 
+        public bool HasGenderFactor { get; set; }
+
+        public int CountValue { get; set; }
     }
 }
