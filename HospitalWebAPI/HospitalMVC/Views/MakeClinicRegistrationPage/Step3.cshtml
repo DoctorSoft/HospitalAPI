@@ -96,9 +96,10 @@
             <div class="col-md-5">
                 <div class="hidden">
                     @Html.EditorFor(command => command.Date)
+                    @Html.EditorFor(command => command.DateValue)
                 </div>
                 <h4>
-                    <b>@Model.DateValue.ToCorrectDateString()</b>
+                    <b>@Model.Date</b>
                 </h4>
             </div>
         </div>

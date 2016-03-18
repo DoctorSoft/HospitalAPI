@@ -8,6 +8,8 @@ using Services.Interfaces.ClinicRegistrationsServices;
 
 namespace HospitalMVC.Controllers
 {
+    using HelpingTools.ExtentionTools;
+
     public class MakeClinicRegistrationPageController : Controller
     {
         private readonly IClinicRegistrationsService _clinicRegistrationsService;
@@ -51,7 +53,7 @@ namespace HospitalMVC.Controllers
                 {
                     Sex = command.Sex,
                     DateValue = command.DateValue,
-                    Date = command.Date,
+                    Date = command.DateValue.ToCorrectDateString(),
                     CurrentHospitalId = command.CurrentHospitalId,
                     Token = answer.Token,
                     SectionProfileId = command.SectionProfileId,

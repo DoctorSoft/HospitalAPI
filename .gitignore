@@ -52,3 +52,10 @@ Publish2.zip
 bin.zip
 Part1.zip
 Part2.zip
+HospitalWebAPI/Enums/bin/
+HospitalWebAPI/HandleTools/bin/
+HospitalWebAPI/HandleToolsInterfaces/bin/
+HospitalWebAPI/HtmlHelpers/bin/HtmlHelpers.dll
+HospitalWebAPI/HtmlHelpers/bin/
+HospitalWebAPI/Resources/bin/
+HospitalWebAPI/StorageModels/bin/

@@ -494,7 +494,7 @@ namespace Services.ClinicRegistrationsServices
                 ClinicId = command.ClinicId.Value,
                 LastName = command.LastName,
                 FirstName = command.FirstName,
-                Date = DateTime.Parse(command.Date).ToCorrectDateString(),
+                Date = command.Date,////DateTime.Parse(command.Date).ToCorrectDateString(),
                 PhoneNumber = command.PhoneNumber,
                 Age = command.Age ?? 0,
                 Code = command.Code,
@@ -589,7 +589,7 @@ namespace Services.ClinicRegistrationsServices
                 {
                     SexId = command.SexId,
                     HospitalSectionProfileId = command.HospitalSectionProfileId,
-                    Sex = ((Sex) command.SexId).ToCorrectString(),
+                    Sex = command.SexId == null ? string.Empty : ((Sex) command.SexId).ToCorrectString(),
                     ClinicId = command.ClinicId,
                     LastName = command.LastName,
                     FirstName = command.FirstName,
