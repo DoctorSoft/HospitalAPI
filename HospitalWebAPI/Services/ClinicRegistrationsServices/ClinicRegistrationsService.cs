@@ -292,7 +292,7 @@ namespace Services.ClinicRegistrationsServices
             {
                 Patient = new PatientStorageModel
                 {
-                    Age = command.Age.Value,
+                    Years = command.Age.Value,
                     Code = command.Code,
                     FirstName = command.FirstName,
                     LastName = command.LastName,
@@ -629,7 +629,7 @@ namespace Services.ClinicRegistrationsServices
             {
                 Patient = new PatientStorageModel
                 {
-                    Age = command.Age.Value,
+                    Years = command.Age.Value,
                     Code = command.Code,
                     FirstName = command.FirstName,
                     LastName = command.LastName,

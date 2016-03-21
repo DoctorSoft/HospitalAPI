@@ -507,7 +507,7 @@ namespace Services.HospitalRegistrationsService
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Age = model.Age,
+                Age = model.Years,
                 Diagnosis = model.Reservation.Diagnosis,
                 SectionName = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfile.Name,
                 ClinicName = model.Reservation.Clinic.Name,

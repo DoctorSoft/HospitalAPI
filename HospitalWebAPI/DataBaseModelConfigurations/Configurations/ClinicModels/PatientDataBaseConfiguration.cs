@@ -21,8 +21,10 @@ namespace DataBaseModelConfigurations.Configurations.ClinicModels
             this.Property(model => model.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             this.Property(model => model.Code).IsRequired();
             this.Property(model => model.Sex).IsRequired();
-            this.Property(model => model.Age).IsRequired();
+            this.Property(model => model.Years).IsRequired();
+            this.Property(model => model.Months).IsRequired();
             this.Property(model => model.FirstName).IsRequired();
+            this.Property(model => model.Weeks).IsRequired();
             this.Property(model => model.LastName).IsRequired();
             this.Property(model => model.PhoneNumber).IsRequired();
 
