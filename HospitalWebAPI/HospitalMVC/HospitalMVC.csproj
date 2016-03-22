@@ -267,6 +267,7 @@
     <Compile Include="Controllers\ReceptionUserUnmarkClientsPageController.cs" />
     <Compile Include="Controllers\ReviewerHomePageController.cs" />
     <Compile Include="Controllers\ReviewerShowStatisticPageController.cs" />
+    <Compile Include="Controllers\ViewHospitalRegistrationsController.cs" />
     <Compile Include="Filters\TokenAuthorizationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -413,10 +414,10 @@
     <Content Include="Views\MakeHospitalRegistrationPage\Index.cshtml" />
     <Content Include="Views\MakeHospitalRegistrationPage\Step2.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\ViewDetailedInformationOnRegisteredPatients.cshtml" />
-    <Content Include="Views\ChangeHospitalRegistrationPage\ShowComingRecords.cshtml" />
     <Content Include="Views\ClinicNoticesPage\ShowDischargesList.cshtml" />
     <Content Include="Views\HospitalNoticesPage\ShowPageToSendDischange.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\ShowAutocompletePage.cshtml" />
+    <Content Include="Views\ViewHospitalRegistrations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

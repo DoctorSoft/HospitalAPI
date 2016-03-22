@@ -1,0 +1,128 @@
+﻿@using HelpingTools.ExtentionTools
+@using Resources
+@using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities
+@model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.GetComingRecordsCommandAnswer
+
+@{
+    ViewBag.Title = "ShowComingRecords";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<AllHospitalRegistrations> filterListByDate = Model.Table
+        .GroupBy(p => p.Date)
+        .Select(g => g.First())
+        .ToList();
+}
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        @{
+            DateTime curDateTime = DateTime.Now;
+            for (int index = 0; index < filterListByDate.Count; index++)
+            {
+                var record = filterListByDate[index];
+                if (record.Date > curDateTime)
+                {
+
+                    <div class="panel-heading" style="box-sizing: border-box; border-bottom: 1px solid #ddd;">
+                        <div class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + index)>
+                                <span style="max-width: 50px">
+                                    <button class="btn btn-default btn-xs">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </button>
+                                    <strong>
+                                        @record.Date.ToCorrectDateString()
+                                    </strong>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div id=@("collapse" + index) class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>№</th>
+                                        <th>Фамилия</th>
+                                        <th>Имя</th>
+                                        <th>Номер телефона</th>
+                                        <th>Возраст</th>
+                                        <th>Диагноз</th>
+                                        <th>Направляющее ЛПУ</th>
+                                        <th>Отделение</th>
+                                        <th>Доктор</th>
+                                        <th>Дата регистрации</th>
+                                        <th>Опции</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int countPatient = 1;
+
+                                        foreach (var patient in @Model.Table)
+                                        {
+                                            if (patient.Date == record.Date)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @countPatient
+                                                    </td>
+                                                    <td>
+                                                        @patient.LastName
+                                                    </td>
+                                                    <td>
+                                                        @patient.FirstName
+                                                    </td>
+                                                    <td>
+                                                        @patient.PhoneNumber
+                                                    </td>
+                                                    <td>
+                                                        @patient.Age
+                                                    </td>
+                                                    <td>
+                                                        @patient.Diagnosis
+                                                    </td>
+                                                    <td>
+                                                        @patient.ClinicName
+                                                    </td>
+                                                    <td>
+                                                        @patient.SectionName
+                                                    </td>
+                                                    <td>
+                                                        @patient.DoctorName
+                                                    </td>
+                                                    <td>
+                                                        @patient.RegistrationDate.ToCorrectDateString()
+                                                    </td>
+                                                    <td>
+                                                        <input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@( "#modalWindow" + index + countPatient) />
+                                                    </td>
+                                                </tr>
+                                        
+                                                @ModalWindowsHelper.AddActionModalWindow(helper: Html,
+                                                headText: "Подтверждение",
+                                                bodyText: "Вы уверены?",
+                                                actionName: "BreakRegistration",
+                                                controlName: "ViewHospitalRegistrations",
+                                                paramsList: new { Token = Model.Token, ReservationId = @patient.ReservationId },
+                                                applyButtonName: "Применить",
+                                                id: index + "" + countPatient)
+                                        
+                                                countPatient++;
+                                            }
+                                        }
+}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+<div>
+    <input type="button" title="Back" class="btn btn-info" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "HospitalUserHomePage", new { Token = Model.Token })'" />
+</div>
+
+

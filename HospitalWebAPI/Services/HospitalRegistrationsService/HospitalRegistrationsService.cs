@@ -507,12 +507,15 @@ namespace Services.HospitalRegistrationsService
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                PhoneNumber = model.PhoneNumber,
                 Age = model.Years,
                 Diagnosis = model.Reservation.Diagnosis,
                 SectionName = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfile.Name,
                 ClinicName = model.Reservation.Clinic.Name,
                 Date = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date,
-                DoctorName = model.Reservation.Reservator.Name
+                DoctorName = model.Reservation.Reservator.Name,
+                RegistrationDate = model.Reservation.ApproveTime,
+                ReservationId = model.Reservation.Id
             })
             .OrderBy(registrations => registrations.Date)
             .ThenBy(registrations => registrations.SectionName)
