@@ -16,7 +16,7 @@
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
         @{
-            DateTime curDateTime = DateTime.Now;
+            DateTime curDateTime = DateTime.Now.Date;
             for (int index = 0; index < filterListByDate.Count; index++)
             {
                 var record = filterListByDate[index];
