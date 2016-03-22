@@ -484,6 +484,7 @@ namespace Services.HospitalRegistrationsService
 
             return new BreakHospitalRegistrationCommandAnswer
             {
+                
             };
         }
 
@@ -568,6 +569,54 @@ namespace Services.HospitalRegistrationsService
 
         public AutocompleteEmptyPlacesCommandAnswer AutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command)
         {
+            var user = this._tokenManager.GetUserByToken(command.Token.Value);
+            var hospital = this._hospitalManager.GetHospitalByUser(user);
+
+            var placeStatistics = _emptyPlaceByTypeStatisticRepository.GetModels();
+
+            const int ForNextDays = 30; 
+            var startDay = DateTime.Now.Date;
+            var endDay = startDay.AddDays(ForNextDays);
+
+            var correctPlaceStatistics = ((IDbSet<EmptyPlaceByTypeStatisticStorageModel>)placeStatistics)
+                .Include(model => model.EmptyPlaceStatistic)
+                .Where(model => model.Sex == (Sex?)command.SexId)
+                .Where(model => model.EmptyPlaceStatistic.Date >= startDay && model.EmptyPlaceStatistic.Date <= endDay)
+                .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId)
+                .ToList();
+
+            if (hospital.IsForChildren)
+            {
+                for (var day = 0; day < 30; day++)
+                {
+                    var nextDate = startDay.AddDays(day);
+                    if (!correctPlaceStatistics.Select(model => model.EmptyPlaceStatistic.Date).Contains(nextDate))
+                    {
+                        var newStatistic = new EmptyPlaceStatisticStorageModel
+                                             {
+                                                 Date = nextDate,
+                                                 HospitalSectionProfileId = command.HospitalSectionProfileId,
+                                                 CreateTime = DateTime.Now,
+                                                 EmptyPlaceByTypeStatistics = new []
+                                                                                  {
+                                                                                      new EmptyPlaceByTypeStatisticStorageModel
+                                                                                          {
+                                                                                              Sex = null,
+                                                                                              Count = command.CountValue
+                                                                                          } 
+                                                                                  }
+                                             };
+                        this._emptyPlaceStatisticRepository.Add(newStatistic);
+                    }
+                }
+            }
+            else
+            {
+                throw new NotImplementedException("This function is not implemented for not children's hospitals");
+            }
+
+            this._emptyPlaceStatisticRepository.SaveChanges();
+
             return new AutocompleteEmptyPlacesCommandAnswer
                        {
                            Token = command.Token.Value

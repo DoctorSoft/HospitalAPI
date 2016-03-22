@@ -16,5 +16,10 @@ namespace Enums.EnumExtensions
             }
             return null;
         }
+
+        public static Sex GetOppositeSex(this Sex sex)
+        {
+            return sex == Sex.Female ? Sex.Male : Sex.Female;
+        }
     }
 }
