@@ -7,11 +7,11 @@ namespace HtmlHelpers.GeneralHtmlHelper
     public class ModalWindowsHelper
     {
         public static HtmlString AddActionModalWindow(HtmlHelper helper, string headText, string bodyText, string actionName,
-            string controlName, object paramsList, string applyButtonName)
+            string controlName, object paramsList, string applyButtonName, string id)
         {
             var a = helper.ActionLink(applyButtonName, actionName, controlName, paramsList, new { @class = "btn btn-default" });
 
-            var result = "<div id='modalWindow' class='modal fade' role='dialog'>" +
+            var result = "<div id='modalWindow"+id+"' class='modal fade' role='dialog'>" +
                             "<div class='modal-dialog'>" +
                             "<div class='modal-content'>" +
                             "<div class='modal-header'>" +

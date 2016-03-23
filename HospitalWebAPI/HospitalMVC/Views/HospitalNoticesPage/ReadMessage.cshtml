@@ -14,7 +14,7 @@
 </div>
 <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "HospitalNoticesPage", new { Token = Model.Token })'" />
 
-<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalWindow">@MainResources.ButtonDeleteMessage</button>
+<button type="button" class="btn btn-default" data-toggle="modal" data-target=@("#modalWindow" + Model.MessageId)>@MainResources.ButtonDeleteMessage</button>
 
 @ModalWindowsHelper.AddActionModalWindow(helper: Html,
     headText: "Подтверждение", 
@@ -22,4 +22,5 @@
     actionName: "RemoveMessage", 
     controlName: "HospitalNoticesPage", 
     paramsList: new {Token = Model.Token, MessageId = Model.MessageId}, 
-    applyButtonName: "Удалить")
+    applyButtonName: "Удалить",
+    id: Model.MessageId.ToString())

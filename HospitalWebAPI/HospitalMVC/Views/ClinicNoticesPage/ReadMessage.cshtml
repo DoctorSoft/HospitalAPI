@@ -1,4 +1,5 @@
-﻿@using Resources
+﻿@using System.Globalization
+@using Resources
 @model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetClinicMessageByIdCommandAnswer
 
 @{
@@ -13,7 +14,7 @@
     </div>
 </div>
 <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "ClinicNoticesPage", new { Token = Model.Token })'" />
-<input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target="#modalWindow" />
+<input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@("#modalWindow"+Model.MessageId) />
 
 @ModalWindowsHelper.AddActionModalWindow(helper: Html,
     headText: "Подтверждение",
@@ -21,4 +22,5 @@
     actionName: "RemoveMessage",
     controlName: "ClinicNoticesPage",
     paramsList: new { Token = Model.Token, MessageId = Model.MessageId },
-    applyButtonName: "Удалить")
+    applyButtonName: "Удалить",
+    id: Model.MessageId.ToString())

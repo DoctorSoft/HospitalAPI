@@ -55,9 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumExtensions\AgeRangeExtension.cs" />
     <Compile Include="EnumExtensions\DateTimeExtensions.cs" />
     <Compile Include="EnumExtensions\SexExtensions.cs" />
     <Compile Include="Enums\AccessType.cs" />
+    <Compile Include="Enums\AgeRange.cs" />
     <Compile Include="Enums\FunctionIdentityName.cs" />
     <Compile Include="Enums\MainMenuItem.cs" />
     <Compile Include="Enums\MessageType.cs" />

@@ -136,15 +136,6 @@ namespace HospitalMVC.Controllers
             }
         }
 
-
-        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserWatchRegisteredUsers)]
-        public ActionResult ShowComingRecords(GetComingRecordsCommand command)
-        {
-            var answer = _hospitalRegistrationsService.GetComingRecords(command);
-
-            return View(answer);
-        }
-
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserAutocompletePlaces)]
         public ActionResult ShowAutocompletePage(ShowAutocompletePageCommand command)
         {

@@ -15,7 +15,11 @@ namespace StorageModels.Models.ClinicModels
 
         public string LastName { get; set; }
 
-        public int Age { get; set; }
+        public int Years { get; set; }
+
+        public int Months { get; set; }
+
+        public int Weeks { get; set; }
 
         public Sex Sex { get; set; }
 

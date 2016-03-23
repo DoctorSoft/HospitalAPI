@@ -23,6 +23,7 @@
 }
 
 @using Enums.EnumExtensions
+@using Enums.Enums
 @using HelpingTools.ExtentionTools
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetMakeHospitalRegistrationsPageInformationCommandAnswer
 
@@ -48,7 +49,12 @@
                     @text = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Value
                 })
             </div>
-
+            <div class="col-lg-3">
+                <label>Возраст пациента:</label>
+            </div>
+            <div class="col-lg-7">
+                @Html.DropDownList("AgeRange", new SelectList(Enum.GetValues(typeof(AgeRange))), new { @class = "form-control"})
+            </div>
         </div>
 
         @if (Model.HasGenderFactor)
@@ -61,8 +67,7 @@
                     @Html.DropDownListFor(answer => answer.Sexes, Model.Sexes.Select(pair => new SelectListItem
                     {
                         Selected = pair.Key == Model.SexId,
-                        Value = pair.Key.ToString(),
-                        Text = pair.Value,
+                        
                         Disabled = false
                     }), new
                     {

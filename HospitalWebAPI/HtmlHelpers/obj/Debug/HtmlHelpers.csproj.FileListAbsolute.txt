@@ -32,7 +32,6 @@ D:\Project\HospitalWebAPI\HtmlHelpers\bin\System.Web.Extensions.dll
 D:\Project\HospitalWebAPI\HtmlHelpers\bin\System.Web.Services.dll
 D:\Project\HospitalWebAPI\HtmlHelpers\bin\System.Xml.dll
 D:\Project\HospitalWebAPI\HtmlHelpers\bin\System.Xml.Linq.dll
-D:\Project\HospitalWebAPI\HtmlHelpers\obj\Debug\HtmlHelpers.csprojResolveAssemblyReference.cache
 D:\!HospitalWebAPI\HospitalWebAPI\HtmlHelpers\bin\HtmlHelpers.dll.config
 D:\!HospitalWebAPI\HospitalWebAPI\HtmlHelpers\bin\HtmlHelpers.dll
 D:\!HospitalWebAPI\HospitalWebAPI\HtmlHelpers\bin\HtmlHelpers.pdb
