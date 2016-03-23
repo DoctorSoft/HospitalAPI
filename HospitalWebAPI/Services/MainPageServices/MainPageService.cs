@@ -107,7 +107,9 @@ namespace Services.MainPageServices
                 Token = (Guid)command.Token,
                 UserName = currentUser.Name,
                 CountNewNotices = countNewNotices,
-                ShowModalWindow = command.ShowModalWindow
+                ShowModalWindow = command.ShowModalWindow,
+                HasDialogMessage = command.HasDialogMessage != null && command.HasDialogMessage.Value,
+                DialogMessage = command.DialogMessage
             };
             return answer;
         }

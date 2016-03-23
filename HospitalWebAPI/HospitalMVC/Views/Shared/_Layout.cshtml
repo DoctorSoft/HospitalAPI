@@ -1,5 +1,4 @@
-﻿@using Enums.Enums
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -11,6 +10,11 @@
 
 </head>
 <body>
+
+@section scripts
+{
+}
+
 <div>
     <div class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -28,25 +32,18 @@
                         <ul class="nav navbar-nav dropdown-menu nav-pills" style="background-color: #333333">
                             @foreach (var nextTab in ViewBag.MainMenuTabs)
                             {
-                                /*if (!nextTab.IsEnabled)
+                                if (nextTab.IsActive)
                                 {
-                                    <li class="disabled" style="width: 100%; height: 50px"><a class=" nav">@nextTab.Label</a></li>
+                                    <li class="active" style="background-color: black; width: 100%; height: 50px">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
                                 }
                                 else
-                                {*/
-                                    if (nextTab.IsActive)
-                                    {
-                                        <li class="active" style="background-color: black; width: 100%; height: 50px">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                                    }
-                                    else
-                                    {
-                                        <li style="width: 100%; height: 50px">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                                    }
-                                /*}*/
+                                {
+                                    <li style="width: 100%; height: 50px">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                                }
                             }
                         </ul>
                     </li>
-}
+                }
             </ul>
 
         </div>
@@ -55,6 +52,34 @@
 
 
 <div class="container body-content">
+
+    @if (ViewBag.HasDialogMessage != null && ViewBag.HasDialogMessage)
+    {
+        <div class="modal fade" tabindex="-1" role="dialog" id="mainModalDialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Информация</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>@ViewBag.DialogMessage</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">ОК</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#mainModalDialog').modal('show');
+            });
+        </script>
+    }
+
     @RenderBody()
     <hr/>
     <footer>

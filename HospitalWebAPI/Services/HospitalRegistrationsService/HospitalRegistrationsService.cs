@@ -571,10 +571,13 @@ namespace Services.HospitalRegistrationsService
         {
             var user = this._tokenManager.GetUserByToken(command.Token.Value);
             var hospital = this._hospitalManager.GetHospitalByUser(user);
+            var section =
+                this._hospitalSectionProfileRepository.GetModels()
+                    .FirstOrDefault(model => model.Id == command.HospitalSectionProfileId);
 
             var placeStatistics = _emptyPlaceByTypeStatisticRepository.GetModels();
 
-            const int ForNextDays = 30; 
+            const int ForNextDays = 31; 
             var startDay = DateTime.Now.Date;
             var endDay = startDay.AddDays(ForNextDays);
 
@@ -587,7 +590,7 @@ namespace Services.HospitalRegistrationsService
 
             if (hospital.IsForChildren)
             {
-                for (var day = 0; day < 30; day++)
+                for (var day = 0; day < ForNextDays; day++)
                 {
                     var nextDate = startDay.AddDays(day);
                     if (!correctPlaceStatistics.Select(model => model.EmptyPlaceStatistic.Date).Contains(nextDate))
@@ -617,9 +620,13 @@ namespace Services.HospitalRegistrationsService
 
             this._emptyPlaceStatisticRepository.SaveChanges();
 
+            var messageText = $"Автозаполнение свободных дат для отделения *{section.Name}* было успешно выполнено";
+
             return new AutocompleteEmptyPlacesCommandAnswer
                        {
-                           Token = command.Token.Value
+                           Token = command.Token.Value,
+                           HasDialogMessage = true,
+                           DialogMessage = messageText
                        };
         }
     }

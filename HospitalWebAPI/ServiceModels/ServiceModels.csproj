@@ -88,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelTools\AbstractCommandAnswer.cs" />
+    <Compile Include="ModelTools\AbstractMessagedCommand.cs" />
+    <Compile Include="ModelTools\AbstractMessagedCommandAnswer.cs" />
     <Compile Include="ModelTools\AbstractTokenCommand.cs" />
     <Compile Include="ModelTools\AbstractTokenCommandAnswer.cs" />
     <Compile Include="ModelTools\CommandAnswerError.cs" />

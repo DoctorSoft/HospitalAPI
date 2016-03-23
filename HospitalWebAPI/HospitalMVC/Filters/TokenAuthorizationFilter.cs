@@ -201,6 +201,13 @@ namespace HospitalMVC.Filters
             viewBag.Token = model.Token;
             viewBag.MainMenuTabs = ConvertToTabList(result.MainMenuTabs);
 
+            var messagedModel = model as AbstractMessagedCommandAnswer;
+            if (messagedModel != null)
+            {
+                viewBag.HasDialogMessage = messagedModel.HasDialogMessage;
+                viewBag.DialogMessage = messagedModel.DialogMessage;
+            }
+
             base.OnActionExecuted(filterContext);
         }
     }

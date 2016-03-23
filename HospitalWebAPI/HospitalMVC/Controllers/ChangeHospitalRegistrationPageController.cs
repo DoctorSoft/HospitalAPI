@@ -158,7 +158,7 @@ namespace HospitalMVC.Controllers
         {
             var answer = _hospitalRegistrationsService.AutocompleteEmptyPlaces(command);
 
-            return RedirectToAction("Index", "Home", new { Token = command.Token });
+            return RedirectToAction("Index", "HospitalUserHomePage", new { Token = command.Token, answer.DialogMessage, answer.HasDialogMessage });
         }
     }
 }

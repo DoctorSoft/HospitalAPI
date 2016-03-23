@@ -2,7 +2,7 @@
 
 namespace ServiceModels.ServiceCommands.MainPageCommands
 {
-    public class GetHospitalUserMainPageInformationCommand : AbstractTokenCommand
+    public class GetHospitalUserMainPageInformationCommand : AbstractMessagedCommand
     {
         public bool ShowModalWindow { get; set; }
     }
