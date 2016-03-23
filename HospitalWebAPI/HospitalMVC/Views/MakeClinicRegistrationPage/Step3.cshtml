@@ -5,18 +5,6 @@
 @using HelpingTools.ExtentionTools
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetClinicRegistrationUserFormCommandAnswer
 
-@if (ViewBag.Errors != null)
-{
-    var errors = ViewBag.Errors as List<ServiceModels.ModelTools.CommandAnswerError>;
-    if (errors.Any())
-    {
-        foreach (var error in errors)
-        {
-            <div class="alert-warning alert"> @error.FieldName : @error.Title </div>
-        }
-    }
-}
-
 @using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", FormMethod.Post))
 {
     @Html.AntiForgeryToken()

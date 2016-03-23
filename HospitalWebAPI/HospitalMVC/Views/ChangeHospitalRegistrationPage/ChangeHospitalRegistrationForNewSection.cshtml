@@ -9,17 +9,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (ViewBag.Errors != null)
-{
-    var errors = ViewBag.Errors as List<ServiceModels.ModelTools.CommandAnswerError>;
-    if (errors.Any())
-    {
-        foreach (var error in errors)
-        {
-            <div class="alert-warning alert"> @error.FieldName : @error.Title </div>
-        }
-    }
-}
 @{
     int i = 0;
 }

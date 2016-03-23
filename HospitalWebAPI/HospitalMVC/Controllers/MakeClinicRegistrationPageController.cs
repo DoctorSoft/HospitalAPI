@@ -65,9 +65,9 @@ namespace HospitalMVC.Controllers
                     Code = command.Code,
                     CurrentHospital = command.CurrentHospital,
                     PhoneNumber = command.PhoneNumber,
-                    Diagnosis = command.Diagnosis
+                    Diagnosis = command.Diagnosis,
+                    Errors = answer.Errors
                 };
-                ViewBag.Errors = answer.Errors;
 
                 return View("Step3", model);
             }

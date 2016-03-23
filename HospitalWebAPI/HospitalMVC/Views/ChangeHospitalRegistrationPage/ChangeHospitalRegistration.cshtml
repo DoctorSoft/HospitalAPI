@@ -8,18 +8,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (ViewBag.Errors != null)
-{
-    var errors = ViewBag.Errors as List<ServiceModels.ModelTools.CommandAnswerError>;
-    if (errors.Any())
-    {
-        foreach (var error in errors)
-        {
-            <div class="alert-warning alert"> @error.FieldName : @error.Title </div>
-        }
-    }
-}
-
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="panel-title">
@@ -76,11 +64,7 @@
             </span>
             @Html.HiddenFor(model => model.Date)
             @Html.HiddenFor(model => model.HospitalProfileId)
-            @*@Html.HiddenFor(model => model.EmptyPlaceByTypeStatisticIdMaleId)
-            @Html.HiddenFor(model => model.EmptyPlaceByTypeStatisticIdFeMaleId)*@
             @Html.HiddenFor(model => model.SectionProfileName)
-            @*@Html.HiddenFor(model => model.CountRegisteredMale)
-            @Html.HiddenFor(model => model.CountRegisteredFemale)*@
 
         </div>
     }

@@ -57,9 +57,9 @@ namespace HospitalMVC.Controllers
                     ClinicId = answer.ClinicId,
                     Clinics = answer.Clinics,
                     Users = answer.Users,
-                    HospitalSectionProfile = answer.HospitalSectionProfile
+                    HospitalSectionProfile = answer.HospitalSectionProfile,
+                    Errors = answer.Errors
                 };
-                ViewBag.Errors = answer.Errors;
 
                 return View("Step2", model);
             }

@@ -48,20 +48,20 @@ namespace HospitalMVC.Controllers
             var answer = _hospitalRegistrationsService.ApplyChangesHospitalRegistration(command);
             if (answer.Errors.Any())
             {
-                ViewBag.Errors = answer.Errors;
                 return View("ChangeHospitalRegistration", new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
                 {
                     Date = command.Date,
                     HospitalProfileId = command.HospitalProfileId,
                     Token = command.Token.Value,
-                    StatisticItems = command.FreeHospitalSectionsForRegistration
+                    StatisticItems = command.FreeHospitalSectionsForRegistration,
+                    Errors = answer.Errors
                 });
             }
 
             return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
             {
                 Token = answer.Token,
-                Date =  DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
+                Date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
                 ShowModalWindow = true
             });
         }
@@ -80,12 +80,12 @@ namespace HospitalMVC.Controllers
             
             if (answer.Errors.Any())
             {
-                ViewBag.Errors = answer.Errors;
                 return View("ChangeHospitalRegistrationForNewSection", new ChangeHospitalRegistrationForNewSectionCommandAnswer
                 {
                     Date = command.Date,
                     Token = command.Token.Value,
-                    FreeHospitalSectionsForRegistration = answer.FreeHospitalSectionsForRegistration
+                    FreeHospitalSectionsForRegistration = answer.FreeHospitalSectionsForRegistration,
+                    Errors = answer.Errors
                 });
             }
 
