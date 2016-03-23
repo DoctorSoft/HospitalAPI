@@ -484,7 +484,7 @@ namespace Services.HospitalRegistrationsService
 
             return new BreakHospitalRegistrationCommandAnswer
             {
-                
+                Token = command.Token.Value
             };
         }
 
@@ -575,6 +575,36 @@ namespace Services.HospitalRegistrationsService
                 this._hospitalSectionProfileRepository.GetModels()
                     .FirstOrDefault(model => model.Id == command.HospitalSectionProfileId);
 
+            var errors = this.ValidateAutocompleteEmptyPlaces(command);
+            if (errors.Any())
+            {
+                var sexes =
+                    Enum.GetValues(typeof(Sex))
+                        .Cast<Sex>()
+                        .Select(sex => new KeyValuePair<int, string>((int)sex, sex.ToCorrectString()))
+                        .ToList();
+
+                var hospitalSectionProfiles =
+                    this._hospitalSectionProfileRepository.GetModels()
+                        .Where(model => model.HospitalId == hospital.Id)
+                        .ToList();
+
+                var hospitalSectionProfilePairs =
+                    hospitalSectionProfiles.Select(model => new KeyValuePair<int, string>(model.Id, model.Name))
+                        .ToList();
+
+                var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;
+
+                return new AutocompleteEmptyPlacesCommandAnswer
+                           {
+                               Token = command.Token.Value,
+                               Errors = errors,
+                               HospitalSectionProfiles = hospitalSectionProfilePairs,
+                               HasGenderFactor = hasGenderFactor,
+                               Sexes = sexes
+                           };
+            }
+
             var placeStatistics = _emptyPlaceByTypeStatisticRepository.GetModels();
 
             const int ForNextDays = 31; 
@@ -622,12 +652,30 @@ namespace Services.HospitalRegistrationsService
 
             var messageText = $"Автозаполнение свободных дат для отделения *{section.Name}* было успешно выполнено";
 
+            
+
             return new AutocompleteEmptyPlacesCommandAnswer
                        {
                            Token = command.Token.Value,
                            HasDialogMessage = true,
                            DialogMessage = messageText
                        };
+        }
+
+        private List<CommandAnswerError> ValidateAutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command)
+        {
+            var errors = new List<CommandAnswerError>();
+
+            if (command.CountValue < 0)
+            {
+                errors.Add(new CommandAnswerError
+                               {
+                                   FieldName = "Количетсво",
+                                   Title = "Количество человек не должно быть меньше нуля"
+                               });
+            }
+
+            return errors;
         }
     }
 }

@@ -201,6 +201,8 @@ namespace HospitalMVC.Filters
             viewBag.Token = model.Token;
             viewBag.MainMenuTabs = ConvertToTabList(result.MainMenuTabs);
 
+            viewBag.Errors = model.Errors;
+
             var messagedModel = model as AbstractMessagedCommandAnswer;
             if (messagedModel != null)
             {

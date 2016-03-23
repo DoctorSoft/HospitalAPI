@@ -158,6 +158,23 @@ namespace HospitalMVC.Controllers
         {
             var answer = _hospitalRegistrationsService.AutocompleteEmptyPlaces(command);
 
+            if (answer.Errors.Any())
+            {
+                return this.View(
+                    "ShowAutocompletePage",
+                    new ShowAutocompletePageCommandAnswer
+                        {
+                            HospitalSectionProfileId = command.HospitalSectionProfileId,
+                            SexId = command.SexId,
+                            Token = command.Token.Value,
+                            CountValue = command.CountValue,
+                            Errors = answer.Errors,
+                            HasGenderFactor = answer.HasGenderFactor,
+                            HospitalSectionProfiles = answer.HospitalSectionProfiles,
+                            Sexes = answer.Sexes
+                        });
+            }
+
             return RedirectToAction("Index", "HospitalUserHomePage", new { Token = command.Token, answer.DialogMessage, answer.HasDialogMessage });
         }
     }

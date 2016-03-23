@@ -80,6 +80,18 @@
         </script>
     }
 
+    @if (ViewBag.Errors != null)
+    {
+        var errors = ViewBag.Errors as List<ServiceModels.ModelTools.CommandAnswerError>;
+        if (errors != null && errors.Any())
+        {
+            foreach (var error in errors)
+            {
+                <div class="alert-warning alert"> @error.FieldName : @error.Title </div>
+            }
+        }
+    }
+
     @RenderBody()
     <hr/>
     <footer>
