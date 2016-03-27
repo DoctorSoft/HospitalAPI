@@ -76,9 +76,19 @@
                                                     <td>
                                                         @patient.PhoneNumber
                                                     </td>
-                                                    <td>
-                                                        @patient.Age
-                                                    </td>
+                                                   
+                                                        @if (patient.Years == 0)
+                                                        {
+                                                            <td>
+                                                                @patient.Month месяцев @patient.Weeks недель
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>
+                                                                @patient.Years;
+                                                            </td>
+                                                        }
                                                     <td>
                                                         @patient.Diagnosis
                                                     </td>

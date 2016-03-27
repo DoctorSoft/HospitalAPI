@@ -20,7 +20,11 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public string LastName { get; set; }
 
-        public int? Age { get; set; }
+        public int? Years { get; set; }
+
+        public int? Months { get; set; }
+
+        public int? Weeks { get; set; }
 
         public string Code { get; set; }
 
@@ -37,5 +41,7 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
         public List<KeyValuePair<int, string>> Clinics { get; set; }
 
         public List<KeyValuePair<int, string>> Users { get; set; }
+
+        public int AgeCategoryId { get; set; }
     }
 }

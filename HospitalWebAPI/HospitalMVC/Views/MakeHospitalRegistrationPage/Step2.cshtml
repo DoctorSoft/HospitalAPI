@@ -4,48 +4,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Enums.Enums
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetHospitalRegistrationUserFormCommandAnswer
 
 @section Scripts {
     <script type="text/javascript">
 
-        var setStartValue = function() {
-            $('#Clinics').val('@Model.ClinicId');
-            $('#Users').val('@Model.UserId');
-        };
-        setStartValue();
+    var setStartValue = function() {
+        $('#Clinics').val('@Model.ClinicId');
+        $('#Users').val('@Model.UserId');
+    };
+    setStartValue();
 
-        var HospitalChange = function(e) {
-            var url = '@Url.Action("Step2", "MakeHospitalRegistrationPage", new {Token = @Model.Token, HospitalSectionProfileId = @Model.HospitalSectionProfileId, Date = @Model.Date})'
+    var HospitalChange = function(e) {
+        var url = '@Url.Action("Step2", "MakeHospitalRegistrationPage", new { Token = @Model.Token, HospitalSectionProfileId = @Model.HospitalSectionProfileId, Date = @Model.Date })'
                 + '&ClinicId=' + $('#Clinics').val()
                 + '&UserId=' + $('#Users').val()
                 + '&Diagnosis=' + $('#Diagnosis').val()
                 + '&FirstName=' + $('#FirstName').val()
                 + '&LastName=' + $('#LastName').val()
-                + '&Age=' + $('#Age').val()
+                + '&Years=' + $('#Years').val()
+                + '&Months=' + $('#Months').val()
+                + '&Weeks=' + $('#Weeks').val()
                 + '&SexId=' + $('#SexId').val()
                 + '&PhoneNumber=' + $('#PhoneNumber').val()
                 + '&Date=' + $('#Date').val()
                 + '&Code=' + $('#Code').val()
-                +  ($('#DoesAgree').val() ? '&DoesAgree=1' : '');
-            window.location.replace(url);
-        };
+                + '&AgeCategoryId=' + @Model.AgeCategoryId
+                +($('#DoesAgree').val() ? '&DoesAgree=1' : '');
+        window.location.replace(url);
+    };
 
-        var SubmitData = function(e) {
-            var url = '@Url.Action("SaveRegistration", "MakeHospitalRegistrationPage", new {Token = @Model.Token, HospitalSectionProfileId = @Model.HospitalSectionProfileId, Date = @Model.Date})'
-                + '&ClinicId=' + $('#Clinics').val()
-                + '&UserId=' + $('#Users').val()
-                + '&Diagnosis=' + $('#Diagnosis').val()
-                + '&FirstName=' + $('#FirstName').val()
-                + '&LastName=' + $('#LastName').val()
-                + '&Age=' + $('#Age').val()
-                + '&SexId=' + $('#SexId').val()
-                + '&PhoneNumber=' + $('#PhoneNumber').val()
-                + '&Date=' + $('#Date').val()
-                + '&Code=' + $('#Code').val()
-                + '&DoesAgree=' + $('#DoesAgree').val();
-            window.location.replace(url);
-        };
+    var SubmitData = function(e) {
+        var url = '@Url.Action("SaveRegistration", "MakeHospitalRegistrationPage", new { Token = @Model.Token, HospitalSectionProfileId = @Model.HospitalSectionProfileId, Date = @Model.Date})'
+            + '&ClinicId=' + $('#Clinics').val()
+            + '&UserId=' + $('#Users').val()
+            + '&Diagnosis=' + $('#Diagnosis').val()
+            + '&FirstName=' + $('#FirstName').val()
+            + '&LastName=' + $('#LastName').val()
+            + '&Years=' + $('#Years').val()
+            + '&Months=' + $('#Months').val()
+            + '&Weeks=' + $('#Weeks').val()
+            + '&SexId=' + $('#SexId').val()
+            + '&PhoneNumber=' + $('#PhoneNumber').val()
+            + '&Date=' + $('#Date').val()
+            + '&Code=' + $('#Code').val()
+            + '&AgeCategoryId=' + @Model.AgeCategoryId
+            + '&DoesAgree=' + $('#DoesAgree').val();
+        window.location.replace(url);
+    };
     </script>
 }
 
@@ -91,8 +98,28 @@
                 <h4>Возраст:</h4>
             </div>
             <div class="col-md-5">
-                @Html.TextBoxFor(o => o.Age, new {@class = "form-control", @rows = "10", @type = "number"})
-            </div>
+                @{
+                    if (@Model.AgeCategoryId == (int) AgeRange.MoreOneYear)
+                    {
+                        @Html.TextBoxFor(o => o.Years, new {@class = "form-control", @rows = "10", @type = "number"})
+                    }
+                    else
+                    {
+                        <div class="col-md-3">
+                            <h4>Месяцев:</h4>
+                        </div>
+                        <div class="col-xs-3">
+                            @Html.TextBoxFor(o => o.Months, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Недель:</h4>
+                        </div>
+                        <div class="col-xs-3">
+                            @Html.TextBoxFor(o => o.Weeks, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
+                        </div>
+                    }
+                }
+    </div>
         </div>
         @if (Model.SexId != null && Model.SexId != 0)
         {

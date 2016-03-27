@@ -7,7 +7,9 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-        public int Age { get; set; }
+        public int Years { get; set; }
+        public int Month { get; set; }
+        public int Weeks { get; set; }
         public string Diagnosis { get; set; }
         public string SectionName { get; set; }
         public string ClinicName { get; set; }

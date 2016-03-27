@@ -405,6 +405,11 @@ namespace Services.ClinicRegistrationsServices
                 command.HospitalSectionProfileId = hospitalSectionProfiles.FirstOrDefault().Id;
             }
 
+            if (command.AgeCategoryId == null)
+            {
+                command.AgeCategoryId = 0; //Default value for age category = more 1 year
+            }
+
             var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;
             
             if ((command.SexId == null || command.SexId == 0) && hasGenderFactor)
@@ -446,6 +451,11 @@ namespace Services.ClinicRegistrationsServices
             var hospitalSectionProfilePairs =
                 hospitalSectionProfiles.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
 
+            var ageCategories = Enum.GetValues(typeof (AgeRange))
+                .Cast<AgeRange>()
+                .Select(ageRange => new KeyValuePair<int, string>((int) ageRange, ageRange.ToCorrectString()))
+                .ToList();
+
             return new GetMakeHospitalRegistrationsPageInformationCommandAnswer
             {
                 Token = command.Token.Value,
@@ -454,7 +464,9 @@ namespace Services.ClinicRegistrationsServices
                 Schedule = startSchedule,
                 Sexes = sexes,
                 HospitalSectionProfiles = hospitalSectionProfilePairs,
-                HasGenderFactor = hasGenderFactor
+                AgeCategories = ageCategories,
+                HasGenderFactor = hasGenderFactor,
+                AgeCategoryId = command.AgeCategoryId
             };
         }
 
@@ -496,7 +508,9 @@ namespace Services.ClinicRegistrationsServices
                 FirstName = command.FirstName,
                 Date = command.Date,////DateTime.Parse(command.Date).ToCorrectDateString(),
                 PhoneNumber = command.PhoneNumber,
-                Age = command.Age ?? 0,
+                Years = command.Years ?? 0,
+                Months = command.Months ?? 0,
+                Weeks = command.Weeks ?? 0,
                 Code = command.Code,
                 Diagnosis = command.Diagnosis,
                 DoesAgree = command.DoesAgree ?? true,
@@ -504,6 +518,7 @@ namespace Services.ClinicRegistrationsServices
                 Clinics = clinicResults,
                 Users = userResults,
                 HospitalSectionProfile = hospitalSectionProfile,
+                AgeCategoryId = command.AgeCategoryId
             };
         }
 
@@ -547,7 +562,7 @@ namespace Services.ClinicRegistrationsServices
                 });
             }
 
-            if (command.Age < 0)
+            if ((command.Years < 0) &&(command.Years != null))
             {
                 result.Add(new CommandAnswerError
                 {
@@ -556,6 +571,39 @@ namespace Services.ClinicRegistrationsServices
                 });
             }
 
+            if ((command.Months < 0) &&(command.Months != null))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Возраст не может быть отрицательным (Месяц)"
+                });
+            }
+            
+            if ((command.Months > 12) &&(command.Months != null))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Количество месяцев не может быть больше 12"
+                });
+            }
+            if ((command.Weeks < 0) &&(command.Weeks != null))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Возраст не может быть отрицательным (Неделя)"
+                });
+            }
+            if ((command.Weeks > 5) &&(command.Weeks != null))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Количество недель не может быть больше 5"
+                });
+            }
             if (string.IsNullOrWhiteSpace(command.Diagnosis) || command.Diagnosis.Length < 2)
             {
                 result.Add(new CommandAnswerError
@@ -595,7 +643,9 @@ namespace Services.ClinicRegistrationsServices
                     FirstName = command.FirstName,
                     Date = command.Date,
                     PhoneNumber = command.PhoneNumber,
-                    Age = command.Age,
+                    Years = command.Years ?? 0,
+                    Months = command.Months ?? 0,
+                    Weeks = command.Weeks ?? 0,
                     Code = command.Code,
                     Diagnosis = command.Diagnosis,
                     DoesAgree = command.DoesAgree,
@@ -629,7 +679,9 @@ namespace Services.ClinicRegistrationsServices
             {
                 Patient = new PatientStorageModel
                 {
-                    Years = command.Age.Value,
+                    Years = command.Years == null ? 0 : command.Years.Value,
+                    Months = command.Months == null ? 0 : command.Months.Value,
+                    Weeks = command.Weeks == null ? 0 : command.Weeks.Value,
                     Code = command.Code,
                     FirstName = command.FirstName,
                     LastName = command.LastName,
@@ -685,7 +737,9 @@ namespace Services.ClinicRegistrationsServices
                 FirstName = command.FirstName,
                 Date = command.Date,
                 PhoneNumber = command.PhoneNumber,
-                Age = command.Age,
+                Years = command.Years ?? 0,
+                Months = command.Months ?? 0,
+                Weeks = command.Weeks ?? 0,
                 Code = command.Code,
                 Diagnosis = command.Diagnosis,
                 DoesAgree = command.DoesAgree,

@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Linq;
 using Enums.EnumExtensions;
 using Enums.Enums;
-using HelpingTools.ExtentionTools;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
@@ -509,7 +508,9 @@ namespace Services.HospitalRegistrationsService
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
-                Age = model.Years,
+                Years = model.Years,
+                Month = model.Months,
+                Weeks = model.Weeks,
                 Diagnosis = model.Reservation.Diagnosis,
                 SectionName = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfile.Name,
                 ClinicName = model.Reservation.Clinic.Name,

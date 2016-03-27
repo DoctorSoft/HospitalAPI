@@ -14,7 +14,11 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
 
         public string LastName { get; set; }
 
-        public int? Age { get; set; }
+        public int? Years { get; set; }
+
+        public int? Months { get; set; }
+
+        public int? Weeks { get; set; }
 
         public string Code { get; set; }
 
@@ -27,5 +31,7 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
         public int UserId { get; set; }
 
         public int ClinicId { get; set; }
+
+        public int AgeCategoryId { get; set; }
     }
 }

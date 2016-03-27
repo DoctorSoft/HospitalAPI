@@ -19,7 +19,11 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public string LastName { get; set; }
 
-        public int? Age { get; set; }
+        public int? Years { get; set; }
+
+        public int? Months { get; set; }
+
+        public int? Weeks { get; set; }
 
         public string Code { get; set; }
 

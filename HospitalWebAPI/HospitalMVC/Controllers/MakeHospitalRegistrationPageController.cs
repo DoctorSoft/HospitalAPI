@@ -46,7 +46,9 @@ namespace HospitalMVC.Controllers
                     FirstName = answer.FirstName,
                     LastName = answer.LastName,
                     SexId = answer.SexId,
-                    Age = answer.Age,
+                    Years = answer.Years,
+                    Months = answer.Months,
+                    Weeks = answer.Weeks,
                     Code = answer.Code,
                     PhoneNumber = answer.PhoneNumber,
                     Diagnosis = answer.Diagnosis,
@@ -58,7 +60,8 @@ namespace HospitalMVC.Controllers
                     Clinics = answer.Clinics,
                     Users = answer.Users,
                     HospitalSectionProfile = answer.HospitalSectionProfile,
-                    Errors = answer.Errors
+                    Errors = answer.Errors,
+                    AgeCategoryId = command.AgeCategoryId
                 };
 
                 return View("Step2", model);
