@@ -2,7 +2,7 @@
     ViewBag.Title = "Step3";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using HelpingTools.ExtentionTools
+@using Enums.Enums
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetClinicRegistrationUserFormCommandAnswer
 
 @using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", FormMethod.Post))
@@ -47,7 +47,28 @@
                 <h4>Возраст:</h4>
             </div>
             <div class="col-md-5">
-                @Html.TextBoxFor(o => o.Age, new {@class = "form-control", @rows = "10", @type = "number"})
+                @{
+                    @Html.HiddenFor(command => command.AgeCategoryId)
+                    if (@Model.AgeCategoryId == (int)AgeRange.MoreOneYear)
+                    {
+                        @Html.TextBoxFor(o => o.Years, new {@class = "form-control", @rows = "10", @type = "number"})
+                    }
+                    else
+                    {
+                        <div class="col-md-3">
+                            <h4>Месяцев:</h4>
+                        </div>
+                        <div class="col-xs-3">
+                            @Html.TextBoxFor(o => o.Months, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Недель:</h4>
+                        </div>
+                        <div class="col-xs-3">
+                            @Html.TextBoxFor(o => o.Weeks, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
+                        </div>
+                    }
+                }
             </div>
         </div>
         @if (Model.SexId != null)
@@ -130,5 +151,6 @@
 
         <input class="btn btn-sm btn-primary" type="submit"/>
     </div>
+
 }
 

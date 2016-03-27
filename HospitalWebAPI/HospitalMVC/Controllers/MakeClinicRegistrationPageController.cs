@@ -61,12 +61,15 @@ namespace HospitalMVC.Controllers
                     LastName = command.LastName,
                     SexId = command.SexId,
                     SectionProfile = command.SectionProfile,
-                    Age = command.Age,
+                    Years = command.Years,
+                    Months = command.Months,
+                    Weeks = command.Weeks,
                     Code = command.Code,
                     CurrentHospital = command.CurrentHospital,
                     PhoneNumber = command.PhoneNumber,
                     Diagnosis = command.Diagnosis,
-                    Errors = answer.Errors
+                    Errors = answer.Errors,
+                    AgeCategoryId = command.AgeCategoryId
                 };
 
                 return View("Step3", model);

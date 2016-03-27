@@ -143,6 +143,11 @@ namespace Services.ClinicRegistrationsServices
                 command.CurrentHospitalId = this.GetDefaultHospitalIdByClinicId(clinicId);
             }
 
+            if (command.AgeCategoryId == null)
+            {
+                command.AgeCategoryId = (int)AgeRange.MoreOneYear;
+            }
+
             var startSchedule = Enumerable.Range(0, weeks)
                .Select(week => new ClinicScheduleTableItem
                {
@@ -167,6 +172,11 @@ namespace Services.ClinicRegistrationsServices
                     .Select(profile => new KeyValuePair<int, string>(profile.Id, profile.Name))
                     .ToList();
 
+            var ageCategories = Enum.GetValues(typeof (AgeRange))
+                .Cast<AgeRange>()
+                .Select(ageRange => new KeyValuePair<int, string>((int) ageRange, ageRange.ToCorrectString()))
+                .ToList();
+
             return new GetClinicRegistrationScheduleCommandAnswer
             {
                 Token = command.Token.Value,
@@ -179,7 +189,9 @@ namespace Services.ClinicRegistrationsServices
                                     .Name,
                 Schedule = startSchedule,
                 CurrentHospitalId = command.CurrentHospitalId.Value,
-                Hospitals = hospitals
+                Hospitals = hospitals,
+                AgeCategoryId = command.AgeCategoryId,
+                AgeCategories = ageCategories
             };
         }
 
@@ -206,7 +218,10 @@ namespace Services.ClinicRegistrationsServices
                 LastName = "",
                 PhoneNumber = "",
                 SectionProfile = sectionProfile.Name,
-                Age = 0
+                Years = 0,
+                Months = 0,
+                Weeks = 0,
+                AgeCategoryId = command.AgeCategoryId
             };
         }
 
@@ -241,12 +256,46 @@ namespace Services.ClinicRegistrationsServices
                 });
             }
 
-            if (command.Age < 0)
+            if ((command.Years < 0) &&(command.Years != null))
             {
                 result.Add(new CommandAnswerError
                 {
                     FieldName = "Возраст",
                     Title = "Возраст не может быть отрицательным"
+                });
+            }
+
+            if ((command.Months < 0) &&(command.Months != null))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Возраст не может быть отрицательным (Месяц)"
+                });
+            }
+            
+            if ((command.Months > 12) &&(command.Months != null))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Количество месяцев не может быть больше 12"
+                });
+            }
+            if ((command.Weeks < 0) &&(command.Weeks != null))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Возраст не может быть отрицательным (Неделя)"
+                });
+            }
+            if ((command.Weeks > 5) &&(command.Weeks != null))
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Возраст",
+                    Title = "Количество недель не может быть больше 5"
                 });
             }
 
@@ -292,7 +341,9 @@ namespace Services.ClinicRegistrationsServices
             {
                 Patient = new PatientStorageModel
                 {
-                    Years = command.Age.Value,
+                    Years = command.Years == null ? 0 : command.Years.Value,
+                    Months = command.Months == null ? 0 : command.Months.Value,
+                    Weeks = command.Weeks == null ? 0 : command.Weeks.Value,
                     Code = command.Code,
                     FirstName = command.FirstName,
                     LastName = command.LastName,
@@ -407,7 +458,7 @@ namespace Services.ClinicRegistrationsServices
 
             if (command.AgeCategoryId == null)
             {
-                command.AgeCategoryId = 0; //Default value for age category = more 1 year
+                command.AgeCategoryId = (int)AgeRange.MoreOneYear;; //Default value for age category = more 1 year
             }
 
             var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;

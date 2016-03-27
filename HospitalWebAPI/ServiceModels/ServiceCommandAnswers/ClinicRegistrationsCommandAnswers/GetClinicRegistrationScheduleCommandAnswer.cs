@@ -19,6 +19,9 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
         public int CurrentHospitalId { get; set; }
 
         public List<KeyValuePair<int, string>> Hospitals { get; set; }
+        public int? AgeCategoryId { get; set; }
+
+        public List<KeyValuePair<int, string>> AgeCategories { get; set; }
 
         public bool HasGenderFactor { get; set; }
     }
