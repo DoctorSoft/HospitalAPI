@@ -16,5 +16,7 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
         public bool HasGenderFactor { get; set; }
 
         public int CountValue { get; set; }
+    
+        public List<bool> DaysOfWeek{get; set; } 
     }
 }

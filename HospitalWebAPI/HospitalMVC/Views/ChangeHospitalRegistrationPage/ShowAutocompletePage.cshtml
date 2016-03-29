@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Enums.EnumExtensions
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowAutocompletePageCommandAnswer
 
 <h2>Заполнить все свободные даты</h2>
@@ -30,6 +31,29 @@
 
 <div class="schedule-label" style="align-items: center">
     <div class="panel-body form-group schedule-label">
+        <div style="width: 100%; float: left;">
+            <div>
+                <label>Дни недели:</label>
+            </div>
+            <div>
+                @{
+                    var days = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().ToList();
+                    foreach (var dayOfWeek in days)
+                    {
+                        <div style="display: inline; width: 10%; float: left; margin-right: 20px;" class="form-group panel-body">
+                            <div style="display: block; min-width: 50px">
+                                <input type="checkbox" style="" class="" id="DayOfWeek[@((int)dayOfWeek)]" name="DayOfWeek[@((int)dayOfWeek)]" />
+                            </div>
+                            <div style="display: block;">
+                                <div class="col-md-2"><h3>@dayOfWeek.ShortName()</h3></div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+        </div>
+
         <div class="col-lg-10 panel-body ">
             <div class="col-lg-3">
                 <label>Отделение:</label>

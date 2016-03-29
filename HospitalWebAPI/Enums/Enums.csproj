@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="EnumExtensions\AgeRangeExtension.cs" />
     <Compile Include="EnumExtensions\DateTimeExtensions.cs" />
+    <Compile Include="EnumExtensions\DayOfWeekExtensins.cs" />
     <Compile Include="EnumExtensions\SexExtensions.cs" />
     <Compile Include="Enums\AccessType.cs" />
     <Compile Include="Enums\AgeRange.cs" />
