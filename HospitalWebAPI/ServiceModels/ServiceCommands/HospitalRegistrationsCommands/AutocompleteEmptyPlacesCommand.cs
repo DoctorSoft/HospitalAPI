@@ -1,4 +1,6 @@
-﻿namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
+﻿using System.Collections.Generic;
+
+namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
 {
     using ServiceModels.ModelTools;
 
@@ -9,5 +11,7 @@
         public int HospitalSectionProfileId { get; set; }
 
         public int CountValue { get; set; }
+
+        public List<bool> DaysOfWeek { get; set; } 
     }
 }

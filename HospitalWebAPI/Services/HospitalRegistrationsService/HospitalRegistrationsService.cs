@@ -560,6 +560,12 @@ namespace Services.HospitalRegistrationsService
             var hospitalSectionProfilePairs =
                 hospitalSectionProfiles.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
 
+            var daysOfWeek = command.DaysOfWeek;
+            if (daysOfWeek == null || !daysOfWeek.Any())
+            {
+                daysOfWeek = @Enum.GetValues(typeof (DayOfWeek)).Cast<DayOfWeek>().Select(week => true).ToList();
+            }
+
             return new ShowAutocompletePageCommandAnswer
             {
                 Token = command.Token.Value,
@@ -567,7 +573,8 @@ namespace Services.HospitalRegistrationsService
                 HospitalSectionProfileId = command.HospitalSectionProfileId.Value,
                 Sexes = sexes,
                 HospitalSectionProfiles = hospitalSectionProfilePairs,
-                HasGenderFactor = hasGenderFactor
+                HasGenderFactor = hasGenderFactor,
+                DaysOfWeek = daysOfWeek
             };
         }
 
