@@ -79,7 +79,7 @@
                         for (var dayOfWeek = (int)DayOfWeek.Sunday; dayOfWeek <= (int)DayOfWeek.Saturday; dayOfWeek++)
                         {
                             <div class="[ form-group ]" style="float: left; margin: 10px; min-width: 90px;">
-                                <input type="checkbox" name="DaysOfWeek[@(dayOfWeek)]" id="DaysOfWeek[@(dayOfWeek)]" autocomplete="off" />
+                                <input type="checkbox" name="DaysOfWeek[@(dayOfWeek)]" id="DaysOfWeek[@(dayOfWeek)]" autocomplete="off" @(@Model.DaysOfWeek[dayOfWeek] ? "checked" : "")/>
                                 <div class="[ btn-group ]">
                                     <label for="DaysOfWeek[@(dayOfWeek)]" class="[ btn btn-default ]">
                                         <span class="[ glyphicon glyphicon-ok ]" id="DOF[@(dayOfWeek)]"></span>

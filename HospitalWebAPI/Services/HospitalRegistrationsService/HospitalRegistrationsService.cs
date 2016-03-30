@@ -612,7 +612,8 @@ namespace Services.HospitalRegistrationsService
                                Errors = errors,
                                HospitalSectionProfiles = hospitalSectionProfilePairs,
                                HasGenderFactor = hasGenderFactor,
-                               Sexes = sexes
+                               Sexes = sexes,
+                               DaysOfWeek = command.DaysOfWeek
                            };
             }
 
@@ -634,6 +635,12 @@ namespace Services.HospitalRegistrationsService
                 for (var day = 0; day < ForNextDays; day++)
                 {
                     var nextDate = startDay.AddDays(day);
+
+                    if (!command.DaysOfWeek[(int)nextDate.Date.DayOfWeek])
+                    {
+                        continue;
+                    }
+
                     if (!correctPlaceStatistics.Select(model => model.EmptyPlaceStatistic.Date).Contains(nextDate))
                     {
                         var newStatistic = new EmptyPlaceStatisticStorageModel
@@ -686,6 +693,14 @@ namespace Services.HospitalRegistrationsService
                                });
             }
 
+            if (command.DaysOfWeek.All(b => b == false))
+            {
+                errors.Add(new CommandAnswerError
+                {
+                    FieldName = "Дни",
+                    Title = "Выберите хотя бы 1 день"
+                });
+            }
             return errors;
         }
     }

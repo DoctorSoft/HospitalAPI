@@ -10,5 +10,7 @@
         public List<KeyValuePair<int, string>> Sexes { get; set; }
 
         public bool HasGenderFactor { get; set; }
+
+        public List<bool> DaysOfWeek { get; set; } 
     }
 }

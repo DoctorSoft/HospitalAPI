@@ -162,7 +162,8 @@ namespace HospitalMVC.Controllers
                             Errors = answer.Errors,
                             HasGenderFactor = answer.HasGenderFactor,
                             HospitalSectionProfiles = answer.HospitalSectionProfiles,
-                            Sexes = answer.Sexes
+                            Sexes = answer.Sexes,
+                            DaysOfWeek = answer.DaysOfWeek
                         });
             }
 
