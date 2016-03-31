@@ -39,92 +39,95 @@
                     </div>
                     <div id=@("collapse" + index) class="panel-collapse collapse">
                         <div class="panel-body">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>№</th>
-                                        <th>Фамилия</th>
-                                        <th>Имя</th>
-                                        <th>Номер телефона</th>
-                                        <th>Возраст</th>
-                                        <th>Диагноз</th>
-                                        <th>Направляющее ЛПУ</th>
-                                        <th>Отделение</th>
-                                        <th>Доктор</th>
-                                        <th>Дата регистрации</th>
-                                        <th>Опции</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        int countPatient = 1;
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Фамилия</th>
+                                            <th>Имя</th>
+                                            <th>Номер телефона</th>
+                                            <th>Возраст</th>
+                                            <th>Диагноз</th>
+                                            <th>Направляющее ЛПУ</th>
+                                            <th>Отделение</th>
+                                            <th>Доктор</th>
+                                            <th>Дата регистрации</th>
+                                            <th>Опции</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                    int countPatient = 1;
 
-                                        foreach (var patient in @Model.Table)
-                                        {
-                                            if (patient.Date == record.Date)
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        @countPatient
-                                                    </td>
-                                                    <td>
-                                                        @patient.LastName
-                                                    </td>
-                                                    <td>
-                                                        @patient.FirstName
-                                                    </td>
-                                                    <td>
-                                                        @patient.PhoneNumber
-                                                    </td>
-                                                   
-                                                        @if (patient.Years == 0)
-                                                        {
-                                                            <td>
-                                                                @patient.Month м.  <br />
-                                                                @patient.Weeks н.
-                                                            </td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td>
-                                                                @patient.Years 
-                                                            </td>
-                                                        }
-                                                    <td>
-                                                        @patient.Diagnosis
-                                                    </td>
-                                                    <td>
-                                                        @patient.ClinicName
-                                                    </td>
-                                                    <td>
-                                                        @patient.SectionName
-                                                    </td>
-                                                    <td>
-                                                        @patient.DoctorName
-                                                    </td>
-                                                    <td>
-                                                        @patient.RegistrationDate.ToCorrectDateString()
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@( "#modalWindow" + index + countPatient) />
-                                                    </td>
-                                                </tr>
-                                        
-                                                @ModalWindowsHelper.AddActionModalWindow(helper: Html,
-                                                headText: "Подтверждение",
-                                                bodyText: "Вы уверены?",
-                                                actionName: "BreakRegistration",
-                                                controlName: "ViewHospitalRegistrations",
-                                                paramsList: new { Token = Model.Token, ReservationId = @patient.ReservationId },
-                                                applyButtonName: "Применить",
-                                                id: index + "" + countPatient)
-                                        
-                                                countPatient++;
-                                            }
+                    foreach (var patient in @Model.Table)
+                    {
+                        if (patient.Date == record.Date)
+                        {
+                            <tr>
+                                <td>
+                                    @countPatient
+                                </td>
+                                <td>
+                                    @patient.LastName
+                                </td>
+                                <td>
+                                    @patient.FirstName
+                                </td>
+                                <td>
+                                    @patient.PhoneNumber
+                                </td>
+
+                                @if (patient.Years == 0)
+                                {
+                                    <td>
+                                        @patient.Month м.  <br />
+                                        @patient.Weeks н.
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @patient.Years
+                                    </td>
+                                }
+                                <td>
+                                    @patient.Diagnosis
+                                </td>
+                                <td>
+                                    @patient.ClinicName
+                                </td>
+                                <td>
+                                    @patient.SectionName
+                                </td>
+                                <td>
+                                    @patient.DoctorName
+                                </td>
+                                <td>
+                                    @patient.RegistrationDate.ToCorrectDateString()
+                                </td>
+                                <td>
+                                    <input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@( "#modalWindow" + index + countPatient) />
+                                </td>
+                            </tr>
+
+                                            @ModalWindowsHelper.AddActionModalWindow(helper: Html,
+                                                        headText: "Подтверждение",
+                                                        bodyText: "Вы уверены?",
+                                                        actionName: "BreakRegistration",
+                                                        controlName: "ViewHospitalRegistrations",
+                                                        paramsList: new { Token = Model.Token, ReservationId = @patient.ReservationId },
+                                                        applyButtonName: "Применить",
+                                                        id: index + "" + countPatient)
+
+                                countPatient++;
+                        }
+                    }
                                         }
-}
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
+
                         </div>
                     </div>
                 }
