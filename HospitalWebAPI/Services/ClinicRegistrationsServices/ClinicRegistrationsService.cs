@@ -65,12 +65,17 @@ namespace Services.ClinicRegistrationsServices
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
             GetBreakClinicRegistrationsPageInformationCommand command)
         {
+            
+            var user = this._tokenManager.GetUserByToken(command.Token);
+            var currentClinicId = this._clinicManager.GetClinicByUser(user).Id;
+
             var resrvations = this._reservationRepository.GetModels();
             var now = DateTime.Now.Date;
 
             var table = resrvations
                 .Where(model => model.Status == ReservationStatus.Opened)
                 .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date > now)
+                .Where(model=>model.ClinicId == currentClinicId)
                 .Select(model => new ClinicBreakRegistrationTableItem
                 {
                     SectionProfile = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Name,
