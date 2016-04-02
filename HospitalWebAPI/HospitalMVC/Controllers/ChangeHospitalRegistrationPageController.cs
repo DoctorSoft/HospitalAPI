@@ -28,6 +28,13 @@ namespace HospitalMVC.Controllers
         }
 
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult SwitchRegistrationPage(SwitchRegistrationPageCommand command)
+        {
+            var answer = _hospitalRegistrationsService.SwitchRegistrationPage(command);
+            return View(answer);
+        }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
         public ActionResult Step2(ShowHospitalRegistrationPlacesByDateCommand command)
         {
             var answer = _hospitalRegistrationsService.ShowHospitalRegistrationPlacesByDate(command);

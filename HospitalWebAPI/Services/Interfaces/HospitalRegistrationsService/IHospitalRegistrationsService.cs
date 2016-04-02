@@ -1,4 +1,5 @@
 ﻿using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
+using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 
 namespace Services.Interfaces.HospitalRegistrationsService
@@ -35,6 +36,8 @@ namespace Services.Interfaces.HospitalRegistrationsService
         ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command);
 
         AutocompleteEmptyPlacesCommandAnswer AutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command);
+
+        SwitchRegistrationPageCommandAnswer SwitchRegistrationPage(SwitchRegistrationPageCommand command);
 
     }
 }

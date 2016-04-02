@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "SwitchRegistrationPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ServiceModels.ServiceCommands.ClinicRegistrationsCommands.SwitchRegistrationPageCommandAnswer
+
+<h2>Выберите способ заполнения свободных мест</h2>
+
+<div>
+    <ul class="nav nav-pills navbar-inverse nav-stacked">
+        <li role="presentation"><a href="@Url.Action("Index", "ChangeHospitalRegistrationPage", new {Token = @Model.Token})">Заполнить по дате</a></li>
+        <li role="presentation"><a href="#">Заполнить по отделению</a></li>
+    </ul>
+</div>

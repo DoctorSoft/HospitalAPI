@@ -13,6 +13,7 @@ using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities;
+using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 using Services.Interfaces.ServiceTools;
@@ -678,6 +679,14 @@ namespace Services.HospitalRegistrationsService
                            HasDialogMessage = true,
                            DialogMessage = messageText
                        };
+        }
+
+        public SwitchRegistrationPageCommandAnswer SwitchRegistrationPage(SwitchRegistrationPageCommand command)
+        {
+            return new SwitchRegistrationPageCommandAnswer
+            {
+                Token = command.Token.Value
+            };
         }
 
         private List<CommandAnswerError> ValidateAutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command)
