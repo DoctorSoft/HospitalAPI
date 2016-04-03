@@ -163,8 +163,10 @@
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetHospitalRegistrationUserFormCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetMakeClinicRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetMakeHospitalRegistrationsPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetRegistrationScheduleBySectionCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SaveClinicRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SaveHospitalRegistrationCommand.cs" />
+    <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SwitchRegistrationPageCommandAnswer.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\AutocompleteEmptyPlacesCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\BreakHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForNewSectionCommand.cs" />
@@ -173,8 +175,10 @@
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetComingRecordsCommand.cs" />
+    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetRegistrationScheduleBySectionCommandAnswer.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ShowAutocompletePageCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ShowHospitalRegistrationPlacesByDateCommand.cs" />
+    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\SwitchRegistrationPageCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ViewDetailedInformationOnRegisteredPatientsCommand.cs" />
     <Compile Include="ServiceCommands\MainMenuCommands\GetMainMenuItemsCommand.cs" />
     <Compile Include="ServiceCommands\MainPageCommands\GetAdministratorMainPageInformationCommand.cs" />

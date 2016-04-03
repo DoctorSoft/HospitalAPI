@@ -10,10 +10,13 @@ using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ModelTools;
+using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities;
+using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
+using Services.Interfaces.ClinicRegistrationsServices;
 using Services.Interfaces.HospitalRegistrationsService;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.ClinicModels;
@@ -693,6 +696,115 @@ namespace Services.HospitalRegistrationsService
                            HasDialogMessage = true,
                            DialogMessage = messageText
                        };
+        }
+
+        public SwitchRegistrationPageCommandAnswer SwitchRegistrationPage(SwitchRegistrationPageCommand command)
+        {
+            return new SwitchRegistrationPageCommandAnswer
+            {
+                Token = command.Token.Value
+            };
+        }
+
+        private int GetHospitalEmptyPlacesCount(GetRegistrationScheduleBySectionCommand command, DateTime date, int hospitalId)
+        {
+           var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()
+               .Where(model => (int)model.Sex == command.SexId 
+                   && model.EmptyPlaceStatistic.Date == date
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
+                   && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
+                   .Select(model => model.Count)
+                   .FirstOrDefault();
+
+            var registrationCount = _emptyPlaceByTypeStatisticRepository.GetModels()
+                .Where(model => (int)model.Sex == command.SexId.Value 
+                   && model.EmptyPlaceStatistic.Date == date
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.HospitalSectionProfileId.Value)
+                .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
+                .Count(model => model.Status == ReservationStatus.Opened);
+
+            return placeCount - registrationCount;
+        }
+
+        public GetRegistrationScheduleBySectionCommandAnswer GetRegistrationScheduleBySection(
+            GetRegistrationScheduleBySectionCommand command)
+        {
+            var user = this._tokenManager.GetUserByToken(command.Token.Value);
+            var hospital = this._hospitalManager.GetHospitalByUser(user);
+            var hospitalSectionProfiles =
+                this._hospitalSectionProfileRepository.GetModels().Where(model => model.HospitalId == hospital.Id)
+                .ToList();
+
+            if (command.HospitalSectionProfileId == null || command.HospitalSectionProfileId == 0)
+            {
+                command.HospitalSectionProfileId = hospitalSectionProfiles.FirstOrDefault().Id;
+            }
+
+            if (command.AgeCategoryId == null)
+            {
+                command.AgeCategoryId = (int)AgeRange.MoreOneYear;; //Default value for age category = more 1 year
+            }
+
+            var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;
+            
+            if ((command.SexId == null || command.SexId == 0) && hasGenderFactor)
+            {
+                command.SexId = (int) Sex.Male;
+            }
+
+            const int days = 30;
+            var now = DateTime.Now;
+            var deadLine = now + new TimeSpan(days, 0, 0, 0);
+
+            var startMonday = GetPreviousMonday(now);
+            var endMonday = GetPreviousMonday(deadLine);
+            var weeks = (endMonday - startMonday).Days / 7 + 1;
+
+            var startSchedule = Enumerable.Range(0, weeks)
+               .Select(week => new ClinicScheduleTableItem
+               {
+                   Cells = Enumerable.Range(0, 7)
+                       .ToDictionary(day => (DayOfWeek)day, day => new ClinicScheduleTableCell
+                       {
+                           IsBlocked =
+                               startMonday.AddDays(7 * week + day).Date < now.Date ||
+                               startMonday.AddDays(7 * week + day).Date > deadLine.Date,
+                           Day = startMonday.AddDays(7 * week + day).Day,
+                           IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
+                           IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date,
+                           Date = startMonday.AddDays(7 * week + day).Date,
+                           Count = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date, hospital.Id)
+                       })
+               })
+               .ToList();
+
+            var sexes = Enum.GetValues(typeof (Sex))
+                .Cast<Sex>()
+                .Select(sex => new KeyValuePair<int, string>((int) sex, sex.ToCorrectString()))
+                .ToList();
+
+            var hospitalSectionProfilePairs =
+                hospitalSectionProfiles.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
+
+            var ageCategories = Enum.GetValues(typeof (AgeRange))
+                .Cast<AgeRange>()
+                .Select(ageRange => new KeyValuePair<int, string>((int) ageRange, ageRange.ToCorrectString()))
+                .ToList();
+
+            return new GetRegistrationScheduleBySectionCommandAnswer
+            {
+                Token = command.Token.Value,
+                SexId = command.SexId,
+                HospitalSectionProfileId = command.HospitalSectionProfileId.Value,
+                Schedule = startSchedule,
+                Sexes = sexes,
+                HospitalSectionProfiles = hospitalSectionProfilePairs,
+                AgeCategories = ageCategories,
+                HasGenderFactor = hasGenderFactor,
+                AgeCategoryId = command.AgeCategoryId
+            };
+            
         }
 
         private List<CommandAnswerError> ValidateAutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command)
