@@ -2,7 +2,7 @@
 
 namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
 {
-    public class GetClinicRegistrationScheduleCommand : AbstractTokenCommand
+    public class GetClinicRegistrationScheduleCommand : AbstractMessagedCommand
     {
         public int? Sex { get; set; }
 

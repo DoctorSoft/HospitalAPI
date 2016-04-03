@@ -67,7 +67,12 @@ namespace HospitalMVC.Controllers
                 return View("Step2", model);
             }
 
-            return RedirectToAction("Index", "HospitalUserHomePage", new { Token = command.Token, ShowModalWindow = true });
+            return RedirectToAction("Index", "MakeHospitalRegistrationPage", new
+            {
+                Token = command.Token, 
+                answer.HasDialogMessage, 
+                answer.DialogMessage
+            });
         }
     }
 }

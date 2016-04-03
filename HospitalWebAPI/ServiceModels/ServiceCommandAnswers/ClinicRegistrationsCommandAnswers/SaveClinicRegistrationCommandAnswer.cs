@@ -2,7 +2,7 @@
 
 namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 {
-    public class SaveClinicRegistrationCommandAnswer : AbstractTokenCommandAnswer
+    public class SaveClinicRegistrationCommandAnswer : AbstractMessagedCommandAnswer
     {
     }
 }

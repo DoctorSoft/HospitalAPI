@@ -3,7 +3,7 @@ using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 {
-    public class SaveHospitalRegistrationCommandAnswer : AbstractTokenCommandAnswer
+    public class SaveHospitalRegistrationCommandAnswer : AbstractMessagedCommandAnswer
     {
         public int? SexId { get; set; }
 

@@ -58,11 +58,12 @@ namespace HospitalMVC.Controllers
                 });
             }
 
-            return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
+            return RedirectToAction("Step2", "ChangeHospitalRegistrationPage", new
             {
                 Token = answer.Token,
                 Date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
-                ShowModalWindow = true
+                answer.DialogMessage,
+                answer.HasDialogMessage
             });
         }
 
@@ -89,12 +90,12 @@ namespace HospitalMVC.Controllers
                 });
             }
 
-            return RedirectToAction("Step2", new ShowHospitalRegistrationPlacesByDateCommand
+            return RedirectToAction("Step2", "ChangeHospitalRegistrationPage", new
             {
                 Token = answer.Token,
-                Date =
-                    DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
-                    ShowModalWindow = true
+                Date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture),
+                answer.DialogMessage,
+                answer.HasDialogMessage
             });
         }
 
@@ -167,7 +168,14 @@ namespace HospitalMVC.Controllers
                         });
             }
 
-            return RedirectToAction("Index", "HospitalUserHomePage", new { Token = command.Token, answer.DialogMessage, answer.HasDialogMessage });
+            return RedirectToAction("ShowAutocompletePage", "ChangeHospitalRegistrationPage", new
+            {
+                Token = command.Token, 
+                HospitalSectionProfileId = command.HospitalSectionProfileId,
+                SexId = command.SexId, 
+                answer.DialogMessage, 
+                answer.HasDialogMessage
+            });
         }
     }
 }

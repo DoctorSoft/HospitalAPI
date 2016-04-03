@@ -4,7 +4,7 @@ using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Enti
 
 namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 {
-    public class GetMakeHospitalRegistrationsPageInformationCommandAnswer : AbstractTokenCommandAnswer
+    public class GetMakeHospitalRegistrationsPageInformationCommandAnswer : AbstractMessagedCommandAnswer
     {
         public List<ClinicScheduleTableItem> Schedule { get; set; }
 

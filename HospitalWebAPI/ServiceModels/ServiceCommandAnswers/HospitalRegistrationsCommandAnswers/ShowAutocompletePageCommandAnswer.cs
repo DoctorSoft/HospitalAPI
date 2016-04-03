@@ -3,7 +3,7 @@ using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class ShowAutocompletePageCommandAnswer : AbstractTokenCommandAnswer
+    public class ShowAutocompletePageCommandAnswer : AbstractMessagedCommandAnswer
     {
         public int HospitalSectionProfileId { get; set; }
 

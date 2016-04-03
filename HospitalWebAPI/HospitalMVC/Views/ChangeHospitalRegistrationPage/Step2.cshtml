@@ -6,14 +6,6 @@
 @using HelpingTools.ExtentionTools
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.ShowHospitalRegistrationPlacesByDateCommandAnswer
 
-@{
-    if (Model.ShowModalWindow)
-    {
-        @ModalWindowsHelper.AddInfoModalWindow(helper: Html,
-            headText: "Оповещение:",
-            bodyText: "Операция успешно выполнена.")
-    }
-}
 <div>
     <h2>Дата: @Model.Date.ToCorrectDateString()</h2>
 </div>

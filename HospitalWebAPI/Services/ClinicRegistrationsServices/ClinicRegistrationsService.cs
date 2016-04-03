@@ -196,7 +196,9 @@ namespace Services.ClinicRegistrationsServices
                 CurrentHospitalId = command.CurrentHospitalId.Value,
                 Hospitals = hospitals,
                 AgeCategoryId = command.AgeCategoryId,
-                AgeCategories = ageCategories
+                AgeCategories = ageCategories,
+                HasDialogMessage = command.HasDialogMessage != null && command.HasDialogMessage.Value,
+                DialogMessage = command.DialogMessage
             };
         }
 
@@ -327,7 +329,7 @@ namespace Services.ClinicRegistrationsServices
                     Token = command.Token.Value
                 };
             }
-
+            
             var user = this._tokenManager.GetUserByToken(command.Token);
             var clinicId = this._clinicManager.GetClinicByUser(user).Id;
 
@@ -378,7 +380,7 @@ namespace Services.ClinicRegistrationsServices
                     IsRead = false,
                     MessageType = MessageType.WarningMessage,
                     ShowStatus = TwoSideShowStatus.Showed,
-                    Text = $"Пациент с номером {command.Code} был зарезервирован в Вашу больницу.\0\n" +
+                    Text = $"Пациент с номером {command.Code} был успешно зарезервирован в Вашу больницу.\0\n" +
                            $"Дата: {command.Date}.\n\0" +
                            $"Отделение: {command.SectionProfile}.\n\0" +
                            $"Диагноз: {command.Diagnosis}.\n\0",
@@ -391,10 +393,18 @@ namespace Services.ClinicRegistrationsServices
             }
 
             _reservationRepository.SaveChanges();
+            
+            var messageText = $"Пациент с номером {command.Code} был зарезервирован в Вашу больницу.\0\n" +
+                           $"Дата: {command.Date}.\n\0" +
+                           $"Отделение: {command.SectionProfile}.\n\0" +
+                           $"Диагноз: {command.Diagnosis}.\n\0";
+
 
             return new SaveClinicRegistrationCommandAnswer
             {
-                Token = command.Token.Value
+                Token = command.Token.Value,
+                HasDialogMessage = true,
+                DialogMessage = messageText
             };
         }
 
@@ -522,7 +532,9 @@ namespace Services.ClinicRegistrationsServices
                 HospitalSectionProfiles = hospitalSectionProfilePairs,
                 AgeCategories = ageCategories,
                 HasGenderFactor = hasGenderFactor,
-                AgeCategoryId = command.AgeCategoryId
+                AgeCategoryId = command.AgeCategoryId,
+                HasDialogMessage = command.HasDialogMessage != null && command.HasDialogMessage.Value,
+                DialogMessage = command.DialogMessage
             };
         }
 
@@ -782,6 +794,11 @@ namespace Services.ClinicRegistrationsServices
 
             _reservationRepository.SaveChanges();
             
+            var messageText = $"Пациент с номером {command.Code} был успешно зарезервирован в Вашу больницу.\0\n" +
+                           $"Дата: {command.Date}.\n\0" +
+                           $"Отделение: {hospitalSectionProfileName}.\n\0" +
+                           $"Диагноз: {command.Diagnosis}.\n\0";
+
             var answer = new SaveHospitalRegistrationCommandAnswer
             {
                 Token = command.Token.Value,
@@ -803,6 +820,9 @@ namespace Services.ClinicRegistrationsServices
                 Clinics = clinicResults,
                 Users = userResults,
                 HospitalSectionProfile = hospitalSectionProfileName,
+                HasDialogMessage = true,
+                DialogMessage = messageText
+
             };
 
             return answer;

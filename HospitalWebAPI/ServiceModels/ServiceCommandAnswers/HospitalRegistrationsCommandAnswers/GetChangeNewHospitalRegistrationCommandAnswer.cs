@@ -5,7 +5,7 @@ using StorageModels.Models.HospitalModels;
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class GetChangeNewHospitalRegistrationCommandAnswer : AbstractTokenCommandAnswer
+    public class GetChangeNewHospitalRegistrationCommandAnswer : AbstractMessagedCommandAnswer
     {
         public string Date { get; set; }
         public List<HospitalSectionProfileStorageModel> FreeHospitalSectionsForRegistration { get; set; }

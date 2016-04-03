@@ -175,7 +175,8 @@ namespace Services.HospitalRegistrationsService
                 Date = command.Date,
                 Table = table,
                 IsCompleted = statistics == completeCount,
-                ShowModalWindow = command.ShowModalWindow
+                HasDialogMessage = command.HasDialogMessage != null && command.HasDialogMessage.Value,
+                DialogMessage = command.DialogMessage
             };
         }
 
@@ -210,7 +211,7 @@ namespace Services.HospitalRegistrationsService
                 StatisticItems = table,
                 Date = command.Date,
                 SectionProfileName = hospitalSectionProfilesName,
-                HospitalProfileId = command.HospitalProfileId,
+                HospitalProfileId = command.HospitalProfileId
             };
         }
 
@@ -277,9 +278,13 @@ namespace Services.HospitalRegistrationsService
             }
             _emptyPlaceByTypeStatisticRepository.SaveChanges();
      
+            var messageText = $"Количество свободных мест для {command.SectionProfileName} успешно изменено";
+
             return new GetChangeHospitalRegistrationCommandAnswer
             {
-                Token = (Guid)command.Token
+                Token = (Guid)command.Token,
+                HasDialogMessage = true,
+                DialogMessage = messageText
             };
         }
 
@@ -352,6 +357,9 @@ namespace Services.HospitalRegistrationsService
                     FreeHospitalSectionsForRegistration = GetFreeSectionsList(command.Date, command.Token.Value)
                 };
             }
+            var hospitalSectionProfileName =
+                _hospitalSectionProfileRepository.GetModels().FirstOrDefault(model => model.Id == command.HospitalProfileId).Name;
+
             var recordExists =
                 _emptyPlaceStatisticRepository.GetModels()
                     .Any(model => model.Date == date && model.HospitalSectionProfileId == command.HospitalProfileId);
@@ -375,9 +383,14 @@ namespace Services.HospitalRegistrationsService
                 _emptyPlaceStatisticRepository.Add(newHospitalSectionProfileId);
                 _emptyPlaceStatisticRepository.SaveChanges();
             }
+            
+            var messageText = $"Количество свободных мест для {hospitalSectionProfileName} успешно изменено";
+
             return new GetChangeNewHospitalRegistrationCommandAnswer
             {
-                Token = (Guid)command.Token
+                Token = (Guid)command.Token,
+                HasDialogMessage = true,
+                DialogMessage = messageText
             };
         }
         public ViewDetailedInformationOnRegisteredPatientsCommandAnswer GetDetailedInformationOnRegisteredPatients(
@@ -574,7 +587,9 @@ namespace Services.HospitalRegistrationsService
                 Sexes = sexes,
                 HospitalSectionProfiles = hospitalSectionProfilePairs,
                 HasGenderFactor = hasGenderFactor,
-                DaysOfWeek = daysOfWeek
+                DaysOfWeek = daysOfWeek,
+                HasDialogMessage = command.HasDialogMessage != null && command.HasDialogMessage.Value,
+                DialogMessage = command.DialogMessage
             };
         }
 

@@ -4,7 +4,7 @@ using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Enti
 
 namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 {
-    public class GetClinicRegistrationScheduleCommandAnswer : AbstractTokenCommandAnswer
+    public class GetClinicRegistrationScheduleCommandAnswer : AbstractMessagedCommandAnswer
     {
         public string Sex { get; set; }
 

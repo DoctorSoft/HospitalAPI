@@ -2,7 +2,7 @@
 
 namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
 {
-    public class GetMakeHospitalRegistrationsPageInformationCommand : AbstractTokenCommand
+    public class GetMakeHospitalRegistrationsPageInformationCommand : AbstractMessagedCommand
     {
         public int? HospitalSectionProfileId { get; set; }
 
