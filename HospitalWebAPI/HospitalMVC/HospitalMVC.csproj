@@ -419,6 +419,7 @@
     <Content Include="Views\ChangeHospitalRegistrationPage\ShowAutocompletePage.cshtml" />
     <Content Include="Views\ViewHospitalRegistrations\Index.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\SwitchRegistrationPage.cshtml" />
+    <Content Include="Views\ChangeHospitalRegistrationPage\GetRegistrationScheduleBySection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

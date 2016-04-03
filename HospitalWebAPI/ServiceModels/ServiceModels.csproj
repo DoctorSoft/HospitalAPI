@@ -163,6 +163,7 @@
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetHospitalRegistrationUserFormCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetMakeClinicRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetMakeHospitalRegistrationsPageInformationCommand.cs" />
+    <Compile Include="ServiceCommands\ClinicRegistrationsCommands\GetRegistrationScheduleBySectionCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SaveClinicRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SaveHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\ClinicRegistrationsCommands\SwitchRegistrationPageCommandAnswer.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetComingRecordsCommand.cs" />
+    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetRegistrationScheduleBySectionCommandAnswer.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ShowAutocompletePageCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ShowHospitalRegistrationPlacesByDateCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\SwitchRegistrationPageCommand.cs" />

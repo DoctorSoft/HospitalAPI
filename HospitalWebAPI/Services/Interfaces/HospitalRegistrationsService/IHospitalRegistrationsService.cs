@@ -39,5 +39,8 @@ namespace Services.Interfaces.HospitalRegistrationsService
 
         SwitchRegistrationPageCommandAnswer SwitchRegistrationPage(SwitchRegistrationPageCommand command);
 
+        GetRegistrationScheduleBySectionCommandAnswer GetRegistrationScheduleBySection(
+            GetRegistrationScheduleBySectionCommand command);
+
     }
 }

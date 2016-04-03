@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
+using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 using Services.Interfaces.HospitalRegistrationsService;
 
@@ -24,6 +25,13 @@ namespace HospitalMVC.Controllers
         public ActionResult Index(GetChangeHospitalRegistrationsPageInformationCommand command)
         {
             var answer = _hospitalRegistrationsService.GetChangeHospitalRegistrationsPageInformation(command);
+            return View(answer);
+        }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        public ActionResult GetRegistrationScheduleBySection(GetRegistrationScheduleBySectionCommand command)
+        {
+            var answer = _hospitalRegistrationsService.GetRegistrationScheduleBySection(command);
             return View(answer);
         }
 
