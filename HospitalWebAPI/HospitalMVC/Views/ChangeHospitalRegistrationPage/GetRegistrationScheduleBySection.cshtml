@@ -127,7 +127,11 @@
                         {
                             <div class="col-md-1" role="alert">
                                 <div style="min-width: 100px;">
-                                    <a class="nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                    <a href="@Url.Action("Step2", new
+                                                 {
+                                                     Date = cell.Date,
+                                                     Token = @Model.Token 
+                                                 })" class="nav" style="height: 100px; text-align: center; min-width: 100%;">
                                         <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
                                             <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Блокиров.</span> <h4>@cell.Day</h4>
                                             <span class="badge">@cell.Count</span>
@@ -144,7 +148,11 @@
                                 {
                                     <div class="col-md-1" role="alert">
                                         <div style="min-width: 100px;">
-                                            <a class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                            <a href="@Url.Action("Step2", new
+                                                 {
+                                                     Date = cell.Date,
+                                                     Token = @Model.Token 
+                                                 })" class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
                                                 <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
                                                     <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Сегодня.</span> <h4>@cell.Day</h4>
                                                     <span class="badge">@cell.Count</span>
@@ -157,13 +165,10 @@
                                 {
                                     <div class="col-md-1" role="alert">
                                         <div style="min-width: 100px;">
-                                            <a href="@Url.Action("ChangeHospitalRegistration", new
+                                            <a href="@Url.Action("Step2", new
                                                  {
-                                                     Token = Model.Token,
-                                                     SexId = Model.SexId,
-                                                     HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                     AgeCategoryId = Model.AgeCategoryId,
-                                                     Date = cell.Date.ToCorrectDateString()
+                                                     Date = cell.Date,
+                                                     Token = @Model.Token 
                                                  })" class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
                                                 <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
                                                     <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Сегодня.</span> <h4>@cell.Day</h4>
@@ -181,7 +186,11 @@
                                 {
                                     <div class="col-md-1" role="alert">
                                         <div style="min-width: 100px;">
-                                            <a class="button8 nav" style="height: 100px; text-align: center; min-width: 100%;">
+                                            <a href="@Url.Action("Step2", new
+                                                 {
+                                                     Date = cell.Date,
+                                                     Token = @Model.Token 
+                                                 })" class="button8 nav" style="height: 100px; text-align: center; min-width: 100%;">
                                                 <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
                                                     <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Нет мест</span> <h4>@cell.Day</h4>
                                                     <span class="badge">@cell.Count</span>
@@ -194,13 +203,10 @@
                                 {
                                     <div class="col-md-1" role="alert">
                                         <div style="min-width: 100px;">
-                                            <a href="@Url.Action("HospitalProfileId", new
+                                            <a href="@Url.Action("Step2", new
                                                  {
-                                                     Token = Model.Token,
-                                                     SexId = Model.SexId,
-                                                     HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                     AgeCategoryId = Model.AgeCategoryId,
-                                                     Date = cell.Date.ToCorrectDateString()
+                                                     Date = cell.Date,
+                                                     Token = @Model.Token 
                                                  })" class="button10 nav" style="height: 100px; text-align: center; min-width: 100%;">
                                                 <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
                                                     <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Зарегес.</span> <h4>@cell.Day</h4>
@@ -214,13 +220,10 @@
                                 {
                                     <div class="col-md-1" role="alert">
                                         <div style="min-width: 100px;">
-                                            <a href="@Url.Action("HospitalProfileId", new
+                                            <a href="@Url.Action("Step2", new
                                                  {
-                                                     Token = Model.Token,
-                                                     SexId = Model.SexId,
-                                                     HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                     AgeCategoryId = Model.AgeCategoryId,
-                                                     Date = cell.Date.ToCorrectDateString()
+                                                     Date = cell.Date,
+                                                     Token = @Model.Token 
                                                  })" class="button7 nav" style="height: 100px; text-align: center; min-width: 100%;">
                                                 <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
                                                     <span aria-hidden="true" style="height: 100px; text-align: center; min-width: 40px;">Зарегес.</span> <h4>@cell.Day</h4>
