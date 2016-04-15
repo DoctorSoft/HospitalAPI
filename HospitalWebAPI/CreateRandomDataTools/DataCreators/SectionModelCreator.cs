@@ -55,7 +55,7 @@ namespace CreateRandomDataTools.DataCreators
                         new SectionProfileStorageModel
                         {
                             IsBlocked = false,
-                            Name = "6-ое Педиатрическое (Гестроэнтерологическое)"
+                            Name = "6-ое Педиатрическое (Гастроэнтерологическое)"
                         },
                         new SectionProfileStorageModel
                         {

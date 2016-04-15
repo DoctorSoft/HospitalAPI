@@ -1,4 +1,5 @@
 ﻿using System;
+using Enums.Enums;
 
 namespace Enums.EnumExtensions
 {

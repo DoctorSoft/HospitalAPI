@@ -39,34 +39,6 @@
 </script>
 }
 
-<style type="text/css">
-    .form-group input[type="checkbox"] {
-        display: none;
-    }
-
-    .form-group input[type="checkbox"] + .btn-group > label span {
-        width: 20px;
-    }
-
-    .form-group input[type="checkbox"] + .btn-group > label span:first-child {
-        display: none;
-    }
-    .form-group input[type="checkbox"] + .btn-group > label span:last-child {
-        display: inline-block;   
-    }
-
-    .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
-        display: inline-block;
-    }
-    .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
-        display: none;   
-    }
-
-    .btn-group {
-        min-width: 80px;
-    }
-</style>
-
 <div class="schedule-label" style="align-items: center">
     <div class="panel-body form-group schedule-label">
         <div class="col-lg-10 panel-body ">
@@ -76,8 +48,13 @@
                 </div>
                 <div>
                     @{
-                        for (var dayOfWeek = (int)DayOfWeek.Sunday; dayOfWeek <= (int)DayOfWeek.Saturday; dayOfWeek++)
+                        for (int dayOfWeek = 1; dayOfWeek <= 7; dayOfWeek++)
                         {
+                            if (dayOfWeek == 7)
+                            {
+                                dayOfWeek = 0;
+                            }
+                            
                             <div class="[ form-group ]" style="float: left; margin: 10px; min-width: 90px;">
                                 <input type="checkbox" name="DaysOfWeek[@(dayOfWeek)]" id="DaysOfWeek[@(dayOfWeek)]" autocomplete="off" @(@Model.DaysOfWeek[dayOfWeek] ? "checked" : "")/>
                                 <div class="[ btn-group ]">
@@ -85,11 +62,15 @@
                                         <span class="[ glyphicon glyphicon-ok ]" id="DOF[@(dayOfWeek)]"></span>
                                         <span> </span>
                                     </label>
-                                    <label for="DaysOfWeek[@((int)dayOfWeek)]" class="[ btn btn-default  ]">
+                                    <label for="DaysOfWeek[@(dayOfWeek)]" class="[ btn btn-default  ]">
                                         @(((DayOfWeek)dayOfWeek).ShortName())
                                     </label>
                                 </div>
                             </div>
+                            if (dayOfWeek == 0)
+                            {
+                                break;
+                            }
                         }
                     }
                 </div>
