@@ -5,13 +5,13 @@ namespace Enums.EnumExtensions
     public static class AgeRangeExtension
     {public static string ToCorrectString(this AgeRange ageRange)
         {
-            if (ageRange == AgeRange.MoreOneYear)
+            if (ageRange == AgeRange.Before18)
             {
-                return "Больше года";
+                return "Младше 18 лет";
             }
-            if (ageRange == AgeRange.LessOneYear)
+            if (ageRange == AgeRange.After18)
             {
-                return "До года";
+                return "18 лет и старше";
             }
             return null;
         }

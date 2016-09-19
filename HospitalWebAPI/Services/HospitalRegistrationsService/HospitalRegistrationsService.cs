@@ -670,7 +670,7 @@ namespace Services.HospitalRegistrationsService
                                                                                   {
                                                                                       new EmptyPlaceByTypeStatisticStorageModel
                                                                                           {
-                                                                                              Sex = null,
+                                                                                              Sex = (Sex?)command.SexId,
                                                                                               Count = command.CountValue
                                                                                           } 
                                                                                   }
@@ -743,7 +743,7 @@ namespace Services.HospitalRegistrationsService
 
             if (command.AgeCategoryId == null)
             {
-                command.AgeCategoryId = (int)AgeRange.MoreOneYear;; //Default value for age category = more 1 year
+                command.AgeCategoryId = (int)AgeRange.After18;; //Default value for age category = more 1 year
             }
 
             var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;

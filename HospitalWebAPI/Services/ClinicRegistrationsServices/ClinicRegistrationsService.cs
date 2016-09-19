@@ -104,7 +104,7 @@ namespace Services.ClinicRegistrationsServices
         {
             var user = this._tokenManager.GetUserByToken(command.Token);
             var clinic = this._clinicManager.GetClinicByUser(user);
-            var hasGenderFactor = !clinic.IsForChildren;
+            var hasGenderFactor = clinic.IsForChildren;
             
             var sexes =
                 Enum.GetValues(typeof (Sex))
@@ -150,7 +150,7 @@ namespace Services.ClinicRegistrationsServices
 
             if (command.AgeCategoryId == null)
             {
-                command.AgeCategoryId = (int)AgeRange.MoreOneYear;
+                command.AgeCategoryId = (int)AgeRange.After18;
             }
 
             var startSchedule = Enumerable.Range(0, weeks)
@@ -473,7 +473,7 @@ namespace Services.ClinicRegistrationsServices
 
             if (command.AgeCategoryId == null)
             {
-                command.AgeCategoryId = (int)AgeRange.MoreOneYear;; //Default value for age category = more 1 year
+                command.AgeCategoryId = (int)AgeRange.After18;; //Default value for age category = more 1 year
             }
 
             var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;

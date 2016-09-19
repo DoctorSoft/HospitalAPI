@@ -66,7 +66,8 @@
                     @Html.DropDownListFor(answer => answer.Sexes, Model.Sexes.Select(pair => new SelectListItem
                     {
                         Selected = pair.Key == Model.SexId,
-
+                        Value = pair.Key.ToString(),
+                        Text = pair.Value,
                         Disabled = false
                     }), new
                     {
@@ -127,7 +128,8 @@
                         {
                             <div class="col-md-1" role="alert">
                                 <div style="min-width: 100px;">
-                                    <a href="@Url.Action("Step2", new
+                                    <a href="@Url.Action("Step2" +
+                                    "", new
                                                  {
                                                      Date = cell.Date,
                                                      Token = @Model.Token 
@@ -148,7 +150,9 @@
                                 {
                                     <div class="col-md-1" role="alert">
                                         <div style="min-width: 100px;">
-                                            <a href="@Url.Action("Step2", new
+                                            <a href="@Url.Action("Step2" +
+                                                                 "" +
+                                                                 "", new
                                                  {
                                                      Date = cell.Date,
                                                      Token = @Model.Token 

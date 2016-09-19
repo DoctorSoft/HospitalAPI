@@ -25,7 +25,7 @@ namespace DataBaseModelConfigurations.Contexts
         private const string Test_Remote_Db = "Test_Remote_Db";
 
         public TestDataBaseContext()
-            : base(ArturTomashHomeKey, new OriginalConfigurationFactory())
+            : base(Test_Remote_Db, new OriginalConfigurationFactory())
         {
         }
     }

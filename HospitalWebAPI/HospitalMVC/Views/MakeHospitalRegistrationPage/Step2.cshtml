@@ -99,7 +99,9 @@
             </div>
             <div class="col-md-5">
                 @{
-                    if (@Model.AgeCategoryId == (int) AgeRange.MoreOneYear)
+
+                    @Html.TextBoxFor(o => o.Years, new { @class = "form-control", @rows = "10", @type = "number" })
+                    /*if (@Model.AgeCategoryId == (int)AgeRange.After18)
                     {
                         @Html.TextBoxFor(o => o.Years, new {@class = "form-control", @rows = "10", @type = "number"})
                     }
@@ -117,9 +119,9 @@
                         <div class="col-xs-3">
                             @Html.TextBoxFor(o => o.Weeks, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
                         </div>
-                    }
+                    }*/
                 }
-    </div>
+            </div>
         </div>
         @if (Model.SexId != null && Model.SexId != 0)
         {
