@@ -79,7 +79,7 @@ namespace HospitalMVC.Controllers
                 new
                 {
                     Token = command.Token, 
-                    SexId = command.SexId, 
+                    Sex = command.SexId, 
                     SectionProfileId = command.SectionProfileId, 
                     answer.DialogMessage,
                     answer.HasDialogMessage
