@@ -113,6 +113,11 @@ namespace HospitalMVC.Filters
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            //Mock
+            filterContext.Result = new RedirectResult("https://www.youtube.com/watch?v=d-diB65scQU");
+            base.OnActionExecuting(filterContext);
+            return;
+
             var requestCommand = GetCommandByFilterContext(filterContext);
             var accessType = GetAccessByCommand(requestCommand);
 
@@ -185,6 +190,11 @@ namespace HospitalMVC.Filters
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
+            //Mock
+            filterContext.Result = new RedirectResult("https://www.youtube.com/watch?v=d-diB65scQU");
+            base.OnActionExecuted(filterContext);
+            return;
+
             var viewBag = filterContext.Controller.ViewBag;
 
             var model = GetCommandAnswerByFilterContext(filterContext);
