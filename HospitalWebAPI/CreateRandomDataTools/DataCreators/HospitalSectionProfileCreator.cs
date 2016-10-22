@@ -29,7 +29,8 @@ namespace CreateRandomDataTools.DataCreators
                 {
                     HospitalId = hospital.Id, 
                     IsBlocked = false, 
-                    Name = $"{hospital.Name} {sectionProfile.Name}", SectionProfileId = sectionProfile.Id,
+                    Name = $"{hospital.Name} {sectionProfile.Name}", 
+                    SectionProfileId = sectionProfile.Id,
                     HasGenderFactor = !hospital.IsForChildren
                 }).ToList();
         }

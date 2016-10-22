@@ -57,12 +57,12 @@ namespace CreateRandomDataTools.DataCreators
                         Account = new AccountStorageModel
                         {
                             Id = 0,
-                            HashedPassword = _passwordHashManager.GetPasswordHash("Rome"),
+                            HashedPassword = _passwordHashManager.GetPasswordHash("12345"),
                             IsBlocked = false,
-                            Login = "ПриёмнаяТест"
+                            Login = "Reception"
                         },
                         Id = 0,
-                        Name = "Приёмная Тест",
+                        Name = "Reception User",
                         UserTypeId = userTypeId
                     }
                 }

@@ -40,7 +40,7 @@ namespace CreateRandomDataTools.DataCreators
 
             foreach (var userTo in users)
             {
-                var messagesCount = _extendedRandom.Next(5, 15);
+                var messagesCount = 0; //extendedRandom.Next(5, 15);
                 for (var i = 0; i < messagesCount; i++)
                 {
                     var nextUserFrom = _extendedRandom.GetRandomValueFromList(users);

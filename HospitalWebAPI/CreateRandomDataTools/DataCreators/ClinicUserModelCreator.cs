@@ -59,52 +59,14 @@ namespace CreateRandomDataTools.DataCreators
                         {
                             Id = 0,
                             IsBlocked = false,
-                            Login = "Поликлиника1Тест1",
-                            HashedPassword = _passwordHashManager.GetPasswordHash("Madrid"),
+                            Login = "Clinic1",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("12345"),
                         },
                         Id = 0,
-                        Name = "Поликлиника 1 Тест 1",
+                        Name = "Clinic User",
                         UserTypeId = userTypeId,
                     }
-                },
-                new ClinicUserStorageModel
-                {
-                    Id = 0,
-                    ClinicId = clinicId,
-                    IsDischargeResponsiblePerson = false,
-                    User = new UserStorageModel
-                    {
-                        Account = new AccountStorageModel
-                        {
-                            Id = 0,
-                            IsBlocked = false,
-                            Login = "Поликлиника1Тест2",
-                            HashedPassword = _passwordHashManager.GetPasswordHash("Berlin"),
-                        },
-                        Id = 0,
-                        Name = "Поликлиника 1 Тест 2",
-                        UserTypeId = userTypeId
-                    }
-                },
-                new ClinicUserStorageModel
-                {
-                    Id = 0,
-                    ClinicId = clinicId,
-                    IsDischargeResponsiblePerson = false,
-                    User = new UserStorageModel
-                    {
-                        Account = new AccountStorageModel
-                        {
-                            Id = 0,
-                            IsBlocked = false,
-                            Login = "Поликлиника1Тест3",
-                            HashedPassword = _passwordHashManager.GetPasswordHash("Paris"),
-                        },
-                        Id = 0,
-                        Name = "Поликлиника 1 Тест 3",
-                        UserTypeId = userTypeId
-                    }
-                },
+                }
             };
         }
 
@@ -123,53 +85,16 @@ namespace CreateRandomDataTools.DataCreators
                         {
                             Id = 0,
                             IsBlocked = false,
-                            Login = "Поликлиника2Тест1",
-                            HashedPassword = _passwordHashManager.GetPasswordHash("London"),
+                            Login = "Clinic2",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("12345"),
                         },
                         Id = 0,
-                        Name = "Поликлиника 2 Тест 1",
-                        UserTypeId = userTypeId
+                        Name = "Clinic User",
+                        UserTypeId = userTypeId,
                     }
-                },
-                new ClinicUserStorageModel
-                {
-                    Id = 0,
-                    ClinicId = clinicId,
-                    IsDischargeResponsiblePerson = false,
-                    User = new UserStorageModel
-                    {
-                        Account = new AccountStorageModel
-                        {
-                            Id = 0,
-                            IsBlocked = false,
-                            Login = "Поликлиника2Тест2",
-                            HashedPassword = _passwordHashManager.GetPasswordHash("Tokyo"),
-                        },
-                        Id = 0,
-                        Name = "Поликлиника 2 Тест 2",
-                        UserTypeId = userTypeId
-                    }
-                },
-                new ClinicUserStorageModel
-                {
-                    Id = 0,
-                    ClinicId = clinicId,
-                    IsDischargeResponsiblePerson = false,
-                    User = new UserStorageModel
-                    {
-                        Account = new AccountStorageModel
-                        {
-                            Id = 0,
-                            IsBlocked = false,
-                            Login = "Поликлиника3Тест3",
-                            HashedPassword = _passwordHashManager.GetPasswordHash("Prague"),
-                        },
-                        Id = 0,
-                        Name = "Поликлиника 3 Тест 3",
-                        UserTypeId = userTypeId
-                    }
-                },
+                }
             };
+
         }
     }
 }
