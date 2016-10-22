@@ -1,0 +1,44 @@
+USE [SystemDoctor]
+GO
+DELETE FROM [dbo].[Patients]
+GO
+DELETE FROM [dbo].[Reservations]
+GO
+DELETE FROM [dbo].[Discharges]
+GO
+DELETE FROM [dbo].[Messages]
+GO
+DELETE FROM [dbo].[EmptyPlaceByTypeStatistics]
+GO
+DELETE FROM [dbo].[EmptyPlaceStatistics]
+GO
+DELETE FROM [dbo].[SectionProfiles]
+GO
+DELETE FROM [dbo].[Sections]
+GO
+DELETE FROM [dbo].[SettingsItems]
+GO
+DELETE FROM [dbo].[UserFunctions]
+GO
+DELETE FROM [dbo].[FunctionalGroups]
+GO
+DELETE FROM [dbo].[GroupFunctions]
+GO
+DELETE FROM [dbo].[Sessions]
+GO
+DELETE FROM [dbo].[Functions]
+GO
+DELETE FROM [dbo].[ClinicUsers]
+GO
+DELETE FROM [dbo].[HospitalUsers]
+GO
+DELETE FROM [dbo].[Accounts]
+GO
+DELETE FROM [dbo].[Users]
+GO
+DELETE FROM [dbo].[UserTypes]
+GO
+DELETE FROM [dbo].[Hospitals]
+GO
+DELETE FROM [dbo].[Clinics]
+GO

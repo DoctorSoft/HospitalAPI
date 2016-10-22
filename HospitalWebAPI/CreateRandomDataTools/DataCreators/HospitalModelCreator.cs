@@ -16,7 +16,7 @@ namespace CreateRandomDataTools.DataCreators
                     Id = 0,
                     Name = "Городская клиническая больница №3",
                     Address = "г. Гродно, ул. БЛК, 59",
-                    IsForChildren = true
+                    IsForChildren = false
                 },
             };
 

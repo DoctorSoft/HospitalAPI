@@ -16,7 +16,7 @@ namespace CreateRandomDataTools.DataCreators
                     Id = 0,
                     Name = "Гродненская городская поликлиника №4",
                     Address = "г.Гродно, ул. Врублевского, 46/1",
-                    IsForChildren = true
+                    IsForChildren = false
                 },
                 new ClinicStorageModel
                 {
@@ -24,7 +24,7 @@ namespace CreateRandomDataTools.DataCreators
                     Id = 0,
                     Name = "Гродненская городская поликлиника №6",
                     Address = "г.Гродно, ул. Лиможа, 25",
-                    IsForChildren = true
+                    IsForChildren = false
                 },
                
             };
