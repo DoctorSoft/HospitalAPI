@@ -85,7 +85,7 @@ namespace Services.ClinicRegistrationsServices
                     PatientFirstName = model.Patient.FirstName,
                     PatientLastName = model.Patient.LastName,
                     ReservationDate = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date,
-                    Diagnosis = model.Diagnosis
+                    Diagnosis = model.Diagnosis,
                 })
                 .ToList();
 
@@ -585,6 +585,10 @@ namespace Services.ClinicRegistrationsServices
                 Weeks = command.Weeks ?? 0,
                 Code = command.Code,
                 Diagnosis = command.Diagnosis,
+                MedicalExaminationResult = command.MedicalExaminationResult,
+                MedicalConsultion = command.MedicalConsultion,
+                ReservationPurpose = command.ReservationPurpose,
+                OtherInformation = command.OtherInformation,
                 DoesAgree = command.DoesAgree ?? true,
                 UserId = command.UserId.Value,
                 Clinics = clinicResults,
@@ -720,6 +724,10 @@ namespace Services.ClinicRegistrationsServices
                     Weeks = command.Weeks ?? 0,
                     Code = command.Code,
                     Diagnosis = command.Diagnosis,
+                    MedicalExaminationResult = command.MedicalExaminationResult,
+                    MedicalConsultion = command.MedicalConsultion,
+                    ReservationPurpose = command.ReservationPurpose,
+                    OtherInformation = command.OtherInformation,
                     DoesAgree = command.DoesAgree,
                     UserId = command.UserId,
                     Clinics = clinicResults,
@@ -819,6 +827,10 @@ namespace Services.ClinicRegistrationsServices
                 Weeks = command.Weeks ?? 0,
                 Code = command.Code,
                 Diagnosis = command.Diagnosis,
+                MedicalExaminationResult = command.MedicalExaminationResult,
+                MedicalConsultion = command.MedicalConsultion,
+                ReservationPurpose = command.ReservationPurpose,
+                OtherInformation = command.OtherInformation,
                 DoesAgree = command.DoesAgree,
                 UserId = command.UserId,
                 Clinics = clinicResults,
