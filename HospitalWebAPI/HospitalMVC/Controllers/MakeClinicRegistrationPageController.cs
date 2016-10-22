@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
@@ -43,8 +44,13 @@ namespace HospitalMVC.Controllers
 
         [HttpPost]
         [TokenAuthorizationFilter(FunctionIdentityName.ClinicUserPrimaryAccess, FunctionIdentityName.ClinicUserMakeRegistrations)]
-        public ActionResult SaveRegistration(SaveClinicRegistrationCommand command)
+        public ActionResult SaveRegistration(SaveClinicRegistrationCommand command, HttpPostedFileBase reservationFile)
         {
+            if (reservationFile != null)
+            {
+                command.File = reservationFile.InputStream;
+                command.FileName = reservationFile.FileName;
+            }
             var answer = _clinicRegistrationsService.SaveClinicRegistration(command);
 
             if (answer.Errors.Any())
@@ -73,7 +79,8 @@ namespace HospitalMVC.Controllers
                     ReservationPurpose = command.ReservationPurpose,
                     OtherInformation = command.OtherInformation,
                     Errors = answer.Errors,
-                    AgeCategoryId = command.AgeCategoryId
+                    AgeCategoryId = command.AgeCategoryId,
+                    File = command.File
                 };
 
                 return View("Step3", model);

@@ -43,6 +43,7 @@ namespace Dependencies.NinjectModules
             Bind<IUserTypeRepository>().To<UserTypeRepository>().InThreadScope();
             Bind<IClinicHospitalPriorityRepository>().To<ClinicHospitalPriorityRepository>().InThreadScope();
             Bind<IEmptyPlaceByTypeStatisticRepository>().To<EmptyPlaceByTypeStatisticRepository>().InThreadScope();
+            Bind<IReservationFileRepository>().To<ReservationFileRepository>().InThreadScope();
 
             Bind<IPersonDataAPIRepository>().To<PersonDataAPIRepository>().InThreadScope();
         }

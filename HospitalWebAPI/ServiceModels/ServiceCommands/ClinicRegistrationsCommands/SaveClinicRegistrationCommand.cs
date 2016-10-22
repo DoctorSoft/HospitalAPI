@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Web.Mvc;
 using ServiceModels.ModelTools;
 
@@ -48,5 +49,9 @@ namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands
         public string OtherInformation { get; set; }
 
         public int AgeCategoryId { get; set; }
+
+        public Stream File { get; set; }
+
+        public string FileName { get; set; }
     }
 }

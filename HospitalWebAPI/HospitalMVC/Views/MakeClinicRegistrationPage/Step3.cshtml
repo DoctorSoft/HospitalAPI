@@ -4,7 +4,7 @@
 }
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetClinicRegistrationUserFormCommandAnswer
 
-@using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", FormMethod.Post))
+@using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -170,6 +170,8 @@
                 @Html.TextBoxFor(o => o.OtherInformation, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
+        
+        <input id="reservationFile" name="reservationFile" type="file" multiple class="file-loading" />
 
         <input class="btn btn-sm btn-primary" type="submit"/>
     </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using Enums.EnumExtensions;
 using Enums.Enums;
@@ -46,7 +47,9 @@ namespace Services.ClinicRegistrationsServices
 
         private readonly IClinicRepository _clinicRepository;
 
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager, IClinicRepository clinicRepository)
+        private readonly IReservationFileRepository _reservationFileRepository;
+
+        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager, IClinicRepository clinicRepository, IReservationFileRepository reservationFile)
         {
             _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
@@ -60,6 +63,7 @@ namespace Services.ClinicRegistrationsServices
             this._hospitalSectionProfileRepository = hospitalSectionProfileRepository;
             this._hospitalManager = hospitalManager;
             _clinicRepository = clinicRepository;
+            _reservationFileRepository = reservationFile;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -318,6 +322,16 @@ namespace Services.ClinicRegistrationsServices
             return result;
         }
         
+        public static byte[] ReadFully(Stream input)
+        {
+            input.Position = 0;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
         public SaveClinicRegistrationCommandAnswer SaveClinicRegistration(SaveClinicRegistrationCommand command)
         {
             var errors = this.ValidateSaveClinicRegistrationCommand(command);
@@ -370,6 +384,16 @@ namespace Services.ClinicRegistrationsServices
             };
 
             _reservationRepository.Add(reservation);
+
+            var reservationFile = new ReservationFileStorageModel()
+            {
+                Name = command.FileName,
+                ReservationId = reservation.Id,
+                Reservation = reservation,
+                File = ReadFully(command.File)
+            };
+
+            _reservationFileRepository.Add(reservationFile);
 
             var receiverIds = this._userRepository.GetModels()
                 .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == command.CurrentHospitalId)

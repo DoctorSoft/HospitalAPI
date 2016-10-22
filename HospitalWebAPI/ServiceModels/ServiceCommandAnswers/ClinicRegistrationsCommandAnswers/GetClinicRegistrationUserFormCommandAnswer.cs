@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
@@ -46,5 +47,7 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
         public string OtherInformation { get; set; }
 
         public int AgeCategoryId { get; set; }
+
+        public Stream File { get; set; }
     }
 }
