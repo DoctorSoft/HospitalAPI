@@ -16,6 +16,10 @@ namespace StorageModels.Models.ClinicModels
         public DateTime ApproveTime { get; set; }
         public DateTime? CancelTime { get; set; }
         public string Diagnosis { get; set; }
+        public string MedicalExaminationResult { get; set; }
+        public string MedicalConsultion { get; set; }
+        public string ReservationPurpose { get; set; }
+        public string OtherInformation { get; set; }
 
         //
 

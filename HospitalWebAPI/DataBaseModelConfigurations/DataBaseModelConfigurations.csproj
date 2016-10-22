@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201603211922532_AddAgeFields.Designer.cs">
       <DependentUpon>201603211922532_AddAgeFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610221050287_AddReservationFields.cs" />
+    <Compile Include="Migrations\201610221050287_AddReservationFields.Designer.cs">
+      <DependentUpon>201610221050287_AddReservationFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -230,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603211922532_AddAgeFields.resx">
       <DependentUpon>201603211922532_AddAgeFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610221050287_AddReservationFields.resx">
+      <DependentUpon>201610221050287_AddReservationFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
