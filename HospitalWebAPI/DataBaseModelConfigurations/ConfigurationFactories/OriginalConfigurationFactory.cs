@@ -5,7 +5,6 @@ using DataBaseModelConfigurations.Configurations.HospitalModels;
 using DataBaseModelConfigurations.Configurations.MailboxModels;
 using DataBaseModelConfigurations.Configurations.UserModels;
 using DataBaseTools.Interfaces;
-using StorageModels.Models.FunctionModels;
 
 namespace DataBaseModelConfigurations.ConfigurationFactories
 {
@@ -34,6 +33,7 @@ namespace DataBaseModelConfigurations.ConfigurationFactories
             builder.Configurations.Add(new ClinicDataBaseConfiguration());
             builder.Configurations.Add(new PatientDataBaseConfiguration());
             builder.Configurations.Add(new ReservationDataBaseConfiguration());
+            builder.Configurations.Add(new ReservationFileDataBaseConfiguration());
             builder.Configurations.Add(new SettingsItemDataBaseConfiguration());
             builder.Configurations.Add(new ClinicHospitalPriorityDataBaseConfiguration());
 

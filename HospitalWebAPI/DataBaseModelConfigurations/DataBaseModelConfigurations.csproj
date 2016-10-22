@@ -82,6 +82,7 @@
     <Compile Include="Configurations\ClinicModels\ClinicDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\ClinicHospitalPriorityDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\PatientDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\ClinicModels\ReservationFileDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\ReservationDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\SettingsItemDataBaseConfiguration.cs" />
     <Compile Include="Configurations\FunctionModels\FunctionalGroupDataBaseConfiguration.cs" />
@@ -171,6 +172,10 @@
     <Compile Include="Migrations\201610221120145_AddReservationField.Designer.cs">
       <DependentUpon>201610221120145_AddReservationField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610221906093_CreateReservationFileTable.cs" />
+    <Compile Include="Migrations\201610221906093_CreateReservationFileTable.Designer.cs">
+      <DependentUpon>201610221906093_CreateReservationFileTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -243,6 +248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610221120145_AddReservationField.resx">
       <DependentUpon>201610221120145_AddReservationField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610221906093_CreateReservationFileTable.resx">
+      <DependentUpon>201610221906093_CreateReservationFileTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

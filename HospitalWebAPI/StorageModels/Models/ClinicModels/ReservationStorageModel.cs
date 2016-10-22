@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums.Enums;
 using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
@@ -28,6 +29,8 @@ namespace StorageModels.Models.ClinicModels
         public PatientStorageModel Patient { get; set; }
         public UserStorageModel Reservator { get; set; }
         public UserStorageModel BehalfReservator { get; set; }
+
+        public ICollection<ReservationFileStorageModel> ReservationFiles { get; set; }
 
         //
 

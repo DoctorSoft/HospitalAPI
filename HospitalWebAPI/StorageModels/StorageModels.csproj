@@ -62,6 +62,7 @@
     <Compile Include="Models\ClinicModels\ClinicHospitalPriorityStorageModel.cs" />
     <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
     <Compile Include="Models\ClinicModels\PatientStorageModel.cs" />
+    <Compile Include="Models\ClinicModels\ReservationFileStorageModel.cs" />
     <Compile Include="Models\ClinicModels\SettingsItemStorageModel.cs" />
     <Compile Include="Models\ClinicModels\ReservationStorageModel.cs" />
     <Compile Include="Models\FunctionModels\FunctionalGroupStorageModel.cs" />
