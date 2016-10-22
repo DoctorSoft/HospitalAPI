@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
+<h2>@Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")</h2>
 
 @{
     if (Model.ShowModalWindow)

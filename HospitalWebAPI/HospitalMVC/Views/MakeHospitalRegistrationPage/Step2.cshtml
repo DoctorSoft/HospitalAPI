@@ -73,8 +73,8 @@
     <h2>Регистрация: </h2>
     <div class="form-group">
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
                     Код пациента:
                 </h4>
             </div>
@@ -86,24 +86,24 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Фамилия:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Фамилия:</h4>
             </div>
             <div class="col-md-5">
                 @Html.TextBoxFor(o => o.LastName, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Имя:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Имя:</h4>
             </div>
             <div class="col-md-5">
                 @Html.TextBoxFor(o => o.FirstName, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Возраст:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Возраст:</h4>
             </div>
             <div class="col-md-5">
                 @{
@@ -115,8 +115,8 @@
         @if (Model.SexId != null && Model.SexId != 0)
         {
             <div class="col-md-12">
-                <div class="col-md-2">
-                    <h4>
+                <div class="col-md-6 aling-right">
+                    <h4 class="aling-right">
                         Пол:
                     </h4>
                 </div>
@@ -130,16 +130,16 @@
             </div>
         }
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Телефон:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Телефон:</h4>
             </div>
             <div class="col-md-5">
                 @Html.TextBoxFor(o => o.PhoneNumber, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
                     Дата:
                 </h4>
             </div>
@@ -153,8 +153,8 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
                     Отделение:
                 </h4>
             </div>
@@ -166,16 +166,16 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Диагноз:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Диагноз:</h4>
             </div>
             <div class="col-md-5">
                 @Html.TextBoxFor(o => o.Diagnosis, new {@class = "form-control", @rows = "10"})
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Поликлиника:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Поликлиника:</h4>
             </div>
             <div class="col-md-5">
                 @Html.DropDownListFor(answer => answer.Clinics, Model.Clinics.Select(pair => new SelectListItem
@@ -194,18 +194,18 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Причина госпитализации:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Причина госпитализации:</h4>
             </div>
             <div class="col-md-5">
                 @Html.TextBoxFor(o => o.ReservationPurpose, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
                     Консультативные заключения врачей-специалистов на догоспитальном этапе <br />
-                    (если пациент направляется из стационара – не заполнять)::
+                    (если пациент направляется из стационара – не заполнять):
                 </h4>
             </div>
             <div class="col-md-5">
@@ -213,8 +213,8 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
                     Проведенное догоспитальное обследование <br />
                     (указать результаты исследований):
                 </h4>
@@ -224,8 +224,8 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
                     Другая информация
                 </h4>
             </div>
@@ -234,8 +234,8 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Врач:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Врач:</h4>
             </div>
             <div class="col-md-5">
                 @Html.DropDownListFor(answer => answer.Users, Model.Users.Select(pair => new SelectListItem
@@ -254,8 +254,8 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Согласие:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Согласие:</h4>
             </div>
             <div class="col-md-5">
                 <input class="form-control active" value='TRUE' type="checkbox" rows="10" id="DoesAgree" checked disabled />

@@ -51,53 +51,53 @@
 </div>
 
 
-<div class="container body-content">
+    <div class="container body-content background-shedule">
 
-    @if (ViewBag.HasDialogMessage != null && ViewBag.HasDialogMessage)
-    {
-        <div class="modal fade" tabindex="-1" role="dialog" id="mainModalDialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Информация</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>@ViewBag.DialogMessage</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">ОК</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#mainModalDialog').modal('show');
-            });
-        </script>
-    }
-
-    @if (ViewBag.Errors != null)
-    {
-        var errors = ViewBag.Errors as List<ServiceModels.ModelTools.CommandAnswerError>;
-        if (errors != null && errors.Any())
+        @if (ViewBag.HasDialogMessage != null && ViewBag.HasDialogMessage)
         {
-            foreach (var error in errors)
+            <div class="modal fade" tabindex="-1" role="dialog" id="mainModalDialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Информация</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>@ViewBag.DialogMessage</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">ОК</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#mainModalDialog').modal('show');
+                });
+            </script>
+        }
+
+        @if (ViewBag.Errors != null)
+        {
+            var errors = ViewBag.Errors as List<ServiceModels.ModelTools.CommandAnswerError>;
+            if (errors != null && errors.Any())
             {
-                <div class="alert-warning alert"> @error.FieldName : @error.Title </div>
+                foreach (var error in errors)
+                {
+                    <div class="alert-warning alert"> @error.FieldName : @error.Title </div>
+                }
             }
         }
-    }
 
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - System Doctor ASP.NET Application</p>
-    </footer>
-</div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - System Doctor ASP.NET Application</p>
+        </footer>
+    </div>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
