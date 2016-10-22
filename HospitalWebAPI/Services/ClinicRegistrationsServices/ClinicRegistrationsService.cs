@@ -104,7 +104,7 @@ namespace Services.ClinicRegistrationsServices
         {
             var user = this._tokenManager.GetUserByToken(command.Token);
             var clinic = this._clinicManager.GetClinicByUser(user);
-            var hasGenderFactor = clinic.IsForChildren;
+            var hasGenderFactor = !clinic.IsForChildren;
             
             var sexes =
                 Enum.GetValues(typeof (Sex))
