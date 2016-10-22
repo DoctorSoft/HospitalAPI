@@ -475,10 +475,10 @@ namespace Services.ClinicRegistrationsServices
                 command.HospitalSectionProfileId = hospitalSectionProfiles.FirstOrDefault().Id;
             }
 
-            if (command.AgeCategoryId == null)
-            {
-                command.AgeCategoryId = (int)AgeRange.After18;; //Default value for age category = more 1 year
-            }
+            //if (command.AgeCategoryId == null)
+            //{
+            //    command.AgeCategoryId = 0; //(int)AgeRange.After18;; //Default value for age category = more 1 year
+            //}
 
             var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;
             
@@ -773,6 +773,10 @@ namespace Services.ClinicRegistrationsServices
                 EmptyPlaceByTypeStatisticId = emptyPlaceByTypeStatisticId,
                 Status = ReservationStatus.Opened,
                 Diagnosis = command.Diagnosis,
+                MedicalExaminationResult = command.MedicalExaminationResult,
+                MedicalConsultion = command.MedicalConsultion,
+                ReservationPurpose = command.ReservationPurpose,
+                OtherInformation = command.OtherInformation,
                 ReservatorId = command.UserId,
                 BehalfReservatorId = user.Id
             };
@@ -806,7 +810,7 @@ namespace Services.ClinicRegistrationsServices
 
             _reservationRepository.SaveChanges();
             
-            var messageText = $"Пациент с номером {command.Code} был успешно зарезервирован в Вашу больницу.\0\n" +
+            var messageText = "Пациент с номером {command.Code} был успешно зарезервирован в Вашу больницу.\0\n" +
                            $"Дата: {command.Date}.\n\0" +
                            $"Отделение: {hospitalSectionProfileName}.\n\0" +
                            $"Диагноз: {command.Diagnosis}.\n\0";
@@ -868,7 +872,7 @@ namespace Services.ClinicRegistrationsServices
         private int GetHospitalEmptyPlacesCount(GetMakeHospitalRegistrationsPageInformationCommand command, DateTime date, int hospitalId)
         {
            var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()
-               .Where(model => (int)model.Sex == command.SexId 
+               .Where(model => (int?)model.Sex == command.SexId 
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
                    && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
@@ -876,10 +880,10 @@ namespace Services.ClinicRegistrationsServices
                    .FirstOrDefault();
 
             var registrationCount = _emptyPlaceByTypeStatisticRepository.GetModels()
-                .Where(model => (int)model.Sex == command.SexId.Value 
+                .Where(model => (int?)model.Sex == command.SexId
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
-                   && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.HospitalSectionProfileId.Value)
+                   && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
                 .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
                 .Count(model => model.Status == ReservationStatus.Opened);
 

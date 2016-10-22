@@ -13,16 +13,14 @@
     var setStartValue = function () {
             $('#HospitalSectionProfiles').val('@Model.HospitalSectionProfileId');
             $('#Sexes').val('@Model.SexId');
-            $('#AgeCategories').val('@Model.AgeCategoryId');
         }
 
         setStartValue();
 
         var HospitalChange = function (e) {
             var url = '@Url.Action("Index", "MakeHospitalRegistrationPage", new {Token = @Model.Token})'
-            + '?SexId=' + $('#Sexes').val()
-            + '&HospitalSectionProfileId=' + $('#HospitalSectionProfiles').val()
-            + '&AgeCategoryId=' + $('#AgeCategories').val();
+                + '?SexId=' + $('#Sexes').val()
+                + '&HospitalSectionProfileId=' + $('#HospitalSectionProfiles').val();
         window.location.replace(url);
     };
     </script>
@@ -49,24 +47,6 @@
                     @value = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Key.ToString(),
                     @text = Model.HospitalSectionProfiles.FirstOrDefault(pair => pair.Key == Model.HospitalSectionProfileId).Value
                 })
-            </div>
-            <div class="col-lg-3">
-                <label>Возраст пациента:</label>
-            </div>
-            <div class="col-lg-7">
-                @Html.DropDownListFor(answer => answer.AgeCategories, Model.AgeCategories.Select(pair => new SelectListItem
-                    {
-                        Selected = pair.Key == Model.AgeCategoryId,
-                        Value = pair.Key.ToString(),
-                        Text = pair.Value,
-                        Disabled = false
-                    }), new
-                    {
-                        @class = "form-control",
-                        @onchange = "HospitalChange()",
-                        @value = Model.AgeCategories.FirstOrDefault(pair => pair.Key == Model.AgeCategoryId).Key.ToString(),
-                        @text = Model.AgeCategories.FirstOrDefault(pair => pair.Key == Model.AgeCategoryId).Value
-                    })
             </div>
         </div>
 
@@ -177,7 +157,6 @@
                                                      Token = Model.Token,
                                                      SexId = Model.SexId,
                                                      HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                     AgeCategoryId = Model.AgeCategoryId,
                                                      Date = cell.Date.ToCorrectDateString()
                                                  })" class="button9 nav" style="height: 100px; text-align: center; min-width: 100%;">
                                             <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
@@ -214,7 +193,6 @@
                                                      Token = Model.Token,
                                                      SexId = Model.SexId,
                                                      HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                     AgeCategoryId = Model.AgeCategoryId,
                                                      Date = cell.Date.ToCorrectDateString()
                                                  })" class="button10 nav" style="height: 100px; text-align: center; min-width: 100%;">
                                             <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
@@ -234,7 +212,6 @@
                                                      Token = Model.Token,
                                                      SexId = Model.SexId,
                                                      HospitalSectionProfileId = Model.HospitalSectionProfileId,
-                                                     AgeCategoryId = Model.AgeCategoryId,
                                                      Date = cell.Date.ToCorrectDateString()
                                                  })" class="button7 nav" style="height: 100px; text-align: center; min-width: 100%;">
                                             <div style="height: 100px; vertical-align: middle; min-width: 100%;" class="text-center btn">
