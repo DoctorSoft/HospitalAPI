@@ -362,6 +362,10 @@ namespace Services.ClinicRegistrationsServices
                 EmptyPlaceByTypeStatisticId = emptyPlaceByTypeStatisticId,
                 Status = ReservationStatus.Opened,
                 Diagnosis = command.Diagnosis,
+                MedicalExaminationResult = command.MedicalExaminationResult,
+                MedicalConsultion = command.MedicalConsultion,
+                ReservationPurpose = command.ReservationPurpose,
+                OtherInformation = command.OtherInformation,
                 ReservatorId = user.Id
             };
 

@@ -102,7 +102,6 @@
     <Compile Include="Configurations\UserModels\SessionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\UserDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\UserTypeDataBaseConfiguration.cs" />
-    <Compile Include="Contexts\OriginalDataBaseContext.cs" />
     <Compile Include="Contexts\TestDataBaseContext.cs" />
     <Compile Include="Migrations\201512012154494_Init.cs" />
     <Compile Include="Migrations\201512012154494_Init.Designer.cs">
@@ -167,6 +166,10 @@
     <Compile Include="Migrations\201610221050287_AddReservationFields.cs" />
     <Compile Include="Migrations\201610221050287_AddReservationFields.Designer.cs">
       <DependentUpon>201610221050287_AddReservationFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610221120145_AddReservationField.cs" />
+    <Compile Include="Migrations\201610221120145_AddReservationField.Designer.cs">
+      <DependentUpon>201610221120145_AddReservationField.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -237,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610221050287_AddReservationFields.resx">
       <DependentUpon>201610221050287_AddReservationFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610221120145_AddReservationField.resx">
+      <DependentUpon>201610221120145_AddReservationField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

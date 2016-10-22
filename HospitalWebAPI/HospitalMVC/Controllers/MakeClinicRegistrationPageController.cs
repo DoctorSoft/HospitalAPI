@@ -68,6 +68,10 @@ namespace HospitalMVC.Controllers
                     CurrentHospital = command.CurrentHospital,
                     PhoneNumber = command.PhoneNumber,
                     Diagnosis = command.Diagnosis,
+                    MedicalExaminationResult = command.MedicalExaminationResult,
+                    MedicalConsultion = command.MedicalConsultion,
+                    ReservationPurpose = command.ReservationPurpose,
+                    OtherInformation = command.OtherInformation,
                     Errors = answer.Errors,
                     AgeCategoryId = command.AgeCategoryId
                 };

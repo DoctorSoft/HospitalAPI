@@ -101,25 +101,6 @@
                 @{
 
                     @Html.TextBoxFor(o => o.Years, new { @class = "form-control", @rows = "10", @type = "number" })
-                    /*if (@Model.AgeCategoryId == (int)AgeRange.After18)
-                    {
-                        @Html.TextBoxFor(o => o.Years, new {@class = "form-control", @rows = "10", @type = "number"})
-                    }
-                    else
-                    {
-                        <div class="col-md-3">
-                            <h4>Месяцев:</h4>
-                        </div>
-                        <div class="col-xs-3">
-                            @Html.TextBoxFor(o => o.Months, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
-                        </div>
-                        <div class="col-md-3">
-                            <h4>Недель:</h4>
-                        </div>
-                        <div class="col-xs-3">
-                            @Html.TextBoxFor(o => o.Weeks, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
-                        </div>
-                    }*/
                 }
             </div>
         </div>
@@ -202,6 +183,46 @@
                     @value = Model.Clinics.FirstOrDefault(pair => pair.Key == Model.ClinicId).Key.ToString(),
                     @text = Model.Clinics.FirstOrDefault(pair => pair.Key == Model.ClinicId).Value
                 })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>Причина госпитализации:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.ReservationPurpose, new { @class = "form-control", @rows = "10" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Консультативные заключения врачей-специалистов на догоспитальном этапе <br />
+                    (если пациент направляется из стационара – не заполнять)::
+                </h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.MedicalConsultion, new { @class = "form-control", @rows = "10" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Проведенное догоспитальное обследование <br />
+                    (указать результаты исследований):
+                </h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.MedicalExaminationResult, new { @class = "form-control", @rows = "10" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <h4>
+                    Другая информация
+                </h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.OtherInformation, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
         <div class="col-md-12">
