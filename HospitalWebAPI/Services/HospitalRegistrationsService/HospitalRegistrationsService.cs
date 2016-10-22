@@ -187,7 +187,7 @@ namespace Services.HospitalRegistrationsService
             ChangeHospitalRegistrationForSelectedSectionCommand command)
         {
             var hospitalSectionProfilesName = _hospitalSectionProfileRepository.GetModels()
-                .FirstOrDefault(model=>model.SectionProfileId == command.HospitalProfileId).Name;
+                .FirstOrDefault(model=>model.Id == command.HospitalProfileId).Name;
 
             var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
