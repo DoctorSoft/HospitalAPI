@@ -648,40 +648,34 @@ namespace Services.HospitalRegistrationsService
                 .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId)
                 .ToList();
 
-            if (hospital.IsForChildren)
+
+            for (var day = 0; day < ForNextDays; day++)
             {
-                for (var day = 0; day < ForNextDays; day++)
+                var nextDate = startDay.AddDays(day);
+
+                if (!command.DaysOfWeek[(int) nextDate.Date.DayOfWeek])
                 {
-                    var nextDate = startDay.AddDays(day);
-
-                    if (!command.DaysOfWeek[(int)nextDate.Date.DayOfWeek])
-                    {
-                        continue;
-                    }
-
-                    if (!correctPlaceStatistics.Select(model => model.EmptyPlaceStatistic.Date).Contains(nextDate))
-                    {
-                        var newStatistic = new EmptyPlaceStatisticStorageModel
-                                             {
-                                                 Date = nextDate,
-                                                 HospitalSectionProfileId = command.HospitalSectionProfileId,
-                                                 CreateTime = DateTime.Now,
-                                                 EmptyPlaceByTypeStatistics = new []
-                                                                                  {
-                                                                                      new EmptyPlaceByTypeStatisticStorageModel
-                                                                                          {
-                                                                                              Sex = (Sex?)command.SexId,
-                                                                                              Count = command.CountValue
-                                                                                          } 
-                                                                                  }
-                                             };
-                        this._emptyPlaceStatisticRepository.Add(newStatistic);
-                    }
+                    continue;
                 }
-            }
-            else
-            {
-                throw new NotImplementedException("This function is not implemented for not children's hospitals");
+
+                if (!correctPlaceStatistics.Select(model => model.EmptyPlaceStatistic.Date).Contains(nextDate))
+                {
+                    var newStatistic = new EmptyPlaceStatisticStorageModel
+                    {
+                        Date = nextDate,
+                        HospitalSectionProfileId = command.HospitalSectionProfileId,
+                        CreateTime = DateTime.Now,
+                        EmptyPlaceByTypeStatistics = new[]
+                        {
+                            new EmptyPlaceByTypeStatisticStorageModel
+                            {
+                                Sex = (Sex?) command.SexId,
+                                Count = command.CountValue
+                            }
+                        }
+                    };
+                    this._emptyPlaceStatisticRepository.Add(newStatistic);
+                }
             }
 
             this._emptyPlaceStatisticRepository.SaveChanges();
