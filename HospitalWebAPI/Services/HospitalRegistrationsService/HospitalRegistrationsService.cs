@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using Enums.EnumExtensions;
 using Enums.Enums;
@@ -37,10 +38,11 @@ namespace Services.HospitalRegistrationsService
         private readonly IMessageRepository _messageRepository;
         private readonly IPatientRepository _patientRepository;
         private readonly IHospitalManager _hospitalManager;
+        private readonly IReservationFileRepository _reservationFileRepository;
 
         public HospitalRegistrationsService(IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository,
             IHospitalSectionProfileRepository hospitalSectionProfileRepository, ITokenManager tokenManager,
-            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository, IUserRepository userRepository, IMessageRepository messageRepository, IPatientRepository patientRepository, IHospitalManager hospitalManager)
+            IHospitalUserRepository hospitalUserRepository, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IReservationRepository reservationRepository, IUserRepository userRepository, IMessageRepository messageRepository, IPatientRepository patientRepository, IHospitalManager hospitalManager, IReservationFileRepository reservationFileRepository)
         {
             _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
             _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
@@ -52,6 +54,7 @@ namespace Services.HospitalRegistrationsService
             _messageRepository = messageRepository;
             _patientRepository = patientRepository;
             this._hospitalManager = hospitalManager;
+            _reservationFileRepository = reservationFileRepository;
         }
 
         public GetChangeHospitalRegistrationsPageInformationCommandAnswer GetChangeHospitalRegistrationsPageInformation(
@@ -591,6 +594,20 @@ namespace Services.HospitalRegistrationsService
             .FirstOrDefault();
 
             return patient;
+        }
+
+        public DownloadHospitalReservationFileCommandAnswer DownloadHospitalReservationFile(DownloadHospitalReservationFileCommand command)
+        {
+            var files = _reservationFileRepository.GetModels();
+            var file = files.FirstOrDefault(model => model.Id == command.HospitalReservationFileId);
+
+            Stream stream = new MemoryStream(file.File);
+
+            return new DownloadHospitalReservationFileCommandAnswer
+            {
+                File = stream,
+                FileName = file.Name
+            };
         }
 
         public ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command)

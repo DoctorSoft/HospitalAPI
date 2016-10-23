@@ -115,6 +115,7 @@
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\BreakHospitalRegistrationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForNewSectionCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\ChangeHospitalRegistrationForSelectedSectionCommandAnswer.cs" />
+    <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\DownloadHospitalReservationFileCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\AllHospitalRegistrations.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationCountStatisticItem.cs" />
     <Compile Include="ServiceCommandAnswers\HospitalRegistrationsCommandAnswers\Entities\HospitalRegistrationTableItem.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\BreakHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForNewSectionCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\ChangeHospitalRegistrationForSelectedSectionCommand.cs" />
+    <Compile Include="ServiceCommands\HospitalRegistrationsCommands\DownloadHospitalReservationFileCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeNewHospitalRegistrationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationsPageInformationCommand.cs" />
     <Compile Include="ServiceCommands\HospitalRegistrationsCommands\GetChangeHospitalRegistrationCommand.cs" />

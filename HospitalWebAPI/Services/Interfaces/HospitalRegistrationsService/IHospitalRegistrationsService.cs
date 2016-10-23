@@ -1,4 +1,5 @@
-﻿using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
+﻿using System.IO;
+using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 
@@ -35,6 +36,8 @@ namespace Services.Interfaces.HospitalRegistrationsService
 
         GetHospitalRegistrationRecordCommandAnswer GetHospitalRegistrationRecord(
             GetHospitalRegistrationRecordCommand command);
+
+        DownloadHospitalReservationFileCommandAnswer DownloadHospitalReservationFile(DownloadHospitalReservationFileCommand command);
 
         ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command);
 

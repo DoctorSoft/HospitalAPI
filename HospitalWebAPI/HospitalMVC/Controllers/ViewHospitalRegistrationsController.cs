@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web.Mvc;
 using Enums.Enums;
 using HospitalMVC.Filters;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
@@ -36,13 +37,20 @@ namespace HospitalMVC.Controllers
             });
         }
 
-        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess,
-            FunctionIdentityName.HospitalUserWatchRegisteredUsers)]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserWatchRegisteredUsers)]
         public ActionResult ViewMore(GetHospitalRegistrationRecordCommand command)
         {
             var result = _hospitalRegistrationsService.GetHospitalRegistrationRecord(command);
             return View(result);
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserWatchRegisteredUsers)]
+        public FileResult DownloadReservationFile(DownloadHospitalReservationFileCommand command)
+        {
+            var result = _hospitalRegistrationsService.DownloadHospitalReservationFile(command);
+            return File(result.File, System.Net.Mime.MediaTypeNames.Application.Octet, result.FileName);
+        }
+
 
     }
 }
