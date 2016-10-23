@@ -1,11 +1,63 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ViewMore";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using Enums.Enums
+@using HelpingTools.ExtentionTools
+@using Resources
 @model ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.GetHospitalRegistrationRecordCommandAnswer
 
+<h2>
+    Регистрация пациента #@Model.ReservationId
+    @Html.ActionLink("Список", "Index", new { Token = Model.Token }, new { @class = "btn btn-info" })
+    <input type="button" title="Delete" class="btn btn-danger" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@( "#modalWindow" + @Model.ReservationId)>
+</h2>
+
+@ModalWindowsHelper.AddActionModalWindow(helper: Html,
+                                        headText: "Подтверждение",
+                                        bodyText: "Вы уверены, что хотите удалить эту регистрацию?",
+                                        actionName: "BreakRegistration",
+                                        controlName: "ViewHospitalRegistrations",
+                                        paramsList: new { Token = Model.Token, ReservationId = Model.ReservationId },
+                                        applyButtonName: "Применить",
+                                        id: @Model.ReservationId + "")
+
 <div class="panel panel-default">
-    @Model.ReservationPurpose
+    <div>
+        <h3><b>Имя:</b> @Model.LastName @Model.FirstName</h3>
+    </div>
+    <div>
+        <h3><b>Дата регистрации:</b> @Model.RegistrationDate.ToCorrectDateString()</h3>
+    </div>
+    <div>
+        <h3><b>Пол:</b> @(Model.Sex == Sex.Female ? "Женский" : "Мужской")</h3>
+    </div>
+    <div>
+        <h3><b>Направляющее ЛПУ:</b> @Model.ClinicName</h3>
+    </div>
+    <div>
+        <h3><b>Отделение:</b> @Model.SectionName</h3>
+    </div>
+    <div>
+        <h3><b>Номер телефона: :</b> @Model.PhoneNumber</h3>
+    </div>
+    <div>
+        <h3><b>Возраст:</b> @Model.Years</h3>
+    </div>
+    <div>
+        <h3><b>Диагноз:</b> @Model.Diagnosis</h3>
+    </div>
+    <div>
+        <h3><b>Причина регистрации:</b> @Model.ReservationPurpose</h3>
+    </div>
+    <div>
+        <h3><b>Медицинское заключение врача:</b> @Model.MedicalConsultion</h3>
+    </div>
+    <div>
+        <h3><b>Результаты медицинского обследования:</b> @Model.MedicalExaminationResult</h3>
+    </div>
+    <div>
+        <h3><b>Иная информация:</b> @Model.OtherInformation</h3>
+    </div>
 </div>

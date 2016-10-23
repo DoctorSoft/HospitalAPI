@@ -1,4 +1,5 @@
 ﻿using System;
+using Enums.Enums;
 using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
@@ -11,6 +12,7 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
         public int Years { get; set; }
         public int Month { get; set; }
         public int Weeks { get; set; }
+        public Sex? Sex { get; set; }
         public string Diagnosis { get; set; }
         public string MedicalExaminationResult { get; set; }
         public string MedicalConsultion { get; set; }

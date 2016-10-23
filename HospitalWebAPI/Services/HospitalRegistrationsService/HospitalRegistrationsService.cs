@@ -573,6 +573,7 @@ namespace Services.HospitalRegistrationsService
                 Years = model.Years,
                 Month = model.Months,
                 Weeks = model.Weeks,
+                Sex = model.Sex,
                 Diagnosis = model.Reservation.Diagnosis,
                 MedicalConsultion = model.Reservation.MedicalConsultion,
                 MedicalExaminationResult = model.Reservation.MedicalExaminationResult,
