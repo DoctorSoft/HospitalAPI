@@ -548,6 +548,50 @@ namespace Services.HospitalRegistrationsService
             };
         }
 
+        public GetHospitalRegistrationRecordCommandAnswer GetHospitalRegistrationRecord(GetHospitalRegistrationRecordCommand command)
+        {
+            var user = _tokenManager.GetUserByToken(command.Token);
+            var hospitalId = GetHospitalIdByUserId(user.Id);
+
+            var patientsRepository = _patientRepository.GetModels();
+
+            var patient = ((IDbSet<PatientStorageModel>) patientsRepository)
+            .Include(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic)
+            .Include(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile)
+            .Where(model => model.Reservation.Id == command.ReservationId)
+            .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId)
+            .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfileId == model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Id)
+            .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatisticId == model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Id)
+            .Where(model => model.Reservation.EmptyPlaceByTypeStatisticId == model.Reservation.EmptyPlaceByTypeStatistic.Id)
+            .Where(model => model.Id == model.Reservation.Id)
+            .Where(model => model.Reservation.Status == ReservationStatus.Opened)
+            .Select(model => new GetHospitalRegistrationRecordCommandAnswer
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                PhoneNumber = model.PhoneNumber,
+                Years = model.Years,
+                Month = model.Months,
+                Weeks = model.Weeks,
+                Diagnosis = model.Reservation.Diagnosis,
+                MedicalConsultion = model.Reservation.MedicalConsultion,
+                MedicalExaminationResult = model.Reservation.MedicalExaminationResult,
+                ReservationPurpose = model.Reservation.ReservationPurpose,
+                OtherInformation = model.Reservation.OtherInformation,
+                SectionName = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfile.Name,
+                ClinicName = model.Reservation.Clinic.Name,
+                Date = model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date,
+                DoctorName = model.Reservation.Reservator.Name,
+                RegistrationDate = model.Reservation.ApproveTime,
+                ReservationId = model.Reservation.Id,
+                HospitalReservationFileId = model.Reservation.ReservationFiles.Select(storageModel => storageModel.Id).FirstOrDefault(),
+                Token = command.Token.Value
+            })
+            .FirstOrDefault();
+
+            return patient;
+        }
+
         public ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command)
         {
             var user = this._tokenManager.GetUserByToken(command.Token.Value);

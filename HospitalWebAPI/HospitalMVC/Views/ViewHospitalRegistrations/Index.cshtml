@@ -58,71 +58,61 @@
                                     </thead>
                                     <tbody>
                                         @{
-                    int countPatient = 1;
+                                            int countPatient = 1;
 
-                    foreach (var patient in @Model.Table)
-                    {
-                        if (patient.Date == record.Date)
-                        {
-                            <tr>
-                                <td>
-                                    @countPatient
-                                </td>
-                                <td>
-                                    @patient.LastName
-                                </td>
-                                <td>
-                                    @patient.FirstName
-                                </td>
-                                <td>
-                                    @patient.PhoneNumber
-                                </td>
+                                            foreach (var patient in @Model.Table)
+                                            {
+                                                if (patient.Date == record.Date)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @countPatient
+                                                        </td>
+                                                        <td>
+                                                            @patient.LastName
+                                                        </td>
+                                                        <td>
+                                                            @patient.FirstName
+                                                        </td>
+                                                        <td>
+                                                            @patient.PhoneNumber
+                                                        </td>
+                                                        <td>
+                                                            @patient.Years
+                                                        </td>
+                                                        <td>
+                                                            @patient.Diagnosis
+                                                        </td>
+                                                        <td>
+                                                            @patient.ClinicName
+                                                        </td>
+                                                        <td>
+                                                            @patient.SectionName
+                                                        </td>
+                                                        <td>
+                                                            @patient.DoctorName
+                                                        </td>
+                                                        <td>
+                                                            @patient.RegistrationDate.ToCorrectDateString()
+                                                        </td>
+                                                        <td>
+                                                            @Html.ActionLink("Подробнее", "ViewMore", new { Token = Model.Token, ReservationId = @patient.ReservationId }, new { @class = "btn btn-info full-width" })
+                                                            <input type="button" title="Delete" class="btn btn-danger full-width" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@( "#modalWindow" + index + countPatient)/>
+                                                        </td>
+                                                    </tr>
 
-                                @if (patient.Years == 0)
-                                {
-                                    <td>
-                                        @patient.Month м.  <br />
-                                        @patient.Weeks н.
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td>
-                                        @patient.Years
-                                    </td>
-                                }
-                                <td>
-                                    @patient.Diagnosis
-                                </td>
-                                <td>
-                                    @patient.ClinicName
-                                </td>
-                                <td>
-                                    @patient.SectionName
-                                </td>
-                                <td>
-                                    @patient.DoctorName
-                                </td>
-                                <td>
-                                    @patient.RegistrationDate.ToCorrectDateString()
-                                </td>
-                                <td>
-                                    <input type="button" title="Delete" class="btn btn-default" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@( "#modalWindow" + index + countPatient) />
-                                </td>
-                            </tr>
-
-                                            @ModalWindowsHelper.AddActionModalWindow(helper: Html,
+                                                    @ModalWindowsHelper.AddActionModalWindow(helper: Html,
                                                         headText: "Подтверждение",
                                                         bodyText: "Вы уверены?",
                                                         actionName: "BreakRegistration",
                                                         controlName: "ViewHospitalRegistrations",
-                                                        paramsList: new { Token = Model.Token, ReservationId = @patient.ReservationId },
+                                                        paramsList: new {Token = Model.Token, ReservationId = @patient.ReservationId},
                                                         applyButtonName: "Применить",
                                                         id: index + "" + countPatient)
 
-                                countPatient++;
-                        }
-                    }
+                                                    countPatient++;
+                                                }
+                                            }
                                         }
                                     </tbody>
                                 </table>

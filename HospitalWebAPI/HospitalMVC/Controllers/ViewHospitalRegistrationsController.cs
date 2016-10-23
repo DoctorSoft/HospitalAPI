@@ -35,5 +35,14 @@ namespace HospitalMVC.Controllers
                 Token = command.Token
             });
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess,
+            FunctionIdentityName.HospitalUserWatchRegisteredUsers)]
+        public ActionResult ViewMore(GetHospitalRegistrationRecordCommand command)
+        {
+            var result = _hospitalRegistrationsService.GetHospitalRegistrationRecord(command);
+            return View(result);
+        }
+
     }
 }
