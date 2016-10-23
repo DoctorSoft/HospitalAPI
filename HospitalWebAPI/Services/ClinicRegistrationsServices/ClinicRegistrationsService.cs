@@ -384,16 +384,19 @@ namespace Services.ClinicRegistrationsServices
             };
 
             _reservationRepository.Add(reservation);
-
-            var reservationFile = new ReservationFileStorageModel()
+            
+            if (command.File != null)
             {
-                Name = command.FileName,
-                ReservationId = reservation.Id,
-                Reservation = reservation,
-                File = ReadFully(command.File)
-            };
+                var reservationFile = new ReservationFileStorageModel()
+                {
+                    Name = command.FileName,
+                    ReservationId = reservation.Id,
+                    Reservation = reservation,
+                    File = ReadFully(command.File)
+                };
 
-            _reservationFileRepository.Add(reservationFile);
+                _reservationFileRepository.Add(reservationFile);
+            }
 
             var receiverIds = this._userRepository.GetModels()
                 .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == command.CurrentHospitalId)

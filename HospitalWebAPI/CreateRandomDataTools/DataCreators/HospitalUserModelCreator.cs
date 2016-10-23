@@ -57,12 +57,30 @@ namespace CreateRandomDataTools.DataCreators
                         Account = new AccountStorageModel
                         {
                             Id = 0,
-                            HashedPassword = _passwordHashManager.GetPasswordHash("12345"),
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Nice90Park"),
                             IsBlocked = false,
-                            Login = "Hospital"
+                            Login = "Hospital3Test1"
                         },
                         Id = 0,
-                        Name = "Hospital User",
+                        Name = "Hospital 3 User 1",
+                        UserTypeId = userTypeId
+                    }
+                },
+                new HospitalUserStorageModel
+                {
+                    Id = 0,
+                    HospitalId = hospitalId,
+                    User = new UserStorageModel
+                    {
+                        Account = new AccountStorageModel
+                        {
+                            Id = 0,
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Velocity45Speed"),
+                            IsBlocked = false,
+                            Login = "Hospital3Test2"
+                        },
+                        Id = 0,
+                        Name = "Hospital 3 User 2",
                         UserTypeId = userTypeId
                     }
                 }

@@ -11,12 +11,14 @@ namespace CreateRandomDataTools.DataCreators
     {
         public IEnumerable<FunctionStorageModel> GetList()
         {
+            var blocked = new[] {FunctionIdentityName.HospitalUserMakeRegistrations};
+
             return Enum.GetValues(typeof (FunctionIdentityName))
                 .Cast<FunctionIdentityName>()
                 .Select(name => new FunctionStorageModel
                 {
                     FunctionIdentityName = name,
-                    IsBlocked = false,
+                    IsBlocked = blocked.Contains(name),
                     Name = name.ToString("F")
                 });
         }

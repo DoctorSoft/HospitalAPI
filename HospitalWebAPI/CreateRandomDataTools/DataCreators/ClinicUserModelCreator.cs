@@ -59,11 +59,30 @@ namespace CreateRandomDataTools.DataCreators
                         {
                             Id = 0,
                             IsBlocked = false,
-                            Login = "Clinic1",
-                            HashedPassword = _passwordHashManager.GetPasswordHash("12345"),
+                            Login = "Clinic4Test1",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Foot69Wand"),
                         },
                         Id = 0,
-                        Name = "Clinic User",
+                        Name = "Clinic 4 User 1",
+                        UserTypeId = userTypeId,
+                    }
+                },
+                new ClinicUserStorageModel
+                {
+                    Id = 0,
+                    ClinicId = clinicId,
+                    IsDischargeResponsiblePerson = true,
+                    User = new UserStorageModel
+                    {
+                        Account = new AccountStorageModel
+                        {
+                            Id = 0,
+                            IsBlocked = false,
+                            Login = "Clinic4Test2",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("KeTTle77Pot"),
+                        },
+                        Id = 0,
+                        Name = "Clinic 4 User 1",
                         UserTypeId = userTypeId,
                     }
                 }
@@ -85,11 +104,30 @@ namespace CreateRandomDataTools.DataCreators
                         {
                             Id = 0,
                             IsBlocked = false,
-                            Login = "Clinic2",
-                            HashedPassword = _passwordHashManager.GetPasswordHash("12345"),
+                            Login = "Clinic6Test1",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Mess48Age18"),
                         },
                         Id = 0,
-                        Name = "Clinic User",
+                        Name = "Clinic 6 User 1",
+                        UserTypeId = userTypeId,
+                    }
+                },
+                new ClinicUserStorageModel
+                {
+                    Id = 0,
+                    ClinicId = clinicId,
+                    IsDischargeResponsiblePerson = true,
+                    User = new UserStorageModel
+                    {
+                        Account = new AccountStorageModel
+                        {
+                            Id = 0,
+                            IsBlocked = false,
+                            Login = "Clinic6Test2",
+                            HashedPassword = _passwordHashManager.GetPasswordHash("Cat8KeyBoardF1"),
+                        },
+                        Id = 0,
+                        Name = "Clinic 6 User 2",
                         UserTypeId = userTypeId,
                     }
                 }
