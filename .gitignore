@@ -65,3 +65,5 @@ fourth.zip
 second.zip
 third.zip
 HospitalWebAPI/HospitalWebAPI/Properties/PublishProfiles/
+HospitalWebAPI/AdminQuickFunctions/bin/
+HospitalWebAPI/AdminQuickFunctions/obj/
