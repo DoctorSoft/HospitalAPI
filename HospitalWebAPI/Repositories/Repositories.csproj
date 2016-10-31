@@ -81,6 +81,7 @@
     <Compile Include="DataBaseRepositories\UserRepositories\AccountRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\ClinicUserRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\HospitalUserRepository.cs" />
+    <Compile Include="DataBaseRepositories\UserRepositories\HospitalUserSectionAccessRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\SessionRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\UserRepository.cs" />
     <Compile Include="DataBaseRepositories\UserRepositories\UserTypeRepository.cs" />
