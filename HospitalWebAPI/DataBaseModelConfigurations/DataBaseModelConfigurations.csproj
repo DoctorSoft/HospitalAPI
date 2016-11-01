@@ -100,6 +100,7 @@
     <Compile Include="Configurations\UserModels\AccountDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\ClinicUserDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\HospitalUserDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\UserModels\HospitalUserSectionAccessDbConfiguration.cs" />
     <Compile Include="Configurations\UserModels\SessionDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\UserDataBaseConfiguration.cs" />
     <Compile Include="Configurations\UserModels\UserTypeDataBaseConfiguration.cs" />
@@ -176,6 +177,10 @@
     <Compile Include="Migrations\201610221906093_CreateReservationFileTable.Designer.cs">
       <DependentUpon>201610221906093_CreateReservationFileTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610302239341_AddHospitalUserSectionAccessTable.cs" />
+    <Compile Include="Migrations\201610302239341_AddHospitalUserSectionAccessTable.Designer.cs">
+      <DependentUpon>201610302239341_AddHospitalUserSectionAccessTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -251,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610221906093_CreateReservationFileTable.resx">
       <DependentUpon>201610221906093_CreateReservationFileTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610302239341_AddHospitalUserSectionAccessTable.resx">
+      <DependentUpon>201610302239341_AddHospitalUserSectionAccessTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

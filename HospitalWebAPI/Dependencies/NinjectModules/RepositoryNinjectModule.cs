@@ -11,6 +11,7 @@ using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using StorageModels.Models.UserModels;
 
 namespace Dependencies.NinjectModules
 {
@@ -44,6 +45,7 @@ namespace Dependencies.NinjectModules
             Bind<IClinicHospitalPriorityRepository>().To<ClinicHospitalPriorityRepository>().InThreadScope();
             Bind<IEmptyPlaceByTypeStatisticRepository>().To<EmptyPlaceByTypeStatisticRepository>().InThreadScope();
             Bind<IReservationFileRepository>().To<ReservationFileRepository>().InThreadScope();
+            Bind<IHospitalUserSectionAccessRepository>().To<HospitalUserSectionAccessRepository>().InThreadScope();
 
             Bind<IPersonDataAPIRepository>().To<PersonDataAPIRepository>().InThreadScope();
         }

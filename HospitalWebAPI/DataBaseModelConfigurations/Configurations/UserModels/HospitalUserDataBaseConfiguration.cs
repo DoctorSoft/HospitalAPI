@@ -24,6 +24,7 @@ namespace DataBaseModelConfigurations.Configurations.UserModels
 
             this.HasRequired(model => model.User).WithOptional(link => link.HospitalUser);
             this.HasRequired(model => model.Hospital).WithMany(link => link.HospitalUsers).HasForeignKey(model => model.HospitalId);
+            HasMany(model => model.HospitalUserSectionAccesses).WithRequired(model => model.HospitalUser).HasForeignKey(model => model.HospitalUserId).WillCascadeOnDelete(false);
         }
     }
 }

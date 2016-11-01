@@ -91,6 +91,7 @@
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IAccountRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IClinicUserRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IHospitalUserRepository.cs" />
+    <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IHospitalUserSectionAccessRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\ISessionRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IUserRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IUserTypeRepository.cs" />
