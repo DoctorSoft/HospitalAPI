@@ -2,7 +2,7 @@
 
 namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
 {
-    public class GetComingRecordsCommand : AbstractTokenCommand
+    public class GetComingRecordsCommand : AbstractMessagedCommand
     {
     }
 }

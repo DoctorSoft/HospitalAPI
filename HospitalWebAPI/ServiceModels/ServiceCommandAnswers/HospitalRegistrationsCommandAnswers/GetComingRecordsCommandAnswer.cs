@@ -4,7 +4,7 @@ using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.En
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class GetComingRecordsCommandAnswer: AbstractTokenCommandAnswer
+    public class GetComingRecordsCommandAnswer: AbstractMessagedCommandAnswer
     {
         public List<AllHospitalRegistrations> Table { get; set; }
     }

@@ -9,5 +9,7 @@ namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
         public int HospitalProfileId { get; set; }
         public string Date { get; set; }
         public int ReservationId { get; set; }
+
+        public string Cause { get; set; }
     }
 }

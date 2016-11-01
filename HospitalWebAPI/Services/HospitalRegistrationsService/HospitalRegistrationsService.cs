@@ -459,6 +459,15 @@ namespace Services.HospitalRegistrationsService
 
         public BreakHospitalRegistrationCommandAnswer BreakHospitalRegistration(BreakHospitalRegistrationCommand command)
         {
+            if (command.Cause == null)
+            {
+                return new BreakHospitalRegistrationCommandAnswer
+                {
+                    Token = command.Token.Value,
+                    DialogMessage = "Регистрация НЕ отменена. Пожалуйста, укажите причину отмены регистрации",
+                    HasDialogMessage = true
+                };
+            }
             var reservation = this._reservationRepository.GetModels().FirstOrDefault(model => model.Id == command.ReservationId);
             var patient = this._reservationRepository.GetModels().Where(model => model.Id == command.ReservationId).Select(model => model.Patient).FirstOrDefault();
             var user = this._tokenManager.GetUserByToken(command.Token);
@@ -473,28 +482,26 @@ namespace Services.HospitalRegistrationsService
                 .Select(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId)
                 .FirstOrDefault();
 
-            var receiverIds = this._userRepository.GetModels()
-                .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == hospitalId)
-                .Select(model => model.Id)
-                .ToList();
-
-            foreach (var receiverId in receiverIds)
+            var reservatorId = this._reservationRepository.GetModels()
+                .Where(model => model.Id == command.ReservationId)
+                .Select(model => model.ReservatorId).FirstOrDefault();
+            
+            var message = new MessageStorageModel
             {
-                var message = new MessageStorageModel
-                {
-                    Date = DateTime.Now.Date,
-                    IsRead = false,
-                    MessageType = MessageType.WarningMessage,
-                    ShowStatus = TwoSideShowStatus.Showed,
-                    Text = $"Бронирование пациента с номером {patient.Code} был отменено.\0\n" +
-                           $"Диагноз: {reservation.Diagnosis}.\n\0",
-                    Title = "Уведомление о отмене бронирования места для пациента.",
-                    UserFromId = user.Id,
-                    UserToId = receiverId
-                };
+                Date = DateTime.Now.Date,
+                IsRead = false,
+                MessageType = MessageType.WarningMessage,
+                ShowStatus = TwoSideShowStatus.Showed,
+                Text = $"Бронирование пациента с номером {patient.Code} был отменено.\0\n" +
+                        $"Диагноз: {reservation.Diagnosis}.\n\0" +
+                        $"Причина отмены: {command.Cause}",
+                Title = "Уведомление о отмене бронирования места для пациента.",
+                UserFromId = user.Id,
+                UserToId = reservatorId
+            };
 
-                _messageRepository.Add(message);
-            }
+            _messageRepository.Add(message);
+            
 
             _reservationRepository.SaveChanges();
 
@@ -502,7 +509,9 @@ namespace Services.HospitalRegistrationsService
 
             return new BreakHospitalRegistrationCommandAnswer
             {
-                Token = command.Token.Value
+                Token = command.Token.Value,
+                DialogMessage = "Бронирование пациента было успешно отменено",
+                HasDialogMessage = true
             };
         }
 
@@ -547,7 +556,9 @@ namespace Services.HospitalRegistrationsService
             return new GetComingRecordsCommandAnswer
             {
                 Token = command.Token.Value,
-                Table =  result
+                Table =  result,
+                DialogMessage = command.DialogMessage,
+                HasDialogMessage = command.HasDialogMessage != null && command.HasDialogMessage.Value
             };
         }
 

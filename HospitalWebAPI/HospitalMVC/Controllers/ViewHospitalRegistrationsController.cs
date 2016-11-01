@@ -29,11 +29,13 @@ namespace HospitalMVC.Controllers
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
         public ActionResult BreakRegistration(BreakHospitalRegistrationCommand command)
         {
-            _hospitalRegistrationsService.BreakHospitalRegistration(command);
+            var answer = _hospitalRegistrationsService.BreakHospitalRegistration(command);
             return RedirectToAction("Index",
             new
             {
-                Token = command.Token
+                Token = command.Token,
+                answer.DialogMessage,
+                answer.HasDialogMessage
             });
         }
 

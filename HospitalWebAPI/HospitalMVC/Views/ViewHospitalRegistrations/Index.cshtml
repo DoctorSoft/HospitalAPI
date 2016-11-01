@@ -97,19 +97,19 @@
                                                         </td>
                                                         <td>
                                                             @Html.ActionLink("Подробнее", "ViewMore", new { Token = Model.Token, ReservationId = @patient.ReservationId }, new { @class = "btn btn-info full-width" })
-                                                            <input type="button" title="Delete" class="btn btn-danger full-width" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@( "#modalWindow" + index + countPatient)/>
+                                                            <input type="button" title="Delete" class="btn btn-danger full-width" value="@MainResources.ButtonCancellationMessage" data-toggle="modal" data-target=@( "#modalWindow" + index + countPatient) />
                                                         </td>
                                                     </tr>
 
-                                                    @ModalWindowsHelper.AddActionModalWindow(helper: Html,
-                                                        headText: "Подтверждение",
-                                                        bodyText: "Вы уверены?",
+                                                    @ModalWindowsHelper.AddActionModalWindowWithTextBox(helper: Html,
+                                                        headText: "Укажите причину отмены регистрации",
                                                         actionName: "BreakRegistration",
                                                         controlName: "ViewHospitalRegistrations",
                                                         paramsList: new {Token = Model.Token, ReservationId = @patient.ReservationId},
                                                         applyButtonName: "Применить",
-                                                        id: index + "" + countPatient)
-
+                                                        id: index + "" + countPatient,
+                                                        textBoxName: "Cause")
+                                            
                                                     countPatient++;
                                                 }
                                             }
@@ -128,5 +128,3 @@
 <div>
     <input type="button" title="Back" class="btn btn-info" value="@MainResources.ButtonBack" onclick="location.href='@Url.Action("Index", "HospitalUserHomePage", new { Token = Model.Token })'" />
 </div>
-
-

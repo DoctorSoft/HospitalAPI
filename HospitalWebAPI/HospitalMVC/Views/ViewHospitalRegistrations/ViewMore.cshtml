@@ -11,21 +11,21 @@
 <h2>
     Регистрация пациента #@Model.ReservationId
     @Html.ActionLink("Список", "Index", new { Token = Model.Token }, new { @class = "btn btn-info" })
-    <input type="button" title="Delete" class="btn btn-danger" value="@MainResources.ButtonDeleteMessage" data-toggle="modal" data-target=@( "#modalWindow" + @Model.ReservationId)>
+    <input type="button" title="Delete" class="btn btn-danger" value="@MainResources.ButtonCancellationMessage" data-toggle="modal" data-target=@( "#modalWindow" + @Model.ReservationId)>
     @if (Model.HospitalReservationFileId != null && Model.HospitalReservationFileId != 0)
     {
         @Html.ActionLink("Скачать файл", "DownloadReservationFile", new { Token = Model.Token, HospitalReservationFileId = Model.HospitalReservationFileId }, new { @class = "btn btn-success" })
     }
 </h2>
 
-@ModalWindowsHelper.AddActionModalWindow(helper: Html,
-                                        headText: "Подтверждение",
-                                        bodyText: "Вы уверены, что хотите удалить эту регистрацию?",
-                                        actionName: "BreakRegistration",
-                                        controlName: "ViewHospitalRegistrations",
-                                        paramsList: new { Token = Model.Token, ReservationId = Model.ReservationId },
-                                        applyButtonName: "Применить",
-                                        id: @Model.ReservationId + "")
+@ModalWindowsHelper.AddActionModalWindowWithTextBox(helper: Html,
+                                            headText: "Укажите причину отмены регистрации",
+                                            actionName: "BreakRegistration",
+                                            controlName: "ViewHospitalRegistrations",
+                                            paramsList: new { Token = Model.Token, ReservationId = Model.ReservationId },
+                                            applyButtonName: "Применить",
+                                            id: @Model.ReservationId + "",
+                                            textBoxName: "Cause")
 
 <div class="panel panel-default">
     <div>

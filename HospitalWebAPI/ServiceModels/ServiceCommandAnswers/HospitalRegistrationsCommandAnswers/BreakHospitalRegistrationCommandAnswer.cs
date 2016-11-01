@@ -4,7 +4,7 @@ using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Enti
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class BreakHospitalRegistrationCommandAnswer : AbstractTokenCommandAnswer
+    public class BreakHospitalRegistrationCommandAnswer : AbstractMessagedCommandAnswer
     {
         public int HospitalProfileId { get; set; }
         public int EmptyPlaceByTypeStatisticId { get; set; }
