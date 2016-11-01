@@ -542,9 +542,13 @@ namespace Services.HospitalRegistrationsService
 
             var patientsRepository = _patientRepository.GetModels();
             
+            var sectionsAccessIds = _hospitalUserSectionAccessRepository.GetModels().Where(model => !model.IsBlocked).Where(model => model.HospitalUserId == user.Id)
+                .Select(model => model.HospitalSectionProfileId).ToList();
+
              var patients = ((IDbSet<PatientStorageModel>) patientsRepository)
             .Include(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic)
             .Include(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile)
+            .Where(model => sectionsAccessIds.Contains(model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfileId))
             .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId)
             .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfileId == model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.Id)
             .Where(model => model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatisticId == model.Reservation.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Id)
