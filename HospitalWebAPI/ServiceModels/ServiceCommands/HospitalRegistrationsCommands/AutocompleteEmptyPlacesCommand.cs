@@ -12,6 +12,8 @@ namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
 
         public int CountValue { get; set; }
 
-        public List<bool> DaysOfWeek { get; set; } 
+        public List<bool> DaysOfWeek { get; set; }
+
+        public int NextDays { get; set; }
     }
 }
