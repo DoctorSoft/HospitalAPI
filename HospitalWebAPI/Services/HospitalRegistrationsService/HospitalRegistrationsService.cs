@@ -237,18 +237,35 @@ namespace Services.HospitalRegistrationsService
             
             var emptyPlaceId = _emptyPlaceStatisticRepository.GetModels()
                 .Where(model => model.HospitalSectionProfileId == command.HospitalProfileId && model.Date == date).Select(m=>m.Id).ToList();
-            
-            var table = emptyPlaceId.Select(i => emptyPlaceByTypeStatisticRepository
-                .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalProfileId)
-                .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(i))
-                .Select(model => new HospitalRegistrationCountStatisticItem
-                {
-                    Sex = model.Sex, 
-                    OpenCount = model.Count, 
-                    Id = model.Id, 
-                    RegisteredCount = model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
-                }).FirstOrDefault()).ToList();
 
+           var table = new List<HospitalRegistrationCountStatisticItem>();
+            if (emptyPlaceId.Count > 1)
+            {
+                table = emptyPlaceId.Select(i => emptyPlaceByTypeStatisticRepository
+                    .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalProfileId)
+                    .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(i))
+                    .Select(model => new HospitalRegistrationCountStatisticItem
+                    {
+                        Sex = model.Sex,
+                        OpenCount = model.Count,
+                        Id = model.Id,
+                        RegisteredCount =
+                            model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
+                    }).FirstOrDefault()).ToList();
+            }
+            else
+            {
+                table = emptyPlaceByTypeStatisticRepository
+                    .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalProfileId)
+                    .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(emptyPlaceId.FirstOrDefault()))
+                    .Select(model => new HospitalRegistrationCountStatisticItem
+                    {
+                        Sex = model.Sex,
+                        OpenCount = model.Count,
+                        Id = model.Id,
+                        RegisteredCount = model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
+                    }).ToList();
+            }
 
             table = FillRegistrationsForBothGenders(table);
 
