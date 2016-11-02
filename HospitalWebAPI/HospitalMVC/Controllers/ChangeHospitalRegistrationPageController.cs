@@ -121,35 +121,35 @@ namespace HospitalMVC.Controllers
             return View(answer);
         }
 
-        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess,
+            FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
         public ActionResult BreakRegistration(BreakHospitalRegistrationCommand command)
         {
-            _hospitalRegistrationsService.BreakHospitalRegistration(command);
+            var answer = _hospitalRegistrationsService.BreakHospitalRegistration(command);
             if (command.FullInformation != null)
-            {
-                return RedirectToAction("ViewDetailedInformationOnRegisteredPatients",
-                new
-                {
-                    Token = command.Token,
-                    FullInformation = command.FullInformation,
-                    HospitalProfileId = command.HospitalProfileId,
-                    Date = command.Date,
-                    EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
-                    ShowModalWundow = true
-                });
-            }
-            else
             {
                 return RedirectToAction("ViewDetailedInformationOnRegisteredPatients",
                     new
                     {
                         Token = command.Token,
+                        FullInformation = command.FullInformation,
                         HospitalProfileId = command.HospitalProfileId,
                         Date = command.Date,
                         EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
-                        ShowModalWindow = true
+                        answer.DialogMessage,
+                        answer.HasDialogMessage
                     });
             }
+            return RedirectToAction("ViewDetailedInformationOnRegisteredPatients",
+                new
+                {
+                    Token = command.Token,
+                    HospitalProfileId = command.HospitalProfileId,
+                    Date = command.Date,
+                    EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
+                    answer.DialogMessage,
+                    answer.HasDialogMessage
+                });
         }
 
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserAutocompletePlaces)]

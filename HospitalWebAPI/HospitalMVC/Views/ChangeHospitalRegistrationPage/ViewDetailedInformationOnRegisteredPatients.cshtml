@@ -8,15 +8,6 @@
 
 <h2>Детальная информация</h2>
 
-@{
-    if (Model.ShowModalWindow)
-    {
-        @ModalWindowsHelper.AddInfoModalWindow(helper: Html,
-            headText: "Оповещение:",
-            bodyText: "Бронирование успешно отменено.")
-    }
-}
-
 <div class="bs-example">
     <div class="panel-group" id="accordion">
 
@@ -26,7 +17,17 @@
                 var iteration = 0;
                 foreach (var item in Model.Table)
                 {
-                    <div class="panel panel-default">
+                        object parameters ;
+                        if (Model.FullInformation == null)
+                        {
+                            parameters = new {Token = @Model.Token, ReservationId = @item.ReservationId, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date};
+                        }
+                        else
+                        {
+                            parameters = new {Token = @Model.Token, ReservationId = @item.ReservationId, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, FullInformation = Model.FullInformation, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date};
+                        }
+
+                <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href=@("#collapse" + iteration)>
@@ -35,9 +36,17 @@
                                             @item.PatientLastName @item.PatientFirstName
                                         </div>
                                         <div style="display: inline-block">
-                                            @(Model.FullInformation == null 
-                                            ? Html.ActionLink("Отменить", "BreakRegistration", new {Token = @Model.Token, ReservationId = @item.ReservationId, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"}) 
-                                            : Html.ActionLink("Отменить", "BreakRegistration", new {Token = @Model.Token, ReservationId = @item.ReservationId, EmptyPlaceByTypeStatisticId = Model.EmptyPlaceByTypeStatisticId, FullInformation = Model.FullInformation, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date}, new {@class = "btn-info btn"}))
+                                            <input type="button" title="Delete" class="btn btn-danger full-width" value="@MainResources.ButtonCancellationMessage" data-toggle="modal" data-target=@( "#modalWindow" + iteration) />
+                                            
+                                            @ModalWindowsHelper.AddActionModalWindowWithTextBox(helper: Html,
+                                                headText: "Укажите причину отмены регистрации",
+                                                actionName: "BreakRegistration",
+                                                controlName: "ChangeHospitalRegistrationPage",
+                                                paramsList: parameters,
+                                                applyButtonName: "Применить",
+                                                id: iteration.ToString("G"),
+                                                textBoxName: "Cause")
+
                                         </div>
                                     </div>
                                 </a>

@@ -59,7 +59,7 @@
             <span>
                 @if (Model.StatisticItems.Any(item => item.RegisteredCount != 0))
                 {
-                    <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick=" location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.StatisticItems.FirstOrDefault().Id, FullInformation = Model.StatisticItems.FirstOrDefault().Id, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
+                    <input type="button" title="@MainResources.ButtonViewAll" class="btn btn-default padding-left" value="@MainResources.ButtonViewAll" onclick=" location.href='@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new { Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.StatisticItems.FirstOrDefault().Id, FullInformation = Model.StatisticItems.LastOrDefault().Id, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date })' " />
                 }
             </span>
             @Html.HiddenFor(model => model.Date)

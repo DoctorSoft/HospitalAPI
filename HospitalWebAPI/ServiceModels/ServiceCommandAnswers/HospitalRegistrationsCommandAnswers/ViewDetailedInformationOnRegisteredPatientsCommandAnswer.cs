@@ -5,7 +5,7 @@ using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Enti
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class ViewDetailedInformationOnRegisteredPatientsCommandAnswer : AbstractTokenCommandAnswer
+    public class ViewDetailedInformationOnRegisteredPatientsCommandAnswer : AbstractMessagedCommandAnswer
     {
         public int EmptyPlaceByTypeStatisticId { get; set; }
         public int? FullInformation { get; set; }

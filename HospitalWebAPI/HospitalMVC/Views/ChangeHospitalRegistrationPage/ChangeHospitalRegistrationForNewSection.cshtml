@@ -72,11 +72,7 @@
                 }
             }
         </div>
-        <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2" +
-        
-        
-        
-        "", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})' "/>
+        <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2" + "", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})' "/>
         <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonAdd" />
        
         @Html.HiddenFor(model => model.Date)
