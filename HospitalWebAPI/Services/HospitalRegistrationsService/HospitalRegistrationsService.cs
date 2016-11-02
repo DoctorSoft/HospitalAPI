@@ -781,9 +781,9 @@ namespace Services.HospitalRegistrationsService
 
             var placeStatistics = _emptyPlaceByTypeStatisticRepository.GetModels();
 
-            const int ForNextDays = 31; 
+            var forNextDays = command.NextDays; 
             var startDay = DateTime.Now.Date;
-            var endDay = startDay.AddDays(ForNextDays);
+            var endDay = startDay.AddDays(forNextDays);
 
             var correctPlaceStatistics = ((IDbSet<EmptyPlaceByTypeStatisticStorageModel>)placeStatistics)
                 .Include(model => model.EmptyPlaceStatistic)
@@ -793,7 +793,7 @@ namespace Services.HospitalRegistrationsService
                 .ToList();
 
 
-            for (var day = 0; day < ForNextDays; day++)
+            for (var day = 0; day < forNextDays; day++)
             {
                 var nextDate = startDay.AddDays(day);
 
@@ -968,6 +968,24 @@ namespace Services.HospitalRegistrationsService
                 {
                     FieldName = "Дни",
                     Title = "Выберите хотя бы 1 день"
+                });
+            }
+
+            if (command.NextDays < 1)
+            {
+                errors.Add(new CommandAnswerError
+                {
+                    FieldName = "Количество дней",
+                    Title = "Выберите хотя бы 1 день"
+                });
+            }
+
+            if (command.NextDays > 31)
+            {
+                errors.Add(new CommandAnswerError
+                {
+                    FieldName = "Количество дней",
+                    Title = "Нельзя регистрировать более чем за месяц"
                 });
             }
             return errors;
