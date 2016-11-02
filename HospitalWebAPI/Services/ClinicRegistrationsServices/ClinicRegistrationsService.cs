@@ -78,7 +78,7 @@ namespace Services.ClinicRegistrationsServices
 
             var table = resrvations
                 .Where(model => model.Status == ReservationStatus.Opened)
-                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date > now)
+                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date >= now)
                 .Where(model=>model.ClinicId == currentClinicId)
                 .Select(model => new ClinicBreakRegistrationTableItem
                 {
