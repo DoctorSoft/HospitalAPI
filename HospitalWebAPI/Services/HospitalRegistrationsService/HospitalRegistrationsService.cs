@@ -232,23 +232,23 @@ namespace Services.HospitalRegistrationsService
                 .FirstOrDefault(model=>model.Id == command.HospitalProfileId).Name;
 
             var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
-            var emptyPlaceStatisticRepository = _emptyPlaceByTypeStatisticRepository.GetModels();
+            
+            var emptyPlaceByTypeStatisticRepository = _emptyPlaceByTypeStatisticRepository.GetModels();
             
             var emptyPlaceId = _emptyPlaceStatisticRepository.GetModels()
-                .FirstOrDefault(model => model.HospitalSectionProfileId == command.HospitalProfileId && model.Date == date)
-                .Id;
+                .Where(model => model.HospitalSectionProfileId == command.HospitalProfileId && model.Date == date).Select(m=>m.Id).ToList();
             
-            var table = emptyPlaceStatisticRepository
+            var table = emptyPlaceId.Select(i => emptyPlaceByTypeStatisticRepository
                 .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalProfileId)
-                .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(emptyPlaceId))
+                .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(i))
                 .Select(model => new HospitalRegistrationCountStatisticItem
                 {
-                    Sex = model.Sex,
-                    OpenCount = model.Count,
-                    Id = model.Id,
+                    Sex = model.Sex, 
+                    OpenCount = model.Count, 
+                    Id = model.Id, 
                     RegisteredCount = model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
-                }).ToList();
+                }).FirstOrDefault()).ToList();
+
 
             table = FillRegistrationsForBothGenders(table);
 
