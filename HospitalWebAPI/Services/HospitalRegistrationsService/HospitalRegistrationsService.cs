@@ -809,6 +809,12 @@ namespace Services.HospitalRegistrationsService
                 .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId)
                 .ToList();
 
+            var otherGenderPlaceStatistics = ((IDbSet<EmptyPlaceByTypeStatisticStorageModel>)placeStatistics)
+                .Include(model => model.EmptyPlaceStatistic)
+                .Where(model => model.Sex != (Sex?)command.SexId)
+                .Where(model => model.EmptyPlaceStatistic.Date >= startDay && model.EmptyPlaceStatistic.Date <= endDay)
+                .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId)
+                .ToList();
 
             for (var day = 0; day < forNextDays; day++)
             {
@@ -821,6 +827,21 @@ namespace Services.HospitalRegistrationsService
 
                 if (!correctPlaceStatistics.Select(model => model.EmptyPlaceStatistic.Date).Contains(nextDate))
                 {
+                    var otherGender = otherGenderPlaceStatistics.FirstOrDefault(model => model.EmptyPlaceStatistic.Date == nextDate);
+
+                    if (otherGender != null)
+                    {
+                        var emptyPlaceStatisticModelId = otherGender.EmptyPlaceStatisticId;
+                        var recordToAdd = new EmptyPlaceByTypeStatisticStorageModel
+                        {
+                            Sex = (Sex?) command.SexId,
+                            Count = command.CountValue,
+                            EmptyPlaceStatisticId = emptyPlaceStatisticModelId
+                        };
+                        this._emptyPlaceByTypeStatisticRepository.Add(recordToAdd);
+                        continue;
+                    }
+
                     var newStatistic = new EmptyPlaceStatisticStorageModel
                     {
                         Date = nextDate,
