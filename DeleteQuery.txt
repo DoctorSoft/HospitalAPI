@@ -42,3 +42,5 @@ DELETE FROM [dbo].[Hospitals]
 GO
 DELETE FROM [dbo].[Clinics]
 GO
+DELETE FROM [dbo].[ClinicHospitalPriorities]
+GO

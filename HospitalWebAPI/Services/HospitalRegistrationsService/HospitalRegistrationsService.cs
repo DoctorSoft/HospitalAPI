@@ -515,7 +515,8 @@ namespace Services.HospitalRegistrationsService
                 EmptyPlaceByTypeStatisticId = command.EmptyPlaceByTypeStatisticId,
                 FullInformation = command.FullInformation,
                 Date = command.Date,
-                ShowModalWindow = command.ShowModalWindow
+                DialogMessage = command.DialogMessage,
+                HasDialogMessage = command.HasDialogMessage != null && command.HasDialogMessage.Value
             };
         }
 
