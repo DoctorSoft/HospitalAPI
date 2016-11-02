@@ -199,6 +199,32 @@ namespace Services.HospitalRegistrationsService
             };
         }
 
+        public List<HospitalRegistrationCountStatisticItem> FillRegistrationsForBothGenders(List<HospitalRegistrationCountStatisticItem> items)
+        {
+            if (items.All(item => item.Sex != Sex.Female))
+            {
+                items.Add(new HospitalRegistrationCountStatisticItem
+                {
+                    Sex = Sex.Female,
+                    Id = 0,
+                    OpenCount = 0,
+                    RegisteredCount = 0
+                });
+            }
+            if (items.All(item => item.Sex != Sex.Male))
+            {
+                items.Add(new HospitalRegistrationCountStatisticItem
+                {
+                    Sex = Sex.Male,
+                    Id = 0,
+                    OpenCount = 0,
+                    RegisteredCount = 0
+                });
+            }
+
+            return items;
+        } 
+
         public ChangeHospitalRegistrationForSelectedSectionCommandAnswer ChangeHospitalRegistrationForSelectedSection(
             ChangeHospitalRegistrationForSelectedSectionCommand command)
         {
@@ -223,6 +249,8 @@ namespace Services.HospitalRegistrationsService
                     Id = model.Id,
                     RegisteredCount = model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
                 }).ToList();
+
+            table = FillRegistrationsForBothGenders(table);
 
             return new ChangeHospitalRegistrationForSelectedSectionCommandAnswer
             {
@@ -293,7 +321,21 @@ namespace Services.HospitalRegistrationsService
 
             foreach (var emptyPlace in result)
             {
-                _emptyPlaceByTypeStatisticRepository.Update(emptyPlace.Id, emptyPlace);
+                if (emptyPlace == null)
+                {
+                    var source = freeHospitalSectionsForRegistrationList.FirstOrDefault(item => result.Where(model => model != null).All(model => model.Sex != item.Sex));
+                    var newEmptyPlace = new EmptyPlaceByTypeStatisticStorageModel
+                    {
+                        Count = source.OpenCount,
+                        Sex = source.Sex,
+                        EmptyPlaceStatisticId = result.FirstOrDefault(model => model != null).EmptyPlaceStatisticId
+                    };
+                    _emptyPlaceByTypeStatisticRepository.Add(newEmptyPlace);
+                }
+                else
+                {
+                    _emptyPlaceByTypeStatisticRepository.Update(emptyPlace.Id, emptyPlace);
+                }
             }
             _emptyPlaceByTypeStatisticRepository.SaveChanges();
      
