@@ -72,7 +72,7 @@
                     </div>
                     previousDateTime = item.SendDate.Date;
                 }
-                @Html.ActionLink(@item.Title, "ReadMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { @class = !item.IsRead ? "list-group-item list-group-item-success black-border" : "list-group-item list-group-item-info black-border" })
+                @Html.ActionLink(@item.Title, "ReadMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { @class = !item.IsRead ? "list-group-item list-group-item-success black-border strong" : "list-group-item list-group-item-info black-border" })
             }
         }
     </div>
