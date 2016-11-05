@@ -400,6 +400,7 @@ namespace Services.ClinicRegistrationsServices
 
             var receiverIds = this._userRepository.GetModels()
                 .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == command.CurrentHospitalId)
+                .Where(model => model.HospitalUser.HospitalUserSectionAccesses.Any(storageModel => !storageModel.IsBlocked && storageModel.HospitalSectionProfileId == command.SectionProfileId))
                 .Select(model => model.Id)
                 .ToList();
 
@@ -454,9 +455,15 @@ namespace Services.ClinicRegistrationsServices
                 .Where(model => model.Id == command.ReservationId)
                 .Select(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId)
                 .FirstOrDefault();
+            
+            var hospitalSectionProfileId = this._reservationRepository.GetModels()
+                .Where(model => model.Id == command.ReservationId)
+                .Select(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfileId)
+                .FirstOrDefault();
 
             var receiverIds = this._userRepository.GetModels()
                 .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == hospitalId)
+                .Where(model => model.HospitalUser.HospitalUserSectionAccesses.Any(storageModel => !storageModel.IsBlocked && storageModel.HospitalSectionProfileId == hospitalSectionProfileId))
                 .Select(model => model.Id)
                 .ToList();
 
