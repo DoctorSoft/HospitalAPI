@@ -90,10 +90,14 @@ namespace Services.NoticesService
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
+            var today = DateTime.Now.Date;
+
             var results = ((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
                 .Include(model => model.UserFrom)
                 .Where(model => model.UserToId == user.Id)
                 .Where(model => model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed)
+                .Where(model => command.OlnyUnRead != true || !model.IsRead)
+                .Where(model => command.OnlyToday != true || model.Date == today)
                 .Select(model => new MessageTableItem
                 {
                     SendDate = model.Date,
@@ -106,7 +110,9 @@ namespace Services.NoticesService
             return new GetHospitalNoticesPageInformationCommandAnswer
             {
                 Token = (Guid) command.Token,
-                Messages = results.ToList()
+                Messages = results.ToList(),
+                OlnyUnRead = command.OlnyUnRead,
+                OnlyToday = command.OnlyToday
             };
         }
 

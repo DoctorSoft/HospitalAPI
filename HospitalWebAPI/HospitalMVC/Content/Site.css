@@ -388,3 +388,14 @@ button, select {
 .full-width {
     width: 100%
 }
+
+.date-list-message {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.black-border {
+    text-align: left;
+    border: black groove thin !important;
+    margin-bottom: 10px
+}
