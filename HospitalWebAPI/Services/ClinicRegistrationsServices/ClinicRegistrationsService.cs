@@ -116,10 +116,23 @@ namespace Services.ClinicRegistrationsServices
                     .Select(sex => new KeyValuePair<int, string>((int) sex, sex.ToCorrectString()))
                     .ToList();
 
+            var hospitalIds = _clinicHospitalPriorityRepository
+                .GetModels()
+                .Where(model => !model.IsBlocked && model.ClinicId == clinic.Id)
+                .Select(model => model.HospitalId)
+                .ToList();
+
             var sectionProfiles =
-                _sectionProfileRepository.GetModels()
+                _hospitalSectionProfileRepository.GetModels()
+                    .Where(model => hospitalIds.Any(id => id == model.HospitalId))
+                    .Select(model => new
+                    {
+                        Id = model.SectionProfileId,
+                        Name = model.SectionProfile.Name
+                    })
                     .ToList()
                     .Select(profile => new KeyValuePair<int, string>(profile.Id, profile.Name))
+                    .Distinct()
                     .ToList();
 
             return new GetMakeClinicRegistrationsPageInformationCommandAnswer
@@ -175,11 +188,17 @@ namespace Services.ClinicRegistrationsServices
                })
                .ToList();
 
-            var hospitals =
-                _hospitalRepository.GetModels()
-                    .ToList()
-                    .Select(profile => new KeyValuePair<int, string>(profile.Id, profile.Name))
-                    .ToList();
+            var hospitals = _clinicHospitalPriorityRepository
+                .GetModels()
+                .Where(model => !model.IsBlocked && model.ClinicId == clinicId)
+                .Select(model => new
+                {
+                    HospitalId = model.HospitalId,
+                    Name = model.Hospital.Name
+                })
+                .ToList()
+                .Select(model => new KeyValuePair<int, string>(model.HospitalId, model.Name))
+                .ToList();
 
             var ageCategories = Enum.GetValues(typeof (AgeRange))
                 .Cast<AgeRange>()
