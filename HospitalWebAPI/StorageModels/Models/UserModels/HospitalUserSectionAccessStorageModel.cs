@@ -1,4 +1,5 @@
-﻿using StorageModels.Interfaces;
+﻿using System.Collections.Generic;
+using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
 
 namespace StorageModels.Models.UserModels

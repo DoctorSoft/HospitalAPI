@@ -5,9 +5,9 @@ using StorageModels.Models.ClinicModels;
 
 namespace Repositories.DataBaseRepositories.ClinicRepositories
 {
-    public class ClinicHospitalPriorityRepository : AbstractAddAbleDataBaseRepository<ClinicHospitalPriorityStorageModel>, IClinicHospitalPriorityRepository
+    public class ClinicUserHospitalSectionProfileAccessRepository : AbstractAddAbleDataBaseRepository<ClinicUserHospitalSectionProfileAccessStorageModel>, IClinicUserHospitalSectionProfileAccessRepository
     {
-        public ClinicHospitalPriorityRepository(IDataBaseContext context)
+        public ClinicUserHospitalSectionProfileAccessRepository(IDataBaseContext context)
             : base(context)
         {
         }

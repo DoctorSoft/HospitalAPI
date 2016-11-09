@@ -59,7 +59,7 @@
     <Compile Include="Interfaces\IBlockAbleModel.cs" />
     <Compile Include="Interfaces\IIdModel.cs" />
     <Compile Include="Interfaces\IShowStatusModel.cs" />
-    <Compile Include="Models\ClinicModels\ClinicHospitalPriorityStorageModel.cs" />
+    <Compile Include="Models\ClinicModels\ClinicUserHospitalSectionProfileAccessStorageModel.cs" />
     <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
     <Compile Include="Models\ClinicModels\PatientStorageModel.cs" />
     <Compile Include="Models\ClinicModels\ReservationFileStorageModel.cs" />

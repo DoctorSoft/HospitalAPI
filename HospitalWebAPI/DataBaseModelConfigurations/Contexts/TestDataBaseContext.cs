@@ -10,7 +10,7 @@ namespace DataBaseModelConfigurations.Contexts
 
     public class TestDataBaseContext: AbstractConfiguredContext
     {
-        private const string Test_Remote_Db = "Test_Remote_Db";
+        private const string Test_Remote_Db = "TestHospitalDataBase_ArturTomashHome"; //"Test_Remote_Db";
 
         public TestDataBaseContext()
             : base(Test_Remote_Db, new OriginalConfigurationFactory())

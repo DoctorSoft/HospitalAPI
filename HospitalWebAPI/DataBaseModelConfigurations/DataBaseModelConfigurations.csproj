@@ -80,7 +80,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationFactories\OriginalConfigurationFactory.cs" />
     <Compile Include="Configurations\ClinicModels\ClinicDataBaseConfiguration.cs" />
-    <Compile Include="Configurations\ClinicModels\ClinicHospitalPriorityDataBaseConfiguration.cs" />
+    <Compile Include="Configurations\ClinicModels\ClinicUserHospitalSectionProfileAccessDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\PatientDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\ReservationFileDataBaseConfiguration.cs" />
     <Compile Include="Configurations\ClinicModels\ReservationDataBaseConfiguration.cs" />
@@ -181,6 +181,10 @@
     <Compile Include="Migrations\201610302239341_AddHospitalUserSectionAccessTable.Designer.cs">
       <DependentUpon>201610302239341_AddHospitalUserSectionAccessTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611091734572_AddHospitalSectionProfileAccess.cs" />
+    <Compile Include="Migrations\201611091734572_AddHospitalSectionProfileAccess.Designer.cs">
+      <DependentUpon>201611091734572_AddHospitalSectionProfileAccess.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -259,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610302239341_AddHospitalUserSectionAccessTable.resx">
       <DependentUpon>201610302239341_AddHospitalUserSectionAccessTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611091734572_AddHospitalSectionProfileAccess.resx">
+      <DependentUpon>201611091734572_AddHospitalSectionProfileAccess.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

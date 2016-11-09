@@ -3,36 +3,35 @@ using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
+using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using StorageModels.Models.ClinicModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
     public class ClinicHospitalPrioritiesCreator : IClinicHospitalPrioritiesCreator
     {
-        private readonly IClinicRepository _clinicRepository;
+        private readonly IClinicUserRepository _clinicUserRepository;
 
-        private readonly IHospitalRepository _hospitalRepository;
+        private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
 
-        public ClinicHospitalPrioritiesCreator(IClinicRepository clinicRepository, IHospitalRepository hospitalRepository)
+        public ClinicHospitalPrioritiesCreator(IClinicUserRepository clinicUserRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository)
         {
-            _clinicRepository = clinicRepository;
-            _hospitalRepository = hospitalRepository;
+            _clinicUserRepository = clinicUserRepository;
+            _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
         }
 
-        public IEnumerable<ClinicHospitalPriorityStorageModel> GetList()
+        public IEnumerable<ClinicUserHospitalSectionProfileAccessStorageModel> GetList()
         {
-            var clinics = _clinicRepository.GetModels().ToList();
-            var hospitals = _hospitalRepository.GetModels().ToList();
+            var clinicUsers = _clinicUserRepository.GetModels().ToList();
+            var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels().ToList();
 
-            var result = new List<ClinicHospitalPriorityStorageModel>();
+            var result = new List<ClinicUserHospitalSectionProfileAccessStorageModel>();
 
-            var priority = 0;
-            foreach (var hospital in hospitals)
+            foreach (var clinicUser in clinicUsers)
             {
-                priority++;
-                result.AddRange(clinics.Select(clinic => new ClinicHospitalPriorityStorageModel
+                result.AddRange(hospitalSectionProfiles.Select(hospitalSectionProfile => new ClinicUserHospitalSectionProfileAccessStorageModel
                 {
-                    Priority = priority, ClinicId = clinic.Id, HospitalId = hospital.Id, IsBlocked = false
+                    ClinicUserId = clinicUser.Id, HospitalSectionProfileId = hospitalSectionProfile.Id, IsBlocked = false
                 }));
             }
 

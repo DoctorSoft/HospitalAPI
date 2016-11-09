@@ -74,22 +74,22 @@ namespace CreateRandomDataTools.Fillers
 
             const double percentIncrementation = 100 / 16.0;
 
-            FillSectionModels(showStatusFunction, percents += percentIncrementation);
-            FillHospitalModels(showStatusFunction, percents += percentIncrementation);
-            FillClinicModels(showStatusFunction, percents += percentIncrementation);
-            FillSettingsItemModels(showStatusFunction, percents += percentIncrementation);
-            FillUserTypeModels(showStatusFunction, percents += percentIncrementation);
-            FillFunctionModels(showStatusFunction, percents += percentIncrementation);
-            FillFunctionalGroupModels(showStatusFunction, percents += percentIncrementation);
-            FillClinicUserModels(showStatusFunction, percents += percentIncrementation);
-            FillHospitalUserModels(showStatusFunction, percents += percentIncrementation);
-            FillReceptionUserModels(showStatusFunction, percents += percentIncrementation);
-            FillBotModels(showStatusFunction, percents += percentIncrementation);
-            FillAdministratorAndReviewerModels(showStatusFunction, percents += percentIncrementation);
+            //FillSectionModels(showStatusFunction, percents += percentIncrementation);
+            //FillHospitalModels(showStatusFunction, percents += percentIncrementation);
+            //FillClinicModels(showStatusFunction, percents += percentIncrementation);
+            //FillSettingsItemModels(showStatusFunction, percents += percentIncrementation);
+            //FillUserTypeModels(showStatusFunction, percents += percentIncrementation);
+            //FillFunctionModels(showStatusFunction, percents += percentIncrementation);
+            //FillFunctionalGroupModels(showStatusFunction, percents += percentIncrementation);
+            //FillClinicUserModels(showStatusFunction, percents += percentIncrementation);
+            //FillHospitalUserModels(showStatusFunction, percents += percentIncrementation);
+            //FillReceptionUserModels(showStatusFunction, percents += percentIncrementation);
+            //FillBotModels(showStatusFunction, percents += percentIncrementation);
+            //FillAdministratorAndReviewerModels(showStatusFunction, percents += percentIncrementation);
             FillClinicHospitalPriorityModels(showStatusFunction, percents += percentIncrementation);
-            FillUserFunctionModels(showStatusFunction, percents += percentIncrementation);
-            FillHospitalSectionProfileModels(showStatusFunction, percents + percentIncrementation);
-            FillMessageModels(showStatusFunction, 100.0);
+            //FillUserFunctionModels(showStatusFunction, percents += percentIncrementation);
+            //FillHospitalSectionProfileModels(showStatusFunction, percents + percentIncrementation);
+            //FillMessageModels(showStatusFunction, 100.0);
         }
 
         protected virtual void FillList<T>(IEnumerable<T> models, Func<string, bool> showStatusFunction = null, double percentCount = 0, bool fillApprove = true)

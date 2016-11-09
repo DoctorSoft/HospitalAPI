@@ -1,6 +1,7 @@
 ﻿using System;
 using StorageModels.Interfaces;
 using System.Collections.Generic;
+using StorageModels.Models.ClinicModels;
 using StorageModels.Models.UserModels;
 
 namespace StorageModels.Models.HospitalModels
@@ -21,7 +22,9 @@ namespace StorageModels.Models.HospitalModels
         public HospitalStorageModel Hospital { get; set; }
         public ICollection<EmptyPlaceStatisticStorageModel> EmptyPlaceStatistics { get; set; }
         public SectionProfileStorageModel SectionProfile { get; set; }
-        public ICollection<HospitalUserSectionAccessStorageModel> HospitalUserSectionAccesses { get; set; }
+        public ICollection<ClinicUserHospitalSectionProfileAccessStorageModel> ClinicUserHospitalSectionProfileAccesses { get; set; }
+
+        public ICollection<HospitalUserSectionAccessStorageModel> HospitalUserSectionAccesses { get; set; } 
 
         //
 

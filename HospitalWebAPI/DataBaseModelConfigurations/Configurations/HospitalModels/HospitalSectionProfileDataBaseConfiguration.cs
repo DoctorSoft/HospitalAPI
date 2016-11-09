@@ -29,6 +29,7 @@ namespace DataBaseModelConfigurations.Configurations.HospitalModels
             this.HasRequired(model => model.SectionProfile).WithMany(link => link.HospitalSectionProfiles).HasForeignKey(model => model.SectionProfileId);
             this.HasMany(model => model.EmptyPlaceStatistics).WithRequired(link => link.HospitalSectionProfile).HasForeignKey(model => model.HospitalSectionProfileId);
             HasMany(model => model.HospitalUserSectionAccesses).WithRequired(model => model.HospitalSectionProfile).HasForeignKey(model => model.HospitalSectionProfileId).WillCascadeOnDelete(false);
+            HasMany(model => model.ClinicUserHospitalSectionProfileAccesses).WithRequired(model => model.HospitalSectionProfile).HasForeignKey(model => model.HospitalSectionProfileId).WillCascadeOnDelete(false);
         }
     }
 }

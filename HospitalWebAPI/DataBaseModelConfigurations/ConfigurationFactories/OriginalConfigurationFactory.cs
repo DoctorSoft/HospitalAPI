@@ -35,7 +35,7 @@ namespace DataBaseModelConfigurations.ConfigurationFactories
             builder.Configurations.Add(new ReservationDataBaseConfiguration());
             builder.Configurations.Add(new ReservationFileDataBaseConfiguration());
             builder.Configurations.Add(new SettingsItemDataBaseConfiguration());
-            builder.Configurations.Add(new ClinicHospitalPriorityDataBaseConfiguration());
+            builder.Configurations.Add(new ClinicUserHospitalSectionProfileAccessDataBaseConfiguration());
 
             builder.Configurations.Add(new FunctionalGroupDataBaseConfiguration());
             builder.Configurations.Add(new FunctionDataBaseConfiguration());

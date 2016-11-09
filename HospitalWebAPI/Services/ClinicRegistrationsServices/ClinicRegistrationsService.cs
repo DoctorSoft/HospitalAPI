@@ -31,7 +31,7 @@ namespace Services.ClinicRegistrationsServices
 
         private readonly IEmptyPlaceByTypeStatisticRepository _emptyPlaceByTypeStatisticRepository;
 
-        private readonly IClinicHospitalPriorityRepository _clinicHospitalPriorityRepository;
+        private readonly IClinicUserHospitalSectionProfileAccessRepository _clinicUserHospitalSectionProfileAccessRepository;
 
         private readonly IHospitalRepository _hospitalRepository;
 
@@ -49,13 +49,13 @@ namespace Services.ClinicRegistrationsServices
 
         private readonly IReservationFileRepository _reservationFileRepository;
 
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager, IClinicRepository clinicRepository, IReservationFileRepository reservationFile)
+        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicUserHospitalSectionProfileAccessRepository clinicUserHospitalSectionProfileAccessRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager, IClinicRepository clinicRepository, IReservationFileRepository reservationFile)
         {
             _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
             _tokenManager = tokenManager;
             _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
-            _clinicHospitalPriorityRepository = clinicHospitalPriorityRepository;
+            _clinicUserHospitalSectionProfileAccessRepository = clinicUserHospitalSectionProfileAccessRepository;
             _hospitalRepository = hospitalRepository;
             _reservationRepository = reservationRepository;
             _messageRepository = messageRepository;
@@ -116,15 +116,16 @@ namespace Services.ClinicRegistrationsServices
                     .Select(sex => new KeyValuePair<int, string>((int) sex, sex.ToCorrectString()))
                     .ToList();
 
-            var hospitalIds = _clinicHospitalPriorityRepository
+            var hospitalSectionProfileIds = _clinicUserHospitalSectionProfileAccessRepository
                 .GetModels()
-                .Where(model => !model.IsBlocked && model.ClinicId == clinic.Id)
-                .Select(model => model.HospitalId)
+                .Where(model => !model.IsBlocked && model.ClinicUserId == user.Id)
+                .Select(model => model.HospitalSectionProfileId)
+                .Distinct()
                 .ToList();
 
             var sectionProfiles =
                 _hospitalSectionProfileRepository.GetModels()
-                    .Where(model => hospitalIds.Any(id => id == model.HospitalId))
+                    .Where(model => hospitalSectionProfileIds.Any(id => id == model.Id))
                     .Select(model => new
                     {
                         Id = model.SectionProfileId,
@@ -188,14 +189,16 @@ namespace Services.ClinicRegistrationsServices
                })
                .ToList();
 
-            var hospitals = _clinicHospitalPriorityRepository
+            var hospitals = _clinicUserHospitalSectionProfileAccessRepository
                 .GetModels()
-                .Where(model => !model.IsBlocked && model.ClinicId == clinicId)
+                .Where(model => !model.IsBlocked && model.ClinicUserId == user.Id)
                 .Select(model => new
                 {
-                    HospitalId = model.HospitalId,
-                    Name = model.Hospital.Name
+                    HospitalId = model.HospitalSectionProfile.HospitalId,
+                    Name = model.HospitalSectionProfile.Hospital.Name
                 })
+                .GroupBy(arg => arg.HospitalId)
+                .Select(grouping => grouping.FirstOrDefault())
                 .ToList()
                 .Select(model => new KeyValuePair<int, string>(model.HospitalId, model.Name))
                 .ToList();
@@ -945,11 +948,10 @@ namespace Services.ClinicRegistrationsServices
 
         private int GetDefaultHospitalIdByClinicId(int clinicId)
         {
-            var result = _clinicHospitalPriorityRepository
+            var result = _hospitalRepository
                 .GetModels()
-                .Where(model => model.Priority == 1)
-                .FirstOrDefault(model => model.ClinicId == clinicId)
-                .HospitalId;
+                .FirstOrDefault()
+                .Id;
 
             return result;
         }

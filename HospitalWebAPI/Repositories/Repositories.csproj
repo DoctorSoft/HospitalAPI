@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnotherRepositories\RemoteAPIRepositories\PersonDataAPIRepository.cs" />
-    <Compile Include="DataBaseRepositories\ClinicRepositories\ClinicHospitalPriorityRepository.cs" />
+    <Compile Include="DataBaseRepositories\ClinicRepositories\ClinicUserHospitalSectionProfileAccessRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\ReservationFileRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\SettingsItemRepository.cs" />
     <Compile Include="DataBaseRepositories\ClinicRepositories\ClinicRepository.cs" />
