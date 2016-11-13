@@ -64,7 +64,14 @@ namespace AdminQuickFunctions
 
         static void Main(string[] args)
         {
-            AddNewClinicUser();
+            var Clinic3Test1 = new PasswordHashManager().GetPasswordHash("Wolf25Matt");
+            var Clinic3Test2 = new PasswordHashManager().GetPasswordHash("Battle2Field");
+            var Clinic5Test1 = new PasswordHashManager().GetPasswordHash("Rocker11Face");
+            var Clinic5Test2 = new PasswordHashManager().GetPasswordHash("Port75Land");
+            var Clinic5Test3 = new PasswordHashManager().GetPasswordHash("Ameno23Rika");
+            var Clinic4Test3 = new PasswordHashManager().GetPasswordHash("Door45Trap");
+            var Clinic6Test3 = new PasswordHashManager().GetPasswordHash("Bool07Dog");
+            var Hospital3Test3 = new PasswordHashManager().GetPasswordHash("Some25Song");
         }
     }
 }

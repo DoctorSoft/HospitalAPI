@@ -422,7 +422,7 @@ namespace Services.ClinicRegistrationsServices
 
             var receiverIds = this._userRepository.GetModels()
                 .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == command.CurrentHospitalId)
-                .Where(model => model.HospitalUser.HospitalUserSectionAccesses.Any(storageModel => !storageModel.IsBlocked && storageModel.HospitalSectionProfileId == command.SectionProfileId))
+                .Where(model => model.HospitalUser.HospitalUserSectionAccesses.Any(storageModel => !storageModel.IsBlocked && storageModel.HospitalSectionProfile.SectionProfileId == command.SectionProfileId))
                 .Select(model => model.Id)
                 .ToList();
 
