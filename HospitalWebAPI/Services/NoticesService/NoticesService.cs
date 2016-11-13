@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
 using HandleToolsInterfaces.RepositoryHandlers;
 using HelpingTools.ExtentionTools;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.Entities;
-using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using ServiceModels.ServiceCommands.NoticesCommands;
 using Services.Interfaces.AuthorizationServices;
 using Services.Interfaces.NoticesService;
 using Services.Interfaces.ServiceTools;
+using StorageModels.Models.ClinicModels;
 using StorageModels.Models.MailboxModels;
 using StorageModels.Models.UserModels;
 
@@ -25,39 +23,27 @@ namespace Services.NoticesService
 {
     public class NoticesService : INoticesService
     {
-        private readonly IMessageRepository _messageRepository;
-
         private readonly ITokenManager _tokenManager;
 
         private readonly IAuthorizationService _authorizationService;
 
-        private readonly IUserRepository _userRepository;
-
         private readonly ITwoSideShowingHandler<MessageStorageModel> _messageShowingHandler;
-
-        private readonly IClinicRepository _clinicRepository;
-
-        private readonly IClinicUserRepository _clinicUserRepository;
 
         private readonly IHospitalManager _hospitalManager;
 
-        private readonly IDischargeRepository _dischargeRepository;
-
         private readonly IClinicManager _clinicManager;
 
-        public NoticesService(IMessageRepository messageRepository, IAuthorizationService authorizationService,
-            ITokenManager tokenManager, IUserRepository userRepository, ITwoSideShowingHandler<MessageStorageModel> messageShowingHandler, IClinicRepository clinicRepository, IClinicUserRepository clinicUserRepository, IHospitalManager hospitalManager, IDischargeRepository dischargeRepository, IClinicManager clinicManager)
+        private readonly IDataBaseContext _context;
+
+        public NoticesService(IAuthorizationService authorizationService,
+            ITokenManager tokenManager, ITwoSideShowingHandler<MessageStorageModel> messageShowingHandler, IHospitalManager hospitalManager, IClinicManager clinicManager, IDataBaseContext context)
         {
-            this._messageRepository = messageRepository;
             _authorizationService = authorizationService;
             _tokenManager = tokenManager;
-            _userRepository = userRepository;
             this._messageShowingHandler = messageShowingHandler;
-            _clinicRepository = clinicRepository;
-            _clinicUserRepository = clinicUserRepository;
             _hospitalManager = hospitalManager;
-            _dischargeRepository = dischargeRepository;
             _clinicManager = clinicManager;
+            _context = context;
         }
 
         public GetClinicNoticesPageInformationCommandAnswer GetClinicNoticesPageInformation(
@@ -67,7 +53,7 @@ namespace Services.NoticesService
 
             var today = DateTime.Now.Date;
 
-            var results = ((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
+            var results = ((IDbSet<MessageStorageModel>)_context.Set<MessageStorageModel>())
                 .Include(model => model.UserFrom)
                 .Where(model => model.UserToId == user.Id)
                 .Where(model => model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed)
@@ -98,7 +84,7 @@ namespace Services.NoticesService
 
             var today = DateTime.Now.Date;
 
-            var results = ((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
+            var results = ((IDbSet<MessageStorageModel>)_context.Set<MessageStorageModel>())
                 .Include(model => model.UserFrom)
                 .Where(model => model.UserToId == user.Id)
                 .Where(model => model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed)
@@ -167,7 +153,7 @@ namespace Services.NoticesService
 
             var user = _tokenManager.GetUserByToken(command.Token);
 
-            var messages = ((IDbSet<UserStorageModel>) _userRepository.GetModels())
+            var messages = ((IDbSet<UserStorageModel>) _context.Set<UserStorageModel>())
                 .Include(model => model.UserType)
                 .Where(model => model.UserType.UserType == UserType.ClinicUser)
                 .ToList()
@@ -185,9 +171,9 @@ namespace Services.NoticesService
 
             foreach (var message in messages)
             {
-                _messageRepository.Add(message);
+                _context.Set<MessageStorageModel>().Add(message);
             }
-            _messageRepository.SaveChanges();
+            _context.SaveChanges();
 
             return new GetSendDistributiveMessagesPageInformationCommandAnswer
             {
@@ -202,14 +188,14 @@ namespace Services.NoticesService
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
-            var message = ((IDbSet<MessageStorageModel>) _messageRepository.GetModels())
+            var message = ((IDbSet<MessageStorageModel>) _context.Set<MessageStorageModel>())
                 .Include(model => model.UserFrom)
                 .Include(model => model.UserTo)
                 .FirstOrDefault(model => model.UserToId == user.Id && model.Id == command.MessageId);
 
             message.IsRead = true;
-            _messageRepository.Update(message.Id, message);
-            _messageRepository.SaveChanges();
+            _context.Set<MessageStorageModel>().AddOrUpdate(message);
+            _context.SaveChanges();
 
             var result = new GetClinicMessageByIdCommandAnswer
             {
@@ -228,12 +214,12 @@ namespace Services.NoticesService
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
-            var message = _messageRepository.GetModels()
+            var message = _context.Set<MessageStorageModel>()
                 .FirstOrDefault(model => model.UserToId == user.Id && model.Id == command.MessageId);
 
             _messageShowingHandler.HideModelFromToSide(message);
-            _messageRepository.Update(message.Id, message);
-            _messageRepository.SaveChanges();
+            _context.Set<MessageStorageModel>().AddOrUpdate(message);
+            _context.SaveChanges();
 
             return new RemoveClinicMessageByIdCommandAnswer
             {
@@ -244,14 +230,14 @@ namespace Services.NoticesService
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
-            var message = ((IDbSet<MessageStorageModel>)_messageRepository.GetModels())
+            var message = ((IDbSet<MessageStorageModel>)_context.Set<MessageStorageModel>())
                 .Include(model => model.UserFrom)
                 .Include(model => model.UserTo)
                 .FirstOrDefault(model => model.UserToId == user.Id && model.Id == command.MessageId);
 
             message.IsRead = true;
-            _messageRepository.Update(message.Id, message);
-            _messageRepository.SaveChanges();
+            _context.Set<MessageStorageModel>().AddOrUpdate(message);
+            _context.SaveChanges();
 
             var result = new GetHospitalMessageByIdCommandAnswer
             {
@@ -270,12 +256,12 @@ namespace Services.NoticesService
         {
             var user = _tokenManager.GetUserByToken(command.Token);
 
-            var message = _messageRepository.GetModels()
+            var message = _context.Set<MessageStorageModel>()
                 .FirstOrDefault(model => model.UserToId == user.Id && model.Id == command.MessageId);
 
             _messageShowingHandler.HideModelFromToSide(message);
-            _messageRepository.Update(message.Id, message);
-            _messageRepository.SaveChanges();
+            _context.Set<MessageStorageModel>().AddOrUpdate(message);
+            _context.SaveChanges();
 
             return new RemoveHospitalMessageByIdCommandAnswer
             {
@@ -288,8 +274,8 @@ namespace Services.NoticesService
             var user = _tokenManager.GetUserByToken(command.Token);
 
             var clinic = _clinicManager.GetClinicByUser(user);
-
-            var results = _dischargeRepository.GetModels()
+            
+            var results = _context.Set<DischargeStorageModel>()
                 .Where(model => model.Message.UserTo.UserType.UserType == UserType.ClinicUser)
                 .Where(model => model.Message.UserTo.ClinicUser.ClinicId == clinic.Id)
                 .Select(model => new DischargeFileItem
@@ -315,7 +301,7 @@ namespace Services.NoticesService
 
         public ShowPageToSendDischangeCommandAnswer ShowPageToSendDischange(ShowPageToSendDischangeCommand command)
         {
-            var clinics = this._clinicRepository.GetModels().ToList();
+            var clinics = this._context.Set<ClinicStorageModel>().ToList();
             if (command.ClinicId == null)
             {
                 command.ClinicId = clinics.FirstOrDefault().Id;
@@ -346,11 +332,11 @@ namespace Services.NoticesService
             var user = _tokenManager.GetUserByToken(command.Token);
 
             var hospital = _hospitalManager.GetHospitalByUser(user);
-
-            var responsiblePersonId = _clinicUserRepository.GetModels()
+            
+            var responsiblePersonId = _context.Set<ClinicUserStorageModel>()
                 .FirstOrDefault(model => model.ClinicId == command.ClinicId && model.IsDischargeResponsiblePerson).Id;
 
-            var anotherPersonsFromClinic = _clinicUserRepository.GetModels()
+            var anotherPersonsFromClinic = _context.Set<ClinicUserStorageModel>()
                 .Where(model => model.ClinicId == command.ClinicId && !model.IsDischargeResponsiblePerson).Select(model => model.Id).ToList();
 
             var titleMessage = $"Новая выписка была отправлена из больницы '{hospital.Name}'";
@@ -378,7 +364,7 @@ namespace Services.NoticesService
                 Body = body,
                 MimeType = command.ContentType
             };
-            this._dischargeRepository.Add(discharge);
+            this._context.Set<DischargeStorageModel>().Add(discharge);
 
             foreach (var personId in anotherPersonsFromClinic)
             {
@@ -394,9 +380,9 @@ namespace Services.NoticesService
                     IsRead = false,
                     MessageType = MessageType.WarningMessage,
                 };
-                _messageRepository.Add(message);
+                _context.Set<MessageStorageModel>().Add(message);
             }
-            _messageRepository.SaveChanges();
+            _context.SaveChanges();
 
             return new SaveDischargeCommandAnswer
             {
@@ -407,7 +393,7 @@ namespace Services.NoticesService
         public DownloadDischargeCommandAnswer DownloadDischarge(DownloadDischargeCommand command)
         {
             var discharge =
-                this._dischargeRepository.GetModels().FirstOrDefault(model => model.Id == command.DischargeId);
+                this._context.Set<DischargeStorageModel>().FirstOrDefault(model => model.Id == command.DischargeId);
 
             return new DownloadDischargeCommandAnswer
             {

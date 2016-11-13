@@ -1,5 +1,4 @@
 ﻿using Services.Interfaces.MainMenuServices;
-using Services.Interfaces.SessionServices;
 
 namespace Dependencies.NinjectFactories
 {

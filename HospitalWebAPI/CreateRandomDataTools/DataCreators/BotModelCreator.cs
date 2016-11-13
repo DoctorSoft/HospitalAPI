@@ -1,26 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
-using StorageModels.Models.ClinicModels;
 using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
     public class BotModelCreator : IBotModelCreator
     {
-        private readonly IUserTypeRepository _userTypeRepository;
+        private readonly IDataBaseContext _context;
 
-        public BotModelCreator(IUserTypeRepository userTypeRepository)
+        public BotModelCreator(IDataBaseContext context)
         {
-            
-            _userTypeRepository = userTypeRepository;
+            _context = context;
         }
 
         public IEnumerable<UserStorageModel> GetList()
         {
-            var userTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.Bot).Id;
+            var userTypeId = _context.Set<UserTypeStorageModel>().FirstOrDefault(model => model.UserType == UserType.Bot).Id;
 
             var bot = GetBot(userTypeId);
             var results = new List<UserStorageModel>

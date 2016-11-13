@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using StorageModels.Models.ClinicModels;
-using StorageModels.Models.UserModels;
 
 namespace DataBaseModelConfigurations.Configurations.ClinicModels 
 {

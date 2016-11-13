@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using ServiceModels.ModelTools;
+﻿using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommands.HospitalRegistrationsCommands
 {

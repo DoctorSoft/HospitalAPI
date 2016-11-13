@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
 using HelpingTools.Interfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.AnotherRepositories.RemoteAPIRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using StorageModels.Models.ClinicModels;
 using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
@@ -13,8 +13,7 @@ namespace CreateRandomDataTools.DataCreators
     public class ClinicUserModelCreator : IClinicUserModelCreator
     {
         private readonly IPersonDataAPIRepository _personDataApiRepository;
-        private readonly IClinicRepository _clinicRepository;
-        private readonly IUserTypeRepository _userTypeRepository;
+        private readonly IDataBaseContext _context;
 
         private readonly IPasswordHashManager _passwordHashManager;
         private readonly IAccountNameCalculator _accountNameCalculator;
@@ -23,21 +22,19 @@ namespace CreateRandomDataTools.DataCreators
         private const string StandardPassword = "12345";
 
         public ClinicUserModelCreator(IPersonDataAPIRepository personDataApiRepository, 
-            IClinicRepository clinicRepository, IUserTypeRepository userTypeRepository,
-            IPasswordHashManager passwordHashManager, IAccountNameCalculator accountNameCalculator)
+            IPasswordHashManager passwordHashManager, IAccountNameCalculator accountNameCalculator, IDataBaseContext context)
         {
             _personDataApiRepository = personDataApiRepository;
-            _clinicRepository = clinicRepository;
-            _userTypeRepository = userTypeRepository;
 
             _passwordHashManager = passwordHashManager;
             _accountNameCalculator = accountNameCalculator;
+            _context = context;
         }
 
         public IEnumerable<ClinicUserStorageModel> GetList()
         {
-            var clinic = _clinicRepository.GetModels().ToList();
-            var userTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.ClinicUser).Id;
+            var clinic = _context.Set<ClinicStorageModel>().ToList();
+            var userTypeId = _context.Set<UserTypeStorageModel>().FirstOrDefault(model => model.UserType == UserType.ClinicUser).Id;
 
             var results = GetUsersByFirstClinic(clinic[0].Id, userTypeId).Union(GetUsersBySecondClinic(clinic[1].Id, userTypeId));
 

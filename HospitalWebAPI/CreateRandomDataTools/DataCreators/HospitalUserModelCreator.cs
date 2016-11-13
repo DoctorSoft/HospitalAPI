@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
 using HelpingTools.Interfaces;
 using RepositoryTools.Interfaces.PrivateInterfaces.AnotherRepositories.RemoteAPIRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using StorageModels.Models.HospitalModels;
 using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
@@ -13,31 +13,27 @@ namespace CreateRandomDataTools.DataCreators
     public class HospitalUserModelCreator : IHospitalUserModelCreator
     {
         private readonly IPersonDataAPIRepository _personDataApiRepository;
-        private readonly IHospitalRepository _hospitalRepository;
-        private readonly IUserTypeRepository _userTypeRepository;
 
         private readonly IPasswordHashManager _passwordHashManager;
         private readonly IAccountNameCalculator _accountNameCalculator;
+        private readonly IDataBaseContext _context;
 
         private const int UsersInOneHospital = 2;
         private const string StandardPassword = "12345";
 
         public HospitalUserModelCreator(IPersonDataAPIRepository personDataApiRepository, 
-            IHospitalRepository hospitalRepository, IUserTypeRepository userTypeRepository,
-            IPasswordHashManager passwordHashManager, IAccountNameCalculator accountNameCalculator)
+            IPasswordHashManager passwordHashManager, IAccountNameCalculator accountNameCalculator, IDataBaseContext context)
         {
             _personDataApiRepository = personDataApiRepository;
-            _hospitalRepository = hospitalRepository;
-            _userTypeRepository = userTypeRepository;
-
             _passwordHashManager = passwordHashManager;
             _accountNameCalculator = accountNameCalculator;
+            _context = context;
         }
    
         public IEnumerable<HospitalUserStorageModel> GetList()
         {
-            var hospital = _hospitalRepository.GetModels().FirstOrDefault();
-            var userTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.HospitalUser).Id;
+            var hospital = _context.Set<HospitalStorageModel>().FirstOrDefault();
+            var userTypeId = _context.Set<UserTypeStorageModel>().FirstOrDefault(model => model.UserType == UserType.HospitalUser).Id;
 
             var results = GetUsersByHospital(hospital.Id, userTypeId);
 

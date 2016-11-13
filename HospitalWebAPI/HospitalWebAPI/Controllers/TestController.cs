@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
 using HospitalWebAPI.Filters;
-using Repositories.DataBaseRepositories.UserRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using StorageModels.Models.UserModels;
 
 namespace HospitalWebAPI.Controllers
 {
     public class TestController : ApiController
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IDataBaseContext _context;
 
-        public TestController(IUserRepository userRepository)
+        public TestController(IDataBaseContext context)
         {
-            _userRepository = userRepository;
+            _context = context;
         }
 
         // GET api/test/token/{token}
@@ -25,7 +23,7 @@ namespace HospitalWebAPI.Controllers
         public IEnumerable<string> Get([FromUri]Guid token)
         {
             //Gets clinic users
-            var list = _userRepository.GetModels().Where(model => model.UserTypeId == 1).Select(model => model.Name).ToList();
+            var list = _context.Set<UserStorageModel>().Where(model => model.UserTypeId == 1).Select(model => model.Name).ToList();
             return list;
         }
 

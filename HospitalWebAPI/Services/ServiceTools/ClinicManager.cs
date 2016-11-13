@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using DataBaseTools.Interfaces;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.ClinicModels;
 using StorageModels.Models.UserModels;
@@ -9,16 +9,16 @@ namespace Services.ServiceTools
 {
     public class ClinicManager : IClinicManager
     {
-        private readonly IClinicUserRepository _clinicUserRepository;
+        private readonly IDataBaseContext _context;
 
-        public ClinicManager(IClinicUserRepository clinicUserRepository)
+        public ClinicManager(IDataBaseContext context)
         {
-            _clinicUserRepository = clinicUserRepository;
+            _context = context;
         }
 
         public ClinicStorageModel GetClinicByUser(UserStorageModel model)
         {
-            var clinicUser = ((IDbSet<ClinicUserStorageModel>) _clinicUserRepository.GetModels())
+            var clinicUser = _context.Set<ClinicUserStorageModel>()
                 .Include(storageModel => storageModel.Clinic)
                 .FirstOrDefault(storageModel => storageModel.Id == model.Id);
 

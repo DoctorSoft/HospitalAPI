@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using EntityFramework.BulkInsert.Extensions;
+﻿using System.Data.Entity;
 
 namespace DataBaseTools.Interfaces
 {

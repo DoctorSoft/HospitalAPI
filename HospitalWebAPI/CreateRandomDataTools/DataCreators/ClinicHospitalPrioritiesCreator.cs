@@ -1,29 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using DataBaseTools.Interfaces;
 using StorageModels.Models.ClinicModels;
+using StorageModels.Models.HospitalModels;
+using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
     public class ClinicHospitalPrioritiesCreator : IClinicHospitalPrioritiesCreator
     {
-        private readonly IClinicUserRepository _clinicUserRepository;
+        private readonly IDataBaseContext _context;
 
-        private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
-
-        public ClinicHospitalPrioritiesCreator(IClinicUserRepository clinicUserRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository)
+        public ClinicHospitalPrioritiesCreator(IDataBaseContext context)
         {
-            _clinicUserRepository = clinicUserRepository;
-            _hospitalSectionProfileRepository = hospitalSectionProfileRepository;
+            _context = context;
         }
 
         public IEnumerable<ClinicUserHospitalSectionProfileAccessStorageModel> GetList()
         {
-            var clinicUsers = _clinicUserRepository.GetModels().ToList();
-            var hospitalSectionProfiles = _hospitalSectionProfileRepository.GetModels().ToList();
+            var clinicUsers = _context.Set<ClinicUserStorageModel>().ToList();
+            var hospitalSectionProfiles = _context.Set<HospitalSectionProfileStorageModel>().ToList();
 
             var result = new List<ClinicUserHospitalSectionProfileAccessStorageModel>();
 

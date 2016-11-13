@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Web.Mvc;
 using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommands.ClinicRegistrationsCommands

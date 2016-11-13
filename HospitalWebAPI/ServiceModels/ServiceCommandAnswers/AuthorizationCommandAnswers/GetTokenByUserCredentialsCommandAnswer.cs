@@ -1,5 +1,4 @@
-﻿using System;
-using ServiceModels.ModelTools;
+﻿using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.AuthorizationCommandAnswers
 {

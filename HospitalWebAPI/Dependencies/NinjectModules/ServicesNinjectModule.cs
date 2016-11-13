@@ -1,4 +1,6 @@
-﻿using Dependencies.NinjectFactories;
+﻿using DataBaseModelConfigurations.Contexts;
+using DataBaseTools.Interfaces;
+using Dependencies.NinjectFactories;
 using Ninject.Extensions.Factory;
 using Ninject.Modules;
 using Services.AuthorizationServices;
@@ -35,6 +37,7 @@ namespace Dependencies.NinjectModules
             Bind<IClinicManager>().To<ClinicManager>().InThreadScope();
             Bind<IClinicReservationsManager>().To<ClinicReservationsManager>().InThreadScope();
             Bind<IHospitalManager>().To<HospitalManager>().InThreadScope();
+            //Bind<IDataBaseContext>().To<TestDataBaseContext>().InThreadScope();
 
             // Services
             Bind<IAuthorizationService>().To<AuthorizationService>().InThreadScope();

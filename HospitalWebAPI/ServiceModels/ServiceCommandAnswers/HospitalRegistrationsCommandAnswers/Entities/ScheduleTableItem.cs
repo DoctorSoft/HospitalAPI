@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enums.Enums;
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities
 {

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using StorageModels.Interfaces;
+﻿using StorageModels.Interfaces;
 
 namespace StorageModels.Models.ClinicModels
 {

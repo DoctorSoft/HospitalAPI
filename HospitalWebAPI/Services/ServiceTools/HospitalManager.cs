@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
+using DataBaseTools.Interfaces;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.HospitalModels;
 using StorageModels.Models.UserModels;
@@ -8,16 +8,16 @@ namespace Services.ServiceTools
 {
     public class HospitalManager : IHospitalManager
     {
-        private readonly IHospitalRepository hospitalRepository;
+        private readonly IDataBaseContext _context;
 
-        public HospitalManager(IHospitalRepository hospitalRepository)
+        public HospitalManager(IDataBaseContext context)
         {
-            this.hospitalRepository = hospitalRepository;
+            _context = context;
         }
 
         public HospitalStorageModel GetHospitalByUser(UserStorageModel model)
         {
-            var hospitals = hospitalRepository.GetModels();
+            var hospitals = _context.Set<HospitalStorageModel>();
 
             var result =
                 hospitals.FirstOrDefault(

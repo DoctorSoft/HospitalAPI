@@ -1,6 +1,4 @@
-﻿using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
-using ServiceModels.ServiceCommandAnswers.ReceptionMarkingCommandAnswers;
-using ServiceModels.ServiceCommands.MainPageCommands;
+﻿using ServiceModels.ServiceCommandAnswers.ReceptionMarkingCommandAnswers;
 using ServiceModels.ServiceCommands.ReceptionMarkingCommands;
 
 namespace Services.Interfaces.ReceptionMarkingServices

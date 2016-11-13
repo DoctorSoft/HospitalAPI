@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using ServiceModels.ModelTools;
-using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
+﻿using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {

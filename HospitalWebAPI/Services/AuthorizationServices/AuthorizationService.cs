@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using HandleToolsInterfaces.RepositoryHandlers;
+using DataBaseTools.Interfaces;
 using HelpingTools.Interfaces;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using Resources;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.AuthorizationCommandAnswers;
@@ -15,24 +15,21 @@ namespace Services.AuthorizationServices
 {
     public class AuthorizationService : IAuthorizationService
     {
-        private readonly IAccountRepository _accountRepository;
-        private readonly ISessionRepository _sessionRepository;
-
         private readonly IPasswordHashManager _passwordHashManager;
 
         private const string ErrorFieldName = "Login";
 
-        public AuthorizationService(IAccountRepository accountRepository, ISessionRepository sessionRepository, IPasswordHashManager passwordHashManager)
-        {
-            _accountRepository = accountRepository;
-            _sessionRepository = sessionRepository;
+        private readonly IDataBaseContext _context;
 
+        public AuthorizationService(IPasswordHashManager passwordHashManager, IDataBaseContext context)
+        {
             _passwordHashManager = passwordHashManager;
+            _context = context;
         }
 
         protected virtual AccountStorageModel GetUserAccountByCommand(GetTokenByUserCredentialsCommand command)
         {
-            return _accountRepository.GetModels().FirstOrDefault(model => model.Login == command.Login);
+            return _context.Set<AccountStorageModel>().FirstOrDefault(model => model.Login == command.Login);
         }
 
         protected virtual GetTokenByUserCredentialsCommandAnswer GetErrorAnswer()
@@ -82,8 +79,8 @@ namespace Services.AuthorizationServices
 
         protected virtual void SaveNewSession(SessionStorageModel newSession)
         {
-            _sessionRepository.Add(newSession);
-            _accountRepository.SaveChanges();
+            _context.Set<SessionStorageModel>().Add(newSession);
+            _context.SaveChanges();
         }
 
         protected bool IsRightCommandData(GetTokenByUserCredentialsCommand command)
@@ -121,11 +118,11 @@ namespace Services.AuthorizationServices
         {
             var token = command.Token;
 
-            var session = _sessionRepository.GetModels().FirstOrDefault(model => model.Token == token);
+            var session = _context.Set<SessionStorageModel>().FirstOrDefault(model => model.Token == token);
             session.IsBlocked = true;
 
-            _sessionRepository.Update(session.Id, session);
-            _sessionRepository.SaveChanges();
+            _context.Set<SessionStorageModel>().AddOrUpdate(session);
+            _context.SaveChanges();
             
             return new LogOutUserByTokenCommandAnswer();
         }

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
+﻿using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using ServiceModels.ServiceCommands.HospitalRegistrationsCommands;
 

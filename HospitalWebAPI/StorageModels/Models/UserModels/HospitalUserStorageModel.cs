@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
 
