@@ -288,7 +288,7 @@ namespace Services.HospitalRegistrationsService
             List<CommandAnswerError> list = new List<CommandAnswerError>();
             foreach (HospitalRegistrationCountStatisticItem element in command.FreeHospitalSectionsForRegistration)
             {
-                if (element.OpenCount < 0)
+                if (element.FreePlacesCount < 0)
                     list.Add(new CommandAnswerError
                     {
                         FieldName = "Число свободных мест", 
@@ -334,7 +334,7 @@ namespace Services.HospitalRegistrationsService
                         .Select(model => new EmptyPlaceByTypeStatisticStorageModel
                         {
                             Id = model.Id, 
-                            Count = element.OpenCount, 
+                            Count = element.RegisteredCount + element.FreePlacesCount, 
                             Sex = element.Sex, 
                             EmptyPlaceStatisticId = emptyPlaceStatisticsId
                         }).FirstOrDefault()).ToList();
