@@ -13,6 +13,7 @@ using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
+using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
 using Services.Interfaces.ServiceTools;
@@ -49,7 +50,9 @@ namespace Services.ClinicRegistrationsServices
 
         private readonly IReservationFileRepository _reservationFileRepository;
 
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicUserHospitalSectionProfileAccessRepository clinicUserHospitalSectionProfileAccessRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager, IClinicRepository clinicRepository, IReservationFileRepository reservationFile)
+        private readonly IEmptyPlaceStatisticRepository _emptyPlaceStatisticRepository;
+
+        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicUserHospitalSectionProfileAccessRepository clinicUserHospitalSectionProfileAccessRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager, IClinicRepository clinicRepository, IReservationFileRepository reservationFile, IEmptyPlaceStatisticRepository emptyPlaceStatisticRepository)
         {
             _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
@@ -64,6 +67,7 @@ namespace Services.ClinicRegistrationsServices
             this._hospitalManager = hospitalManager;
             _clinicRepository = clinicRepository;
             _reservationFileRepository = reservationFile;
+            _emptyPlaceStatisticRepository = emptyPlaceStatisticRepository;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -262,6 +266,29 @@ namespace Services.ClinicRegistrationsServices
         {
             var result = new List<CommandAnswerError>();
 
+            var emptyPlaceStatisticId = _emptyPlaceStatisticRepository.GetModels()
+                .Where(model => model.HospitalSectionProfileId == command.SectionProfileId && model.Date == command.DateValue).Select(m=>m.Id).ToList();
+            
+            var emptyPlaceByTypeStatisticRepository = _emptyPlaceByTypeStatisticRepository.GetModels();
+
+            var places = emptyPlaceStatisticId.Select(i => emptyPlaceByTypeStatisticRepository
+                    .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.SectionProfileId)
+                    .Where(model => model.Sex == (command.SexId == 1 ? Sex.Male : Sex.Female))
+                    .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(i))
+                    .Select(model => new HospitalRegistrationCountStatisticItem
+                    {
+                        FreePlacesCount = model.Count - model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
+                    }).FirstOrDefault()).FirstOrDefault();
+
+            if (places.FreePlacesCount <= 0)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Внимание!",
+                    Title = "К сожалению свободных мест по выбранным критериям не осталось."
+                });
+            }
+
             if (string.IsNullOrWhiteSpace(command.FirstName) || command.FirstName.Length < 2)
             {
                 result.Add(new CommandAnswerError
@@ -357,6 +384,7 @@ namespace Services.ClinicRegistrationsServices
         public SaveClinicRegistrationCommandAnswer SaveClinicRegistration(SaveClinicRegistrationCommand command)
         {
             var errors = this.ValidateSaveClinicRegistrationCommand(command);
+
             if (errors.Any())
             {
                 return new SaveClinicRegistrationCommandAnswer
