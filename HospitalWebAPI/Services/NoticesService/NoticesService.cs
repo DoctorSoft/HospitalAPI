@@ -53,12 +53,14 @@ namespace Services.NoticesService
 
             var today = DateTime.Now.Date;
 
-            var results = ((IDbSet<MessageStorageModel>)_context.Set<MessageStorageModel>())
+            var results = _context.Set<MessageStorageModel>()
                 .Include(model => model.UserFrom)
                 .Where(model => model.UserToId == user.Id)
                 .Where(model => model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed)
                 .Where(model => command.OlnyUnRead != true || !model.IsRead)
                 .Where(model => command.OnlyToday != true || model.Date == today)
+                .OrderByDescending(model => model.Date)
+                .Take(100)
                 .Select(model => new MessageTableItem
                 {
                     SendDate = model.Date,
@@ -84,12 +86,13 @@ namespace Services.NoticesService
 
             var today = DateTime.Now.Date;
 
-            var results = ((IDbSet<MessageStorageModel>)_context.Set<MessageStorageModel>())
+            var results = _context.Set<MessageStorageModel>()
                 .Include(model => model.UserFrom)
                 .Where(model => model.UserToId == user.Id)
                 .Where(model => model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed)
                 .Where(model => command.OlnyUnRead != true || !model.IsRead)
                 .Where(model => command.OnlyToday != true || model.Date == today)
+                .OrderByDescending(model => model.Date)
                 .Take(100)
                 .Select(model => new MessageTableItem
                 {
