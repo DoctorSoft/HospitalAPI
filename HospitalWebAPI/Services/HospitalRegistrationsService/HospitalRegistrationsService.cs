@@ -877,7 +877,7 @@ namespace Services.HospitalRegistrationsService
                 .Where(model => (int)model.Sex == command.SexId.Value 
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
-                   && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.HospitalSectionProfileId.Value)
+                   && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
                 .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
                 .Count(model => model.Status == ReservationStatus.Opened);
 
