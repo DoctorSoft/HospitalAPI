@@ -158,7 +158,9 @@ namespace Services.HospitalRegistrationsService
                         .Select(storageModel => new HospitalRegistrationCountStatisticItem
                         {
                             Sex = storageModel.Sex,
-                            OpenCount = storageModel.Count
+                            OpenCount = storageModel.Count,
+                            RegisteredCount = storageModel.Reservations.Count(reservationModel => reservationModel.Status == ReservationStatus.Opened),
+                            FreePlacesCount = storageModel.Count - storageModel.Reservations.Count(reservationModel => reservationModel.Status == ReservationStatus.Opened)
                          })
                         .ToList()
                 }).ToList();
@@ -226,8 +228,8 @@ namespace Services.HospitalRegistrationsService
                         Sex = model.Sex,
                         OpenCount = model.Count,
                         Id = model.Id,
-                        RegisteredCount =
-                            model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
+                        RegisteredCount = model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened),
+                        FreePlacesCount = model.Count - model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
                     }).FirstOrDefault()).ToList();
             }
             else
@@ -240,7 +242,8 @@ namespace Services.HospitalRegistrationsService
                         Sex = model.Sex,
                         OpenCount = model.Count,
                         Id = model.Id,
-                        RegisteredCount = model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
+                        RegisteredCount = model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened),
+                        FreePlacesCount = model.Count - model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
                     }).ToList();
             }
 
@@ -262,7 +265,7 @@ namespace Services.HospitalRegistrationsService
             List<CommandAnswerError> list = new List<CommandAnswerError>();
             foreach (HospitalRegistrationCountStatisticItem element in command.FreeHospitalSectionsForRegistration)
             {
-                if (element.OpenCount < 0)
+                if (element.FreePlacesCount < 0)
                     list.Add(new CommandAnswerError
                     {
                         FieldName = "Число свободных мест", 
@@ -307,7 +310,7 @@ namespace Services.HospitalRegistrationsService
                         .Select(model => new EmptyPlaceByTypeStatisticStorageModel
                         {
                             Id = model.Id, 
-                            Count = element.OpenCount, 
+                            Count = element.RegisteredCount + element.FreePlacesCount, 
                             Sex = element.Sex, 
                             EmptyPlaceStatisticId = emptyPlaceStatisticsId
                         }).FirstOrDefault()).ToList();

@@ -18,7 +18,7 @@
         @Html.AntiForgeryToken()
 
         @Html.HiddenFor(command => command.Token)
-        ;
+        
         <div class="panel-body">
             <div class="change-hospital-registration-panel">
 
@@ -32,20 +32,25 @@
                             <input type="hidden" name="FreeHospitalSectionsForRegistration[@i].Sex" id="FreeHospitalSectionsForRegistration[@i].Sex" class="form-control" value="@Model.StatisticItems[i].Sex.Value.ToString("D")"/>
                         </div>
                     }
+                    
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">Зарег.</span>
-                        
-                            <label class="form-control"> @Model.StatisticItems[i].RegisteredCount.ToString("G") </label>
-                            @if (Model.StatisticItems[i].RegisteredCount != 0)
+                        <span class="input-group-addon" id="basic-addon1">Всего мест:</span>
+                        <label class="form-control">@Model.StatisticItems[i].OpenCount.ToString("G") </label> 
+                     </div>
+                    
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Зарегистр.:</span>
+                        <label class="form-control" id="FreeHospitalSectionsForRegistration[@i].RegisteredCount" name="FreeHospitalSectionsForRegistration[@i].RegisteredCount"> @Model.StatisticItems[i].RegisteredCount.ToString("G") </label>
+                        <input class="form-control" id="FreeHospitalSectionsForRegistration[@i].RegisteredCount" name="FreeHospitalSectionsForRegistration[@i].RegisteredCount" type="hidden" value="@Model.StatisticItems[i].RegisteredCount.ToString("G")" required />
+ 
+                          @if (Model.StatisticItems[i].RegisteredCount != 0)
                             {
                                 <input type="button" title="@MainResources.ButtonView" class="btn btn-sm btn-primary" value="@MainResources.ButtonView" onclick=" location.href = '@Url.Action("ViewDetailedInformationOnRegisteredPatients", "ChangeHospitalRegistrationPage", new {Token = Model.Token, EmptyPlaceByTypeStatisticId = Model.StatisticItems[i].Id, HospitalProfileId = Model.HospitalProfileId, Date = Model.Date})' "/>
                             }
-                        
-                    
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
-                        <input class="form-control" id="FreeHospitalSectionsForRegistration[@i].OpenCount" name="FreeHospitalSectionsForRegistration[@i].OpenCount" type="number" value="@Model.StatisticItems[i].OpenCount.ToString("G")" required />
+                        <span class="input-group-addon" id="basic-addon1">Свободно:</span>
+                        <input class="form-control" id="FreeHospitalSectionsForRegistration[@i].FreePlacesCount" name="FreeHospitalSectionsForRegistration[@i].FreePlacesCount" type="number" value="@Model.StatisticItems[i].FreePlacesCount.ToString("G")" required />
                     </div>
                     <br />
                 }

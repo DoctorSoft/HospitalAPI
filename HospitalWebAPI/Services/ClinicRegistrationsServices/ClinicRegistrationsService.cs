@@ -11,6 +11,7 @@ using HelpingTools.ExtentionTools;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
+using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
 using Services.Interfaces.ServiceTools;
@@ -31,12 +32,12 @@ namespace Services.ClinicRegistrationsServices
 
         private readonly IDataBaseContext _context;
 
-        public ClinicRegistrationsService(IClinicManager clinicManager, ITokenManager tokenManager, IHospitalManager hospitalManager, IDataBaseContext context)
+        public ClinicRegistrationsService(IClinicManager clinicManager, ITokenManager tokenManager, IHospitalManager hospitalManager, IDataBaseContext context, IDataBaseContext context1)
         {
             this._clinicManager = clinicManager;
             _tokenManager = tokenManager;
             this._hospitalManager = hospitalManager;
-            _context = context;
+            _context = context1;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -233,6 +234,29 @@ namespace Services.ClinicRegistrationsServices
         {
             var result = new List<CommandAnswerError>();
 
+            var emptyPlaceStatisticId = this._context.Set<EmptyPlaceStatisticStorageModel>()
+                .Where(model => model.HospitalSectionProfileId == command.SectionProfileId && model.Date == command.DateValue).Select(m=>m.Id).ToList();
+            
+            var emptyPlaceByTypeStatisticRepository = this._context.Set<EmptyPlaceByTypeStatisticStorageModel>();
+
+            var places = emptyPlaceStatisticId.Select(i => emptyPlaceByTypeStatisticRepository
+                    .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.SectionProfileId)
+                    .Where(model => model.Sex == (command.SexId == 1 ? Sex.Male : Sex.Female))
+                    .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(i))
+                    .Select(model => new HospitalRegistrationCountStatisticItem
+                    {
+                        FreePlacesCount = model.Count - model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
+                    }).FirstOrDefault()).FirstOrDefault();
+
+            if (places.FreePlacesCount <= 0)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Внимание!",
+                    Title = "К сожалению свободных мест по выбранным критериям не осталось."
+                });
+            }
+
             if (string.IsNullOrWhiteSpace(command.FirstName) || command.FirstName.Length < 2)
             {
                 result.Add(new CommandAnswerError
@@ -328,6 +352,7 @@ namespace Services.ClinicRegistrationsServices
         public SaveClinicRegistrationCommandAnswer SaveClinicRegistration(SaveClinicRegistrationCommand command)
         {
             var errors = this.ValidateSaveClinicRegistrationCommand(command);
+
             if (errors.Any())
             {
                 return new SaveClinicRegistrationCommandAnswer

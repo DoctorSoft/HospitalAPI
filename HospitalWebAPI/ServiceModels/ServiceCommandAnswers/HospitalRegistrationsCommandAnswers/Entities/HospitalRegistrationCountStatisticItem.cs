@@ -11,5 +11,7 @@ namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswer
         public int OpenCount { get; set; }
 
         public int RegisteredCount { get; set; }
+
+        public int FreePlacesCount { get; set; }
     }
 }

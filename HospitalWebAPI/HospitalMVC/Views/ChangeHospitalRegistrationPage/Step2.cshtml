@@ -36,11 +36,15 @@
                                     <br />
                                     @if (info.Sex != null)
                                     {
-                                        <span>Пол:</span>
-                                        <span>@(info.Sex.Value.ToCorrectString())</span>
+                                        <b>
+                                            <span>Пол:</span>
+                                            <span>@(info.Sex.Value.ToCorrectString())</span>
+                                        </b>
                                         <br/>
                                     }
-                                    Количество: @info.OpenCount <br />
+                                    Всего мест: @info.OpenCount <br />                                   
+                                    Зарегистрировано: @info.RegisteredCount <br />
+                                    Свободно: @info.FreePlacesCount <br />
                                     <br />
                                 </div>
                             }
