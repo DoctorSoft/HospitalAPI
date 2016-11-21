@@ -403,3 +403,7 @@ button, select {
 .strong {
     font-weight: bold
 }
+
+.separated-input {
+    padding-top: 10px;
+}
