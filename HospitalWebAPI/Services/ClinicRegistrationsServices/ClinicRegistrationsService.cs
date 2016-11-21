@@ -158,7 +158,7 @@ namespace Services.ClinicRegistrationsServices
                            IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
                            IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date,
                            Date = startMonday.AddDays(7 * week + day).Date,
-                           Count = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date)
+                           EmptyPlaceCount = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date)
                        })
                })
                .ToList();
@@ -557,7 +557,7 @@ namespace Services.ClinicRegistrationsServices
                            IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
                            IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date,
                            Date = startMonday.AddDays(7 * week + day).Date,
-                           Count = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date, hospital.Id)
+                           EmptyPlaceCount = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date, hospital.Id)
                        })
                })
                .ToList();
@@ -897,7 +897,7 @@ namespace Services.ClinicRegistrationsServices
             return answer;
         }
 
-        private int GetHospitalEmptyPlacesCount(GetClinicRegistrationScheduleCommand command, DateTime date)
+        private EmptyPlace GetHospitalEmptyPlacesCount(GetClinicRegistrationScheduleCommand command, DateTime date)
         {
            var placeCount = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
                .Where(model => (int)model.Sex == command.Sex 
@@ -915,10 +915,14 @@ namespace Services.ClinicRegistrationsServices
                 .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
                 .Count(model => model.Status == ReservationStatus.Opened);
 
-            return placeCount - registrationCount;
+            return new EmptyPlace
+            {
+                PlacesWithoutRegitartions =  placeCount - registrationCount,
+                PlaceCount = placeCount
+            };
         }
 
-        private int GetHospitalEmptyPlacesCount(GetMakeHospitalRegistrationsPageInformationCommand command, DateTime date, int hospitalId)
+        private EmptyPlace GetHospitalEmptyPlacesCount(GetMakeHospitalRegistrationsPageInformationCommand command, DateTime date, int hospitalId)
         {
            var placeCount = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
                .Where(model => (int?)model.Sex == command.SexId 
@@ -936,7 +940,11 @@ namespace Services.ClinicRegistrationsServices
                 .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
                 .Count(model => model.Status == ReservationStatus.Opened);
 
-            return placeCount - registrationCount;
+            return new EmptyPlace
+            {
+                PlacesWithoutRegitartions = placeCount - registrationCount,
+                PlaceCount = placeCount
+            };
         }
 
         private int GetDefaultHospitalIdByClinicId(int clinicId)

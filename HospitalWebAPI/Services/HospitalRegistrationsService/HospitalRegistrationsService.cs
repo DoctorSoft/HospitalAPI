@@ -884,6 +884,42 @@ namespace Services.HospitalRegistrationsService
             return placeCount - registrationCount;
         }
 
+        private EmptyPlace GetHospitalEmptyPlacesCount(List<EmptyPlaceByTypeStatisticStorageModel> list, GetRegistrationScheduleBySectionCommand command, DateTime date, int hospitalId)
+        {
+           var placeCount = list
+               .Where(model => (int)model.Sex == command.SexId 
+                   && model.EmptyPlaceStatistic.Date == date
+                   && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
+                   .Select(model => model.Count)
+                   .FirstOrDefault();
+
+            var registrationCount = list
+                .Where(model => (int)model.Sex == command.SexId.Value 
+                   && model.EmptyPlaceStatistic.Date == date
+                   && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
+                .SelectMany(model => model.Reservations.Where(storageModel => storageModel.EmptyPlaceByTypeStatisticId == model.Id).Where(storageModel => storageModel.Status == ReservationStatus.Opened))
+                .Count(model => model.Status == ReservationStatus.Opened);
+
+            return new EmptyPlace
+            {
+                PlaceCount = placeCount,
+                PlacesWithoutRegitartions = placeCount - registrationCount
+            };
+        }
+
+        private List<EmptyPlaceByTypeStatisticStorageModel> GetEmptyPlaceByTypeStatisticStorageModels(DateTime startDate, DateTime endDate, int hospitalId)
+        {
+            var placesData = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
+               .Where(model => model.EmptyPlaceStatistic.Date >= startDate
+                   && model.EmptyPlaceStatistic.Date <= endDate
+                   && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId)
+                   .Include(model => model.Reservations)
+                   .Include(model => model.EmptyPlaceStatistic)
+                   .ToList();
+
+            return placesData;
+        } 
+
         public GetRegistrationScheduleBySectionCommandAnswer GetRegistrationScheduleBySection(
             GetRegistrationScheduleBySectionCommand command)
         {
@@ -922,6 +958,8 @@ namespace Services.HospitalRegistrationsService
             var endMonday = GetPreviousMonday(deadLine);
             var weeks = (endMonday - startMonday).Days / 7 + 1;
 
+            var dateList = GetEmptyPlaceByTypeStatisticStorageModels(startMonday.AddDays(-1), startMonday.AddDays(days + 1), hospital.Id);
+
             var startSchedule = Enumerable.Range(0, weeks)
                .Select(week => new ClinicScheduleTableItem
                {
@@ -935,7 +973,7 @@ namespace Services.HospitalRegistrationsService
                            IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
                            IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date,
                            Date = startMonday.AddDays(7 * week + day).Date,
-                           Count = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date, hospital.Id)
+                           EmptyPlaceCount = this.GetHospitalEmptyPlacesCount(dateList, command, startMonday.AddDays(7 * week + day).Date, hospital.Id)
                        })
                })
                .ToList();

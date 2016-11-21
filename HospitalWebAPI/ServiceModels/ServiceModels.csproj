@@ -103,6 +103,7 @@
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\Entities\ClinicBreakRegistrationTableItem.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\Entities\ClinicScheduleTableCell.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\Entities\ClinicScheduleTableItem.cs" />
+    <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\Entities\EmptyPlace.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetBreakClinicRegistrationsPageInformationCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetClinicRegistrationScheduleCommandAnswer.cs" />
     <Compile Include="ServiceCommandAnswers\ClinicRegistrationsCommandAnswers\GetClinicRegistrationUserFormCommandAnswer.cs" />

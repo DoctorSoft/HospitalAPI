@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-using DataBaseModelConfigurations.ConfigurationFactories;
+﻿using DataBaseModelConfigurations.ConfigurationFactories;
 using DataBaseTools.AbstractClasses;
 using DataBaseTools.Interfaces;
-using EntityFramework.BulkInsert.Extensions;
 
 namespace DataBaseModelConfigurations.Contexts
 {
     // Warning: Don't commit this file
 
-    public class TestDataBaseContext: AbstractConfiguredContext
+    public class TestDataBaseContext: AbstractConfiguredContext, IDataBaseContext
     {
-        private const string Test_Remote_Db = "TestHospitalDataBase_ArturTomashHome"; //"Test_Remote_Db";
+        private const string Test_Remote_Db = "Test_Remote_Db"; // "Demo_Remote_Db"; //"Test_Remote_Db";
 
         public TestDataBaseContext()
             : base(Test_Remote_Db, new OriginalConfigurationFactory())
