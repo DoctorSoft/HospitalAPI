@@ -234,13 +234,19 @@ namespace Services.ClinicRegistrationsServices
         {
             var result = new List<CommandAnswerError>();
 
+            var hospitalSectionProfileId =
+                this._context.Set<HospitalSectionProfileStorageModel>()
+                    .Where(model => model.SectionProfileId == command.SectionProfileId)
+                    .FirstOrDefault()
+                    .Id;
+
             var emptyPlaceStatisticId = this._context.Set<EmptyPlaceStatisticStorageModel>()
-                .Where(model => model.HospitalSectionProfileId == command.SectionProfileId && model.Date == command.DateValue).Select(m=>m.Id).ToList();
+                .Where(model => model.HospitalSectionProfileId == hospitalSectionProfileId && model.Date == command.DateValue).Select(m=>m.Id).ToList();
             
             var emptyPlaceByTypeStatisticRepository = this._context.Set<EmptyPlaceByTypeStatisticStorageModel>();
 
             var places = emptyPlaceStatisticId.Select(i => emptyPlaceByTypeStatisticRepository
-                    .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == command.SectionProfileId)
+                    .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == hospitalSectionProfileId)
                     .Where(model => model.Sex == (command.SexId == 1 ? Sex.Male : Sex.Female))
                     .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(i))
                     .Select(model => new HospitalRegistrationCountStatisticItem
