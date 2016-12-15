@@ -407,3 +407,10 @@ button, select {
 .separated-input {
     padding-top: 10px;
 }
+
+.center-image {
+    text-align: center;
+    vertical-align: middle;
+    min-width: 100%;
+    padding-top: 130px;
+}

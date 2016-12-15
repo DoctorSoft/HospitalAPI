@@ -251,6 +251,7 @@
     <Compile Include="Controllers\ChangeHospitalRegistrationPageController.cs" />
     <Compile Include="Controllers\ClinicNoticesPageController.cs" />
     <Compile Include="Controllers\ClinicUserHomePageController.cs" />
+    <Compile Include="Controllers\ContructionWorkController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\AdministratorHomePageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -322,6 +323,7 @@
     <Content Include="Content\Images\9_.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\offline.jpg" />
     <Content Include="Content\noticePages.css" />
     <Content Include="Content\homePages.css" />
     <Content Include="favicon.ico" />
@@ -422,6 +424,7 @@
     <Content Include="Views\ChangeHospitalRegistrationPage\SwitchRegistrationPage.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\GetRegistrationScheduleBySection.cshtml" />
     <Content Include="Views\ViewHospitalRegistrations\ViewMore.cshtml" />
+    <Content Include="Views\ContructionWork\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -114,7 +114,7 @@ namespace HospitalMVC.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             //Mock
-            filterContext.Result = new RedirectResult("https://www.youtube.com/watch?v=d-diB65scQU");
+            filterContext.Result = GetRedirectResult("ContructionWork", "Index");
             base.OnActionExecuting(filterContext);
             return;
 

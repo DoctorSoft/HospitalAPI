@@ -30,15 +30,18 @@
                             Открыть главное меню <span class="caret"></span>
                         </a>
                         <ul class="nav navbar-nav dropdown-menu nav-pills" style="background-color: #333333">
-                            @foreach (var nextTab in ViewBag.MainMenuTabs)
+                            @if (ViewBag.)
                             {
-                                if (nextTab.IsActive)
+                                foreach (var nextTab in ViewBag.MainMenuTabs)
                                 {
-                                    <li class="active" style="background-color: black; width: 100%; height: 50px">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
-                                }
-                                else
-                                {
-                                    <li style="width: 100%; height: 50px">@Html.ActionLink((string)nextTab.Label, (string)nextTab.ActionName, (string)nextTab.ControllerName, new { Token = ViewBag.Token }, new { @class = "nav" })</li>
+                                    if (nextTab.IsActive)
+                                    {
+                                        <li class="active" style="background-color: black; width: 100%; height: 50px">@Html.ActionLink((string) nextTab.Label, (string) nextTab.ActionName, (string) nextTab.ControllerName, new {Token = ViewBag.Token}, new {@class = "nav"})</li>
+                                    }
+                                    else
+                                    {
+                                        <li style="width: 100%; height: 50px">@Html.ActionLink((string) nextTab.Label, (string) nextTab.ActionName, (string) nextTab.ControllerName, new {Token = ViewBag.Token}, new {@class = "nav"})</li>
+                                    }
                                 }
                             }
                         </ul>
