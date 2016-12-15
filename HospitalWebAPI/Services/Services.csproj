@@ -99,6 +99,10 @@
       <Project>{2C4E04EC-DCE7-476A-B64F-94693442F653}</Project>
       <Name>DataBaseRepositoryTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataBaseTools\DataBaseTools.csproj">
+      <Project>{236788B4-A90D-4AC1-940B-D179B2F41BFD}</Project>
+      <Name>DataBaseTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Enums\Enums.csproj">
       <Project>{3248D9C8-3BBB-4F77-95D9-B1E66E66FC0B}</Project>
       <Name>Enums</Name>

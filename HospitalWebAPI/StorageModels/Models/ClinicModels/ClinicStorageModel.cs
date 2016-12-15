@@ -19,6 +19,5 @@ namespace StorageModels.Models.ClinicModels
 
         public ICollection<ClinicUserStorageModel> ClinicUsers { get; set; }
         public ICollection<ReservationStorageModel> Reservations { get; set; }
-        public ICollection<ClinicHospitalPriorityStorageModel> ClinicHospitalAccesses { get; set; }
     }
 }

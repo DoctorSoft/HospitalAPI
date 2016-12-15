@@ -14,14 +14,14 @@
             bodyText: "Операция успешно выполнена.")
     }
 }
-@Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")
+<h2>@Html.WriteTextAndVariable(@MainResources.UserPageHello + ", ", @Model.UserName, "!", "p")</h2>
 
 <div class="panel-home">
     <div class="panel-group">
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
-                    @Html.WriteTextAndUrl(MainResources.HospitalUserPageChangeRegistrationBefore, "Index", "ChangeHospitalRegistrationPage", @MainResources.HospitalUserPageChangeRegistrationAfter)
+                    @Html.WriteTextAndUrl(MainResources.HospitalUserPageChangeRegistrationBefore, "GetRegistrationScheduleBySection", "ChangeHospitalRegistrationPage", @MainResources.HospitalUserPageChangeRegistrationAfter)
                 </p>
             </div>
         </div>

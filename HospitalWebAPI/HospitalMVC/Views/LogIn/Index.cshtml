@@ -26,8 +26,12 @@
             <div class="wrapper">
                 <div class="form-signin">
                     <h1 class="form-signin-heading">@MainResources.AutorizationPageTitle</h1>
-                    @Html.TextBoxFor(o => o.Login, new { @class = "form-control", @placeholder = MainResources.UserName, @name = "username", @required = "" })
-                    @Html.TextBoxFor(o => o.Password, new { @class = "form-control", @placeholder = "Пароль", MainResources.Password, @required = "" })
+                    <div class="separated-input">
+                        @Html.TextBoxFor(o => o.Login, new {@class = "form-control", @placeholder = MainResources.UserName, @name = "username", @required = ""})
+                    </div>
+                    <div class="separated-input">
+                        @Html.TextBoxFor(o => o.Password, new { @class = "form-control", @placeholder = "Пароль", MainResources.Password, @required = "", @type = "password" })
+                    </div>
                     <br />
                     <button class="btn btn-lg btn-primary btn-block" type="submit">@MainResources.ButtonSign</button>
                 </div>

@@ -59,9 +59,10 @@
     <Compile Include="Interfaces\IBlockAbleModel.cs" />
     <Compile Include="Interfaces\IIdModel.cs" />
     <Compile Include="Interfaces\IShowStatusModel.cs" />
-    <Compile Include="Models\ClinicModels\ClinicHospitalPriorityStorageModel.cs" />
+    <Compile Include="Models\ClinicModels\ClinicUserHospitalSectionProfileAccessStorageModel.cs" />
     <Compile Include="Models\ClinicModels\ClinicStorageModel.cs" />
     <Compile Include="Models\ClinicModels\PatientStorageModel.cs" />
+    <Compile Include="Models\ClinicModels\ReservationFileStorageModel.cs" />
     <Compile Include="Models\ClinicModels\SettingsItemStorageModel.cs" />
     <Compile Include="Models\ClinicModels\ReservationStorageModel.cs" />
     <Compile Include="Models\FunctionModels\FunctionalGroupStorageModel.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Models\MailboxModels\MessageStorageModel.cs" />
     <Compile Include="Models\UserModels\AccountStorageModel.cs" />
     <Compile Include="Models\UserModels\ClinicUserStorageModel.cs" />
+    <Compile Include="Models\UserModels\HospitalUserSectionAccessStorageModel.cs" />
     <Compile Include="Models\UserModels\HospitalUserStorageModel.cs" />
     <Compile Include="Models\UserModels\SessionStorageModel.cs" />
     <Compile Include="Models\UserModels\UserStorageModel.cs" />

@@ -229,6 +229,11 @@ box-sizing: border-box;
     margin-left: auto;
 }
 
+.container .schedule-label
+{
+	background-color: white;
+}
+
 .btn.focus, .btn:focus, .btn:hover { 
 color: #333333;
 text-decoration: none;
@@ -368,4 +373,37 @@ button, select {
 
 .btn-group {
 	min-width: 80px;
+}
+
+/* sheadule style*/
+.background-shedule
+{
+	background-color: white;
+}
+
+.aling-right {
+    text-align: right
+}
+
+.full-width {
+    width: 100%
+}
+
+.date-list-message {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.black-border {
+    text-align: left;
+    border: yellow groove thin !important;
+    margin-bottom: 10px
+}
+
+.strong {
+    font-weight: bold
+}
+
+.separated-input {
+    padding-top: 10px;
 }

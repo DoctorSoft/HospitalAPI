@@ -1,4 +1,5 @@
-﻿using StorageModels.Interfaces;
+﻿using System.Collections.Generic;
+using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
 
 namespace StorageModels.Models.UserModels
@@ -11,6 +12,7 @@ namespace StorageModels.Models.UserModels
 
         public UserStorageModel User { get; set; }
         public HospitalStorageModel Hospital { get; set; }
+        public ICollection<HospitalUserSectionAccessStorageModel> HospitalUserSectionAccesses { get; set; } 
 
         //
 

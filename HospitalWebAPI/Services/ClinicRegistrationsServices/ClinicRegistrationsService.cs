@@ -1,65 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using DataBaseTools.Interfaces;
 using Enums.EnumExtensions;
 using Enums.Enums;
 using HelpingTools.ExtentionTools;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
+using ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers.Entities;
 using ServiceModels.ServiceCommands.ClinicRegistrationsCommands;
 using Services.Interfaces.ClinicRegistrationsServices;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.ClinicModels;
+using StorageModels.Models.HospitalModels;
 using StorageModels.Models.MailboxModels;
+using StorageModels.Models.UserModels;
 
 namespace Services.ClinicRegistrationsServices
 {
     public class ClinicRegistrationsService : IClinicRegistrationsService
     {
-        private readonly ISectionProfileRepository _sectionProfileRepository;
-
         private readonly IClinicManager _clinicManager;
 
         private readonly ITokenManager _tokenManager;
 
-        private readonly IEmptyPlaceByTypeStatisticRepository _emptyPlaceByTypeStatisticRepository;
-
-        private readonly IClinicHospitalPriorityRepository _clinicHospitalPriorityRepository;
-
-        private readonly IHospitalRepository _hospitalRepository;
-
-        private readonly IReservationRepository _reservationRepository;
-
-        private readonly IMessageRepository _messageRepository;
-
-        private readonly IUserRepository _userRepository;
-
-        private readonly IHospitalSectionProfileRepository _hospitalSectionProfileRepository;
-
         private readonly IHospitalManager _hospitalManager;
 
-        private readonly IClinicRepository _clinicRepository;
+        private readonly IDataBaseContext _context;
 
-        public ClinicRegistrationsService(ISectionProfileRepository sectionProfileRepository, IClinicManager clinicManager, ITokenManager tokenManager, IEmptyPlaceByTypeStatisticRepository emptyPlaceByTypeStatisticRepository, IClinicHospitalPriorityRepository clinicHospitalPriorityRepository, IHospitalRepository hospitalRepository, IReservationRepository reservationRepository, IMessageRepository messageRepository, IUserRepository userRepository, IHospitalSectionProfileRepository hospitalSectionProfileRepository, IHospitalManager hospitalManager, IClinicRepository clinicRepository)
+        public ClinicRegistrationsService(IClinicManager clinicManager, ITokenManager tokenManager, IHospitalManager hospitalManager, IDataBaseContext context, IDataBaseContext context1)
         {
-            _sectionProfileRepository = sectionProfileRepository;
             this._clinicManager = clinicManager;
             _tokenManager = tokenManager;
-            _emptyPlaceByTypeStatisticRepository = emptyPlaceByTypeStatisticRepository;
-            _clinicHospitalPriorityRepository = clinicHospitalPriorityRepository;
-            _hospitalRepository = hospitalRepository;
-            _reservationRepository = reservationRepository;
-            _messageRepository = messageRepository;
-            _userRepository = userRepository;
-            this._hospitalSectionProfileRepository = hospitalSectionProfileRepository;
             this._hospitalManager = hospitalManager;
-            _clinicRepository = clinicRepository;
+            _context = context1;
         }
 
         public GetBreakClinicRegistrationsPageInformationCommandAnswer GetBreakClinicRegistrationsPageInformation(
@@ -69,12 +47,12 @@ namespace Services.ClinicRegistrationsServices
             var user = this._tokenManager.GetUserByToken(command.Token);
             var currentClinicId = this._clinicManager.GetClinicByUser(user).Id;
 
-            var resrvations = this._reservationRepository.GetModels();
+            var resrvations = this._context.Set<ReservationStorageModel>();
             var now = DateTime.Now.Date;
 
             var table = resrvations
                 .Where(model => model.Status == ReservationStatus.Opened)
-                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date > now)
+                .Where(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date >= now)
                 .Where(model=>model.ClinicId == currentClinicId)
                 .Select(model => new ClinicBreakRegistrationTableItem
                 {
@@ -85,7 +63,7 @@ namespace Services.ClinicRegistrationsServices
                     PatientFirstName = model.Patient.FirstName,
                     PatientLastName = model.Patient.LastName,
                     ReservationDate = model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.Date,
-                    Diagnosis = model.Diagnosis
+                    Diagnosis = model.Diagnosis,
                 })
                 .ToList();
 
@@ -104,7 +82,7 @@ namespace Services.ClinicRegistrationsServices
         {
             var user = this._tokenManager.GetUserByToken(command.Token);
             var clinic = this._clinicManager.GetClinicByUser(user);
-            var hasGenderFactor = clinic.IsForChildren;
+            var hasGenderFactor = !clinic.IsForChildren;
             
             var sexes =
                 Enum.GetValues(typeof (Sex))
@@ -112,10 +90,24 @@ namespace Services.ClinicRegistrationsServices
                     .Select(sex => new KeyValuePair<int, string>((int) sex, sex.ToCorrectString()))
                     .ToList();
 
+            
+            var hospitalSectionProfileIds = _context.Set<ClinicUserHospitalSectionProfileAccessStorageModel>()
+                .Where(model => !model.IsBlocked && model.ClinicUserId == user.Id)
+                .Select(model => model.HospitalSectionProfileId)
+                .Distinct()
+                .ToList();
+
             var sectionProfiles =
-                _sectionProfileRepository.GetModels()
+                _context.Set<HospitalSectionProfileStorageModel>()
+                    .Where(model => hospitalSectionProfileIds.Any(id => id == model.Id))
+                    .Select(model => new
+                    {
+                        Id = model.SectionProfileId,
+                        Name = model.SectionProfile.Name
+                    })
                     .ToList()
                     .Select(profile => new KeyValuePair<int, string>(profile.Id, profile.Name))
+                    .Distinct()
                     .ToList();
 
             return new GetMakeClinicRegistrationsPageInformationCommandAnswer
@@ -166,30 +158,36 @@ namespace Services.ClinicRegistrationsServices
                            IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
                            IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date,
                            Date = startMonday.AddDays(7 * week + day).Date,
-                           Count = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date)
+                           EmptyPlaceCount = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date)
                        })
                })
                .ToList();
 
-            var hospitals =
-                _hospitalRepository.GetModels()
-                    .ToList()
-                    .Select(profile => new KeyValuePair<int, string>(profile.Id, profile.Name))
-                    .ToList();
+            var hospitals = _context.Set<ClinicUserHospitalSectionProfileAccessStorageModel>()
+                .Where(model => !model.IsBlocked && model.ClinicUserId == user.Id)
+                .Select(model => new
+                {
+                    HospitalId = model.HospitalSectionProfile.HospitalId,
+                    Name = model.HospitalSectionProfile.Hospital.Name
+                })
+                .GroupBy(arg => arg.HospitalId)
+                .Select(grouping => grouping.FirstOrDefault())
+                .ToList()
+                .Select(model => new KeyValuePair<int, string>(model.HospitalId, model.Name))
+                .ToList();
 
             var ageCategories = Enum.GetValues(typeof (AgeRange))
                 .Cast<AgeRange>()
                 .Select(ageRange => new KeyValuePair<int, string>((int) ageRange, ageRange.ToCorrectString()))
                 .ToList();
-
+            
             return new GetClinicRegistrationScheduleCommandAnswer
             {
                 Token = command.Token.Value,
                 Sex = command.Sex != null ? ((Sex)command.Sex).ToCorrectString() : string.Empty,
                 SexId = command.Sex,
                 SectionProfileId = command.SectionProfileId,
-                SectionProfile = _sectionProfileRepository
-                                    .GetModels()
+                SectionProfile = _context.Set<SectionProfileStorageModel>()
                                     .FirstOrDefault(model => model.Id == command.SectionProfileId)
                                     .Name,
                 Schedule = startSchedule,
@@ -205,10 +203,10 @@ namespace Services.ClinicRegistrationsServices
         public GetClinicRegistrationUserFormCommandAnswer GetClinicRegistrationUserForm(GetClinicRegistrationUserFormCommand command)
         {
             var hospital =
-                this._hospitalRepository.GetModels().FirstOrDefault(model => model.Id == command.CurrentHospitalId);
+                this._context.Set<HospitalStorageModel>().FirstOrDefault(model => model.Id == command.CurrentHospitalId);
 
             var sectionProfile =
-                this._sectionProfileRepository.GetModels().FirstOrDefault(model => model.Id == command.SectionProfileId);
+                this._context.Set<SectionProfileStorageModel>().FirstOrDefault(model => model.Id == command.SectionProfileId);
 
             return new GetClinicRegistrationUserFormCommandAnswer
             {
@@ -235,6 +233,35 @@ namespace Services.ClinicRegistrationsServices
         private List<CommandAnswerError> ValidateSaveClinicRegistrationCommand(SaveClinicRegistrationCommand command)
         {
             var result = new List<CommandAnswerError>();
+
+            var hospitalSectionProfileId =
+                this._context.Set<HospitalSectionProfileStorageModel>()
+                    .Where(model => model.SectionProfileId == command.SectionProfileId)
+                    .FirstOrDefault()
+                    .Id;
+
+            var emptyPlaceStatisticId = this._context.Set<EmptyPlaceStatisticStorageModel>()
+                .Where(model => model.HospitalSectionProfileId == hospitalSectionProfileId && model.Date == command.DateValue).Select(m=>m.Id).ToList();
+            
+            var emptyPlaceByTypeStatisticRepository = this._context.Set<EmptyPlaceByTypeStatisticStorageModel>();
+
+            var places = emptyPlaceStatisticId.Select(i => emptyPlaceByTypeStatisticRepository
+                    .Where(model => model.EmptyPlaceStatistic.HospitalSectionProfileId == hospitalSectionProfileId)
+                    .Where(model => model.Sex == (command.SexId == 1 ? Sex.Male : Sex.Female))
+                    .Where(storageModel => storageModel.EmptyPlaceStatisticId.Equals(i))
+                    .Select(model => new HospitalRegistrationCountStatisticItem
+                    {
+                        FreePlacesCount = model.Count - model.Reservations.Count(storageModel => storageModel.Status == ReservationStatus.Opened)
+                    }).FirstOrDefault()).FirstOrDefault();
+
+            if (places.FreePlacesCount <= 0)
+            {
+                result.Add(new CommandAnswerError
+                {
+                    FieldName = "Внимание!",
+                    Title = "К сожалению свободных мест по выбранным критериям не осталось."
+                });
+            }
 
             if (string.IsNullOrWhiteSpace(command.FirstName) || command.FirstName.Length < 2)
             {
@@ -318,9 +345,20 @@ namespace Services.ClinicRegistrationsServices
             return result;
         }
         
+        public static byte[] ReadFully(Stream input)
+        {
+            input.Position = 0;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
         public SaveClinicRegistrationCommandAnswer SaveClinicRegistration(SaveClinicRegistrationCommand command)
         {
             var errors = this.ValidateSaveClinicRegistrationCommand(command);
+
             if (errors.Any())
             {
                 return new SaveClinicRegistrationCommandAnswer
@@ -335,8 +373,7 @@ namespace Services.ClinicRegistrationsServices
 
             var date = DateTime.ParseExact(command.Date.Split(' ').First(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
-            var emptyPlaceByTypeStatistics = _emptyPlaceByTypeStatisticRepository
-                .GetModels()
+            var emptyPlaceByTypeStatistics = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
                 .Where(model => model.Sex == (Sex?)command.SexId 
                     && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.SectionProfileId
                     && model.EmptyPlaceStatistic.Date == date
@@ -362,13 +399,31 @@ namespace Services.ClinicRegistrationsServices
                 EmptyPlaceByTypeStatisticId = emptyPlaceByTypeStatisticId,
                 Status = ReservationStatus.Opened,
                 Diagnosis = command.Diagnosis,
+                MedicalExaminationResult = command.MedicalExaminationResult,
+                MedicalConsultion = command.MedicalConsultion,
+                ReservationPurpose = command.ReservationPurpose,
+                OtherInformation = command.OtherInformation,
                 ReservatorId = user.Id
             };
 
-            _reservationRepository.Add(reservation);
+            _context.Set<ReservationStorageModel>().Add(reservation);
+            
+            if (command.File != null)
+            {
+                var reservationFile = new ReservationFileStorageModel()
+                {
+                    Name = command.FileName,
+                    ReservationId = reservation.Id,
+                    Reservation = reservation,
+                    File = ReadFully(command.File)
+                };
 
-            var receiverIds = this._userRepository.GetModels()
+                _context.Set<ReservationFileStorageModel>().Add(reservationFile);
+            }
+            
+            var receiverIds = this._context.Set<UserStorageModel>()
                 .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == command.CurrentHospitalId)
+                .Where(model => model.HospitalUser.HospitalUserSectionAccesses.Any(storageModel => !storageModel.IsBlocked && storageModel.HospitalSectionProfile.SectionProfileId == command.SectionProfileId))
                 .Select(model => model.Id)
                 .ToList();
 
@@ -389,10 +444,10 @@ namespace Services.ClinicRegistrationsServices
                     UserToId = receiverId
                 };
 
-                _messageRepository.Add(message);
+                _context.Set<MessageStorageModel>().Add(message);
             }
 
-            _reservationRepository.SaveChanges();
+            _context.SaveChanges();
             
             var messageText = $"Пациент с номером {command.Code} был зарезервирован в Вашу больницу.\0\n" +
                            $"Дата: {command.Date}.\n\0" +
@@ -410,22 +465,28 @@ namespace Services.ClinicRegistrationsServices
 
         public BreakClinicRegistrationCommandAnswer BreakClinicRegistration(BreakClinicRegistrationCommand command)
         {
-            var reservation = this._reservationRepository.GetModels().FirstOrDefault(model => model.Id == command.ReservationId);
-            var patient = this._reservationRepository.GetModels().Where(model => model.Id == command.ReservationId).Select(model => model.Patient).FirstOrDefault();
+            var reservation = this._context.Set<ReservationStorageModel>().FirstOrDefault(model => model.Id == command.ReservationId);
+            var patient = this._context.Set<ReservationStorageModel>().Where(model => model.Id == command.ReservationId).Select(model => model.Patient).FirstOrDefault();
             var user = this._tokenManager.GetUserByToken(command.Token);
 
             reservation.CancelTime = DateTime.Now;
             reservation.Status = ReservationStatus.ClosedByClinic;
 
-            this._reservationRepository.Update(command.ReservationId, reservation);
+            this._context.Set<ReservationStorageModel>().AddOrUpdate(reservation);
 
-            var hospitalId = this._reservationRepository.GetModels()
+            var hospitalId = this._context.Set<ReservationStorageModel>()
                 .Where(model => model.Id == command.ReservationId)
                 .Select(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId)
                 .FirstOrDefault();
+            
+            var hospitalSectionProfileId = this._context.Set<ReservationStorageModel>()
+                .Where(model => model.Id == command.ReservationId)
+                .Select(model => model.EmptyPlaceByTypeStatistic.EmptyPlaceStatistic.HospitalSectionProfileId)
+                .FirstOrDefault();
 
-            var receiverIds = this._userRepository.GetModels()
+            var receiverIds = this._context.Set<UserStorageModel>()
                 .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == hospitalId)
+                .Where(model => model.HospitalUser.HospitalUserSectionAccesses.Any(storageModel => !storageModel.IsBlocked && storageModel.HospitalSectionProfileId == hospitalSectionProfileId))
                 .Select(model => model.Id)
                 .ToList();
 
@@ -444,12 +505,10 @@ namespace Services.ClinicRegistrationsServices
                     UserToId = receiverId
                 };
 
-                _messageRepository.Add(message);
+                _context.Set<MessageStorageModel>().Add(message);
             }
 
-            _reservationRepository.SaveChanges();
-
-            this._reservationRepository.SaveChanges();
+            _context.SaveChanges();
 
             return new BreakClinicRegistrationCommandAnswer
             {
@@ -463,7 +522,7 @@ namespace Services.ClinicRegistrationsServices
             var user = this._tokenManager.GetUserByToken(command.Token.Value);
             var hospital = this._hospitalManager.GetHospitalByUser(user);
             var hospitalSectionProfiles =
-                this._hospitalSectionProfileRepository.GetModels().Where(model => model.HospitalId == hospital.Id)
+                this._context.Set<HospitalSectionProfileStorageModel>().Where(model => model.HospitalId == hospital.Id)
                 .ToList();
 
             if (command.HospitalSectionProfileId == null || command.HospitalSectionProfileId == 0)
@@ -471,10 +530,10 @@ namespace Services.ClinicRegistrationsServices
                 command.HospitalSectionProfileId = hospitalSectionProfiles.FirstOrDefault().Id;
             }
 
-            if (command.AgeCategoryId == null)
-            {
-                command.AgeCategoryId = (int)AgeRange.After18;; //Default value for age category = more 1 year
-            }
+            //if (command.AgeCategoryId == null)
+            //{
+            //    command.AgeCategoryId = 0; //(int)AgeRange.After18;; //Default value for age category = more 1 year
+            //}
 
             var hasGenderFactor = hospitalSectionProfiles.FirstOrDefault().HasGenderFactor;
             
@@ -504,7 +563,7 @@ namespace Services.ClinicRegistrationsServices
                            IsThisMonth = startMonday.AddDays(7 * week + day).Month == now.Month,
                            IsThisDate = startMonday.AddDays(7 * week + day).Date == now.Date,
                            Date = startMonday.AddDays(7 * week + day).Date,
-                           Count = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date, hospital.Id)
+                           EmptyPlaceCount = this.GetHospitalEmptyPlacesCount(command, startMonday.AddDays(7 * week + day).Date, hospital.Id)
                        })
                })
                .ToList();
@@ -541,14 +600,15 @@ namespace Services.ClinicRegistrationsServices
         public GetHospitalRegistrationUserFormCommandAnswer GetHospitalRegistrationUserForm(
             GetHospitalRegistrationUserFormCommand command)
         {
-            var clinics = this._clinicRepository.GetModels().ToList();
+            
+            var clinics = this._context.Set<ClinicStorageModel>().ToList();
             if (command.ClinicId == null)
             {
                 command.ClinicId = clinics.FirstOrDefault().Id;
             }
             var clinicResults = clinics.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
 
-            var users = this._userRepository.GetModels().Where(model => model.ClinicUser != null && model.ClinicUser.ClinicId == command.ClinicId.Value).ToList();
+            var users = this._context.Set<UserStorageModel>().Where(model => model.ClinicUser != null && model.ClinicUser.ClinicId == command.ClinicId.Value).ToList();
             if (command.UserId == null || users.Select(model => model.Id).All(i => command.UserId.Value != i))
             {
                 command.UserId = users.FirstOrDefault().Id;
@@ -556,7 +616,7 @@ namespace Services.ClinicRegistrationsServices
             var userResults = users.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
 
             var hospitalSectionProfile =
-                this._hospitalSectionProfileRepository.GetModels()
+                this._context.Set<HospitalSectionProfileStorageModel>()
                     .FirstOrDefault(model => model.Id == command.HospitalSectionProfileId)
                     .Name;
 
@@ -581,6 +641,10 @@ namespace Services.ClinicRegistrationsServices
                 Weeks = command.Weeks ?? 0,
                 Code = command.Code,
                 Diagnosis = command.Diagnosis,
+                MedicalExaminationResult = command.MedicalExaminationResult,
+                MedicalConsultion = command.MedicalConsultion,
+                ReservationPurpose = command.ReservationPurpose,
+                OtherInformation = command.OtherInformation,
                 DoesAgree = command.DoesAgree ?? true,
                 UserId = command.UserId.Value,
                 Clinics = clinicResults,
@@ -688,14 +752,14 @@ namespace Services.ClinicRegistrationsServices
         {
             var errors = this.ValidateSaveHospitalRegistrationCommand(command);
 
-            var users = this._userRepository.GetModels().Where(model => model.ClinicUser != null && model.ClinicUser.ClinicId == command.ClinicId).ToList();
+            var users = this._context.Set<UserStorageModel>().Where(model => model.ClinicUser != null && model.ClinicUser.ClinicId == command.ClinicId).ToList();
             var userResults = users.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
             
-            var clinics = this._clinicRepository.GetModels().ToList();
+            var clinics = this._context.Set<ClinicStorageModel>().ToList();
             var clinicResults = clinics.Select(model => new KeyValuePair<int, string>(model.Id, model.Name)).ToList();
 
             var hospitalSectionProfileName =
-                this._hospitalSectionProfileRepository.GetModels()
+                this._context.Set<HospitalSectionProfileStorageModel>()
                     .FirstOrDefault(model => model.Id == command.HospitalSectionProfileId)
                     .Name;
 
@@ -716,6 +780,10 @@ namespace Services.ClinicRegistrationsServices
                     Weeks = command.Weeks ?? 0,
                     Code = command.Code,
                     Diagnosis = command.Diagnosis,
+                    MedicalExaminationResult = command.MedicalExaminationResult,
+                    MedicalConsultion = command.MedicalConsultion,
+                    ReservationPurpose = command.ReservationPurpose,
+                    OtherInformation = command.OtherInformation,
                     DoesAgree = command.DoesAgree,
                     UserId = command.UserId,
                     Clinics = clinicResults,
@@ -734,8 +802,7 @@ namespace Services.ClinicRegistrationsServices
 
             var date = DateTime.ParseExact(command.Date.Split(' ').First(), "dd.MM.yyyy", CultureInfo.InvariantCulture);
 
-            var emptyPlaceByTypeStatistics = _emptyPlaceByTypeStatisticRepository
-                .GetModels()
+            var emptyPlaceByTypeStatistics = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
                 .Where(model => model.Sex == (command.SexId == null || command.SexId == 0 ? (Sex?)null : (Sex?)command.SexId)
                     && model.EmptyPlaceStatistic.HospitalSectionProfile.Id == command.HospitalSectionProfileId
                     && model.EmptyPlaceStatistic.Date == date
@@ -761,13 +828,17 @@ namespace Services.ClinicRegistrationsServices
                 EmptyPlaceByTypeStatisticId = emptyPlaceByTypeStatisticId,
                 Status = ReservationStatus.Opened,
                 Diagnosis = command.Diagnosis,
+                MedicalExaminationResult = command.MedicalExaminationResult,
+                MedicalConsultion = command.MedicalConsultion,
+                ReservationPurpose = command.ReservationPurpose,
+                OtherInformation = command.OtherInformation,
                 ReservatorId = command.UserId,
                 BehalfReservatorId = user.Id
             };
 
-            _reservationRepository.Add(reservation);
+            _context.Set<ReservationStorageModel>().Add(reservation);
 
-            var receiverIds = this._userRepository.GetModels()
+            var receiverIds = this._context.Set<UserStorageModel>()
                 .Where(model => model.HospitalUser != null && model.HospitalUser.HospitalId == hospital.Id)
                 .Select(model => model.Id)
                 .ToList();
@@ -789,12 +860,12 @@ namespace Services.ClinicRegistrationsServices
                     UserToId = receiverId
                 };
 
-                _messageRepository.Add(message);
+                _context.Set<MessageStorageModel>().Add(message);
             }
 
-            _reservationRepository.SaveChanges();
+            _context.SaveChanges();
             
-            var messageText = $"Пациент с номером {command.Code} был успешно зарезервирован в Вашу больницу.\0\n" +
+            var messageText = "Пациент с номером {command.Code} был успешно зарезервирован в Вашу больницу.\0\n" +
                            $"Дата: {command.Date}.\n\0" +
                            $"Отделение: {hospitalSectionProfileName}.\n\0" +
                            $"Диагноз: {command.Diagnosis}.\n\0";
@@ -815,6 +886,10 @@ namespace Services.ClinicRegistrationsServices
                 Weeks = command.Weeks ?? 0,
                 Code = command.Code,
                 Diagnosis = command.Diagnosis,
+                MedicalExaminationResult = command.MedicalExaminationResult,
+                MedicalConsultion = command.MedicalConsultion,
+                ReservationPurpose = command.ReservationPurpose,
+                OtherInformation = command.OtherInformation,
                 DoesAgree = command.DoesAgree,
                 UserId = command.UserId,
                 Clinics = clinicResults,
@@ -828,9 +903,9 @@ namespace Services.ClinicRegistrationsServices
             return answer;
         }
 
-        private int GetHospitalEmptyPlacesCount(GetClinicRegistrationScheduleCommand command, DateTime date)
+        private EmptyPlace GetHospitalEmptyPlacesCount(GetClinicRegistrationScheduleCommand command, DateTime date)
         {
-           var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()
+           var placeCount = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
                .Where(model => (int)model.Sex == command.Sex 
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId
@@ -838,7 +913,7 @@ namespace Services.ClinicRegistrationsServices
                    .Select(model => model.Count)
                    .FirstOrDefault();
 
-            var registrationCount = _emptyPlaceByTypeStatisticRepository.GetModels()
+            var registrationCount = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
                 .Where(model => (int)model.Sex == command.Sex 
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == command.CurrentHospitalId
@@ -846,37 +921,43 @@ namespace Services.ClinicRegistrationsServices
                 .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
                 .Count(model => model.Status == ReservationStatus.Opened);
 
-            return placeCount - registrationCount;
+            return new EmptyPlace
+            {
+                PlacesWithoutRegitartions =  placeCount - registrationCount,
+                PlaceCount = placeCount
+            };
         }
 
-        private int GetHospitalEmptyPlacesCount(GetMakeHospitalRegistrationsPageInformationCommand command, DateTime date, int hospitalId)
+        private EmptyPlace GetHospitalEmptyPlacesCount(GetMakeHospitalRegistrationsPageInformationCommand command, DateTime date, int hospitalId)
         {
-           var placeCount = _emptyPlaceByTypeStatisticRepository.GetModels()
-               .Where(model => (int)model.Sex == command.SexId 
+           var placeCount = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
+               .Where(model => (int?)model.Sex == command.SexId 
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
                    && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
                    .Select(model => model.Count)
                    .FirstOrDefault();
 
-            var registrationCount = _emptyPlaceByTypeStatisticRepository.GetModels()
-                .Where(model => (int)model.Sex == command.SexId.Value 
+            var registrationCount = _context.Set<EmptyPlaceByTypeStatisticStorageModel>()
+                .Where(model => (int?)model.Sex == command.SexId
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfile.HospitalId == hospitalId
-                   && model.EmptyPlaceStatistic.HospitalSectionProfile.SectionProfileId == command.HospitalSectionProfileId.Value)
+                   && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
                 .SelectMany(model => model.Reservations.Where(storageModel => storageModel.Status == ReservationStatus.Opened))
                 .Count(model => model.Status == ReservationStatus.Opened);
 
-            return placeCount - registrationCount;
+            return new EmptyPlace
+            {
+                PlacesWithoutRegitartions = placeCount - registrationCount,
+                PlaceCount = placeCount
+            };
         }
 
         private int GetDefaultHospitalIdByClinicId(int clinicId)
         {
-            var result = _clinicHospitalPriorityRepository
-                .GetModels()
-                .Where(model => model.Priority == 1)
-                .FirstOrDefault(model => model.ClinicId == clinicId)
-                .HospitalId;
+            var result = _context.Set<HospitalStorageModel>()
+                .FirstOrDefault()
+                .Id;
 
             return result;
         }

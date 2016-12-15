@@ -33,43 +33,46 @@
 
             @{
                 List<Sex?> sexes;
-                if (Model.FreeHospitalSectionsForRegistration.FirstOrDefault().HasGenderFactor)
+                var freePlaces = Model.FreeHospitalSectionsForRegistration.FirstOrDefault();
+
+                if (freePlaces != null)
                 {
-                    sexes = Enum.GetValues(typeof (Sex)).Cast<Sex>().Select(sex => (Sex?)sex).ToList();
+                    if (freePlaces != null && freePlaces.HasGenderFactor)
+                    {
+                        sexes = Enum.GetValues(typeof (Sex)).Cast<Sex>().Select(sex => (Sex?) sex).ToList();
+                    }
+                    else
+                    {
+                        sexes = new List<Sex?> {null};
+                    }
+                    foreach (var sex in sexes)
+                    {
+                        if (sex != null)
+                        {
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
+                                <label class="form-control" aria-describedby="basic-addon1" name="CountFreePlaces[@i].Sex" id="CountFreePlaces[@i].Sex">@sex.Value.ToCorrectString()</label>
+                                <input type="hidden" name="CountFreePlaces[@i].Sex" id="CountFreePlaces[@i].Sex" class="form-control" value="@sex"/>
+                                <br/>
+                            </div>
+                        }
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
+                            <input type="number" required class="form-control" aria-describedby="basic-addon1" name="CountFreePlaces[@i].OpenCount" id="CountFreePlaces[@i].OpenCount"/>
+
+                            <br/>
+                        </div>
+                        <br/>
+                        i++;
+                    }
                 }
                 else
                 {
-                    sexes = new List<Sex?> {null};
+                    <h1>Нет больше возможности регистрировать</h1>
                 }
-                foreach (var sex in sexes)
-                {
-                    if (sex != null)
-                    {
-                        <div class="input-group">
-                            <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageSex</span>
-                            <label class="form-control" aria-describedby="basic-addon1" name="CountFreePlaces[@i].Sex" id="CountFreePlaces[@i].Sex">@sex.Value.ToCorrectString()</label>
-                            <input type="hidden" name="CountFreePlaces[@i].Sex" id="CountFreePlaces[@i].Sex" class="form-control" value="@sex"/>
-                            <br/>
-                        </div>
-                    }
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">@MainResources.EmptyPlacePageCount</span>
-                        <input type="number" required class="form-control" aria-describedby="basic-addon1" name="CountFreePlaces[@i].OpenCount" id="CountFreePlaces[@i].OpenCount" />
-                            
-                        <br />
-                    </div>
-                    <br />
-                    i++;
-                }
-
-
             }
         </div>
-        <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2" +
-        
-        
-        
-        "", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})' "/>
+        <input type="button" title="Back" class="btn btn-default" value="@MainResources.ButtonBack" onclick="location.href = '@Url.Action("Step2" + "", "ChangeHospitalRegistrationPage", new {Token = Model.Token, Date = Model.Date})' "/>
         <input class="btn btn-sm btn-primary" type="submit" value="@MainResources.ButtonAdd" />
        
         @Html.HiddenFor(model => model.Date)

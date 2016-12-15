@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
@@ -37,6 +38,16 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers
 
         public string Diagnosis { get; set; }
 
+        public string MedicalExaminationResult { get; set; }
+
+        public string MedicalConsultion { get; set; }
+
+        public string ReservationPurpose { get; set; }
+
+        public string OtherInformation { get; set; }
+
         public int AgeCategoryId { get; set; }
+
+        public Stream File { get; set; }
     }
 }

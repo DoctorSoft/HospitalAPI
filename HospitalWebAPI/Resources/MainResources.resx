@@ -282,4 +282,7 @@
   <data name="HospitalUserPageViewComingRecordsBefore" xml:space="preserve">
     <value>Если Вы хотите просмотреть список ближайших записей, то</value>
   </data>
+  <data name="ButtonCancellationMessage" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
 </root>

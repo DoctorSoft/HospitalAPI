@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Enums.Enums;
 using ServiceModels.ModelTools.Entities;
-using StorageModels.Models.FunctionModels;
 
 namespace Services.Interfaces.ServiceTools
 {

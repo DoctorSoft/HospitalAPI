@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class ViewDetailedInformationOnRegisteredPatientsCommandAnswer : AbstractTokenCommandAnswer
+    public class ViewDetailedInformationOnRegisteredPatientsCommandAnswer : AbstractMessagedCommandAnswer
     {
         public int EmptyPlaceByTypeStatisticId { get; set; }
         public int? FullInformation { get; set; }

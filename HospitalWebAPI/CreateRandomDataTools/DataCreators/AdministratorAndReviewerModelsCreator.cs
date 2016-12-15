@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
 using HelpingTools.Interfaces;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
     public class AdministratorAndReviewerModelsCreator : IAdministratorAndReviewerModelsCreator
     {
-        private readonly IUserTypeRepository _userTypeRepository;
+        private readonly IDataBaseContext _context;
 
         private readonly IPasswordHashManager _passwordHashManager;
 
@@ -20,17 +20,16 @@ namespace CreateRandomDataTools.DataCreators
         private const string ReviewerLogin = "Смотритель";
         private const string ReviewerPassword = "12345";
 
-        public AdministratorAndReviewerModelsCreator(IUserTypeRepository userTypeRepository,
-            IPasswordHashManager passwordHashManager)
+        public AdministratorAndReviewerModelsCreator(
+            IPasswordHashManager passwordHashManager, IDataBaseContext context)
         {
-            _userTypeRepository = userTypeRepository;
-
             _passwordHashManager = passwordHashManager;
+            _context = context;
         }
         public IEnumerable<UserStorageModel> GetList()
         {
-            var adminTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.Administrator).Id;
-            var reviewerTypeId = _userTypeRepository.GetModels().FirstOrDefault(model => model.UserType == UserType.Reviewer).Id;
+            var adminTypeId = _context.Set<UserTypeStorageModel>().FirstOrDefault(model => model.UserType == UserType.Administrator).Id;
+            var reviewerTypeId = _context.Set<UserTypeStorageModel>().FirstOrDefault(model => model.UserType == UserType.Reviewer).Id;
 
             var results = new List<UserStorageModel>
             {

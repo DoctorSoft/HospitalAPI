@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.ClinicModels;
 
@@ -10,16 +10,16 @@ namespace Services.ServiceTools
 {
     public class ClinicReservationsManager : IClinicReservationsManager
     {
-        private readonly IReservationRepository _reservationRepository;
+        private readonly IDataBaseContext _context;
 
-        public ClinicReservationsManager(IReservationRepository reservationRepository)
+        public ClinicReservationsManager(IDataBaseContext context)
         {
-            _reservationRepository = reservationRepository;
+            _context = context;
         }
 
         public IEnumerable<ReservationStorageModel> GetReservationsByDate(ClinicStorageModel clinic, DateTime date)
         {
-            var reservations = _reservationRepository.GetModels()
+            var reservations = _context.Set<ReservationStorageModel>()
                 .Where(model => model.ClinicId == clinic.Id && model.ApproveTime.Date == date.Date)
                 .Where(model => model.Status == ReservationStatus.Opened)
                 .ToList();

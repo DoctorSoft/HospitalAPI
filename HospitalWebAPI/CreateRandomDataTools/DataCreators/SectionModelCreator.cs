@@ -14,94 +14,30 @@ namespace CreateRandomDataTools.DataCreators
                 {
                     IsBlocked = false,
                     Id = 0,
-                    Name = "Неврологическое",
+                    Name = "Кардиологическое",
                     SectionProfiles = new List<SectionProfileStorageModel>
                     {
                         new SectionProfileStorageModel
                         {
                             IsBlocked = false,
-                            Name = "Неврологическое"
-                        },
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "Неврологическое (дети до 1 года)"
-                        },
+                            Name = "Кардиологическое"
+                        }
                     }
                 },
                 new SectionStorageModel()
                 {
                     IsBlocked = false,
                     Id = 0,
-                    Name = "Педиатрическое",
+                    Name = "Терапевтическое",
                     SectionProfiles = new List<SectionProfileStorageModel>
                     {
                         new SectionProfileStorageModel
                         {
                             IsBlocked = false,
-                            Name = "5-ое Педиатрическое (Гематологическое)"
-                        },
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "5-ое Педиатрическое (Кардиоревматологическое)"
-                        },
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "5-ое Педиатрическое (Нефрологическое)"
-                        },
-                        
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "6-ое Педиатрическое (Гастроэнтерологическое)"
-                        },
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "6-ое Педиатрическое (Аллергологическое)"
-                        },
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "6-ое Педиатрическое (Педиатрическое)"
-                        },
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "6-ое Педиатрическое (Эндокринологическое)"
-                        },
+                            Name = "Терапевтическое"
+                        }
                     }
-                },
-                new SectionStorageModel()
-                {
-                    IsBlocked = false,
-                    Id = 0,
-                    Name = "Хирургичское",
-                    SectionProfiles = new List<SectionProfileStorageModel>
-                    {
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "7-ое Хирургичское"
-                        },
-                    }
-                },
-                new SectionStorageModel()
-                {
-                    IsBlocked = false,
-                    Id = 0,
-                    Name = "Травмотолого-ортопедическое",
-                    SectionProfiles = new List<SectionProfileStorageModel>
-                    {
-                        new SectionProfileStorageModel
-                        {
-                            IsBlocked = false,
-                            Name = "Травмотолого-ортопедическое"
-                        },
-                    }
-                },
+                }
             };
 
             return sectionProfilesList;

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using ServiceModels.ModelTools;
-using ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.Entities;
+﻿using ServiceModels.ModelTools;
 
 namespace ServiceModels.ServiceCommandAnswers.HospitalRegistrationsCommandAnswers
 {
-    public class BreakHospitalRegistrationCommandAnswer : AbstractTokenCommandAnswer
+    public class BreakHospitalRegistrationCommandAnswer : AbstractMessagedCommandAnswer
     {
         public int HospitalProfileId { get; set; }
         public int EmptyPlaceByTypeStatisticId { get; set; }

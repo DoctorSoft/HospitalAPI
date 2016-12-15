@@ -1,34 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using RepositoryTools.Interfaces.PrivateInterfaces.ClinicRepositories;
+using DataBaseTools.Interfaces;
 using ServiceModels.ServiceCommandAnswers.ReceptionMarkingCommandAnswers;
 using ServiceModels.ServiceCommandAnswers.ReceptionMarkingCommandAnswers.Entities;
 using ServiceModels.ServiceCommands.ReceptionMarkingCommands;
 using Services.Interfaces.ReceptionMarkingServices;
 using Services.Interfaces.ServiceTools;
+using StorageModels.Models.ClinicModels;
 
 namespace Services.ReceptionMarkingServices
 {
     public class ReceptionMarkingService : IReceptionMarkingService
     {
-        private readonly IReservationRepository reservationRepository;
-
         private readonly ITokenManager tokenManager;
 
         private readonly IHospitalManager hospitalManager;
 
-        public ReceptionMarkingService(IReservationRepository reservationRepository, ITokenManager tokenManager, IHospitalManager hospitalManager)
+        private readonly IDataBaseContext _context;
+
+        public ReceptionMarkingService(ITokenManager tokenManager, IHospitalManager hospitalManager, IDataBaseContext context)
         {
-            this.reservationRepository = reservationRepository;
             this.tokenManager = tokenManager;
             this.hospitalManager = hospitalManager;
+            _context = context;
         }
 
         public GetReceptionUserMarkClientsPageInformationCommandAnswer GetReceptionUserMarkClientsPageInformation(
             GetReceptionUserMarkClientsPageInformationCommand command)
         {
-            var reservations = this.reservationRepository.GetModels();
+            var reservations = this._context.Set<ReservationStorageModel>();
 
             var user = tokenManager.GetUserByToken(command.Token.Value);
             var hospital = hospitalManager.GetHospitalByUser(user);
@@ -64,7 +65,7 @@ namespace Services.ReceptionMarkingServices
         public GetReceptionUserUnmarkClientsPageInformationCommandAnswer GetReceptionUserUnmarkClientsPageInformation(
             GetReceptionUserUnmarkClientsPageInformationCommand command)
         {
-            var reservations = this.reservationRepository.GetModels();
+            var reservations = this._context.Set<ReservationStorageModel>();
 
             var user = tokenManager.GetUserByToken(command.Token.Value);
             var hospital = hospitalManager.GetHospitalByUser(user);
@@ -98,12 +99,12 @@ namespace Services.ReceptionMarkingServices
 
         public MarkClientAsArrivedCommandAnswer MarkClientAsArrived(MarkClientAsArrivedCommand command)
         {
-            var reservations = reservationRepository.GetModels();
+            var reservations = _context.Set<ReservationStorageModel>();
             var reservation = reservations.FirstOrDefault(model => model.Id == command.ReservationId);
 
             reservation.CancelTime = DateTime.Now;
-            reservationRepository.Update(reservation.Id, reservation);
-            reservationRepository.SaveChanges();
+            _context.Set<ReservationStorageModel>().AddOrUpdate(reservation);
+            _context.SaveChanges();
 
             var result = new MarkClientAsArrivedCommandAnswer
             {
@@ -115,12 +116,12 @@ namespace Services.ReceptionMarkingServices
 
         public MarkClientAsArrivingCommandAnswer MarkClientAsArriving(MarkClientAsArrivingCommand command)
         {
-            var reservations = reservationRepository.GetModels();
+            var reservations = _context.Set<ReservationStorageModel>();
             var reservation = reservations.FirstOrDefault(model => model.Id == command.ReservationId);
 
             reservation.CancelTime = null;
-            reservationRepository.Update(reservation.Id, reservation);
-            reservationRepository.SaveChanges();
+            _context.Set<ReservationStorageModel>().AddOrUpdate(reservation);
+            _context.SaveChanges();
 
             var result = new MarkClientAsArrivingCommandAnswer
             {

@@ -2,21 +2,19 @@
 using System.Data.Entity;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
-using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
+using DataBaseTools.Interfaces;
 using StorageModels.Models.FunctionModels;
+using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
     public class UserFunctionModelCreator : IUserFunctionModelCreator
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IFunctionalGroupRepository _functionalGroupRepository;
+        private readonly IDataBaseContext _context;
 
-        public UserFunctionModelCreator(IUserRepository userRepository, IFunctionalGroupRepository functionalGroupRepository)
+        public UserFunctionModelCreator(IDataBaseContext context)
         {
-            _userRepository = userRepository;
-            _functionalGroupRepository = functionalGroupRepository;
+            _context = context;
         }
 
         private class TypeFunctionSelectorModel
@@ -28,7 +26,7 @@ namespace CreateRandomDataTools.DataCreators
 
         public IEnumerable<UserFunctionStorageModel> GetList()
         {
-            var functionSelectors = ((IDbSet<FunctionalGroupStorageModel>)_functionalGroupRepository.GetModels())
+            var functionSelectors = _context.Set<FunctionalGroupStorageModel>()
                 .Include(model => model.GroupFunctions)
                 .Select(model => new TypeFunctionSelectorModel
                 {
@@ -36,8 +34,7 @@ namespace CreateRandomDataTools.DataCreators
                     GroupFunctions = model.GroupFunctions
                 }).ToList();
 
-            var results = _userRepository
-                .GetModels()
+            var results = _context.Set<UserStorageModel>()
                 .ToList()
                 .SelectMany(model => functionSelectors
                     .Where(selectorModel => selectorModel.UserTypeId == model.UserTypeId)

@@ -28,12 +28,30 @@ namespace HospitalMVC.Controllers
         [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserChangeEmptyPlaces)]
         public ActionResult BreakRegistration(BreakHospitalRegistrationCommand command)
         {
-            _hospitalRegistrationsService.BreakHospitalRegistration(command);
+            var answer = _hospitalRegistrationsService.BreakHospitalRegistration(command);
             return RedirectToAction("Index",
             new
             {
-                Token = command.Token
+                Token = command.Token,
+                answer.DialogMessage,
+                answer.HasDialogMessage
             });
         }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserWatchRegisteredUsers)]
+        public ActionResult ViewMore(GetHospitalRegistrationRecordCommand command)
+        {
+            var result = _hospitalRegistrationsService.GetHospitalRegistrationRecord(command);
+            return View(result);
+        }
+
+        [TokenAuthorizationFilter(FunctionIdentityName.HospitalUserPrimaryAccess, FunctionIdentityName.HospitalUserWatchRegisteredUsers)]
+        public FileResult DownloadReservationFile(DownloadHospitalReservationFileCommand command)
+        {
+            var result = _hospitalRegistrationsService.DownloadHospitalReservationFile(command);
+            return File(result.File, System.Net.Mime.MediaTypeNames.Application.Octet, result.FileName);
+        }
+
+
     }
 }

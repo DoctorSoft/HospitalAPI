@@ -1,6 +1,5 @@
 ﻿using System;
 using StorageModels.Interfaces;
-using StorageModels.Models.ClinicModels;
 using System.Collections.Generic;
 
 namespace StorageModels.Models.HospitalModels

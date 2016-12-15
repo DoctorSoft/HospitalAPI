@@ -14,6 +14,6 @@ namespace ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.
 
         public DateTime Date { get; set; }
 
-        public int Count { get; set; }
+        public EmptyPlace EmptyPlaceCount { get; set; }
     }
 }

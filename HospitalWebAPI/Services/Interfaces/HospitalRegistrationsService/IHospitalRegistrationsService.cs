@@ -33,6 +33,11 @@ namespace Services.Interfaces.HospitalRegistrationsService
         GetComingRecordsCommandAnswer GetComingRecords(
             GetComingRecordsCommand command);
 
+        GetHospitalRegistrationRecordCommandAnswer GetHospitalRegistrationRecord(
+            GetHospitalRegistrationRecordCommand command);
+
+        DownloadHospitalReservationFileCommandAnswer DownloadHospitalReservationFile(DownloadHospitalReservationFileCommand command);
+
         ShowAutocompletePageCommandAnswer ShowAutocompletePage(ShowAutocompletePageCommand command);
 
         AutocompleteEmptyPlacesCommandAnswer AutocompleteEmptyPlaces(AutocompleteEmptyPlacesCommand command);

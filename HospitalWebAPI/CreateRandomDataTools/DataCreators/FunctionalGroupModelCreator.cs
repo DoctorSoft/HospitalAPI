@@ -2,25 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
-using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using StorageModels.Models.FunctionModels;
+using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
     public class FunctionalGroupModelCreator : IFunctionalGroupModelCreator
     {
-        private readonly IUserTypeRepository _userTypeRepository;
-        private readonly IFunctionRepository _functionRepository;
         private const string GroupNameMark = "Group";
         private readonly Dictionary<UserType, Func<IEnumerable<FunctionStorageModel>, IEnumerable<GroupFunctionStorageModel>>> dictionary;
+        private readonly IDataBaseContext _context;
 
-        public FunctionalGroupModelCreator(IUserTypeRepository userTypeRepository, IFunctionRepository functionRepository)
+        public FunctionalGroupModelCreator(IDataBaseContext context)
         {
-            _userTypeRepository = userTypeRepository;
-            _functionRepository = functionRepository;
-
+            _context = context;
             dictionary = new Dictionary<UserType, Func<IEnumerable<FunctionStorageModel>, IEnumerable<GroupFunctionStorageModel>>>
             {
                 {UserType.ClinicUser, GetFunctionsForClinicUser},
@@ -34,8 +31,8 @@ namespace CreateRandomDataTools.DataCreators
 
         public IEnumerable<FunctionalGroupStorageModel> GetList()
         {
-            var userTypes = _userTypeRepository.GetModels().ToList();
-            var functions = _functionRepository.GetModels().ToList();
+            var userTypes = _context.Set<UserTypeStorageModel>().ToList();
+            var functions = _context.Set<FunctionStorageModel>().ToList();
 
             var results = userTypes.Select(model => new FunctionalGroupStorageModel
             {

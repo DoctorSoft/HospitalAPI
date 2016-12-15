@@ -2,21 +2,44 @@
     ViewBag.Title = "Step3";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using Enums.Enums
+
+@section scripts
+{
+    @*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">*@
+    <link href="~/Content/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    @*<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+    <!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
+    This must be loaded before fileinput.min.js -->
+    <script src="~/js/Javascript-Canvas-to-Blob/canvas-to-blob.js" type="text/javascript"></script>
+    <script src="~/js/Javascript-Canvas-to-Blob/file-input.js"></script>
+    <!-- bootstrap.js below is only needed if you wish to the feature of viewing details
+    of text file preview via modal dialog -->
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>*@
+    <!-- optionally if you need translation for your language then include
+    locale file as mentioned below -->
+    <script src="~/js/Javascript-Canvas-to-Blob/file_input_locale_ru.js"></script>
+
+}
+
 @model ServiceModels.ServiceCommandAnswers.ClinicRegistrationsCommandAnswers.GetClinicRegistrationUserFormCommandAnswer
 
-@using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", FormMethod.Post))
+@using (Html.BeginForm("SaveRegistration", "MakeClinicRegistrationPage", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(command => command.Token);
 
     <h2>Регистрация: </h2>
-    <div class="form-group ">
+    <div>
+        <div style="padding-bottom: 20px">
+            <input id="reservationFile" name="reservationFile" type="file" multiple class="file-loading" />
+        </div>
+    </div>
+    <div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
-                    Код пациента: 
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
+                    Код пациента:
                 </h4>
             </div>
             <div class="col-md-5">
@@ -27,58 +50,37 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Фамилия:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Фамилия:</h4>
             </div>
             <div class="col-md-5">
                 @Html.TextBoxFor(o => o.LastName, new { @class = "form-control", @rows = "10" })
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Имя:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Имя:</h4>
             </div>
             <div class="col-md-5">
                 @Html.TextBoxFor(o => o.FirstName, new {@class = "form-control", @rows = "10"})
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Возраст:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Возраст:</h4>
             </div>
             <div class="col-md-5">
                 @{
                     @Html.HiddenFor(command => command.AgeCategoryId)
                     @Html.TextBoxFor(o => o.Years, new { @class = "form-control", @rows = "10", @type = "number" })
-                    /*
-                    if (@Model.AgeCategoryId == (int)AgeRange.After18)
-                    {
-                        @Html.TextBoxFor(o => o.Years, new {@class = "form-control", @rows = "10", @type = "number"})
-                    }
-                    else
-                    {
-                        <div class="col-md-3">
-                            <h4>Месяцев:</h4>
-                        </div>
-                        <div class="col-xs-3">
-                            @Html.TextBoxFor(o => o.Months, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
-                        </div>
-                        <div class="col-md-3">
-                            <h4>Недель:</h4>
-                        </div>
-                        <div class="col-xs-3">
-                            @Html.TextBoxFor(o => o.Weeks, new {@class = "form-control col-xs-2", @rows = "10", @type = "number"})
-                        </div>
-                    }
-                    */
                 }
             </div>
         </div>
         @if (Model.SexId != null)
         {
             <div class="col-md-12">
-                <div class="col-md-2">
-                    <h4>
+                <div class="col-md-6 aling-right">
+                    <h4 class="aling-right">
                         Пол:
                     </h4>
                 </div>
@@ -92,17 +94,17 @@
             </div>
         }
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Телефон:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Телефон:</h4>
             </div>
             <div class="col-md-5">
                 @Html.TextBoxFor(o => o.PhoneNumber, new {@class = "form-control", @rows = "10"})
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
-                    Дата: 
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
+                    Дата:
                 </h4>
             </div>
             <div class="col-md-5">
@@ -116,9 +118,9 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
-                    Больница: 
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
+                    Больница:
                 </h4>
             </div>
             <div class="col-md-5">
@@ -130,8 +132,8 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
                     Отделение:
                 </h4>
             </div>
@@ -144,16 +146,67 @@
             </div>
         </div>
         <div class="col-md-12">
-            <div class="col-md-2">
-                <h4>Диагноз:</h4>
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Диагноз:</h4>
             </div>
             <div class="col-md-5">
-                @Html.TextBoxFor(o => o.Diagnosis, new { @class = "form-control", @rows = "10" })
+                @Html.TextBoxFor(o => o.Diagnosis, new {@class = "form-control", @rows = "10"})
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">Причина госпитализации:</h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.ReservationPurpose, new {@class = "form-control", @rows = "10"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6 aling-right">
+                <div class="aling-right">
+                    <h4 class="aling-right">
+                        Консультативные заключения врачей-специалистов <br /> на догоспитальном этапе
+                    </h4>
+                </div>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.MedicalConsultion, new {@class = "form-control", @rows = "10"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
+                    Проведенное догоспитальное обследование <br />
+                    (указать результаты исследований):
+                </h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.MedicalExaminationResult, new {@class = "form-control", @rows = "10"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6 aling-right">
+                <h4 class="aling-right">
+                    Другая информация
+                </h4>
+            </div>
+            <div class="col-md-5">
+                @Html.TextBoxFor(o => o.OtherInformation, new { @class = "form-control", @rows = "10" })
+            </div>
+        </div>
+        <script>
+            $(document).on('ready', function() {
 
-        <input class="btn btn-sm btn-primary" type="submit"/>
-    </div>
+                $("#reservationFile").fileinput({
+                    overwriteInitial: true,
+                    initialCaption: "Выберите файл"
+                });
+            });
+        </script>
+
+
+        <input class="btn btn-sm btn-primary" type="submit" />
+        </div>
 
 }
 

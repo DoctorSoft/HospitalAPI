@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
-using HandleToolsInterfaces.RepositoryHandlers;
-using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
 using ServiceModels.ModelTools.Entities;
 using Services.Interfaces.ServiceTools;
 using StorageModels.Models.FunctionModels;
@@ -14,25 +12,23 @@ namespace Services.ServiceTools
 {
     public class UserFunctionManager : IUserFunctionManager
     {
-        private readonly IUserFunctionRepository _userFunctionRepository;
-        private readonly IFunctionRepository _functionRepository;
-
         private readonly ITokenManager _tokenManager;
 
-        private readonly Dictionary<FunctionIdentityName, Func<Guid, bool>> _functions; 
+        private readonly Dictionary<FunctionIdentityName, Func<Guid, bool>> _functions;
 
-        public UserFunctionManager(IUserFunctionRepository userFunctionRepository, IFunctionRepository functionRepository, ITokenManager tokenManager)
+        private readonly IDataBaseContext _context;
+
+        public UserFunctionManager(ITokenManager tokenManager, IDataBaseContext context)
         {
-            _userFunctionRepository = userFunctionRepository;
-            _functionRepository = functionRepository;
             _tokenManager = tokenManager;
+            _context = context;
 
             _functions = new Dictionary<FunctionIdentityName, Func<Guid, bool>>();  // No items now
         }
 
         protected virtual IEnumerable<UserFunctionStorageModel> GetUserFunctionsByUser(UserStorageModel user)
         {
-            var result = _userFunctionRepository.GetModels()
+            var result = _context.Set<UserFunctionStorageModel>()
                 .Where(model => model.UserId == user.Id)
                 .Where(model => !model.IsBlocked)
                 .ToList();
@@ -45,7 +41,7 @@ namespace Services.ServiceTools
         {
             var functionIds = models.Select(model => model.FunctionId).ToList();
             var result =
-                _functionRepository.GetModels()
+                _context.Set<FunctionStorageModel>()
                     .Where(model => functionIds.Contains(model.Id))
                     .Where(model => !model.IsBlocked)
                     .ToList();

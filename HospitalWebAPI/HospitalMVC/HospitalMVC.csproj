@@ -318,7 +318,8 @@
     <Content Include="Content\Images\8.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\9.jpg">
+    <Content Include="Content\Images\9.jpg" />
+    <Content Include="Content\Images\9_.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\noticePages.css" />
@@ -420,6 +421,7 @@
     <Content Include="Views\ViewHospitalRegistrations\Index.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\SwitchRegistrationPage.cshtml" />
     <Content Include="Views\ChangeHospitalRegistrationPage\GetRegistrationScheduleBySection.cshtml" />
+    <Content Include="Views\ViewHospitalRegistrations\ViewMore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -516,7 +518,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53367</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

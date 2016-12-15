@@ -1,36 +1,33 @@
 ﻿using System;
 using System.Linq;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
 using HandleToolsInterfaces.Converters;
-using RepositoryTools.Interfaces.PrivateInterfaces.MailboxRepositories;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using ServiceModels.ServiceCommandAnswers.MainPageCommandAnswers;
 using ServiceModels.ServiceCommands.MainPageCommands;
 using Services.Interfaces.MainPageServices;
 using Services.Interfaces.ServiceTools;
+using StorageModels.Models.MailboxModels;
 using StorageModels.Models.UserModels;
 
 namespace Services.MainPageServices
 {
     public class MainPageService : IMainPageService
     {
-        private readonly IUserTypeRepository _userTypeRepository;
-        private readonly IMessageRepository _messageRepository;
-
+        private readonly IDataBaseContext _context;
         private readonly IUserToAccountTypeConverter _userToAccountTypeConverter;
         private readonly ITokenManager _tokenManager;
 
-        public MainPageService(IUserTypeRepository userTypeRepository, IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IMessageRepository messageRepository)
+        public MainPageService(IUserToAccountTypeConverter userToAccountTypeConverter, ITokenManager tokenManager, IDataBaseContext context)
         {
-            _userTypeRepository = userTypeRepository;
             _userToAccountTypeConverter = userToAccountTypeConverter;
             _tokenManager = tokenManager;
-            _messageRepository = messageRepository;
+            _context = context;
         }
 
         protected virtual UserType GetUserType(UserStorageModel user)
         {
-            var userType = _userTypeRepository.GetModels().FirstOrDefault(model => model.Id == user.UserTypeId);
+            var userType = _context.Set<UserTypeStorageModel>().FirstOrDefault(model => model.Id == user.UserTypeId);
 
             return userType.UserType;
         }
@@ -38,7 +35,7 @@ namespace Services.MainPageServices
         public int? GetCountNewNotices(UserStorageModel user)
         {
             int? countNewNotices =
-                _messageRepository.GetModels()
+                _context.Set<MessageStorageModel>()
                     .Where(model => model.UserToId == user.Id 
                         && (model.ShowStatus == TwoSideShowStatus.ToSideOnly || model.ShowStatus == TwoSideShowStatus.Showed))
                         .Count(model => !model.IsRead);

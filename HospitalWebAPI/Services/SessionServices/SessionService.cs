@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
-using HandleToolsInterfaces.RepositoryHandlers;
-using RepositoryTools.Interfaces.PrivateInterfaces.FunctionRepositories;
 using Resources;
 using ServiceModels.ModelTools;
 using ServiceModels.ServiceCommandAnswers.SessionCommandAnswers;
@@ -11,20 +10,19 @@ using ServiceModels.ServiceCommands.SessionCommands;
 using Services.Interfaces.ServiceTools;
 using Services.Interfaces.SessionServices;
 using StorageModels.Models.FunctionModels;
-using StorageModels.Models.UserModels;
 
 namespace Services.SessionServices
 {
     public class SessionService : ISessionService
     {
-        private readonly IFunctionRepository _functionRepository;
-
         private readonly IUserFunctionManager _userFunctionManager;
 
-        public SessionService(IFunctionRepository functionRepository, IUserFunctionManager userFunctionManager)
+        private readonly IDataBaseContext _context;
+
+        public SessionService(IUserFunctionManager userFunctionManager, IDataBaseContext context)
         {
-            _functionRepository = functionRepository;
             _userFunctionManager = userFunctionManager;
+            _context = context;
         }
 
         public List<CommandAnswerError> GetAccessDeniedErrors()
@@ -42,7 +40,7 @@ namespace Services.SessionServices
         protected virtual IEnumerable<FunctionStorageModel> GetFunctionsByCommand(IsTokenHasAccessToFunctionCommand command)
         {
             var result =
-                _functionRepository.GetModels()
+                _context.Set<FunctionStorageModel>()
                     .Where(model => command.Functions.Contains(model.FunctionIdentityName))
                     .Where(model => !model.IsBlocked)
                     .ToList();

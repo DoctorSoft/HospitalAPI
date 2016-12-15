@@ -70,29 +70,6 @@
     <Compile Include="Interfaces\CommonInterfaces\IReadOnlyRepository.cs" />
     <Compile Include="Interfaces\CommonInterfaces\IUpdateAbleRepository.cs" />
     <Compile Include="Interfaces\PrivateInterfaces\AnotherRepositories\RemoteAPIRepositories\IPersonDataAPIRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicHospitalPriorityRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\ISettingsItemRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IClinicRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IPatientRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\ClinicRepositories\IReservationRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IFunctionalGroupRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IFunctionRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IGroupFunctionRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\FunctionRepositories\IUserFunctionRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IEmptyPlaceByTypeStatisticRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IEmptyPlaceStatisticRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IHospitalRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\IHospitalSectionProfileRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\ISectionProfileRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\HospitalRepositories\ISectionRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\MailboxRepositories\IDischargeRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\MailboxRepositories\IMessageRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IAccountRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IClinicUserRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IHospitalUserRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\ISessionRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IUserRepository.cs" />
-    <Compile Include="Interfaces\PrivateInterfaces\UserRepositories\IUserTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

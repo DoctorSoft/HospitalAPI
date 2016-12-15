@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Enums.Enums;
 using StorageModels.Interfaces;
 using StorageModels.Models.HospitalModels;
@@ -16,6 +17,10 @@ namespace StorageModels.Models.ClinicModels
         public DateTime ApproveTime { get; set; }
         public DateTime? CancelTime { get; set; }
         public string Diagnosis { get; set; }
+        public string MedicalExaminationResult { get; set; }
+        public string MedicalConsultion { get; set; }
+        public string ReservationPurpose { get; set; }
+        public string OtherInformation { get; set; }
 
         //
 
@@ -24,6 +29,8 @@ namespace StorageModels.Models.ClinicModels
         public PatientStorageModel Patient { get; set; }
         public UserStorageModel Reservator { get; set; }
         public UserStorageModel BehalfReservator { get; set; }
+
+        public ICollection<ReservationFileStorageModel> ReservationFiles { get; set; }
 
         //
 

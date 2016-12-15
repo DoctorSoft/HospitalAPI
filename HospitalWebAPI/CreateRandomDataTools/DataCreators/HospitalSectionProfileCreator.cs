@@ -1,27 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
-using RepositoryTools.Interfaces.PrivateInterfaces.HospitalRepositories;
+using DataBaseTools.Interfaces;
 using StorageModels.Models.HospitalModels;
+using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
     public class HospitalSectionProfileCreator : IHospitalSectionProfileCreator
     {
-        private readonly IHospitalRepository _hospitalRepository;
+        private readonly IDataBaseContext _context;
 
-        private readonly ISectionProfileRepository _sectionProfileRepository;
-        
-        public HospitalSectionProfileCreator(IHospitalRepository hospitalRepository, ISectionProfileRepository sectionProfileRepository)
+        public HospitalSectionProfileCreator(IDataBaseContext context)
         {
-            this._hospitalRepository = hospitalRepository;
-            _sectionProfileRepository = sectionProfileRepository;
+            _context = context;
         }
 
         public IEnumerable<HospitalSectionProfileStorageModel> GetList()
         {
-            var hospitals = _hospitalRepository.GetModels().ToList();
-            var sectionProfiles = _sectionProfileRepository.GetModels().ToList();
+            var hospitals = _context.Set<HospitalStorageModel>().ToList();
+            var sectionProfiles = _context.Set<SectionProfileStorageModel>().ToList();
+
+            var hospitalUsers = _context.Set<HospitalUserStorageModel>().ToList();
 
             return (from hospital in hospitals
                 from sectionProfile in sectionProfiles
@@ -29,8 +29,16 @@ namespace CreateRandomDataTools.DataCreators
                 {
                     HospitalId = hospital.Id, 
                     IsBlocked = false, 
-                    Name = $"{hospital.Name} {sectionProfile.Name}", SectionProfileId = sectionProfile.Id,
-                    HasGenderFactor = !hospital.IsForChildren
+                    Name = $"{hospital.Name} {sectionProfile.Name}", 
+                    SectionProfileId = sectionProfile.Id,
+                    HasGenderFactor = !hospital.IsForChildren,
+                    HospitalUserSectionAccesses = hospitalUsers
+                        .Where(model => model.HospitalId == hospital.Id)
+                        .Select(model => new HospitalUserSectionAccessStorageModel
+                        {
+                             HospitalUserId = model.Id,
+                             IsBlocked = false
+                        }).ToList()
                 }).ToList();
         }
     }

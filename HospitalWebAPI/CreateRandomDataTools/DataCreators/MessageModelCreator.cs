@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using CreateRandomDataTools.Interfaces.PrivateInterfaces;
+using DataBaseTools.Interfaces;
 using Enums.Enums;
 using HelpingTools.Interfaces;
-using RepositoryTools.Interfaces.PrivateInterfaces.UserRepositories;
 using StorageModels.Models.MailboxModels;
+using StorageModels.Models.UserModels;
 
 namespace CreateRandomDataTools.DataCreators
 {
@@ -13,12 +14,12 @@ namespace CreateRandomDataTools.DataCreators
     {
         private readonly IExtendedRandom _extendedRandom;
 
-        private readonly IUserRepository _userRepository;
+        private readonly IDataBaseContext _context;
 
-        public MessageModelCreator(IExtendedRandom extendedRandom, IUserRepository userRepository)
+        public MessageModelCreator(IExtendedRandom extendedRandom, IDataBaseContext context)
         {
             this._extendedRandom = extendedRandom;
-            _userRepository = userRepository;
+            _context = context;
         }
 
         public IEnumerable<MessageStorageModel> GetList()
@@ -36,11 +37,11 @@ namespace CreateRandomDataTools.DataCreators
             };
 
             var result = new List<MessageStorageModel>();
-            var users = _userRepository.GetModels().ToList();
+            var users = _context.Set<UserStorageModel>().ToList();
 
             foreach (var userTo in users)
             {
-                var messagesCount = _extendedRandom.Next(5, 15);
+                var messagesCount = 0; //extendedRandom.Next(5, 15);
                 for (var i = 0; i < messagesCount; i++)
                 {
                     var nextUserFrom = _extendedRandom.GetRandomValueFromList(users);

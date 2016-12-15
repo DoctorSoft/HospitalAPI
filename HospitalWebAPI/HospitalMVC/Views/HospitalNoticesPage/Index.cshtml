@@ -1,4 +1,5 @@
-﻿@using Resources
+﻿@using HelpingTools.ExtentionTools
+@using Resources
 @model ServiceModels.ServiceCommandAnswers.NoticesCommandAnswers.GetHospitalNoticesPageInformationCommandAnswer
 
 @{
@@ -6,13 +7,73 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section scripts
+{
+    <script type="text/javascript">
+        var unReadDataChange = function(e) {
+            var url = '@Url.Action("Index", "HospitalNoticesPage", new {Token = @Model.Token})'
+                + '?OlnyUnRead=' + ($('#OlnyUnRead').attr("checked") != 'checked')
+                + '&OnlyToday=' + ($('#OnlyToday').attr("checked") == 'checked');
+            window.location.replace(url);
+        };
+
+        var todayDataChange = function(e) {
+            var url = '@Url.Action("Index", "HospitalNoticesPage", new {Token = @Model.Token})'
+                + '?OlnyUnRead=' + ($('#OlnyUnRead').attr("checked") == 'checked')
+                + '&OnlyToday=' + ($('#OnlyToday').attr("checked") != 'checked');
+            window.location.replace(url);
+        };
+    </script>
+}
+
 <div class="w3-padding w3-white notranslate">
     <h2 class="panel-heading">@MainResources.NoticeTableHeading</h2>
 
-    <ul class="list-group">
-        @foreach (var item in Model.Messages)
-        {
-            @Html.ActionLink(@item.Title, "ReadMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { @class = !item.IsRead ? "list-group-item list-group-item-success" : "list-group-item list-group-item-info" })
+    <div>
+        <div class="message-settings">
+
+            <div class="alert-warning alert message-settings">
+                <h4><strong>Настройки</strong></h4>
+                <span for="OlnyUnRead" class="">Показывать только непрочитанные: </span>
+                @if (Model.OlnyUnRead == true)
+                {
+                    <input type="checkbox" onchange="unReadDataChange()" id="OlnyUnRead" checked="checked" class="checkbox checkbox-inline">
+                }
+                else
+                {
+                    <input type="checkbox" onchange="unReadDataChange()" id="OlnyUnRead" class="checkbox checkbox-inline">
+                }
+                <br/>
+                <span for="OlnyUnRead" class="">Показывать только за сегодня: </span>
+                @if (Model.OnlyToday == true)
+                {
+                    <input type="checkbox" onchange="todayDataChange()" id="OnlyToday" checked="checked" class="checkbox checkbox-inline">
+                }
+                else
+                {
+                    <input type="checkbox" onchange="todayDataChange()" id="OnlyToday" class="checkbox checkbox-inline">
+                }
+            </div>
+        </div>
+    </div>
+
+    <h4><strong>Сообщения:</strong></h4>
+
+    <div class="list-group">
+        @{
+            DateTime previousDateTime = DateTime.MinValue;
+
+            foreach (var item in Model.Messages)
+            {
+                if (item.SendDate.Date != previousDateTime.Date)
+                {
+                    <div class="date-list-message">
+                        <strong>Дата: @item.SendDate.ToCorrectDateString()</strong>
+                    </div>
+                    previousDateTime = item.SendDate.Date;
+                }
+                @Html.ActionLink(@item.Title, "ReadMessage", "HospitalNoticesPage", new { Token = Model.Token, MessageId = item.MessageId }, new { @class = !item.IsRead ? "list-group-item list-group-item-success black-border strong" : "list-group-item list-group-item-info black-border" })
+            }
         }
-    </ul>
+    </div>
 </div>
