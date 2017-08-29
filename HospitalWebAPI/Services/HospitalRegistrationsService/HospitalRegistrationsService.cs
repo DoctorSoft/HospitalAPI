@@ -888,6 +888,7 @@ namespace Services.HospitalRegistrationsService
         {
            var placeCount = list
                .Where(model => (int)model.Sex == command.SexId 
+                   && model.EmptyPlaceStatistic != null
                    && model.EmptyPlaceStatistic.Date == date
                    && model.EmptyPlaceStatistic.HospitalSectionProfileId == command.HospitalSectionProfileId.Value)
                    .Select(model => model.Count)
